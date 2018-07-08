@@ -46,16 +46,19 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 [Git的官方介绍]已经很详细了，现在已经有了环境，就可以边看官方教程边学习了。
 
 # xx.附录-常用Git命令
-| git config的使用 |  |  |
-| - | - | - |
+
+## git 的使用
+
 | 命令 | 简介 | 备注 |
+| - | - | - |
 | git –version| 查看git版本| |
 | git clone xxx| 克隆仓库||
 | git checkout dev| 切换分支| |
 
-| git config的使用 |  |  |
-| - | - | - |
+## git config的使用
+
 | 命令 | 简介 | 备注 |
+| - | - | - |
 | git config --global user.name "liutianyu" | 设置全局的用户名 |  |
 | git config --global --list| 列出所有全局的配置项| |
 | git config --local --list| 在一个git repository下面使用，查看当前的配置| |
