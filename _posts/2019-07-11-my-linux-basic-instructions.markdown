@@ -6,7 +6,7 @@ categories: jekyll update
 ---
 最近在通过《鸟哥的Linux私房菜》系统得学习linux。可是工作中还是要用Linux的，有些命令啥的就是现学现用，这个笔记就是记录这个的。
 
-## 常用
+# 常用
 
 | 命令 | 简介 | 备注 |
 | - | - | - |
@@ -18,6 +18,8 @@ categories: jekyll update
 |zip -r mydata.zip mydata |把当前目录下面的mydata目录压缩为mydata.zip| |
 |unzip |解压zip文件。unzip xx.zip | |
 |tar |将文件压缩成tar文件| |
+
+
 |查看电脑和操作系统的信息：uname -a
 查询内核版本：cat /proc/version
 查询发行版本：cat /etc/issue
