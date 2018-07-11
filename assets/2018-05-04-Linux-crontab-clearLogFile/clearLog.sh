@@ -1,5 +1,5 @@
 #!/bin/sh
-for I in `find /root -size +10000k `
+for i in `find /root -name '*.log*' -size +10k`
 do
 	echo > $i
 done
