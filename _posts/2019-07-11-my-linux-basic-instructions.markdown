@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "我的Linux常用命令（持续更新）"
-date:   2018-07-08 11:46:49 +0800
+date:   2018-07-11 22:46:49 +0800
 categories: jekyll update
 ---
 最近在通过《鸟哥的Linux私房菜》系统得学习linux。可是工作中还是要用Linux的，有些命令啥的就是现学现用，这个笔记就是记录这个的。
