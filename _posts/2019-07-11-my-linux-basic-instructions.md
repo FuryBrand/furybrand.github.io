@@ -82,3 +82,11 @@ categories: jekyll update
 |ps auxw &#124; head -1;ps auxw&#124;sort -rn -k4&#124;head -5 |查看内存占用前五的进程 | 
 |ps auxw&#124;head -1;ps auxw&#124;sort -rn -k3&#124;head -5 |查看CPU占用前五的进程 | 
 |top |查看系统整体的负载情况 | 
+
+
+### SCP
+scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令。本地←→远程
+
+| 命令 | 简介 | 备注 
+| - | - | - 
+|scp -P 2181 /etc/hosts root@10.182.74.205:/etc/ | 将本机的host文件通过2181端口以root权限复制到指定机器的/etc/目录下 |
