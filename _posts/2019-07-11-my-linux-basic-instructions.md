@@ -77,7 +77,7 @@ categories: jekyll update
 ### 查看系统资源占用 [鸣谢](https://www.cnblogs.com/chengJAVA/p/6115061.html)
 | 命令 | 简介 | 备注 
 | - | - | - 
-|free |总体内存占用的查看 | 1.默认按kb显示，free -m来用mb表示<br>2.Mem行，total=used+free，其中buffers和cached虽然计算在used内， 但其实为可用内存。<br>3.下一行是刨除buffers和cache的结果，是真实的可用内存。<br>Swap：内存交换区的使用情况。
-|ps auxw &#124; head -1;ps auxw&#124;sort -rn -k4&#124;head -5 |查看内存占用前五的进程
-|ps auxw&#124;head -1;ps auxw&#124;sort -rn -k3&#124;head -5 |查看CPU占用前五的进程
-|top |查看系统整体的负载情况
+|free |总体内存占用的查看 | 1.默认按kb显示，free -m来用mb表示<br>2.Mem行，total=used+free，其中buffers和cached虽然计算在used内， 但其实为可用内存。<br>3.下一行是刨除buffers和cache的结果，是真实的可用内存。<br>Swap：内存交换区的使用情况。|
+|ps auxw &#124; head -1;ps auxw&#124;sort -rn -k4&#124;head -5 |查看内存占用前五的进程 |
+|ps auxw&#124;head -1;ps auxw&#124;sort -rn -k3&#124;head -5 |查看CPU占用前五的进程 |
+|top |查看系统整体的负载情况 |
