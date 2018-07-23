@@ -59,13 +59,6 @@ categories: jekyll update
 |/export/servers/nginx/sbin/nginx |启动 |
 |/export/servers/nginx/sbin/nginx -s stop |关闭 |
 
-### scp
-
-| 命令 | 简介 | 备注 
-| - | - | - 
-|scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令。本地←→远程 | |
-|scp -P 2181 /etc/hosts root@10.182.74.205:/etc/ |将本机的host文件通过2181端口以root权限复制到指定机器的/etc/目录下 |
-
 ### less
 
 | 命令 | 简介 | 备注 
