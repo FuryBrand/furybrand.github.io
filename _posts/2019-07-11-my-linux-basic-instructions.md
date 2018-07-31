@@ -75,6 +75,7 @@ categories: jekyll update
 |ps auxw &#124; head -1;ps auxw&#124;sort -rn -k4&#124;head -5 |查看内存占用前五的进程 | 
 |ps auxw&#124;head -1;ps auxw&#124;sort -rn -k3&#124;head -5 |查看CPU占用前五的进程 | 
 |top |查看系统整体的负载情况 | 
+|ps -ef &#124; grep xixi &#124; grep -v 'grep' &#124; awk '{print $2}' |输出xixi相关的进程的PID |可以配合for循环加kill -9就清理调相关的进程
 
 
 ### SCP
