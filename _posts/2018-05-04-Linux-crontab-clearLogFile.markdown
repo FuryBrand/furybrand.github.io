@@ -4,7 +4,7 @@ title:  "Linux-利用crontab定时清理日志"
 date:   2018-05-04 22:14:49 +0800
 categories: jekyll update
 ---
-这篇[博文](https://www.cnblogs.com/zoulongbin/p/6187238.html)对crontab有较为详细的介绍。如果日后链接失效了，可以email我。
+这篇[博文](https://www.cnblogs.com/zoulongbin/p/6187238.html)和这篇[博文](https://github.com/ice7mayu/tutorial/blob/master/doc/crontab.md)对crontab有较为详细的介绍。如果日后链接失效了，可以email我。
 这个[web版的时间合法性校验工具](https://crontab.guru/)特别好用。
 
 接下来详细介绍一下步骤（没考虑重启和安装的情况）：
@@ -22,3 +22,5 @@ categories: jekyll update
 
 # 04.重启crontab服务
 `service crond restart`
+
+(好像定时任务在添加好之后无需重启crontab服务，这个有待确认，先记下)
