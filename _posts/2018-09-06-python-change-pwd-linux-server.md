@@ -93,12 +93,13 @@ input("执行完毕，回车后关闭当前窗口")
 192.168.158.111 22 root testpwd111 admin admin@fuza1.
 192.168.158.112 22 root testpwd112 admin admin@fuza1.
 ```
-主要分了6个字段，*服务器ip地址*，*ssh端口*，*root*，*root的用户名*，*想要修改密码的用户*，*用户对应的密码*。每个字段用空格隔开。
+主要分了6个字段，`服务器ip地址`，`ssh端口`，`root`，`root的用户名`，`想要修改密码的用户`，`用户对应的密码`。每个字段用空格隔开。
 
 ## 写在最后
 
 程序已经打包好了。[下载]({{ site.url }}assets/2018-09-06-python-change-pwd-linux-server/批量修改服务器密码Ver0.2.zip)
 
 为了不瞎眼，必须要写个脚本来实现。主要收到这两篇博文的启发,谢谢！
+
 [鸣谢1](https://www.cnblogs.com/rainowl-ymj/p/7247287.html)
 [鸣谢2](http://blog.51cto.com/weixiaoxin/2063323)
