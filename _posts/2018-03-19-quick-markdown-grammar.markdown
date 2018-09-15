@@ -4,6 +4,8 @@ title:  "Markdown简明语法教程"
 date:   2018-03-19 22:09:49 +0800
 categories: jekyll update
 ---
+180915：发现了一个貌似很全的介绍markdown语法的[网站](https://www.appinn.com/markdown/)
+
 ***显示效果以“MarkdownPad 2”为准，貌似不同的引擎解析起来的效果略有区别。***
 
 此篇文章旨在列举常用的markdown语法，方便新手快速入门。以下简称md。

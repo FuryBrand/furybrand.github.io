@@ -19,6 +19,6 @@ categories: jekyll update
 ![鞋]({{ site.url }}assets/2018-07-26-1806Dalian-GuangLuIsland/微信图片_20180730203729.jpg)
 [原图]({{ site.url }}assets/2018-07-26-1806Dalian-GuangLuIsland/微信图片_20180726224030.jpg)
 
-这张是同行的伙伴拍的，我觉得真的是有屎以来我最喜欢的一张。美滋滋~
+这张是同行的伙伴拍的，我觉得真的是有屎以来我最喜欢的一张。呆毛美滋滋~
 
 ![我]({{ site.url }}assets/2018-07-26-1806Dalian-GuangLuIsland/微信图片_20180730203745.jpg)
