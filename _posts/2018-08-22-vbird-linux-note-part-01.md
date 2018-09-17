@@ -4,12 +4,41 @@ title:  "《鸟叔的Linux私房菜-基础学习篇（第三版）》学习笔�
 date:   2018-08-22 12:02:49 +0800
 categories: jekyll update
 ---
+##目录
 
+第1章 Linux是什么？
+<a href='Keywords'>Keywords</a>
+<a href="1.2.5">1.2.5 Linux的内核版本</a>
+<a href="1.2.6">1.2.6 Linux distribution</a>
+<a href="1.3.3">1.3.3 关于授权</a>
+第2章 Linux如何学习
+<a href="2.3.1">2.3.1 从头学习Linux基础</a>
+第3章 主机规划与磁盘分区
+<a href="3.1">3.1 Linux与硬件的搭配</a>
+<a href="3.1.3">3.1.3 各硬件设备在Linux中的文件名</a>
+<a href="3.2.1">3.2.1 磁盘连接的方式与设备文件名的关系</a>
+<a href="3.2.2">3.2.2 磁盘的组成复习</a>
+<a href="3.2.3">3.2.3 磁盘分区表（partition table）</a>
+<a href="3.2.4">3.2.4 开机流程与主引导分区（MBR）</a>
+<a href="3.2.5">3.2.5 Linux安装模式下，磁盘分区的选择（极重要）</a>
+<a href="3.3.2">3.3.2 主机的服务规划与硬件的关系</a>
+第4章 安装CentOS 5.x与多重引导小技巧<br>
+略<br>
+第5章 首次登陆与在线求助 man page
+<a href="5.1.4">5.1.4 X Window与命令行模式的切换</a>
+<a href="5.1.5">5.1.5 在终端界面登录linux</a>
+<a href="5.2">5.2 在命令行模式下执行命令</a>
+<a href="5.2.1">5.2.1 开始执行命令</a>
+<a href="5.2.2">5.2.2 基本命令的操作</a>
+<a href="5.2.3">5.2.3 重要的热键[Tab], [Ctrl]-c, [Ctrl]-d</a>
+<a href="5.2.4">5.2.4 错误信息的查看</a>
+<a href="5.3">5.3 Linux系统的在线求助man page与info page</a>
+<a href="5.3.1">5.3.1 man page</a>
 
 =================================================================================
 ## 第1章 Linux是什么？
 
-### Keywords：
+<h3 id="Keywords">Keywords</h3>
 
  - GUI：Graphical User Interface
  - FSF：Free Software Foundation
@@ -18,14 +47,14 @@ categories: jekyll update
  - [LSB](http://www.linuxbase.org)：Linux Standard Base
  - [FHS](http://www.pathname.com/fhs)：File system Hierarchy Standard
 
-### 1.2.5 Linux的内核版本
+<h3 id="1.2.5">1.2.5 Linux的内核版本</h3>
 
 Linux的内核版本号一般长成这个样子：2.6.18-92.e15
 - 主版本.次版本.释出版本-修改版本
 
 次版本为奇数：development； 次版本为偶数：stable
 
-### 1.2.6 Linux distribution
+<h3 id="1.2.6">1.2.6 Linux distribution</h3>
 
 定义：这个“Kernel+Softwares+Tools”的可完全安装的系统。
 
@@ -35,7 +64,7 @@ Distribution主要分为两类：
 
 想了解更多的Linux Distribution的下载于使用信息，参考：http://distrowatch.com
 
-### 1.3.3 关于授权
+<h3 id="1.3.3">1.3.3 关于授权</h3>
 
 Open Source：
 - GNU General Public License
@@ -53,7 +82,7 @@ Close Source：
 
 [The Linux Documentation Project](http://www.tldp.org/)
 
-### 2.3.1 从头学习Linux基础
+<h3 id="2.3.1">2.3.1 从头学习Linux基础</h3>
 
 学习路线：
 - 计算机概论与硬件相关知识：做到听过，有概念即可
@@ -67,11 +96,11 @@ Close Source：
 =================================================================================
 ## 第3章 主机规划与磁盘分区
 
-### 3.1 Linux与硬件的搭配
+<h3 id="3.1">3.1 Linux与硬件的搭配</h3>
 
 强调：各个组件或设备在Linux下面都是一个文件。
 
-### 3.1.3 各硬件设备在Linux中的文件名
+<h3 id="3.1.3">3.1.3 各硬件设备在Linux中的文件名</h3>
 
 | 设备 | 设备在Linux内的文件名  
 | - | - 
@@ -88,7 +117,7 @@ Close Source：
 需要特别留意的是硬盘，每个磁盘驱动器的磁盘分区(partition)不同时，其磁盘文件名还会改变。
 更多Linux内核支持的硬件设备与文件名，可以参考[这里](www.kernel.org/pub/linux/docs/device-list/devices.txt)
 
-### 3.2.1 磁盘连接的方式与设备文件名的关系
+<h3 id="3.2.1">3.2.1 磁盘连接的方式与设备文件名的关系</h3>
 
 以IDE接口来说，通常，主机提供两个IDE接口，一个IDE接口可以连接两个IDE设备。两个IDE接口一般称为IDE1（primary）和IDE2（secondary），而每条扁平电缆上面的IDE设备可以被区分为Master与Slave。其文件名如下：
 
@@ -99,7 +128,7 @@ Close Source：
 
 由于SCSI/SATA/USB硬盘是使用SCSI模块驱动的，所以这些设备的文件名是/dev/sd[a-p]，但是与IDE接口不同的是，其命名顺序是按照Linux内核检测到磁盘的顺序决定的。
 
-### 3.2.2 磁盘的组成复习
+<h3 id="3.2.2">3.2.2 磁盘的组成复习</h3>
 
 ![磁盘截面图]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/01.jpg)
 
@@ -107,7 +136,7 @@ Close Source：
 
 整块儿磁盘的第一个扇区特别的重要，因为它记录了整块儿磁盘的重要信息。即：主引导分区（Master Boot Record，MBR）可以安装引导加载程序的地方，有446bytes；分区表（partition table）记录整块硬盘分区的状态，有64bytes。
 
-### 3.2.3 磁盘分区表（partition table）
+<h3 id="3.2.3">3.2.3 磁盘分区表（partition table）</h3>
 
 ![磁盘分区表]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/02.png)
 
@@ -150,7 +179,7 @@ Close Source：
 - 能够被格式化后作为数据访问的分区为主分区与逻辑分区。扩展分区无法格式化。
 - 逻辑分区的数量，依操作系统的不同而不同，在Linux系统中，IDE硬盘最多有59个逻辑分区（5号-63号），SATA硬盘则有11个逻辑分区（5号-15号）。
 
-### 3.2.4 开机流程与主引导分区（MBR）
+<h3 id="3.2.4">3.2.4 开机流程与主引导分区（MBR）</h3>
 
 BIOS：写入到主板上的一个程序。是计算机在开机后系统主动执行的第一个程序。<br>
 CMOS：记录各项硬件参数且嵌入到主板上面的存储器。<br>
@@ -176,7 +205,7 @@ Boot Loader除了可以安装在MBR之外，还可以安装在每个分区的引
 
 为什么安装多重引导，最好先安装Windows，然后安装Linux？（spfdisk/spfdisk.sourceforge.net）
 
-### 3.2.5 Linux安装模式下，磁盘分区的选择（极重要）
+<h3 id="3.2.5">3.2.5 Linux安装模式下，磁盘分区的选择（极重要）</h3>
 
 目录树结构（directory tree），根目录（root directory）是“/”。下图中方框为文件夹，波浪线方框为文件。<br>
 ![图05_目录树相关性示意图]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/05.gif)
@@ -188,7 +217,7 @@ Boot Loader除了可以安装在MBR之外，还可以安装在每个分区的引
 
 初次接触Linux，只要分区“/”和“swap”即可。建议预留一个备用的剩余磁盘容量。
 
-### 3.3.2 主机的服务规划与硬件的关系
+<h3 id="3.3.2">3.3.2 主机的服务规划与硬件的关系</h3>
 
 由于主机的服务目的不同，所需要的硬件等级和配置也不同，下面是几种常见的主机服务：
 - 打造Windows与Linux共存的环境
@@ -223,7 +252,7 @@ Boot Loader除了可以安装在MBR之外，还可以安装在每个分区的引
 - 在GNOME中，使用[ctrl]+[space]来切换成中午输入法SCIM
 - KDE也是常见的窗口管理程序，（SL：树莓派的页面好像就是KDE），其资源管理器被称为Konqueror。
 
-### 5.1.4 X Window与命令行模式的切换
+<h3 id="5.1.4">5.1.4 X Window与命令行模式的切换</h3>
 
 命令行模式通常被称为：terminal或者console。<br>
 Linux默认提供6个Terminal来让用户登登录，切换方式是[Ctrl]+[Alt]+[F1]~[F6]<br>
@@ -240,7 +269,7 @@ Linux默认的登录模式分两种:
   
 Linux默认提供了7个Run level给我们使用，可以在/etc/inittab中配置。
 
-### 5.1.5 在终端界面登录linux
+<h3 id="5.1.5">5.1.5 在终端界面登录linux</h3>
 
 登录后会显示"[admin@host-192-168-101-119 ~]$"：
 - 其中admin是登录账号。
@@ -250,11 +279,11 @@ Linux默认提供了7个Run level给我们使用，可以在/etc/inittab中配�
 
 注销Linux“exit”命令。
 
-### 5.2 在命令行模式下执行命令
+<h3 id="5.2">5.2 在命令行模式下执行命令</h3>
 
 命令行模式登录后取得的程序被称为shell，是负责最外层和用户通信的。
 
-### 5.2.1 开始执行命令
+<h3 id="5.2.1">5.2.1 开始执行命令</h3>
 
 一般的命令长相：[admin@host-192-168-101-119 ~]$ command [-options] parameter1 parameter2 ...
 - Command是命令或者可执行文件
@@ -273,7 +302,7 @@ Linux默认提供了7个Run level给我们使用，可以在/etc/inittab中配�
 - `echo $LANG` 显示目前所支持的语言
 - `LANG=en_US` 修改语言为英语语系，修改后只对本次登录生效。
 
-### 5.2.2 基本命令的操作
+<h3 id="5.2.2">5.2.2 基本命令的操作</h3>
 
 操作几个简单的小命令:
 
@@ -290,7 +319,7 @@ Linux默认提供了7个Run level给我们使用，可以在/etc/inittab中配�
 - 输入后进入这个软件的工作环境了，然后可以输入计算方程式计算了。退出的话，使用“quit"命令。
 - 默认输出的结果只有整数，通过输入”scale=3“来设置小数点后的位数。
 
-### 5.2.3 重要的热键[Tab], [Ctrl]-c, [Ctrl]-d
+<h3 id="5.2.3">5.2.3 重要的热键[Tab], [Ctrl]-c, [Ctrl]-d</h3>
 
 [Tab]键：
 - 接在一串命令的第一个命令的后面，为“命令补全”
@@ -302,7 +331,7 @@ Linux默认提供了7个Run level给我们使用，可以在/etc/inittab中配�
 [Ctrl]-d：
 - 这个组合键代表键盘输入结束（End of File, End of Input）的意思。相当于输入exit
 
-### 5.2.4 错误信息的查看
+<h3 id="5.2.4">5.2.4 错误信息的查看</h3>
 
 错误信息基本上都是见名知义的。
 
@@ -311,11 +340,11 @@ Linux默认提供了7个Run level给我们使用，可以在/etc/inittab中配�
 - 命令所在的目录，当前的用户并没有将它加入到命令搜寻路径中，请参考bash的PATH说明。
 - 打错命令。
 
-### 5.3 Linux系统的在线求助man page与info page
+<h3 id="5.3">5.3 Linux系统的在线求助man page与info page</h3>
 
 直接在命令行按两下Tab键，可以显示有多少命令是可用的。
 
-### 5.3.1 man page
+<h3 id="5.3.1">5.3.1 man page</h3>
 
 man是manual的简写。例：man date<br>
 进去man功能后，按下空格键往下翻页，按下“q”按键来离开man的环境。<br>
