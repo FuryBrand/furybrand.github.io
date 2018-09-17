@@ -6,34 +6,34 @@ categories: jekyll update
 ---
 ##目录
 
-第1章 Linux是什么？
-<a href='Keywords'>Keywords</a>
-<a href="1.2.5">1.2.5 Linux的内核版本</a>
-<a href="1.2.6">1.2.6 Linux distribution</a>
-<a href="1.3.3">1.3.3 关于授权</a>
-第2章 Linux如何学习
-<a href="2.3.1">2.3.1 从头学习Linux基础</a>
-第3章 主机规划与磁盘分区
-<a href="3.1">3.1 Linux与硬件的搭配</a>
-<a href="3.1.3">3.1.3 各硬件设备在Linux中的文件名</a>
-<a href="3.2.1">3.2.1 磁盘连接的方式与设备文件名的关系</a>
-<a href="3.2.2">3.2.2 磁盘的组成复习</a>
-<a href="3.2.3">3.2.3 磁盘分区表（partition table）</a>
-<a href="3.2.4">3.2.4 开机流程与主引导分区（MBR）</a>
-<a href="3.2.5">3.2.5 Linux安装模式下，磁盘分区的选择（极重要）</a>
-<a href="3.3.2">3.3.2 主机的服务规划与硬件的关系</a>
+第1章 Linux是什么？<br>
+<a href="#Keywords">Keywords</a><br>
+<a href="#1.2.5">1.2.5 Linux的内核版本</a><br>
+<a href="#1.2.6">1.2.6 Linux distribution</a><br>
+<a href="#1.3.3">1.3.3 关于授权</a><br>
+第2章 Linux如何学习<br>
+<a href="#2.3.1">2.3.1 从头学习Linux基础</a><br>
+第3章 主机规划与磁盘分区<br>
+<a href="#3.1">3.1 Linux与硬件的搭配</a><br>
+<a href="#3.1.3">3.1.3 各硬件设备在Linux中的文件名</a><br>
+<a href="#3.2.1">3.2.1 磁盘连接的方式与设备文件名的关系</a><br>
+<a href="#3.2.2">3.2.2 磁盘的组成复习</a><br>
+<a href="#3.2.3">3.2.3 磁盘分区表（partition table）</a><br>
+<a href="#3.2.4">3.2.4 开机流程与主引导分区（MBR）</a><br>
+<a href="#3.2.5">3.2.5 Linux安装模式下，磁盘分区的选择（极重要）</a><br>
+<a href="#3.3.2">3.3.2 主机的服务规划与硬件的关系</a><br>
 第4章 安装CentOS 5.x与多重引导小技巧<br>
 略<br>
-第5章 首次登陆与在线求助 man page
-<a href="5.1.4">5.1.4 X Window与命令行模式的切换</a>
-<a href="5.1.5">5.1.5 在终端界面登录linux</a>
-<a href="5.2">5.2 在命令行模式下执行命令</a>
-<a href="5.2.1">5.2.1 开始执行命令</a>
-<a href="5.2.2">5.2.2 基本命令的操作</a>
-<a href="5.2.3">5.2.3 重要的热键[Tab], [Ctrl]-c, [Ctrl]-d</a>
-<a href="5.2.4">5.2.4 错误信息的查看</a>
-<a href="5.3">5.3 Linux系统的在线求助man page与info page</a>
-<a href="5.3.1">5.3.1 man page</a>
+第5章 首次登陆与在线求助 man page<br>
+<a href="#5.1.4">5.1.4 X Window与命令行模式的切换</a><br>
+<a href="#5.1.5">5.1.5 在终端界面登录linux</a><br>
+<a href="#5.2">5.2 在命令行模式下执行命令</a><br>
+<a href="#5.2.1">5.2.1 开始执行命令</a><br>
+<a href="#5.2.2">5.2.2 基本命令的操作</a><br>
+<a href="#5.2.3">5.2.3 重要的热键[Tab], [Ctrl]-c, [Ctrl]-d</a><br>
+<a href="#5.2.4">5.2.4 错误信息的查看</a><br>
+<a href="#5.3">5.3 Linux系统的在线求助man page与info page</a><br>
+<a href="#5.3.1">5.3.1 man page</a><br>
 
 =================================================================================
 ## 第1章 Linux是什么？
