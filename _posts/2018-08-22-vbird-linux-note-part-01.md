@@ -4,6 +4,7 @@ title:  "《鸟叔的Linux私房菜-基础学习篇（第三版）》学习笔�
 date:   2018-08-22 12:02:49 +0800
 categories: jekyll update
 ---
+
 ##目录
 
 第1章 Linux是什么？<br>
@@ -34,6 +35,7 @@ categories: jekyll update
 <a href="#5.2.4">5.2.4 错误信息的查看</a><br>
 <a href="#5.3">5.3 Linux系统的在线求助man page与info page</a><br>
 <a href="#5.3.1">5.3.1 man page</a><br>
+<a href="#5.3.2">5.3.2 info page</a><br>
 
 =================================================================================
 ## 第1章 Linux是什么？
@@ -382,3 +384,23 @@ man page各个部分的含义：
 
 在man page中可以进行的操作：
 
+|   按键    |   功能    |
+|   -   |   -   |
+|   空格键  |   向下翻一页  |
+|   [Page Down] |   向下翻一页  |
+|   [Page Up] |   向上翻一页  |
+|   [Home] |   去到第一页  |
+|   [End] |   去到最后一页  |
+|   /string |   向下查询string字符串  |
+|   ?string |   向上查询string字符串  |
+|   n,N |   利用/或?来查询字符串时，利用n来进行继续下一个的查询。N则进行继续上一个的查询。  |
+|   q |   退出man page  |
+
+man的特殊用法：
+- `man -f man`获取更多与man相关的信息。若要具体查看，则利用结果中的数字，即`man 7 man`。如果不加数字直接使用`man man`时的具体查询顺序在**/etc/man.conf**中配置
+- `man -k man`模糊查询。凡是带有man的都会被带出来。
+- 上面的两个命令有简略写法。`whatis man`=`man -f man`、`apropos man`=`man -k man`。若要使用这两个特殊的命令，需要创建whatis数据库才行。需要以root的身份执行如下命令`makewhatis`。
+
+<h3 id="5.3.2">5.3.2 info page</h3>
+
+info page
