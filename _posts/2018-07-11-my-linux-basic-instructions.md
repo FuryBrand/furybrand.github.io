@@ -12,6 +12,7 @@ categories: jekyll update
 - [less](#less)
 - [查看系统资源占用 鸣谢](#)
 - [SCP](#scp)
+- [lrzsz](#lrzsz)
 
 ### 常用
 
@@ -96,3 +97,13 @@ scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令�
 | 命令 | 简介 | 备注 
 | - | - | - 
 |scp -P 2181 /etc/hosts root@10.182.74.205:/etc/ | 将本机的host文件通过2181端口以root权限复制到指定机器的/etc/目录下 |
+
+### lrzsz
+[lrzsz官网](http://freecode.com/projects/lrzsz/)<br>
+lrzsz是一个unix通信套件提供的X，Y，和ZModem文件传输协议。<br>
+在centos中安装`yum install lrzsz`。
+
+| 命令 | 简介 | 备注 
+| - | - | - 
+| sz /home/admin/log1.log  | 将log文件从服务器下载到本机 |
+| rz | 页面弹出文件选择的页面，可以上传文件
