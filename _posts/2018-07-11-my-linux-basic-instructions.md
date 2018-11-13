@@ -31,6 +31,7 @@ categories: jekyll update
 |netstat |-a:将目前系统上所有的链接、监听、Socket数据都列出来<br>-t:列出tcp网络数据包的数据<br>-u:列出udp网络数据包的数据<br>-n：不列出进程的服务名称，以端口号来显示<br>-l：列出目前正在网络监听listen的服务<br>-p：列出该网络服务的进程 PID |列出目前系统上已在监听的网络连接及其PID：netstat –tlnp<br>netstat -tunlp &#124; grep 8005 | 
 |查询linux系统的版本 |查看电脑和操作系统的信息：uname -a<br>查询内核版本：cat /proc/version<br>查询发行版本：cat /etc/issue<br>查询发行版本：lsb_release -a(适用于所有的linux，包括Redhat、SuSE、Debian等发行版，但是在debian下要安装lsb) | 
 |ps -ef&#124;grep java |查找“java”相关的进程信息 | 
+|grep -r xixi /home | 显示/home目录下的文件(包含子目录)包含xixi的行（去掉-r则不查子目录） | 
 |jar -xvf game.war |解压game.war包到当前目录 | 
 |which python |查找python的安装路径 | 
 |alias vi |通过alias来查找别名对应的命令 | 
