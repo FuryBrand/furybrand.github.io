@@ -63,19 +63,19 @@ if __name__=='__main__':
 ## 3. 试着用一下吧~
 
 本地调试的话，直接运行python文件就可以启动服务了。
-![01]({{ site.url }}assets/2019-12-5-Python-mock-http/01.png)
+![01]({{ site.url }}assets/2018-12-5-Python-mock-http/01.png)
 
 先发送请求来设置值。
-![02]({{ site.url }}assets/2019-12-5-Python-mock-http/02.png)
+![02]({{ site.url }}assets/2018-12-5-Python-mock-http/02.png)
 
 然后用再次请求之后就可以获得到刚才设置的值了。
-![03]({{ site.url }}assets/2019-12-5-Python-mock-http/03.png)
+![03]({{ site.url }}assets/2018-12-5-Python-mock-http/03.png)
 
 如果用浏览器来访问的话，就会提示我们给出的信息了。
-![04]({{ site.url }}assets/2019-12-5-Python-mock-http/04.png)
+![04]({{ site.url }}assets/2018-12-5-Python-mock-http/04.png)
 
 终端中会记录请求的记录。
-![05]({{ site.url }}assets/2019-12-5-Python-mock-http/05.png)
+![05]({{ site.url }}assets/2018-12-5-Python-mock-http/05.png)
 
 ## 4. 部署到服务器上吧~
 
