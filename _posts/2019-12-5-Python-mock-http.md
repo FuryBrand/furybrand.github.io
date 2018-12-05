@@ -71,6 +71,12 @@ if __name__=='__main__':
 然后用再次请求之后就可以获得到刚才设置的值了。
 ![03]({{ site.url }}assets/2019-12-5-Python-mock-http/03.png)
 
+如果用浏览器来访问的话，就会提示我们给出的信息了。
+![04]({{ site.url }}assets/2019-12-5-Python-mock-http/04.png)
+
+终端中会记录请求的记录。
+![05]({{ site.url }}assets/2019-12-5-Python-mock-http/05.png)
+
 ## 4. 部署到服务器上吧~
 
 往往办公机的网络可能会和服务器不能直接连通，那么我们就将它部署到服务器上吧。
