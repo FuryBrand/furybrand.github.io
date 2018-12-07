@@ -79,4 +79,52 @@ if __name__=='__main__':
 
 ## 4. 部署到服务器上吧~
 
-往往办公机的网络可能会和服务器不能直接连通，那么我们就将它部署到服务器上吧。
+往往办公机的网络可能会和服务器不能直接连通，那么我们就将它部署到服务器上吧~
+
+部署到服务器的话，可能就需要Nginx和uWSGI来帮忙了。Nginx用于反向代理，即外部请求打到服务器的80端口上之后就会被Nginx获取到。随后Nginx将其交给uWSGI来处理。所以uWSGI就是Web容器，用于运行起我们的程序从而处理从Nginx传递过来的请求。对了我用的服务器是CentOS6.6。
+
+### 4.1 安装uWSGI
+
+- 首先下载[uWSGI](https://projects.unbit.it/downloads/uwsgi-latest.tar.gz)后传到服务器上。有网络的话，可以用`wget http://projects.unbit.it/downloads/uwsgi-latest.tar.gz`来下载。
+- 然后`tar zxf uwsgi-latest.tar.gz`解压文件。
+- 随后`cd uwsgi-2.0.17.1`进入文件内
+- 执行`make`来编译并安装uWSGI。
+
+P.S. 关于配置，这个[手册](https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/Nginx.html)给了我很大的帮助。
+
+### 4.2 安装Nginx
+
+我的服务器里有，所以先不多提了，稍后补充一波。
+
+### 4.3 配置Nginx
+
+安装目录稍有不同，但是配置文件都在`nginx.conf`这个文件里。添加配置文件：
+
+'''
+server
+        {
+         listen                 80; #对外暴露的端口，默认就是80不用变。
+         server_name            test_mock.com; #如果不想那个配置host的话就用服务器的ip地址也没有关系。
+location / {
+         include uwsgi_params; #自0.8.40版本起，Nginx本身就包含了对使用 uwsgi protocol 的上游服务器的的支持。通过这个会默认引入一些参数。
+         uwsgi_pass 127.0.0.1:8888; #uWSGI服务器启动后使用的ip和端口。稍后启动uWSGI时会用到。
+         }
+}
+'''
+
+记得重启Nginx。
+
+### 4.4 启动uWSGI
+
+由于我们的代码就一个demo.py。所以将文件传到服务器上即可。然后到`uwsgi-2.0.17.1`文件夹内使用如下命令来启动uWSGI。
+
+`./uwsgi --socket 127.0.0.1:8888 --wsgi-file /root/demo.py --master --processes 4 --threads 2 --stats 127.0.0.1:9191 --callable app`
+
+注意:
+- 命令中的`/root/demo.py`是demo.py的路径。
+- `--callable app`中的app是代码中的Flask的服务的名字。因为不是用python来直接运行，所以代码中的第6步实际在这种方式的运行下就没有用了。uWSGI是通过Flask服务的名字来启动的。
+
+### 4.5 验证结果
+
+用之前的方式来验证就可以。
+
