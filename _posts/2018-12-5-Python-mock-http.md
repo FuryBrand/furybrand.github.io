@@ -9,6 +9,17 @@ categories: jekyll update
 
 这次对接的外部系统是采用了http协议，通过白名单的形式来保证安全。但是和往常不同，这次的外部系统是通过被调用后提供信息，也就是说内部系统定时轮询去调用外部系统。那么功能测试阶段只能mock一下来搞了，不然就没法测了。还好是http，实现起来也相对比较简单。
 
+目录：
+- [1. 准备工作](#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)
+- [2. demo.py](#2-demopy)
+- [3. 试着用一下吧~](#3-%E8%AF%95%E7%9D%80%E7%94%A8%E4%B8%80%E4%B8%8B%E5%90%A7)
+- [4. 部署到服务器上吧~](#4-%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%90%A7)
+    - [4.1 安装uWSGI](#41-%E5%AE%89%E8%A3%85uwsgi)
+    - [4.2 安装Nginx](#42-%E5%AE%89%E8%A3%85nginx)
+    - [4.3 配置Nginx](#43-%E9%85%8D%E7%BD%AEnginx)
+    - [4.4 启动uWSGI](#44-%E5%90%AF%E5%8A%A8uwsgi)
+    - [4.5 验证结果](#45-%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C)
+
 ## 1. 准备工作
 
 通过`pip install -U Flask`来安装Flask。Flask是一个使用 Python 编写的轻量级 Web 应用框架。在[GitHub](https://github.com/pallets/flask/)上可以找到相当有用的信息，我这里就是一个小Demo吧。
