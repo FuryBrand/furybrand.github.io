@@ -19,7 +19,7 @@ datetime是python中基本的日期和时间类型。包含了很多可用的类
 
 新建一个python文件，将下面的代码复制进去执行下就行。其实直接看也行，因为输出的结果也标记出来了。
 
-```
+```python
 import datetime
 
 # 获取当天
@@ -33,6 +33,8 @@ print('date:',date) #date: 2018-12-01 00:39:25
 # 获取两个datetime的日期差
 days = (date - today).days
 print('days', days) # days -2
+# 补充一个坑，因为数据库中获取的时间可能没有具体是小时分钟数，所以在和today计算日期差的时候可能会不准，可以通过如下方法将today中的小时分钟抹去。
+today = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
 ```
 
 ## 2. xlwt
