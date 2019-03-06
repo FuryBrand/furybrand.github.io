@@ -45,7 +45,7 @@ categories: jekyll update
 |date |获取系统当前时间 | 
 |date -s "2018-2-6 14:25:07" |设置系统时间，注：admin可能没有权限 | 
 |history |可以打印出之前所输入过的命令，然后用!123就可以指定第123号命令 | 
-|truncate |将文件变为指定大小，可用于创建测试用的垃圾文件，或用于清理日志 | find ./ -name '*.out' | xargs truncate -s 0 |
+|truncate |将文件变为指定大小，可用于创建测试用的垃圾文件，或用于清理日志 | find ./ -name '*.out' &#124; xargs truncate -s 0 |
 
 ### 账户，修改密码相关
 
