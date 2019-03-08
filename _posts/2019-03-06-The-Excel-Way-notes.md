@@ -270,7 +270,7 @@ vlokup函数的使用条件：
 
 使用后的效果：
 
-![07]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/07.jpg)
+![07]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/07.png)
 
 [练习]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/第五章-字段调整-电子表格.xlsx)
 
