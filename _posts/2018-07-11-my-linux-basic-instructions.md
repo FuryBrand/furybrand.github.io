@@ -103,7 +103,8 @@ scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令�
 ### lrzsz
 [lrzsz官网](http://freecode.com/projects/lrzsz/)<br>
 lrzsz是一个unix通信套件提供的X，Y，和ZModem文件传输协议。<br>
-在centos中安装`yum install lrzsz`。
+在centos中安装`yum install lrzsz`。<br>
+如果服务器不能连接外网的话，就通过该[地址](http://mirror.centos.org/centos/6/os/x86_64/Packages/lrzsz-0.12.20-27.1.el6.x86_64.rpm)下载后通过`yum install lrzsz-0.12.20-27.1.el6.x86_64.rpm`来进行安装。
 
 | 命令 | 简介 | 备注 
 | - | - | - 
