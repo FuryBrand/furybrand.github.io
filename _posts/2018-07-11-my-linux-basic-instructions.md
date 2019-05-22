@@ -5,8 +5,9 @@ date:   2018-07-11 22:46:49 +0800
 categories: jekyll update
 ---
 最近在通过《鸟哥的Linux私房菜》系统得学习linux。可是工作中还是要用Linux的，有些命令啥的就是现学现用，这个笔记就是记录这个的。
+
 - [常用](#%E5%B8%B8%E7%94%A8)
-- [账户，修改密码相关](#%E8%B4%A6%E6%88%B7%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%9B%B8%E5%85%B3)
+- [账户，修改密码相关](#%E8%B4%A6%E6%88%B7%EF%BC%8C%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%9B%B8%E5%85%B3)
 - [压缩包](#%E5%8E%8B%E7%BC%A9%E5%8C%85)
 - [Nginx](#nginx)
 - [less](#less)
@@ -26,7 +27,9 @@ categories: jekyll update
 |zip -r mydata.zip mydata |把当前目录下面的mydata目录压缩为mydata.zip| 
 |unzip |解压zip文件。unzip xx.zip | 
 |tar |将文件压缩成tar文件| 
-|df -h |查看磁盘使用量 | 
+|df -h |以磁盘分区为单位查看磁盘使用量 | 
+|du -sh ./ |获取当前目录的大小 |
+|du -h ./ |获取当前目录的下所有文件夹的大小（含子文件夹） | 
 |rz/sz |利用ssh协议在Xshell上传输文件 | 
 |netstat |-a:将目前系统上所有的链接、监听、Socket数据都列出来<br>-t:列出tcp网络数据包的数据<br>-u:列出udp网络数据包的数据<br>-n：不列出进程的服务名称，以端口号来显示<br>-l：列出目前正在网络监听listen的服务<br>-p：列出该网络服务的进程 PID |列出目前系统上已在监听的网络连接及其PID：netstat –tlnp<br>netstat -tunlp &#124; grep 8005 | 
 |查询linux系统的版本 |查看电脑和操作系统的信息：uname -a<br>查询内核版本：cat /proc/version<br>查询发行版本：cat /etc/issue<br>查询发行版本：lsb_release -a(适用于所有的linux，包括Redhat、SuSE、Debian等发行版，但是在debian下要安装lsb) | 
