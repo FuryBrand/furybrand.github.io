@@ -62,6 +62,7 @@ categories: jekyll update
 |who |命令查看主机上的用户 |
 |whoami |查看当前登录的用户 |
 |lastlog |登录日志 |
+|su |用户切换 |su rootmima 切换root身份<br>su -rootmima 切换root身份及shell环境<br>su admin 切换admin用户
 
 ### 压缩包 
 
