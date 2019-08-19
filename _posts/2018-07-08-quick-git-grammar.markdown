@@ -61,7 +61,6 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | - | - | - |
 | git –version| 查看git版本| |
 | git clone xxx| 克隆仓库||
-| git checkout dev| 切换至dev分支| |
 | git add ./xixi/heihei.txt| 将文件heihei.txt添加至staging area| |
 | git add .| 将当前目录下的所有文件加入到staging area| |
 | git commit -m '添加一个heihei.txt文件'| 将staging area中的文件提交到仓库| |
@@ -74,6 +73,13 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git remote -v| 查看git的服务器地址| |
 | git remote show origin| 提供有关远程的一些信息| 也可以看到远程地址|
 | git help remote| 查看remote的详细说明| |
+
+## git checkout的使用
+| 命令 | 简介 | 备注 |
+| - | - | - |
+| git checkout dev| 切换至dev分支| |
+| git checkout -- templates/index.html| 放弃本地尚未commit的修改| 谨慎使用，除非使用了git stash，不然只能去local history里面找之前的代码了|
+| git checkout .| 放弃本地尚未commit的**所有**修改| 同上|
 
 
 ## git config的使用
