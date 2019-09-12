@@ -47,7 +47,7 @@ categories: jekyll update
 1. 手动通过浏览器的F12开发者工具，定位要提交的`<input>`元素。这里用**XPath**。
 2. 在`Selenium IDE`通过js脚本为`<input>`元素赋值。Target中的内容如下。
 
-```javascript
+```
 document.querySelector('#pane-white > div > div:nth-child(3) > div > div.el-dialog__body > form > div:nth-child(5) > div > div:nth-child(1) > div > input').value='2019-09-01  00:00:00';
 ```
 
