@@ -25,17 +25,3 @@ categories: jekyll update
 
 上面的录制只是针对了最简单的文本输入框进行的录制。录制虽然方便，但是目前还没有那么全能，啥都能录，还有些东西是`Selenium IDE`的录制功能搞不定，这时候就需要特殊处理了。
 
-### 1.input形式的下拉选
-
-如果是select形式的下拉选，虽然我没有尝试，但是作为基本的HTML元素，推测通过`Selenium IDE`的录制应该就能搞定。我遇到的是用`<input>`做的下拉选。该下拉选形式如下：
-
-![下拉选]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912094014.png)
-
-录制的脚本并不能生效，处理方式为：
-1. 触发点击激活下拉选（脚本应该会录制）；
-2. 手动通过浏览器的F12开发者工具，定位要选的下拉选的选项。这里用**XPath**或者**selector**都行，只不过一个在Target对应`xpath=`，另一个对应`css=`。
-
-![下拉选手动定位]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912095245.png)
-
-![下拉选脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912095524.png)
-
