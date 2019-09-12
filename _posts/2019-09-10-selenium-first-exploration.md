@@ -39,23 +39,3 @@ categories: jekyll update
 
 ![下拉选脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912095524.png)
 
-### 2.日期控件
-
-针对日期控件，录制脚本的时候也是未能成功录制出来的。虽然前端的时间控件千奇百怪，但是大部分的控件在和后台交互的时候都是讲选好的时间以`<input>`的形式提交。此时的一个投机取巧的方式为，直接给控件的输入框赋值。注意，该方式其实是绕过了选择时间的过程，而是直接赋值了时间。故无法暴露控件本身存在的问题，切记。
-
-处理方法很简单：
-1. 手动通过浏览器的F12开发者工具，定位要提交的`<input>`元素。这里用**XPath**。
-2. 在`Selenium IDE`通过js脚本为`<input>`元素赋值。Target中的内容如下。
-
-```
-document.querySelector('#pane-white > div > div:nth-child(3) > div > div.el-dialog__body > form > div:nth-child(5) > div > div:nth-child(1) > div > input').value='2019-09-01  00:00:00';
-```
-
-![日期控件手动定位]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912100442.png)
-
-![日期控件脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912100630.png)
-
-### 3.后续遇到新问题再补充吧
-
-参考文档：
-1. [selenium IDE Chrome下载安装与使用](https://blog.csdn.net/qq_33673213/article/details/90489479)
