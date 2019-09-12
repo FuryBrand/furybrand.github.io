@@ -11,7 +11,7 @@ categories: jekyll update
 - [典型问题](#%E5%85%B8%E5%9E%8B%E9%97%AE%E9%A2%98)
   - [1.input形式的下拉选](#1input%E5%BD%A2%E5%BC%8F%E7%9A%84%E4%B8%8B%E6%8B%89%E9%80%89)
   - [2.日期控件](#2%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6)
-  - [3.后续遇到新问题再补充](#3%E5%90%8E%E7%BB%AD%E9%81%87%E5%88%B0%E6%96%B0%E9%97%AE%E9%A2%98%E5%86%8D%E8%A1%A5%E5%85%85)
+  - [3.后续遇到新问题再补充吧](#3%E5%90%8E%E7%BB%AD%E9%81%87%E5%88%B0%E6%96%B0%E9%97%AE%E9%A2%98%E5%86%8D%E8%A1%A5%E5%85%85%E5%90%A7)
 
 
 ## 背景
@@ -37,6 +37,7 @@ categories: jekyll update
 ### 1.input形式的下拉选
 
 如果是select形式的下拉选，虽然我没有尝试，但是作为基本的HTML元素，推测通过`Selenium IDE`的录制应该就能搞定。我遇到的是用`<input>`做的下拉选。该下拉选形式如下：
+
 ![下拉选]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912094014.png)
 
 录制的脚本并不能生效，处理方式为：
@@ -55,7 +56,7 @@ categories: jekyll update
 1. 手动通过浏览器的F12开发者工具，定位要提交的`<input>`元素。这里用**XPath**。
 2. 在`Selenium IDE`通过js脚本为`<input>`元素赋值。Target中的内容如下。
 
-```JavaScript
+```javascript
 document.querySelector('#pane-white > div > div:nth-child(3) > div > div.el-dialog__body > form > div:nth-child(5) > div > div:nth-child(1) > div > input').value='2019-09-01  00:00:00';
 ```
 
@@ -63,7 +64,7 @@ document.querySelector('#pane-white > div > div:nth-child(3) > div > div.el-dial
 
 ![日期控件脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912100630.png)
 
-### 3.后续遇到新问题再补充
+### 3.后续遇到新问题再补充吧
 
 参考文档：
 1. [selenium IDE Chrome下载安装与使用](https://blog.csdn.net/qq_33673213/article/details/90489479)
