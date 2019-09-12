@@ -44,6 +44,7 @@ categories: jekyll update
 2. 手动通过浏览器的F12开发者工具，定位要选的下拉选的选项。这里用**XPath**或者**selector**都行，只不过一个在Target对应`xpath=`，另一个对应`css=`。
 
 ![下拉选手动定位]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912095245.png)
+
 ![下拉选脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912095524.png)
 
 ### 2.日期控件
@@ -59,6 +60,7 @@ document.querySelector('#pane-white > div > div:nth-child(3) > div > div.el-dial
 ```
 
 ![日期控件手动定位]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912100442.png)
+
 ![日期控件脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/微信截图_20190912100630.png)
 
 ### 3.后续遇到新问题再补充
