@@ -21,9 +21,8 @@ categories: jekyll update
 
 先打开`Selenium IDE`，然后创建Project和Tests，之后输入好要访问的URL。随后点击**REC**录制按钮后会弹出一个新的浏览器页面，跟着操作就好了。
 
-`感觉最近GitHub的访问速度都巨慢，下面是一个gif动图，如果载入太慢的话，就右键保存本地之后看吧😓`
-
-![录屏动图]({{ site.url }}assets/2019-09-10-selenium-first-exploration/14.gif)
+`下面是一个gif动图，展示了脚本的录制和执行，感觉最近GitHub的访问速度都巨慢，就新开标签页或者右键保存本地之后看吧😓`
+[录屏动图]({{ site.url }}assets/2019-09-10-selenium-first-exploration/14.gif)
 
 ## 脚本导出
 
