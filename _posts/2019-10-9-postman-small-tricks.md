@@ -26,7 +26,7 @@ categories: jekyll update
 
 很多时候我们测试不可能一次通过，而验证问题或者复现问题只需要在报文中改一个唯一的值，比如*订单号*、*身份证号码*、*手机号码*等等，就可以。这里我们利用参数化可以简单实现这个需求。
 
-`Request Headers`和`Request Body`中的内容都可以通过`{{paramName}}`的形式进行参数化。
+`Request Headers`和`Request Body`中的内容都可以通过`{% raw %}{{paramName}}{% endraw %}`的形式进行参数化。
 
 ![参数化]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_1.png)
 ![脚本]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_2.png)
