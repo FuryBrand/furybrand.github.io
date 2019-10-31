@@ -5,12 +5,13 @@ date:   2018-07-08 11:46:49 +0800
 categories: jekyll update
 ---
 
-- [01.下载安装Git，并在VSTS上新建一个项目](#01%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85git%E5%B9%B6%E5%9C%A8vsts%E4%B8%8A%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE)
-- [02.Clone项目](#02clone%E9%A1%B9%E7%9B%AE)
-- [xx.附录-常用Git命令](#xx%E9%99%84%E5%BD%95-%E5%B8%B8%E7%94%A8git%E5%91%BD%E4%BB%A4)
-  - [git 的使用](#git-%E7%9A%84%E4%BD%BF%E7%94%A8)
-  - [git config的使用](#git-config%E7%9A%84%E4%BD%BF%E7%94%A8)
-  - [git stash的使用](#git-stash%E7%9A%84%E4%BD%BF%E7%94%A8)
+- [01.下载安装Git，并在VSTS上新建一个项目](#01%e4%b8%8b%e8%bd%bd%e5%ae%89%e8%a3%85git%e5%b9%b6%e5%9c%a8vsts%e4%b8%8a%e6%96%b0%e5%bb%ba%e4%b8%80%e4%b8%aa%e9%a1%b9%e7%9b%ae)
+- [02.Clone项目](#02clone%e9%a1%b9%e7%9b%ae)
+- [xx.附录-常用Git命令](#xx%e9%99%84%e5%bd%95-%e5%b8%b8%e7%94%a8git%e5%91%bd%e4%bb%a4)
+  - [git 的使用](#git-%e7%9a%84%e4%bd%bf%e7%94%a8)
+  - [git checkout的使用](#git-checkout%e7%9a%84%e4%bd%bf%e7%94%a8)
+  - [git config的使用](#git-config%e7%9a%84%e4%bd%bf%e7%94%a8)
+  - [git stash的使用](#git-stash%e7%9a%84%e4%bd%bf%e7%94%a8)
 
 **本教程针对Git的初学者**
 
@@ -75,6 +76,7 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git help remote| 查看remote的详细说明| |
 
 ## git checkout的使用
+
 | 命令 | 简介 | 备注 |
 | - | - | - |
 | git checkout dev| 切换至dev分支| |
