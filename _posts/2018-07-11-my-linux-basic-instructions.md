@@ -6,12 +6,12 @@ categories: jekyll update
 ---
 最近在通过《鸟哥的Linux私房菜》系统得学习linux。可是工作中还是要用Linux的，有些命令啥的就是现学现用，这个笔记就是记录这个的。
 
-- [常用](#%E5%B8%B8%E7%94%A8)
-- [账户，修改密码相关](#%E8%B4%A6%E6%88%B7%EF%BC%8C%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%9B%B8%E5%85%B3)
-- [压缩包](#%E5%8E%8B%E7%BC%A9%E5%8C%85)
+- [常用](#%e5%b8%b8%e7%94%a8)
+- [账户，修改密码相关](#%e8%b4%a6%e6%88%b7%e4%bf%ae%e6%94%b9%e5%af%86%e7%a0%81%e7%9b%b8%e5%85%b3)
+- [压缩包](#%e5%8e%8b%e7%bc%a9%e5%8c%85)
 - [Nginx](#nginx)
 - [less](#less)
-- [查看系统资源占用 鸣谢](#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%8D%A0%E7%94%A8-%E9%B8%A3%E8%B0%A2)
+- [查看系统资源占用 鸣谢](#%e6%9f%a5%e7%9c%8b%e7%b3%bb%e7%bb%9f%e8%b5%84%e6%ba%90%e5%8d%a0%e7%94%a8-%e9%b8%a3%e8%b0%a2)
 - [SCP](#scp)
 - [lrzsz](#lrzsz)
 
@@ -34,6 +34,7 @@ categories: jekyll update
 |netstat |-a:将目前系统上所有的链接、监听、Socket数据都列出来<br>-t:列出tcp网络数据包的数据<br>-u:列出udp网络数据包的数据<br>-n：不列出进程的服务名称，以端口号来显示<br>-l：列出目前正在网络监听listen的服务<br>-p：列出该网络服务的进程 PID |列出目前系统上已在监听的网络连接及其PID：netstat –tlnp<br>netstat -tunlp &#124; grep 8005 | 
 |查询linux系统的版本 |查看电脑和操作系统的信息：uname -a<br>查询内核版本：cat /proc/version<br>查询发行版本：cat /etc/issue<br>查询发行版本：lsb_release -a(适用于所有的linux，包括Redhat、SuSE、Debian等发行版，但是在debian下要安装lsb) | 
 |ps -ef&#124;grep java |查找“java”相关的进程信息 | 
+|ps -ef &#124;grep nginx &#124;awk '{print $2}'&#124;xargs kill -9 |杀死nginx相关的所有进程 | 
 |grep -r xixi /home | 显示/home目录下的文件(包含子目录)包含xixi的行（去掉-r则不查子目录） | 
 |jar -xvf game.war |解压game.war包到当前目录 | 
 |which python |查找python的安装路径 | 
