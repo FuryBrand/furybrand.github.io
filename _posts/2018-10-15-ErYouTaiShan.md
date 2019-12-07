@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "二游泰山、一访趵突泉"
+title:  "二游泰山、初见趵突泉"
 date:   2018-10-15 21:56:16 +0800
 categories: jekyll update
 ---
