@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Write down & share my person notes.
   记录和分享我的个人笔记
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://furybrand.gitee.io/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://furybrand.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  FuryBrand
 
 # Build settings
