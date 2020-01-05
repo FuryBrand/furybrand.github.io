@@ -59,6 +59,7 @@ requests==2.18.4
 #### 2.导出安装包
 
 ~~pip install --download /root/packs -r requirements.txt~~
+
 `pip download pymysql -d "D:\pipDownloadTest"`
 
 不清楚为什么，原来记的这个命令不好用了，所以更新一波。具体原因再说吧，最近有点忙。另外注意一点，比如request包又依赖的别的几个包（如下），所以导出时要一起导出才行，不过简单暴力的方法就是本机中有啥包，直接全灌倒离线服务器上也行😂
