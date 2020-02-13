@@ -125,3 +125,73 @@ return content - 1 + 1;
 }
 }
 </script>
+<p>请输入原数字串：<input type="text" id="sendpay" onblur="checkSendpay()"/></p>
+<p>
+    将第<input type="text" id="loc" onblur="checkLoc(this);"/>位的值，替换为<input type="text" id="newVal" onblur="checkNewVal()"/>（位数从0开始数）
+    <input type="button" value="替换" onclick="replace()">
+    <p>替换后的结果为：</p>
+    <pan id="result"></pan>
+</p>
+<p>
+    获取第<input type="text" id="getLoc"  onblur="checkLoc(this);"/>位的值（位数从0开始数）<input type="button" value="获取" onclick="getNum()">
+</p>
+<p>
+    版本信息：
+    Ver0.4：去掉了异常输入校验，增加了对chrome的兼容性。
+</p>
+<script type="text/javascript">
+    /* function checkSendpay(){
+        var sendpay = document.getElementById("sendpay").value;
+        var re = new RegExp("^\\d{200}$");
+        if(sendpay.match(re)){
+            return true;
+        }else{
+            alert("输入的sendpay不合法,sendpay是200位的数字");
+            window.setTimeout(function(){document.getElementById('sendpay').focus()},0);
+            return false;
+        }
+    } */
+/*             function checkLoc(x){
+        var loc = x.value;
+        var re = new RegExp("^0$|^[1-9]\\d?$|^1[0-9][0-9]$");
+        if(loc.match(re)){
+            return true;
+        }else{
+            alert("位数中请输入0-199之间的整数");
+            window.setTimeout(function(){x.focus()},0);
+            return false;
+        }
+    } */
+    /* function checkNewVal(){
+        var newVal = document.getElementById("newVal").value;
+        var re = new RegExp("^[0-9]$");
+        if(newVal.match(re)){
+            return true;
+        }else{
+            alert("替换的数字只能是0-9的整数");
+            window.setTimeout(function(){document.getElementById('newVal').focus()},0);
+            return false;
+        }
+    } */
+    function replace(){
+        //checkSendpay();
+        //checkLoc(document.getElementById("loc"));
+        //checkNewVal();
+        //var checkSendpay = checkSendpay();
+        //if(checkSendpay()&checkLoc(document.getElementById("loc"))&checkNewVal()){
+            var sendpay = document.getElementById("sendpay").value;
+            var loc = document.getElementById("loc").value;
+            var newVal = document.getElementById("newVal").value;
+            var str1 = sendpay.substring(0,loc);
+            var str2 = sendpay.substring(loc*1+1,sendpay.length);
+            //alert(str1+""+newVal+""+str2);
+            document.getElementById("result").innerHTML = str1+""+newVal+""+str2;
+        //}
+    }
+    function getNum(){
+        //checkLoc(document.getElementById("getLoc"));
+        var sendpay = document.getElementById("sendpay").value;
+        var loc = document.getElementById("getLoc").value;
+        alert(sendpay.charAt(loc));
+    }
+</script>
