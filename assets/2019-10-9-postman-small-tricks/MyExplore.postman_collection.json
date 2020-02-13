@@ -191,12 +191,7 @@
 							"value": "{\"vehicleCode\":\"C001_001\",\"deviceCode\":\"D001_001\",\"type\":1,\"uuid\":\"4561acdawf\",\"authorityData\":\"7ef648848b403a668f543d13b60b1b71\"}",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://192.168.75.41/setReturn",
@@ -213,7 +208,140 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "4.base64编解码和Tests",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a74202ea-20d9-4fde-87d3-9b74cf099a8f",
+						"exec": [
+							"// 1. 先声明变量和报文的拼装，用于后续方便修改",
+							"var orderNo = 'TYCH14205';",
+							"var data = '<Request><errcode>0</errcode><errmsg>ok</errmsg><orderno>' + orderNo + '</orderno></Request>'",
+							"console.log('请求明文:' + intermediate);",
+							"// 2. 由于原始报文为utf-8编码的，故先将原始的报文转变为“中间态”。然后再将其转换至相应的其他编码形式。",
+							"//    其中'Utf8'和'Base64'可以互换也可以改为其他的编码格式。",
+							"var intermediate = CryptoJS.enc.Utf8.parse(data);",
+							"console.log('-------intermediate-------:' + intermediate);",
+							"data = CryptoJS.enc.Base64.stringify(intermediate);",
+							"console.log('实际请求:' + data)",
+							"",
+							"// 3. 替换请求中的参数",
+							"pm.environment.set(\"data\", data);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe8ce6d4-a507-4a95-bcef-6ccdf739f095",
+						"exec": [
+							"console.log(\"-------responseBody-------\" + responseBody);",
+							"// 去掉返回值中的换行符及回车符",
+							"var str = responseBody.replace(/[\\r\\n]/g,\"\");",
+							"// base64转utf-8",
+							"var intermediate = CryptoJS.enc.Base64.parse(str);",
+							"var utf8 = CryptoJS.enc.Utf8.stringify(intermediate)",
+							"console.log(\"出参转明文为：\" + utf8);",
+							"pm.test(\"出参转明文为：\" + utf8)",
+							"",
+							"//Postman的test-scripts用法示例",
+							"//https://learning.postman.com/docs/postman/scripts/test-scripts/",
+							"//Postman的解码base64数据示例",
+							"//https://learning.postman.com/docs/postman/scripts/test-examples/#decode-base64-data",
+							"",
+							"//模拟的出参可以做实验用：",
+							"//PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz",
+							"//48UmVzcG9uc2U+PFJlc3VsdHM+c3VjY2VzczxSZXN1bHRzPjwv",
+							"//UmVzcG9uc2U+"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{data}"
+				},
+				"url": {
+					"raw": "http://192.168.75.41/getReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"getReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "设置返回值form",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "value",
+							"value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz\n48UmVzcG9uc2U+PFJlc3VsdHM+c3VjY2VzczxSZXN1bHRzPjwv\nUmVzcG9uc2U+",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.75.41/setReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"setReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取设置好的返回值",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.75.41/getReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"getReturn"
+					]
+				}
+			},
+			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

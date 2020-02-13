@@ -12,10 +12,16 @@ categories: jekyll update
 今天我主要是来分享几个我常用的小把戏。所以默认读者已经用过`Postman`发送过请求，如果想看一些更详细的文章的话，这里有一个[51testing的专题](http://www.51testing.com/zhuanti/postman.htm)。另附一个[Postman使用方法的博客](https://blog.csdn.net/fxbin123/article/details/80428216)。
 
 目录：
-- [不可不知的大前提](#%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%A4%A7%E5%89%8D%E6%8F%90)
-- [1.参数化](#1%E5%8F%82%E6%95%B0%E5%8C%96)
-- [2.如何应对一个有签名算法的接口](#2%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E4%B8%80%E4%B8%AA%E6%9C%89%E7%AD%BE%E5%90%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8E%A5%E5%8F%A3)
-- [3.网站需要登录咋整](#3%E7%BD%91%E7%AB%99%E9%9C%80%E8%A6%81%E7%99%BB%E5%BD%95%E5%92%8B%E6%95%B4)
+- [写在最前面](#%e5%86%99%e5%9c%a8%e6%9c%80%e5%89%8d%e9%9d%a2)
+- [不可不知的大前提](#%e4%b8%8d%e5%8f%af%e4%b8%8d%e7%9f%a5%e7%9a%84%e5%a4%a7%e5%89%8d%e6%8f%90)
+- [1.参数化](#1%e5%8f%82%e6%95%b0%e5%8c%96)
+- [2.如何应对一个有签名算法的接口](#2%e5%a6%82%e4%bd%95%e5%ba%94%e5%af%b9%e4%b8%80%e4%b8%aa%e6%9c%89%e7%ad%be%e5%90%8d%e7%ae%97%e6%b3%95%e7%9a%84%e6%8e%a5%e5%8f%a3)
+- [3.网站需要登录咋整](#3%e7%bd%91%e7%ab%99%e9%9c%80%e8%a6%81%e7%99%bb%e5%bd%95%e5%92%8b%e6%95%b4)
+- [4.base64编解码和Tests](#4base64%e7%bc%96%e8%a7%a3%e7%a0%81%e5%92%8ctests)
+
+## 写在最前面
+
+下面的所有内容都从Postman中导出来了，下载后可以直接导入后使用（[点我下载Postman导出的Collections]({{ site.url }}assets/2019-10-9-postman-small-tricks/MyExplore.postman_collection.json)）。不过由于示例的服务是我局域网内的一个临时接口，所以可能只能作为语法参考了。或者参考这篇文章（[Python-mock一个提供http协议的服务]({% post_url 2018-12-5-Python-mock-http %})）来在本机提供一个临时接口以供调用。
 
 ## 不可不知的大前提
 
@@ -31,8 +37,6 @@ categories: jekyll update
 ![参数化]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_1.png)
 ![脚本]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_2.png)
 
-另附[Postman导出的Collections]({{ site.url }}assets/2019-10-9-postman-small-tricks/MyExplore.postman_collection.json)，下载后可以直接导入后使用，不过由于示例的服务是我局域网内的一个临时接口，所以只能勉强参考下语法啥的了。
-
 ## 2.如何应对一个有签名算法的接口
 
 为了防止接口调用的过程中被恶意攻击篡改，一般暴露在公网的接口往往都需要调用方携带签名进行请求。那么如何应对一个有签名算法的接口呢？
@@ -43,8 +47,6 @@ categories: jekyll update
 
 ![签名]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_3.png)
 
-另附[Postman导出的Collections]({{ site.url }}assets/2019-10-9-postman-small-tricks/MyExplore.postman_collection.json)，下载后可以直接导入后使用，不过由于示例的服务是我局域网内的一个临时接口，所以只能勉强参考下语法啥的了。
-
 ## 3.网站需要登录咋整
 
 说起登录就很容易联想起Http身份认证了，这个要具体问题具体分析。举个最简单的例子，设置路由器的时候，网页会弹出一个弹窗要求输入用户名和密码，这种身份认证是`HTTP Basic Authentication`，可以在`Postman`主窗口中的`Authorization`进行配置即可。
@@ -54,4 +56,11 @@ categories: jekyll update
 ![浏览器]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_4.png)
 ![Cookie]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_5.png)
 
-另附[Postman导出的Collections]({{ site.url }}assets/2019-10-9-postman-small-tricks/MyExplore.postman_collection.json)，下载后可以直接导入后使用，不过由于示例的服务是我局域网内的一个临时接口，所以只能勉强参考下语法啥的了。
+## 4.base64编解码和Tests
+
+有时和外部接口交互的时候规定了传输的编码格式比如base64等。对我们来说肯定是utf8有可读性了。那么就需要将入参报文和出参报文进行base64的编解码。编码自然是参考[1.参数化](#1%e5%8f%82%e6%95%b0%e5%8c%96)，在`Pre-request Script`中进行编码。为了提到出参的可读性，在`Tests`中进行解码，将原本的以base64编码的出参转换成可读的utf8编码格式并展示在`Test Results`中。详情参考下面两图。
+
+![Pre-request_Script]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_6.png)
+![Tests]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_7.png)
+
+这里有一个坑，我当时阻塞了很久，从本节的第一张图可以看出来，出参是分了多行的。这也是我当时实测接口的状况，导致做转换时，`Tests`中的第6行一直报错。后来才发现原来是换行符的锅。所以才有了第3行去换行去回车的代码。
