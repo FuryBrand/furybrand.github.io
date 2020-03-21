@@ -1,16 +1,17 @@
 # Site settings
 title: FuryBrand's notes
-SEOTitle: FuryBrand | 愤怒的布兰德
+SEOTitle: FuryBrand's notes
 header-img: img/home-bg.jpg
 email: furybrand@outlook.com
 description: >- # this means to ignore newlines until "baseurl:"
   Write down & share my person notes.
   记录和分享我的个人笔记
-keyword: ""
+keyword: "furybrand, notes"
 url: "http://furybrand.github.io/"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
-
+# Publish posts or collection documents with a future date.
+future: true
 
 # SNS settings
 RSS: true
@@ -45,7 +46,12 @@ gems: [jekyll-paginate]
 markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
-
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
 
 
 # Disqus settings
@@ -80,6 +86,13 @@ featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
+
+
+# MathJax rendering for layout:page (e.g. post preview)
+page-mathjax: false
 
 # Friends
 # friends: [

@@ -1,11 +1,13 @@
 ---
-layout: post
+layout:     post
 title:  "名词解释大全"
-date:   2018-03-19 20:09:49 +0800
-categories: jekyll update
+subtitle:   ""
+date:   2018-03-19
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
 ---
-
-- [127.0.0.1](#127.0.0.1)
 
 ## 127.0.0.1
 
