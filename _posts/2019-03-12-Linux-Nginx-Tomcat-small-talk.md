@@ -2,7 +2,13 @@
 layout: post
 title:  "Linux-浅谈Nginx的反向代理 即http请求经历了什么😀"
 date:   2019-03-12 23:20:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Linux
 ---
 
 这两天解决了几个环境的问题，觉得自己对于http请求在请求过程中是如何流传的，以及Nginx的反向代理功能有了更深的认识。

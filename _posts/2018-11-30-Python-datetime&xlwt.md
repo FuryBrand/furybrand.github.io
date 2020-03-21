@@ -2,7 +2,13 @@
 layout: post
 title:  "Python-浅解datetime和xlwt"
 date:   2018-11-30 23:50:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Python
 ---
 
 这两天写了个小工具，从任务管理平台的数据库中获取数据，然后在excel中绘制出甘特图。初衷是为了方便排期，因为会有一些优先级被升级的任务插队，但是又不能很直观得知道谁在这个时段有空。

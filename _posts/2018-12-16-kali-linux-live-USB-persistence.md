@@ -2,7 +2,13 @@
 layout: post
 title:  "Kali Linux-制作Live USB Persistence模式的启动盘"
 date:   2018-12-16 09:46:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Linux
 ---
 
 Kali Linux含有多种渗透测试软件，是一个测试自家wifi是否可以被轻易攻破的好工具（大雾😀）。我的PC都是Win10系统的，所以还是把这个系统装到U盘里比较合适。

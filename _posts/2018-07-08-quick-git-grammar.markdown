@@ -2,16 +2,14 @@
 layout: post
 title:  "Git简明教程-从不会到能用？还是只是连接远称仓库？（笑）"
 date:   2018-07-08 11:46:49 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - 技术
 ---
-
-- [01.下载安装Git，并在VSTS上新建一个项目](#01%e4%b8%8b%e8%bd%bd%e5%ae%89%e8%a3%85git%e5%b9%b6%e5%9c%a8vsts%e4%b8%8a%e6%96%b0%e5%bb%ba%e4%b8%80%e4%b8%aa%e9%a1%b9%e7%9b%ae)
-- [02.Clone项目](#02clone%e9%a1%b9%e7%9b%ae)
-- [xx.附录-常用Git命令](#xx%e9%99%84%e5%bd%95-%e5%b8%b8%e7%94%a8git%e5%91%bd%e4%bb%a4)
-  - [git 的使用](#git-%e7%9a%84%e4%bd%bf%e7%94%a8)
-  - [git checkout的使用](#git-checkout%e7%9a%84%e4%bd%bf%e7%94%a8)
-  - [git config的使用](#git-config%e7%9a%84%e4%bd%bf%e7%94%a8)
-  - [git stash的使用](#git-stash%e7%9a%84%e4%bd%bf%e7%94%a8)
 
 **本教程针对Git的初学者**
 

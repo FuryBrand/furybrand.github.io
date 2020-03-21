@@ -2,18 +2,15 @@
 layout: post
 title:  "我的Linux常用命令（持续更新）"
 date:   2018-07-11 22:46:49 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Linux
 ---
 最近在通过《鸟哥的Linux私房菜》系统得学习linux。可是工作中还是要用Linux的，有些命令啥的就是现学现用，这个笔记就是记录这个的。
-
-- [常用](#%e5%b8%b8%e7%94%a8)
-- [账户，修改密码相关](#%e8%b4%a6%e6%88%b7%e4%bf%ae%e6%94%b9%e5%af%86%e7%a0%81%e7%9b%b8%e5%85%b3)
-- [压缩包](#%e5%8e%8b%e7%bc%a9%e5%8c%85)
-- [Nginx](#nginx)
-- [less](#less)
-- [查看系统资源占用 鸣谢](#%e6%9f%a5%e7%9c%8b%e7%b3%bb%e7%bb%9f%e8%b5%84%e6%ba%90%e5%8d%a0%e7%94%a8-%e9%b8%a3%e8%b0%a2)
-- [SCP](#scp)
-- [lrzsz](#lrzsz)
 
 ### 常用
 

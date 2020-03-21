@@ -2,7 +2,7 @@
 layout:     post
 title:  "名词解释大全"
 subtitle:   ""
-date:   2018-03-19
+date:   2018-03-18
 author:     "Steve"
 header-img: "img/home-bg.jpg"
 header-mask: 0.3

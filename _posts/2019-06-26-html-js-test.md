@@ -2,7 +2,13 @@
 layout: post
 title:  "这是一个测试jekyll上如何写html和js的测试页面"
 date:   2019-06-26 23:20:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - JS
 ---
 
 <style>

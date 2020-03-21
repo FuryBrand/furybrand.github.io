@@ -2,7 +2,13 @@
 layout: post
 title:  "Selenium初探"
 date:   2019-09-10 21:06:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Selenium
 ---
 
 - [背景](#%e8%83%8c%e6%99%af)

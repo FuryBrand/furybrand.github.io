@@ -1,8 +1,13 @@
 ---
 layout: post
 title:  "《鸟叔的Linux私房菜-基础学习篇（第三版）》学习笔记-Part01-Linux的规则与安装"
-date:   2018-08-22 12:02:49 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    false
+tags:
+    - Linux
 ---
 
 ##目录

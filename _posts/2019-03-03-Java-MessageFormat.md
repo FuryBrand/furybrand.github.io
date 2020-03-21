@@ -2,7 +2,13 @@
 layout: post
 title:  "Java-用MessageFormat来替换占位符"
 date:   2019-03-03 23:57:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Java
 ---
 
 最近开始Java写自动化测试脚本（虽然不太会Java，但是单位有现成的Java自动化框架，所以就写吧，其实编程语言都差不多，当作学习了😀）。

@@ -2,7 +2,13 @@
 layout: post
 title:  "Python-mock一个提供http协议的服务"
 date:   2018-12-05 21:00:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Python
 ---
 
 更新日志：
@@ -13,15 +19,15 @@ categories: jekyll update
 这次对接的外部系统是采用了http协议，通过白名单的形式来保证安全。但是和往常不同，这次的外部系统是通过被调用后提供信息，也就是说内部系统定时轮询去调用外部系统。那么功能测试阶段只能mock一下来搞了，不然就没法测了。还好是http，实现起来也相对比较简单。
 
 目录：
-- [1. 准备工作](#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)
+- [1. 准备工作](#1-%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c)
 - [2. demo.py](#2-demopy)
-- [3. 试着用一下吧~](#3-%E8%AF%95%E7%9D%80%E7%94%A8%E4%B8%80%E4%B8%8B%E5%90%A7)
-- [4. 部署到服务器上吧~](#4-%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%90%A7)
-    - [4.1 安装uWSGI](#41-%E5%AE%89%E8%A3%85uwsgi)
-    - [4.2 安装Nginx](#42-%E5%AE%89%E8%A3%85nginx)
-    - [4.3 配置Nginx](#43-%E9%85%8D%E7%BD%AEnginx)
-    - [4.4 启动uWSGI](#44-%E5%90%AF%E5%8A%A8uwsgi)
-    - [4.5 验证结果](#45-%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C)
+- [3. 试着用一下吧~](#3-%e8%af%95%e7%9d%80%e7%94%a8%e4%b8%80%e4%b8%8b%e5%90%a7)
+- [4. 部署到服务器上吧~](#4-%e9%83%a8%e7%bd%b2%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%b8%8a%e5%90%a7)
+  - [4.1 安装uWSGI](#41-%e5%ae%89%e8%a3%85uwsgi)
+  - [4.2 安装Nginx](#42-%e5%ae%89%e8%a3%85nginx)
+  - [4.3 配置Nginx](#43-%e9%85%8d%e7%bd%aenginx)
+  - [4.4 启动uWSGI](#44-%e5%90%af%e5%8a%a8uwsgi)
+  - [4.5 验证结果](#45-%e9%aa%8c%e8%af%81%e7%bb%93%e6%9e%9c)
 
 ## 1. 准备工作
 

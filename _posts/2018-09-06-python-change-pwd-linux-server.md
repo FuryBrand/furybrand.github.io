@@ -2,7 +2,13 @@
 layout: post
 title:  "Python-批量修改Linux服务器的密码"
 date:   2018-09-06 20:02:49 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Python
 ---
 
 ### 背景

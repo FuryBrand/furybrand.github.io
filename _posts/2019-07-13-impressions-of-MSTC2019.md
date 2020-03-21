@@ -2,7 +2,13 @@
 layout: post
 title:  "测试团队如何更好的的保证软件产品质量——MTSC2019有感"
 date:   2019-07-13 15:04:16 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - 杂文
 ---
 
 由于单位有MTSC2019的票，所以有幸听到了科大讯飞AI营销业务群测试架构师孙玉的分享《打破职能局限-科大讯飞百亿级交互业务的缺陷预防之路》。

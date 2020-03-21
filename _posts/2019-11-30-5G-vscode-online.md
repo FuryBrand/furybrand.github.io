@@ -2,7 +2,13 @@
 layout: post
 title:  "5G和VSCodeOnline"
 date:   2019-11-30 18:19:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - 杂文
 ---
 
 ## 引子

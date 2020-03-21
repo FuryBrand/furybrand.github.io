@@ -2,7 +2,13 @@
 layout: post
 title:  "软件推荐-ios上的python利器Pythonista"
 date:   2018-05-12 14:27:49 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    false
+tags:
+    - 杂文
 ---
 今天，推荐一款在ios平台上超棒的python开发环境--[Pythonista](http://omz-software.com/pythonista/)。这篇文章其实就是在Pythonista上写的。
 

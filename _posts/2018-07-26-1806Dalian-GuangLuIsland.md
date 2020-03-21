@@ -2,7 +2,13 @@
 layout: post
 title:  "1806_大连_广鹿岛"
 date:   2018-07-26 22:37:16 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - 我眼中的世界-拍拍照
 ---
 
 最近入手了富士的X-T20，开始学习学习摄影。这是18年六月份去大连广鹿岛拍摄的照片，把似乎可以当作壁纸的东西单独拎出来了，为了随时可以下载当壁纸，把原图也放上了~

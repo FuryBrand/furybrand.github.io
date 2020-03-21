@@ -2,7 +2,13 @@
 layout: post
 title:  "二游泰山、初见趵突泉"
 date:   2018-10-15 21:56:16 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - 我眼中的世界-码码字
 ---
 
 这是一篇带有攻略性质的流水账式的游记，又臭又长，请各位看官做好心理准备。<br>

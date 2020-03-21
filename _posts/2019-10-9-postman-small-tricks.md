@@ -2,7 +2,13 @@
 layout: post
 title:  "Postman-几个小把戏"
 date:   2019-10-09 18:44:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Postman
 ---
 
 `Postman`应该是目前比较好用的测试HTTP接口的工具，由于它可以发送几乎所有类型的HTTP请求，所以堪称是“全能战士”。另附[官网链接](https://www.getpostman.com/)。

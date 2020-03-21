@@ -2,21 +2,16 @@
 layout: post
 title:  "Python-pip的常用命令"
 date:   2018-12-08 22:44:25 +0800
-categories: jekyll update
+subtitle:   ""
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - Python
 ---
 
 pip是PyPA推荐的用于管理Python包的工具，现在Python的安装包中已经自带了该工具。[GitHub地址](https://github.com/pypa/pip)
-
-- [常用命令](#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4)
-    - [pip --help](#pip---help)
-    - [pip list](#pip-list)
-    - [pip install flask](#pip-install-flask)
-    - [pip install -r requirements.txt](#pip-install--r-requirementstxt)
-    - [pip 导出离线安装包并安装](#pip-%E5%AF%BC%E5%87%BA%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E5%B9%B6%E5%AE%89%E8%A3%85)
-        - [1.导出所安装的包](#1%E5%AF%BC%E5%87%BA%E6%89%80%E5%AE%89%E8%A3%85%E7%9A%84%E5%8C%85)
-        - [2.导出安装包](#2%E5%AF%BC%E5%87%BA%E5%AE%89%E8%A3%85%E5%8C%85)
-        - [3.拷贝导出的安装包到需要安装的机器上](#3%E6%8B%B7%E8%B4%9D%E5%AF%BC%E5%87%BA%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%E5%88%B0%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85%E7%9A%84%E6%9C%BA%E5%99%A8%E4%B8%8A)
-        - [4.安装导出的安装包](#4%E5%AE%89%E8%A3%85%E5%AF%BC%E5%87%BA%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85)
 
 ## 常用命令
 
