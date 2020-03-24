@@ -17,13 +17,6 @@ tags:
 
 今天我主要是来分享几个我常用的小把戏。所以默认读者已经用过`Postman`发送过请求，如果想看一些更详细的文章的话，这里有一个[51testing的专题](http://www.51testing.com/zhuanti/postman.htm)。另附一个[Postman使用方法的博客](https://blog.csdn.net/fxbin123/article/details/80428216)。
 
-目录：
-- [写在最前面](#%e5%86%99%e5%9c%a8%e6%9c%80%e5%89%8d%e9%9d%a2)
-- [不可不知的大前提](#%e4%b8%8d%e5%8f%af%e4%b8%8d%e7%9f%a5%e7%9a%84%e5%a4%a7%e5%89%8d%e6%8f%90)
-- [1.参数化](#1%e5%8f%82%e6%95%b0%e5%8c%96)
-- [2.如何应对一个有签名算法的接口](#2%e5%a6%82%e4%bd%95%e5%ba%94%e5%af%b9%e4%b8%80%e4%b8%aa%e6%9c%89%e7%ad%be%e5%90%8d%e7%ae%97%e6%b3%95%e7%9a%84%e6%8e%a5%e5%8f%a3)
-- [3.网站需要登录咋整](#3%e7%bd%91%e7%ab%99%e9%9c%80%e8%a6%81%e7%99%bb%e5%bd%95%e5%92%8b%e6%95%b4)
-- [4.base64编解码和Tests](#4base64%e7%bc%96%e8%a7%a3%e7%a0%81%e5%92%8ctests)
 
 ## 写在最前面
 
