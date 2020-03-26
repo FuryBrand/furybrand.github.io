@@ -78,7 +78,7 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | 命令 | 简介 | 备注 |
 | - | - | - |
 | git checkout dev| 切换至dev分支| |
-| git checkout -- templates/index.html| 放弃本地尚未commit的修改| 谨慎使用，除非使用了git stash，不然只能去local history里面找之前的代码了|
+| git checkout &#150;&#150; templates/index.html| 放弃本地尚未commit的修改| 谨慎使用，除非使用了git stash，不然只能去local history里面找之前的代码了|
 | git checkout .| 放弃本地尚未commit的**所有**修改| 同上|
 
 
@@ -86,12 +86,12 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 
 | 命令 | 简介 | 备注 |
 | - | - | - |
-| git config --global user.name "liutianyu" | 设置全局的用户名 |  |
-| git config --global --list| 列出所有全局的配置项| |
-| git config --local --list| 在一个git repository下面使用，查看当前的配置| |
-| git config --local user.name "liutianyu"| 设置局部用户名||
-| git config --local user.email "liutianyu@x.com"| 设置局部邮箱||
-| git config --system --unset credential.helper| 清除登录信息||
+| git config &#150;&#150;global user.name "liutianyu" | 设置全局的用户名 |  |
+| git config &#150;&#150;global &#150;&#150;list| 列出所有全局的配置项| |
+| git config &#150;&#150;local &#150;&#150;list| 在一个git repository下面使用，查看当前的配置| |
+| git config &#150;&#150;local user.name "liutianyu"| 设置局部用户名||
+| git config &#150;&#150;local user.email "liutianyu@x.com"| 设置局部邮箱||
+| git config &#150;&#150;system &#150;&#150;unset credential.helper| 清除登录信息||
 
 ## git stash的使用
 
@@ -100,7 +100,7 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git stash save "xixi"| 创建名为“xixi”的stash，并将当前的工作区回归为初始状态。||
 | git stash list| 列出当前所有的stash||
 | git stash appley 0| 将序列号为0的stash中的内容恢复到当前的工作区，并且不删除||
-| git reset --hard HEAD| 强制将当前的改动删掉，回归到初始状态。||
+| git reset &#150;&#150;hard HEAD| 强制将当前的改动删掉，回归到初始状态。||
 | git stash pop 0| 将序列号为0的stash中的内容恢复到当前的工作区，并且删除||
 | git stash drop 0| 删除序列号为0的stash||
 | git stash clear| 清空stash中的所有内容||
