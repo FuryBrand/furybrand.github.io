@@ -191,7 +191,12 @@
 							"value": "{\"vehicleCode\":\"C001_001\",\"deviceCode\":\"D001_001\",\"type\":1,\"uuid\":\"4561acdawf\",\"authorityData\":\"7ef648848b403a668f543d13b60b1b71\"}",
 							"type": "text"
 						}
-					]
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://192.168.75.41/setReturn",
@@ -270,7 +275,84 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{{data}"
+					"raw": "{{data}}"
+				},
+				"url": {
+					"raw": "http://192.168.75.41/getReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"getReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.在请求前的请求",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a74202ea-20d9-4fde-87d3-9b74cf099a8f",
+						"exec": [
+							"//手动修改要查询单号",
+							"var orderNumber = 'LWX4398046632103';",
+							"//url和请求体*如果“Body”中的报文有换行的情况，那么参数postBody可能需要基于换行的报文进行URL编码。",
+							"var postUrl = 'https://http://192.168.75.41/getSign';",
+							"var postBody = 'value={\"orderno\":\"' + orderNumber + '\",\"key\":\"asfjoaslnjklgalsdfjl\"}';",
+							"//组装请求体",
+							"const echoPostRequest = {",
+							"  url: postUrl,",
+							"  method: 'POST',",
+							"  header:'Content-Type:application/x-www-form-urlencoded',",
+							"  body: {",
+							"    mode: 'x-www-form-urlencoded',",
+							"    raw: postBody",
+							"  }};",
+							"var sign;",
+							"//发送请求，并在处理返回的内容res后进行参数的替换",
+							"pm.sendRequest(echoPostRequest, function (err, res) {",
+							"    console.log(res.json());",
+							"    sign = res.json()[\"sign\"];",
+							"    pm.environment.set(\"orderNo\", orderNumber);",
+							"    pm.environment.set(\"sign\", sign);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe8ce6d4-a507-4a95-bcef-6ccdf739f095",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "value",
+							"value": "{\"orderno\":\"{{orderno}}\",\"sign\":\"{{sign}}\"}",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
 					"raw": "http://192.168.75.41/getReturn",
@@ -343,5 +425,6 @@
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
