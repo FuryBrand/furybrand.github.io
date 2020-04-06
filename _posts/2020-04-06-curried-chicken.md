@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "【主食】日式咖喱鸡块"
+title:      "xin食:咖喱鸡块(主食)"
 date:       2020-04-06 14:47:00
 author:     "Steve"
 header-img: "img/home-bg.jpg"
@@ -31,6 +31,6 @@ tags:
 
 ![效果图]({{ site.url }}assets/2020-04-06-curried-chicken/未命名.webp)
 
-## 踩过的坑
+### 踩过的坑
 
 一定要炒一下，不炒不好吃。
