@@ -12,7 +12,7 @@ tags:
 ---
 
 
-> free software和open source software中有很多带劲的呢
+> free software和open source software中有很多带劲的软件。推荐走一波
 
 我的“怪癖”，要么用买的软件，要么用免费软件，当然如果迫不得已的话，那啥都能用了😀。免费软件也可以细分两种，一种是**free software**免费使用，但是源代码不对外开放，可能一些高级功能会收费啥的。另一种是**open source software**就是源代码开源，免费使用。至于能不能用开源代码集成到我的产品中来售卖，就要看具体的开源协议了。下面会从几个纬度来介绍，我常用的软件。
 
@@ -48,8 +48,8 @@ SSH工具Putty就挺带劲了，但是比起MobaXterm或者XShell来，缺少连
 ## 屏幕录制
 
 Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是没咋研究。推荐的是下面这款。
-1. EV录屏，有VIP版本，高级功能需要VIP，但是平时简单录个屏啥的，免费版本就足够了[官网](https://www.ieway.cn/)
-2. OBS Studio，同事LGX推荐的，还没有亲自体验，但是貌似可以按照窗口进行后台录制，同时还支持直播？，感觉有点溜[GitHub主页](https://github.com/jp9000/obs)
+1. EV录屏，有VIP版本，高级功能需要VIP，但是平时简单录个屏啥的，免费版本就足够了。[官网](https://www.ieway.cn/)
+2. OBS Studio，同事LGX推荐的，还没有亲自体验，但是貌似可以按照窗口进行后台录制，同时还可以作为直播软件配合斗鱼等平台食用，感觉有点强。[GitHub主页](https://github.com/jp9000/obs)
 
 ## 思维导图
 
