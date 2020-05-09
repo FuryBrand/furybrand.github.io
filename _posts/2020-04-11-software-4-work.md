@@ -19,7 +19,7 @@ tags:
 ## 小工具
 
 - 截图工具
-	1. snipaste，聊天工具常见组件的加强版，有个牛逼的功能是可以讲截的图pin在页面上，用来做对比好用极了。[官网](https://www.snipaste.com/)
+	1. snipaste，在同事FNN电脑上发现的，是聊天工具常见组件的加强版，有个牛逼的功能是可以讲截的图pin在页面上，用来做对比好用极了。[官网](https://www.snipaste.com/)
 	2. ShareX，安装之后键盘上的*PrintScreen*突然变得高频起来了，牛逼之处在于可以长截图。推测是锁定窗体之后模拟进行滚动实现的，推测哈，不一定是。不过安装就完事儿了对吧。[GitHub主页](https://github.com/ShareX/ShareX)
 - 剪贴板工具——Ditto，虽然win10自带了云同步剪贴板，这款工具实在是太强了。貌似可以无线记录复制过的文本和图片（我怕把硬盘搞爆了，所以设置了上限，不过上限有点大——999999999条😁所以记得把缓存文件的位置改下，我的缓存文件有18G.......）。能记录图片就很牛逼了，还支持文本的检索，那找之前复制过的测试环境服务器密码简直就是分分钟。[官网](https://ditto-cp.sourceforge.io/)
 - HOST切换工具——SwitchHosts，地球人都知道的。[GitHub主页](https://github.com/oldj/SwitchHosts)
