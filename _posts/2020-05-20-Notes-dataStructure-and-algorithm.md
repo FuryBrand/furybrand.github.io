@@ -41,7 +41,118 @@ tags:
 
 代码效率优化的最终目标：**要采用尽可能低的复杂度去完成一段代码的开发。**
 
-代码效率优化的核心思路：
-1. **时间昂贵，空间廉价。**由于代码效率的瓶颈会发生在时间或者空间两个方面。空间可以花钱买，时间买不来，故。
-2. ---收工先，2020年5月24日22点51分
+代码效率优化的核心定理：
+1. **时间昂贵，空间廉价。**由于代码效率的瓶颈会发生在时间或者空间两个方面。空间可以花钱买，时间买不来，故如是。
+2. **数据结构连接时空。**程序开发中，连接时间和空间的桥梁是数据结构。如立交桥较十字路口，用空间换取了时间。
+
+完成程序设计并进行代码效率优化的步骤：
+1. **暴力解法。**在不考虑空间和时间的前提下，完成功能的实现。
+2. **剔除无效操作。**将代码中无效的计算和存储剔除，从而降低时间和空间复杂度。
+3. **时空转换。**设计合理的数据结构，完成时间复杂度向空间复杂度的转移。
+
+下面举一个具体的例子。*假设有任意多张面额为 2 元、3 元、7 元的货币，现要用它们凑出 100 元，求总共有多少种可能性。*
+
+```java
+//暴力解法
+public class MyClass {
+    public static void main(String[] args) {
+        int count = 0;
+        for (int i = 0; i < (100 / 7); i++) {
+            for (int j = 0; j < (100 / 3); j++) {
+                for (int k = 0; k < (100 / 2); k++) {
+                    if (((i * 7) + (j * 3) + (k * 2)) == 100) {
+                        count += 1;
+                    }
+                }
+            }
+        }
+        System.out.println(count);
+    }
+}
+```
+
+```java
+//剔除无效操作
+public class MyClass {
+    public static void main(String[] args) {
+        int count = 0;
+        for (int i = 0; i < (100 / 7); i++) {
+            for (int j = 0; j < (100 / 3); j++) {
+                if (((100 - (i * 7) - (j * 3)) % 2) == 0) {
+                    count += 1;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+}
+```
+
+第二个例子，*查找出一个数组中，出现次数最多的那个元素的数值。例如，输入数组 a = [1,2,3,4,5,5,6 ] 中，查找出现次数最多的数值。从数组中可以看出，只有 5 出现了 2 次，其余都是 1 次。显然 5 出现的次数最多，则输出 5。*
+
+```java
+//暴力解法
+public class MyClass {
+    public static void main(String[] args) {
+        int[] a = { 1, 2, 3, 4, 5, 5, 6 };
+        int val_max = -1;
+        int time_max = 0;
+        int time_tmp = 0;
+
+        for (int i = 0; i < a.length; i++) {
+            time_tmp = 0;
+
+            for (int j = 0; j < a.length; j++) {
+                if (a[i] == a[j]) {
+                    time_tmp += 1;
+                }
+
+                if (time_tmp > time_max) {
+                    time_max = time_tmp;
+                    val_max = a[i];
+                }
+            }
+        }
+
+        System.out.println(val_max);
+    }
+}
+```
+
+```java
+//时空转换
+import java.util.HashMap;
+import java.util.Map;
+
+public class MyClass {
+    public static void main(String[] args) {
+        int[] a = { 1, 2, 3, 4, 5, 5, 6 };
+        Map<Integer, Integer> d = new HashMap<>();
+        for (int i = 0; i < a.length; i++) {
+            if (d.containsKey(a[i])) {
+                d.put(a[i], d.get(a[i]) + 1);
+            } else {
+                d.put(a[i], 1);
+            }
+        }
+        int val_max = -1;
+        int time_max = 0;
+        int count = 0;
+        for (Integer key : d.keySet()) {
+            if (d.get(key) > time_max) {
+                time_max = d.get(key);
+                val_max = count;
+            }
+
+            count++;
+        }
+        System.out.println(d);
+    }
+}
+
+```
+
+## 模块二：数据结构基础
+
+---收工先，2020年6月8日23点51分
 
