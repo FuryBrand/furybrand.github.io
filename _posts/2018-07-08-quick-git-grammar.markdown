@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Git简明教程-从不会到能用？还是只是连接远称仓库？（笑）"
-date:   2018-07-08 11:46:49 +0800
+date:   2019-06-20 18:42:49 +0800
 subtitle:   ""
 author:     "Steve"
 header-img: "img/home-bg.jpg"
@@ -108,6 +108,40 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git stash drop 0| 删除序列号为0的stash||
 | git stash clear| 清空stash中的所有内容||
 
+
+## git初始化仓库
+
+```shell
+Command line instructions
+You can also upload existing files from your computer using the instructions below.
+
+Git global setup
+git config --global user.name "liuwuxin1"
+git config --global user.email "liuwuxin@jd.com"
+
+Create a new repository
+git clone git@git.jd.com:class6/itat-auto-test.git
+cd itat-auto-test
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+ 
+Push an existing folder
+cd existing_folder
+git init
+git remote add origin git@git.jd.com:class6/itat-auto-test.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+Push an existing Git repository
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@git.jd.com:class6/itat-auto-test.git
+git push -u origin --all
+git push -u origin --tags
+```
 
 
 [Github]: https://github.com/
