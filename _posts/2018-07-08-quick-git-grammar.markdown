@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Git简明教程-从不会到能用？还是只是连接远称仓库？（笑）"
-date:   2019-06-20 18:42:49 +0800
+date:   2018-07-08 18:42:49 +0800
 subtitle:   ""
 author:     "Steve"
 header-img: "img/home-bg.jpg"
