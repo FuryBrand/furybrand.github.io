@@ -17,15 +17,17 @@ tags:
 
 我的“怪癖”，要么用买的软件，要么用免费软件，当然如果迫不得已的话，那啥都能用了😀。免费软件也可以细分两种，一种是**free software**免费使用，但是源代码不对外开放，可能一些高级功能会收费啥的。另一种是**open source software**就是源代码开源，免费使用。至于能不能用开源代码集成到我的产品中来售卖，就要看具体的开源协议了。下面会从几个纬度来介绍，我常用的软件。
 
-## 小工具
+## 小工具（体验为本，效率制胜）
 
 - 截图工具
 	1. snipaste，在同事FNN电脑上发现的，是聊天工具常见组件的加强版，有个牛逼的功能是可以讲截的图pin在页面上，用来做对比好用极了。[官网](https://www.snipaste.com/)
 	2. ShareX，安装之后键盘上的*PrintScreen*突然变得高频起来了，牛逼之处在于可以长截图。推测是锁定窗体之后模拟进行滚动实现的，推测哈，不一定是。不过安装就完事儿了对吧。[GitHub主页](https://github.com/ShareX/ShareX)
 - 剪贴板工具——Ditto，虽然win10自带了云同步剪贴板，这款工具实在是太强了。貌似可以无线记录复制过的文本和图片（我怕把硬盘搞爆了，所以设置了上限，不过上限有点大——999999999条😁所以记得把缓存文件的位置改下，我的缓存文件有18G.......）。能记录图片就很牛逼了，还支持文本的检索，那找之前复制过的测试环境服务器密码简直就是分分钟。[官网](https://ditto-cp.sourceforge.io/)
-- HOST切换工具——SwitchHosts，地球人都知道的。[GitHub主页](https://github.com/oldj/SwitchHosts)
+- HOST切换工具——SwitchHosts，地球人都知道的快速切换本机Host文件的工具。[GitHub主页](https://github.com/oldj/SwitchHosts)
 - 录屏工具——ScreenToGif，可以录制屏幕并转换为Gif动图，同时可以进行简单的编辑，增加字幕等。简直就是报bug神器，Jira上可以直接预览，聊天工具基本也支持直接预览。语言描述很麻烦的问题，一个录屏就可以轻松描述。[GitHub主页](https://github.com/NickeManarin/ScreenToGif)
 - 文件管理——Everything，找文件特别方便，而且很快。[官网](https://www.voidtools.com/)
+- 跨系统跨设备共享一套键鼠——Synergy，在局域网内可以跨系统共享一套键鼠，如果您有两个机器（如：Windows+Ubuntu），可以像连接扩展屏幕一样用一套键鼠来控制两个机器[官网](https://symless.com/synergy) [GitHub主页](https://github.com/symless/synergy-core)
+- 快捷启动器——Wox，`被誉为 Alfred 的 Windows 版最佳替代品`，通过Alt+Space激活一个文本框，可以实现快捷查找文件、应用启动器、网页检索、词典等功能。依赖`Everything`、`Python`。具体请看[GitHub主页](https://github.com/Wox-launcher/Wox)
 
 ## 数据库
 
@@ -62,3 +64,7 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 1. Visual Studio Code，VS Code一生推。ta已经不是一个简单的编辑工具了，甚至可以算是一个IDE。同时大量的插件让ta可以做很多事情。最常用的就是文本内容对比、格式化XML/JSON/EDI。[GitHub主页](https://github.com/microsoft/vscode)
 2. editplus，同事ZP推荐的，还没有亲自体验。[官网](https://www.editplus.com/) 
 3. Notepad++，同事LGX推荐的，还没有亲自体验。[官网](https://notepad-plus-plus.org/) 
+
+## 更新日志：
+- 2020年4月11日：初稿。
+- 2020年7月27日：追加Wox和synergy
