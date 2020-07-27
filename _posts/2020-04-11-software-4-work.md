@@ -6,7 +6,7 @@ date:       2020-04-11 12:00:00
 author:     "Steve"
 header-img: "img/home-bg.jpg"
 header-mask: 0.3
-catalog:    false
+catalog:    true
 tags:
     - 杂文
     - Windows
