@@ -65,6 +65,6 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 2. editplus，同事ZP推荐的，还没有亲自体验。[官网](https://www.editplus.com/) 
 3. Notepad++，同事LGX推荐的，还没有亲自体验。[官网](https://notepad-plus-plus.org/) 
 
-## 更新日志：
+## 更新日志
 - 2020年4月11日：初稿。
 - 2020年7月27日：追加Wox和synergy
