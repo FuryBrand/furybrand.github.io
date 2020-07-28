@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "c6d0336f-38bb-4c4a-aac4-0a7ae451f992",
+		"name": "ExportFrom-liutianyu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WireMock",
+			"item": [
+				{
+					"name": "set-message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"request\": {\r\n        \"url\": \"/get/message\",\r\n        \"method\": \"GET\"\r\n    },\r\n    \"response\": {\r\n        \"status\": 200,\r\n        \"body\": \"Here it is!\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/__admin/mappings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"__admin",
+								"mappings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-message",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/get/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set-use query params & headers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"fb9c349c-c457-4680-b2d1-b55258ea8424\",\r\n  \"request\": {\r\n    \"urlPathPattern\": \"/get/message\",\r\n    \"method\": \"GET\",\r\n    \"headers\": {\r\n      \"name\": {\r\n        \"equalTo\": \"liutianyu\"\r\n      }\r\n    },\r\n    \"queryParameters\": {\r\n      \"sex\": {\r\n        \"contains\": \"male\"\r\n      }\r\n    },\r\n    \"bodyPatterns\": []\r\n  },\r\n  \"response\": {\r\n    \"status\": 200,\r\n    \"body\": \"He is a cool gay.\"\r\n  },\r\n  \"uuid\": \"fb9c349c-c457-4680-b2d1-b55258ea8424\",\r\n  \"priority\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/__admin/mappings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"__admin",
+								"mappings"
+							]
+						},
+						"description": "https://stackoverflow.com/questions/50523008/wiremock-query-parameter-json-stub-file"
+					},
+					"response": []
+				},
+				{
+					"name": "get-use query params",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "name",
+								"value": "liutianyu",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/get/message?sex=male",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get",
+								"message"
+							],
+							"query": [
+								{
+									"key": "sex",
+									"value": "male",
+									"description": "d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
