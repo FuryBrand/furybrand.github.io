@@ -278,7 +278,7 @@ vlokup函数的使用条件：
 
 ![07]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/07.png)
 
-[练习]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/第五章-字段调整-电子表格.xlsx)
+[练习]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng.xlsx)
 
 答案：
 
@@ -317,4 +317,4 @@ match函数可以返回一个指定字符在一行或者一列数据中的排序
 
 index函数，可以根据横纵坐标返回一个区域内的具体值。
 	
-[具体例子]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/第五章-字段调整-电子表格2.xlsx)
+[具体例子]({{ site.url }}assets/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng2.xlsx)

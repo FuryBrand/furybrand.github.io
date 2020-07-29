@@ -33,8 +33,8 @@ tags:
 
 `Request Headers`和`Request Body`中的内容都可以通过{% raw %}{{paramName}}{% endraw %}的形式进行参数化。
 
-![参数化]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_1.png)
-![脚本]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_2.png)
+![参数化]({{ site.url }}assets/2019-10-9-postman-small-tricks/1.png)
+![脚本]({{ site.url }}assets/2019-10-9-postman-small-tricks/2.png)
 
 ## 2.如何应对一个有签名算法的接口
 
@@ -44,7 +44,7 @@ tags:
 
 一般的签名都是用到了MD5算法，好在`Postman`中内置了`CryptoJS`可以轻松处理它。
 
-![签名]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_3.png)
+![签名]({{ site.url }}assets/2019-10-9-postman-small-tricks/3.png)
 
 ## 3.网站需要登录咋整
 
@@ -52,15 +52,15 @@ tags:
 
 我要聊的是通过Session和Cookie实现的登录。之前处理过这样的问题，架构是前端独立的Vue应用，后端业务逻辑为Java应用。通过日志拿到了前端调用后端的请求报文，但是想自己模拟的时候发现直接发送请求会被登录拦住。这时候最简单的处理方式就是通过浏览器登录，然后用F12开发者工具拿到对应的cookie后通过`Postman`直接带着cookie就可以发送请求了。
 
-![浏览器]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_4.png)
-![Cookie]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_5.png)
+![浏览器]({{ site.url }}assets/2019-10-9-postman-small-tricks/4.png)
+![Cookie]({{ site.url }}assets/2019-10-9-postman-small-tricks/5.png)
 
 ## 4.base64编解码和Tests
 
 有时和外部接口交互的时候规定了传输的编码格式比如base64等。对我们来说肯定是utf8有可读性了。那么就需要将入参报文和出参报文进行base64的编解码。编码自然是参考[1.参数化](#1%e5%8f%82%e6%95%b0%e5%8c%96)，在`Pre-request Script`中进行编码。为了提到出参的可读性，在`Tests`中进行解码，将原本的以base64编码的出参转换成可读的utf8编码格式并展示在`Test Results`中。详情参考下面两图。
 
-![Pre-request_Script]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_6.png)
-![Tests]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_7.png)
+![Pre-request_Script]({{ site.url }}assets/2019-10-9-postman-small-tricks/6.png)
+![Tests]({{ site.url }}assets/2019-10-9-postman-small-tricks/7.png)
 
 这里有一个坑，我当时阻塞了很久，从本节的第一张图可以看出来，出参是分了多行的。这也是我当时实测接口的状况，导致做转换时，`Tests`中的第6行一直报错。后来才发现原来是换行符的锅。所以才有了第3行去换行去回车的代码。
 
@@ -68,8 +68,8 @@ tags:
 
 有点绕口，其实就是在点击`Send`按钮后，在此请求发出去前，先通过Pre-request Script执行一次http请求，从而获取一些信息。我的实际场景是外部系统和我交互的时候需要签名，而研发那边提供了一个http接口，我先调这个接口就可以得到签名。省的我自己写签名的算法了。那么问题来了，我不能每次请求都手动调下研发提供的然后手动填sign吧，这样好麻烦。所以就在报文正式请求前先请求一次提供签名的接口，然后将得到的签名填到sign上，从而实现偷懒，具体不同的接口在参数上可能有所区别，抛砖引玉吧。详情参考下面两图。
 
-![Body]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_8.png)
-![Pre-request_Script]({{ site.url }}assets/2019-10-9-postman-small-tricks/微信截图_9.png)
+![Body]({{ site.url }}assets/2019-10-9-postman-small-tricks/8.png)
+![Pre-request_Script]({{ site.url }}assets/2019-10-9-postman-small-tricks/9.png)
 
 
 ## 更新日志

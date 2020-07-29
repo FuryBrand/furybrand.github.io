@@ -21,7 +21,7 @@ tags:
 
 这里要说明一下，这个图是按照俺们公司的测试环境绘制的，实际线上环境的话，nginx可能是单独的一台服务器，不止实现反向代理，还有缓存负载均衡等功能。而相应的tomcat服务也会部署到不同的服务器上。甚至catA会同时存在数个为了应付高并发的情况。
 
-![http请求的一生]({{ site.url }}assets/2019-03-12-Linux-Nginx-Tomcat-small-talk/图片1.png)
+![http请求的一生]({{ site.url }}assets/2019-03-12-Linux-Nginx-Tomcat-small-talk/tupian1.png)
 
 ### 为什么可以通过域名访问到服务器？
 
