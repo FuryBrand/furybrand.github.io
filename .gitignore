@@ -3,3 +3,4 @@ _site
 .jekyll-metadata
 .gitpod.yml
 # _config.yml
+.theia/
