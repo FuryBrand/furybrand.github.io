@@ -12,7 +12,7 @@ tags:
 ---
 最近在通过《鸟哥的Linux私房菜》系统得学习linux。可是工作中还是要用Linux的，有些命令啥的就是现学现用，这个笔记就是记录这个的。
 
-### 常用
+## 常用
 
 | 命令 | 简介 | 备注
 | - | - | -
@@ -49,7 +49,7 @@ tags:
 |truncate |将文件变为指定大小，可用于创建测试用的垃圾文件，或用于清理日志 | find ./ -name '*.out' &#124; xargs truncate -s 0 |
 |yum -y install |centos下安装软件 |yum -y install git 
 
-### 账户，修改密码相关
+## 账户，修改密码相关
 
 | 命令 | 简介 | 备注 
 | - | - | - 
@@ -62,14 +62,14 @@ tags:
 |lastlog |登录日志 |
 |su |用户切换 |su rootmima 切换root身份<br>su -rootmima 切换root身份及shell环境<br>su admin 切换admin用户
 
-### 压缩包 
+## 压缩包 
 
 | 命令 | 简介 | 备注 
 | - | - | - 
 |tar -cvjpf etc.tar.bz2 ./ngin |打包 |
 |tar -xvjf　etc.tar.bz2 |解压缩 |
 
-### Nginx
+## Nginx
 
 | 命令 | 简介 | 备注 
 | - | - | - 
@@ -77,7 +77,7 @@ tags:
 |/export/servers/nginx/sbin/nginx |启动 |
 |/export/servers/nginx/sbin/nginx -s stop |关闭 |
 
-### less
+## less
 
 | 命令 | 简介 | 备注 
 | - | - | - 
@@ -85,7 +85,7 @@ tags:
 |less xix.sh |进入less程序。/字符串，为向下查找。?字符串，为向上查找。 |
 |ll &#124; less |针对文件夹内文件很多的情况，这样就可以显示全了 |
 
-### 查看系统资源占用 [鸣谢](https://www.cnblogs.com/chengJAVA/p/6115061.html)
+## 查看系统资源占用 [鸣谢](https://www.cnblogs.com/chengJAVA/p/6115061.html)
 
 | 命令 | 简介 | 备注 
 | - | - | - 
@@ -96,14 +96,14 @@ tags:
 |ps -ef &#124; grep xixi &#124; grep -v 'grep' &#124; awk '{print $2}' |输出xixi相关的进程的PID |可以配合for循环加kill -9就清理调相关的进程
 
 
-### SCP
+## SCP
 scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令。本地←→远程
 
 | 命令 | 简介 | 备注 
 | - | - | - 
 |scp -P 2181 /etc/hosts root@10.182.74.205:/etc/ | 将本机的host文件通过2181端口以root权限复制到指定机器的/etc/目录下 |
 
-### lrzsz
+## lrzsz
 [lrzsz官网](http://freecode.com/projects/lrzsz/)<br>
 lrzsz是一个unix通信套件提供的X，Y，和ZModem文件传输协议。<br>
 在centos中安装`yum install lrzsz`。<br>
@@ -113,3 +113,14 @@ lrzsz是一个unix通信套件提供的X，Y，和ZModem文件传输协议。<br
 | - | - | - 
 | sz /home/admin/log1.log  | 将log文件从服务器下载到本机 |
 | rz | 页面弹出文件选择的页面，可以上传文件
+
+## vim
+
+按道理，vim应该抽空做专题的，不过先暂时做个记录吧。
+
+vim有12种编辑模式，其中6种是basic modes。Normal mode、Visual mode、Select mode、Insert mode、Cmdline mode、Ex mode
+
+| 模式 | 命令 | 功能 
+| - | - | - 
+| Normal mode | u | 撤销（等同于Microsoft Office中的Ctrl + z）
+| Normal mode | Ctrl + r | 恢复撤销（等同于Microsoft Office中的Ctrl + y）

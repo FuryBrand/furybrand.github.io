@@ -50,7 +50,7 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 在`Git Bash`页面，然后进入到我们想要下载代码的文件夹中。输入`git clone 远称仓库地址`。因为Git Bash中的命令和linux中的一样，这里就不赘述了。
 ![git_clone]({{ site.url }}assets/2018-07-08-quick-git-grammar/009.png)
 
-[Git的官方介绍]已经很详细了，现在已经有了环境，就可以边看官方教程边学习了。
+[Git的官方介绍]已经很详细了，现在已经有了环境，就可以边看官方教程边学习了。除了官方的文档以外，[廖雪峰老师的教程](https://www.liaoxuefeng.com/wiki/896043488029600/896067008724000)以及[菜鸟教程](https://www.runoob.com/git/git-tutorial.html也很不错。
 
 # xx.附录-常用Git命令
 
@@ -75,6 +75,7 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git blame -L 123,125 ./xixi/heihei.txt| 查看heihei.txt文件第123-125行最新的修改人及时间 | 去掉 -L也可以，就是查全文，按**q**来退出 |
 | git restore ./ | 还原改动的文件 | |
 | git clean | 清除未track的文件或文件夹，不能直接使用，一定要跟参数 | -n 显示要删除哪些文件<br>-f 删除文件<br>-df 删除文件及文件夹 |
+| git log | 查看历史提交(复杂模式) | git log --oneline |
 
 ## git checkout的使用
 
