@@ -29,7 +29,7 @@ tags:
 6. 大火烧开，去掉浮沫，盖盖调小火煮2.5小时。
 7. 盖子继续扣着，直到放凉后放入冰箱冷藏2小时。
 
-![效果图]({{ site.url }}assets/2020-04-06-spiced-beef/initpintu.webp)
+![效果图]({{ site.url }}assets/2020/2020-04-06-spiced-beef/initpintu.webp)
 
 ### 踩过的坑
 

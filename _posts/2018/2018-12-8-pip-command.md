@@ -18,12 +18,12 @@ pip是PyPA推荐的用于管理Python包的工具，现在Python的安装包中�
 ### pip --help
 
 `pip --help`帮助。
-![help]({{ site.url }}assets/2018-12-8-pip-command/02.png)
+![help]({{ site.url }}assets/2018/2018-12-8-pip-command/02.png)
 
 ### pip list
 
 `pip list`列出安装好的包以及对应的版本。
-![list]({{ site.url }}assets/2018-12-8-pip-command/01.png)
+![list]({{ site.url }}assets/2018/2018-12-8-pip-command/01.png)
 
 ### pip install flask
 

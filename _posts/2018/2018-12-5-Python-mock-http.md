@@ -19,15 +19,15 @@ tags:
 这次对接的外部系统是采用了http协议，通过白名单的形式来保证安全。但是和往常不同，这次的外部系统是通过被调用后提供信息，也就是说内部系统定时轮询去调用外部系统。那么功能测试阶段只能mock一下来搞了，不然就没法测了。还好是http，实现起来也相对比较简单。
 
 目录：
-- [1. 准备工作](#1-%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c)
+- [1. 准备工作](#1-准备工作)
 - [2. demo.py](#2-demopy)
-- [3. 试着用一下吧~](#3-%e8%af%95%e7%9d%80%e7%94%a8%e4%b8%80%e4%b8%8b%e5%90%a7)
-- [4. 部署到服务器上吧~](#4-%e9%83%a8%e7%bd%b2%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%b8%8a%e5%90%a7)
-  - [4.1 安装uWSGI](#41-%e5%ae%89%e8%a3%85uwsgi)
-  - [4.2 安装Nginx](#42-%e5%ae%89%e8%a3%85nginx)
-  - [4.3 配置Nginx](#43-%e9%85%8d%e7%bd%aenginx)
-  - [4.4 启动uWSGI](#44-%e5%90%af%e5%8a%a8uwsgi)
-  - [4.5 验证结果](#45-%e9%aa%8c%e8%af%81%e7%bb%93%e6%9e%9c)
+- [3. 试着用一下吧~](#3-试着用一下吧)
+- [4. 部署到服务器上吧~](#4-部署到服务器上吧)
+  - [4.1 安装uWSGI](#41-安装uwsgi)
+  - [4.2 安装Nginx](#42-安装nginx)
+  - [4.3 配置Nginx](#43-配置nginx)
+  - [4.4 启动uWSGI](#44-启动uwsgi)
+  - [4.5 验证结果](#45-验证结果)
 
 ## 1. 准备工作
 
@@ -85,22 +85,22 @@ if __name__=='__main__':
 ## 3. 试着用一下吧~
 
 本地调试的话，直接运行python文件就可以启动服务了。
-![01]({{ site.url }}assets/2018-12-5-Python-mock-http/01.png)
+![01]({{ site.url }}assets/2018/2018-12-5-Python-mock-http/01.png)
 
 先发送请求来设置值。
-![02]({{ site.url }}assets/2018-12-5-Python-mock-http/02.png)
+![02]({{ site.url }}assets/2018/2018-12-5-Python-mock-http/02.png)
 
 然后用再次请求之后就可以获得到刚才设置的值了。
-![03]({{ site.url }}assets/2018-12-5-Python-mock-http/03.png)
+![03]({{ site.url }}assets/2018/2018-12-5-Python-mock-http/03.png)
 
 如果用浏览器来访问的话，就会提示我们给出的信息了。
-![04]({{ site.url }}assets/2018-12-5-Python-mock-http/04.png)
+![04]({{ site.url }}assets/2018/2018-12-5-Python-mock-http/04.png)
 
 终端中会记录请求的记录。
-![05]({{ site.url }}assets/2018-12-5-Python-mock-http/05.png)
+![05]({{ site.url }}assets/2018/2018-12-5-Python-mock-http/05.png)
 
 如果在上面使用了form表单来进行接收的话，则需要使用这种形式来发送请求设置值。
-![06]({{ site.url }}assets/2018-12-5-Python-mock-http/06.png)
+![06]({{ site.url }}assets/2018/2018-12-5-Python-mock-http/06.png)
 
 
 ## 4. 部署到服务器上吧~

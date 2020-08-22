@@ -42,7 +42,7 @@ Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most ou
 
 man是manual的简写。例：man date<br>
 进去man功能后，按下空格键往下翻页，按下“q”按键来离开man的环境。<br>
-![图07_manpage]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/07.png)
+![图07_manpage]({{ site.url }}assets/2018/2018-08-22-vbird-linux-note-part-01/07.png)
 man page各个部分的含义：
 - man date后第一行`DATE（1）`表示：一般用户可使用的命令。
 - `NAME`解释了这个命令的含义。

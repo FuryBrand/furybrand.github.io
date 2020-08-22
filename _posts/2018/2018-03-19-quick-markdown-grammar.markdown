@@ -41,9 +41,9 @@ md是什么在这里就不多谈了，但是它真的很方便。
 
 **03.01 链接图片**
 
-链接图片包含两种形式，一种是将图片以超链接的形式嵌入到[文本]({{ site.url }}assets/2018-03-19-quick-markdown-grammar/ca.jpg)当中。点击文本后页面跳转到上。另一种是像下面一样将图片嵌入在页面中。
+链接图片包含两种形式，一种是将图片以超链接的形式嵌入到[文本]({{ site.url }}assets/2018/2018-03-19-quick-markdown-grammar/ca.jpg)当中。点击文本后页面跳转到上。另一种是像下面一样将图片嵌入在页面中。
 
-![黑条]({{ site.url }}assets/2018-03-19-quick-markdown-grammar/black.png)
+![黑条]({{ site.url }}assets/2018/2018-03-19-quick-markdown-grammar/black.png)
  - 前者：`[文本](图片文件的路径，默认是以当前路径来查找)`
  - 后者：`![文本](图片文件的路径，默认是以当前路径来查找)`
 
@@ -55,7 +55,7 @@ md是什么在这里就不多谈了，但是它真的很方便。
 
 **03.03 链接文档**
 
-其实链接文档和上面的图片以及网址是一样的，[下载 zip]({{ site.url }}assets/2018-03-19-quick-markdown-grammar/ca.zip)。
+其实链接文档和上面的图片以及网址是一样的，[下载 zip]({{ site.url }}assets/2018/2018-03-19-quick-markdown-grammar/ca.zip)。
 
 # 04.普通无序列表
 用“-”、“+”、“*”来标识列表即可，文字和符号之间有一个空格。

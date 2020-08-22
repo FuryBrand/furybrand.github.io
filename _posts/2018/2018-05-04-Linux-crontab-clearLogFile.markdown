@@ -15,7 +15,7 @@ tags:
 
 接下来详细介绍一下步骤（没考虑重启和安装的情况）：
 
-# 01.在/home/admin/timedTask下新建[clearLog.sh]({{ site.url }}assets/2018-05-04-Linux-crontab-clearLogFile/clearLog.sh)
+# 01.在/home/admin/timedTask下新建[clearLog.sh]({{ site.url }}assets/2018/2018-05-04-Linux-crontab-clearLogFile/clearLog.sh)
 该脚本就是未来要定时执行的。
 
 # 02.修改文件的执行权限

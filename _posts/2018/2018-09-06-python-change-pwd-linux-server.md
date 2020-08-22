@@ -103,7 +103,7 @@ input("执行完毕，回车后关闭当前窗口")
 
 ## 写在最后
 
-程序已经打包好了。[下载]({{ site.url }}assets/2018-09-06-python-change-pwd-linux-server/python-change-pwdVer0.2.zip)
+程序已经打包好了。[下载]({{ site.url }}assets/2018/2018-09-06-python-change-pwd-linux-server/python-change-pwdVer0.2.zip)
 
 为了不瞎眼，必须要写个脚本来实现。主要收到这两篇博文的启发,谢谢！
 

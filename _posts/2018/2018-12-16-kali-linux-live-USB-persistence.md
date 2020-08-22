@@ -29,25 +29,25 @@ Kali Linux含有多种渗透测试软件，是一个测试自家wifi是否可以
 ## Step-01、将Kali Linux写入U盘并进入系统
 
 ### 使用`balenaEtcher`将Kali Linux写入U盘
-![01]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/01.webp)
+![01]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/01.webp)
 
 ### 使用不想制作Live USB Persistence模式的启动盘的那个U盘来进入（我们只要他的Linux环境，后续就可以格式化了）
 
 选择U盘启动
-![02]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/02.webp)
+![02]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/02.webp)
 
 选择`Live(amd64)`进入系统
-![03]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/03.webp)
+![03]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/03.webp)
 
 系统启动中
-![04]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/04.jpg)
+![04]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/04.jpg)
 
 ## Step-02、为U盘添加Persistence模式
 
 ### 使用fdisk -l确认挂载点
 
 因为我的PC本身有一块机械硬盘和一块固态硬盘，所以看起来有点多。我们可以打开终端，先`fdisk -l`，再插入要添加Persisitence模式的U盘后再次执行`fdisk -l`来判断是哪个挂载点。目前我的是**/dev/sdd1**和**/dev/sdd2**。
-![05]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/05.webp)
+![05]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/05.webp)
 
 ### 执行命令进行分区
 
@@ -60,15 +60,15 @@ yes
 ignore
 fdisk -l
 ```
-![06]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/06.webp)
-![07]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/07.webp)
+![06]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/06.webp)
+![07]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/07.webp)
 
 这样我们就创建了`/dev/sdd3`，然后我们用这个命令将其变为**ext3**格式。
 ```
 mkfs.ext3 -L persistence /dev/sdd3
 e2label /dev/sdd3 persistence
 ```
-![08]({{ site.url }}assets/2018-12-16-kali-linux-live-USB-persistence/08.webp)
+![08]({{ site.url }}assets/2018/2018-12-16-kali-linux-live-USB-persistence/08.webp)
 
 通过以下命令创建挂载点，并写入配置文件。
 ```

@@ -36,7 +36,7 @@ WireMock支持两种工作方式：
 - Windows:java -jar wiremock-jre8-standalone-2.27.0.jar
 - Linux:nohup java -jar /root/wiremock-jre8-standalone-2.27.0.jar --port 8888 &
 
-![启动图]({{ site.url }}assets/2020-07-27-wiremock-simple-guide/20-07-27_22-28-36.png)
+![启动图]({{ site.url }}assets/2020/2020-07-27-wiremock-simple-guide/20-07-27_22-28-36.png)
 
 我这一般windows上启动的话，就是做本地调试用，所以命令行比较简单。参考上图，可以看出启动默认占用了8080端口。并且在当前目录下新建了`__files`和`mappings`这两个文件夹。（WireMock这个工程是用`gradle`做构建管理，web容器用的是`jetty`。这两个工具都没用过，真的是学到老活到老）
 
@@ -47,7 +47,7 @@ WireMock支持两种工作方式：
   - 使用Chrome的插件。[三方制作的插件在Chrome Webstore上的地址](https://chrome.google.com/webstore/detail/wiremock-extension/ikiaofdpbmofgmlhajfnhdjelkleljbl?utm_source=chrome-ntp-icon)
   - 使用WireMock自带的UI界面`http://localhost:8080/__admin/swagger-ui`
 
-WireMock是可以根据请求的内容做一些逻辑的，既请求内容不同，返回值也不同。具体设置方式还是参考[官网手册](http://wiremock.org/docs/request-matching/)。我这里附一个Postman的[导出文件]({{ site.url }}assets/2020-07-27-wiremock-simple-guide/ExportFrom-liutianyu.postman_collection.json)，可以本地启动服务试一下。
+WireMock是可以根据请求的内容做一些逻辑的，既请求内容不同，返回值也不同。具体设置方式还是参考[官网手册](http://wiremock.org/docs/request-matching/)。我这里附一个Postman的[导出文件]({{ site.url }}assets/2020/2020-07-27-wiremock-simple-guide/ExportFrom-liutianyu.postman_collection.json)，可以本地启动服务试一下。
 
 ## 后记
 

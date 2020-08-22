@@ -29,7 +29,7 @@ tags:
 6. 关火加咖喱块，待咖喱块溶解后再开盖小火煮10分钟。看具体咖喱的形态决定是少加点水还是多煮一会儿。
 7. 关火盛出，淋在米饭上就可以了。
 
-![效果图]({{ site.url }}assets/2020-04-06-curried-chicken/noname.webp)
+![效果图]({{ site.url }}assets/2020/2020-04-06-curried-chicken/noname.webp)
 
 ### 踩过的坑
 

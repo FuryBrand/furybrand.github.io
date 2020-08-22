@@ -28,7 +28,7 @@ tags:
 先打开`Selenium IDE`，然后创建Project和Tests，之后输入好要访问的URL。随后点击**REC**录制按钮后会弹出一个新的浏览器页面，跟着操作就好了。
 
 `下面是一个gif动图，展示了脚本的录制和执行，感觉最近GitHub的访问速度都巨慢，就新开标签页或者右键保存本地之后看吧😓`
-[录屏动图]({{ site.url }}assets/2019-09-10-selenium-first-exploration/14.gif)
+[录屏动图]({{ site.url }}assets/2019/2019-09-10-selenium-first-exploration/14.gif)
 
 ## 脚本导出
 
@@ -42,15 +42,15 @@ tags:
 
 如果是select形式的下拉选，虽然我没有尝试，但是作为基本的HTML元素，推测通过`Selenium IDE`的录制应该就能搞定。我遇到的是用`<input>`做的下拉选。该下拉选形式如下：
 
-![下拉选]({{ site.url }}assets/2019-09-10-selenium-first-exploration/20190912094014.png)
+![下拉选]({{ site.url }}assets/2019/2019-09-10-selenium-first-exploration/20190912094014.png)
 
 录制的脚本并不能生效，处理方式为：
 1. 触发点击激活下拉选（脚本应该会录制）；
 2. 手动通过浏览器的F12开发者工具，定位要选的下拉选的选项。这里用**XPath**或者**selector**都行，只不过一个在Target对应`xpath=`，另一个对应`css=`。
 
-![下拉选手动定位]({{ site.url }}assets/2019-09-10-selenium-first-exploration/20190912095245.png)
+![下拉选手动定位]({{ site.url }}assets/2019/2019-09-10-selenium-first-exploration/20190912095245.png)
 
-![下拉选脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/20190912095524.png)
+![下拉选脚本]({{ site.url }}assets/2019/2019-09-10-selenium-first-exploration/20190912095524.png)
 
 ### 2.日期控件
 
@@ -64,9 +64,9 @@ tags:
 document.querySelector('#pane-white > div > div:nth-child(3) > div > div.el-dialog__body > form > div:nth-child(5) > div > div:nth-child(1) > div > input').value='2019-09-01  00:00:00';
 ```
 
-![日期控件手动定位]({{ site.url }}assets/2019-09-10-selenium-first-exploration/20190912100442.png)
+![日期控件手动定位]({{ site.url }}assets/2019/2019-09-10-selenium-first-exploration/20190912100442.png)
 
-![日期控件脚本]({{ site.url }}assets/2019-09-10-selenium-first-exploration/20190912100630.png)
+![日期控件脚本]({{ site.url }}assets/2019/2019-09-10-selenium-first-exploration/20190912100630.png)
 
 ### 3.后续遇到新问题再补充吧
 
