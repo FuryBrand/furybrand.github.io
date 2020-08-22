@@ -6,23 +6,23 @@ categories: jekyll update
 ---
 <!-- TOC -->
 
-- [第6章 Linux的文件权限与目录配置](#6-linux)
-    - [Keywords：](#keywords)
-    - [1.2.5 Linux的内核版本](#125-linux)
-    - [1.2.6 Linux distribution](#126-linux-distribution)
-    - [1.3.3 关于授权](#133)
-- [第2章 Linux如何学习](#2-linux)
-    - [2.3.1 从头学习Linux基础](#231-linux)
-- [第3章 主机规划与磁盘分区](#3)
-    - [3.1 Linux与硬件的搭配](#31-linux)
-    - [3.1.3 各硬件设备在Linux中的文件名](#313-linux)
-    - [3.2.1 磁盘连接的方式与设备文件名的关系](#321)
-    - [3.2.2 磁盘的组成复习](#322)
-    - [3.2.3 磁盘分区表（partition table）](#323-partition-table)
-    - [3.2.4 开机流程与主引导分区（MBR）](#324-mbr)
-    - [3.2.5 Linux安装模式下，磁盘分区的选择（极重要）](#325-linux)
-    - [3.3.2 主机的服务规划与硬件的关系](#332)
-    - [主机硬盘的主要规划](#)
+- [第6章 Linux的文件权限与目录配置](#第6章-linux的文件权限与目录配置)
+  - [Keywords：](#keywords)
+  - [1.2.5 Linux的内核版本](#125-linux的内核版本)
+  - [1.2.6 Linux distribution](#126-linux-distribution)
+  - [1.3.3 关于授权](#133-关于授权)
+- [第2章 Linux如何学习](#第2章-linux如何学习)
+  - [2.3.1 从头学习Linux基础](#231-从头学习linux基础)
+- [第3章 主机规划与磁盘分区](#第3章-主机规划与磁盘分区)
+  - [3.1 Linux与硬件的搭配](#31-linux与硬件的搭配)
+  - [3.1.3 各硬件设备在Linux中的文件名](#313-各硬件设备在linux中的文件名)
+  - [3.2.1 磁盘连接的方式与设备文件名的关系](#321-磁盘连接的方式与设备文件名的关系)
+  - [3.2.2 磁盘的组成复习](#322-磁盘的组成复习)
+  - [3.2.3 磁盘分区表（partition table）](#323-磁盘分区表partition-table)
+  - [3.2.4 开机流程与主引导分区（MBR）](#324-开机流程与主引导分区mbr)
+  - [3.2.5 Linux安装模式下，磁盘分区的选择（极重要）](#325-linux安装模式下磁盘分区的选择极重要)
+  - [3.3.2 主机的服务规划与硬件的关系](#332-主机的服务规划与硬件的关系)
+  - [主机硬盘的主要规划](#主机硬盘的主要规划)
 
 <!-- /TOC -->
 ## 第6章 Linux的文件权限与目录配置
@@ -119,7 +119,7 @@ Close Source：
 
 ### 3.2.2 磁盘的组成复习
 
-![磁盘截面图]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/01.jpg)
+![磁盘截面图]({{ site.url }}assets/2018/2018-08-22-vbird-linux-note-part-01/01.jpg)
 
 盘片上细分出扇区（Sector）与柱面（Cylinder）两个单位，其中扇区每个为512bytes 。
 
@@ -127,7 +127,7 @@ Close Source：
 
 ### 3.2.3 磁盘分区表（partition table）
 
-![磁盘分区表]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/02.png)
+![磁盘分区表]({{ site.url }}assets/2018/2018-08-22-vbird-linux-note-part-01/02.png)
 
 在分区表所在的64bytes中，总共分为4组记录区，每组记录区记录了该区段的起始与结束的柱面号码。
 
@@ -150,7 +150,7 @@ Close Source：
 - 数据的安全性，将数据分门别类来管理。
 - 系统的性能考虑：将数据集中保存，磁盘只会在相应的柱面范围进行检索，有助于提高系统的读取速度。
 
-![图3-4_磁盘分区表的作用示意图]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/03.png)
+![图3-4_磁盘分区表的作用示意图]({{ site.url }}assets/2018/2018-08-22-vbird-linux-note-part-01/03.png)
 利用扩展分区的方式，可以将硬盘分成4个以上的分区。其中P1是主分区，P2是扩展分区。
 
 扩展分区的目的是使用而外的扇区来记录分区信息，所以不能拿来格式化。
@@ -183,7 +183,7 @@ Boot Loader：引导加载程序是系统安装时提供的，所以它能识别
 
 双系统的实现原理：<br>
 Boot Loader除了可以安装在MBR之外，还可以安装在每个分区的引导扇区（boot sector）。
-![图04_引导加载程序的工作执行示意图]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/04.jpg)
+![图04_引导加载程序的工作执行示意图]({{ site.url }}assets/2018/2018-08-22-vbird-linux-note-part-01/04.jpg)
 
 总结：
 - 每个分区都拥有自己的启动扇区（boot sector）。
@@ -197,10 +197,10 @@ Boot Loader除了可以安装在MBR之外，还可以安装在每个分区的引
 ### 3.2.5 Linux安装模式下，磁盘分区的选择（极重要）
 
 目录树结构（directory tree），根目录（root directory）是“/”。下图中方框为文件夹，波浪线方框为文件。
-![图05_目录树相关性示意图]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/05.gif)
+![图05_目录树相关性示意图]({{ site.url }}assets/2018/2018-08-22-vbird-linux-note-part-01/05.gif)
 
 文件系统与目录树的关系（挂载mount）,所谓的挂载就是利用一个目录当成进入点，将磁盘分区的数据放置在该目录下；也就是说，进入该目录就可以读取该分区的意思。
-![图06_目录树与分区之间的相关性]({{ site.url }}assets/2018-08-22-vbird-linux-note-part-01/06.png)
+![图06_目录树与分区之间的相关性]({{ site.url }}assets/2018/2018-08-22-vbird-linux-note-part-01/06.png)
 假设我的硬盘分为两区，partition 1挂载到根目录，partition 2则挂载到/home这个目录。则/home下的数据是保存在partition 2中的。
 
 初次接触Linux，只要分区“/”和“swap”即可。建议预留一个备用的剩余磁盘容量。
