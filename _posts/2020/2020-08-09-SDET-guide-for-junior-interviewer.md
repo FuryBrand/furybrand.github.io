@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "【测试开发工程师】新人初级面试官生存指南——一些面试经验分享"
+title:      "【初级测试开发工程师】新人面试官生存指南——一些面试经验分享"
 date:       2020-08-09 12:14:00
 author:     "Steve"
 header-img: "img/home-bg.jpg"

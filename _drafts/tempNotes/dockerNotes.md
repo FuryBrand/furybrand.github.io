@@ -1,4 +1,4 @@
-'''
+```shell
 $ docker pull ubuntu:18.04
 $ docker run -it ubuntu:18.04 bash
 $ docker images
@@ -38,4 +38,4 @@ $ docker [container] cp data test:/tmp/
 $ docker container diff test
 $ docker container port test
 $ docker update ——cpu-quota 1000000 test
-'''
+```

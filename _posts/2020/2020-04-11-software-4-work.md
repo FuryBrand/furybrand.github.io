@@ -63,8 +63,13 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 
 1. Visual Studio Code，VS Code一生推。ta已经不是一个简单的编辑工具了，甚至可以算是一个IDE。同时大量的插件让ta可以做很多事情。最常用的就是文本内容对比、格式化XML/JSON/EDI。[GitHub主页](https://github.com/microsoft/vscode)
 2. editplus，同事ZP推荐的，还没有亲自体验。[官网](https://www.editplus.com/) 
-3. Notepad++，同事LGX推荐的，还没有亲自体验。[官网](https://notepad-plus-plus.org/) 
+3. Notepad++，同事LGX推荐的，还没有亲自体验。[官网](https://notepad-plus-plus.org/)
+
+## UML建模
+
+1. JUDE，小巧实用，最后一个社区版是5.5.2。[下载链接]({{ site.url }}assets/2020/2020-04-11-software-4-work/JUDE-Community-5.5.2.zip)
 
 ## 更新日志
 - 2020年4月11日：初稿。
 - 2020年7月27日：追加Wox和synergy
+- 2020年9月2日：追加JUDE
