@@ -19,7 +19,7 @@ tags:
 |pwd |显示当前路径 |
 |mv |重命名或移动 |
 |cp |复制 |-r 递归将子文件全部复制 
-|mkdir |创建文件夹 | 
+|mkdir |创建文件夹 | -p 递归创建所有需要的目录
 |/sbin/ifconfig |获取ip地址 | 
 |zip -r mydata.zip mydata |把当前目录下面的mydata目录压缩为mydata.zip| 
 |unzip |解压zip文件。unzip xx.zip | 
@@ -48,6 +48,7 @@ tags:
 |history |可以打印出之前所输入过的命令，然后用!123就可以指定第123号命令 | 
 |truncate |将文件变为指定大小，可用于创建测试用的垃圾文件，或用于清理日志 | find ./ -name '*.out' &#124; xargs truncate -s 0 |
 |yum -y install |centos下安装软件 |yum -y install git 
+|& |job control，将命令放在后台继续执行 |tar -zpcf /tmp/etc.tar.gz /etc &
 
 ## 账户，修改密码相关
 
