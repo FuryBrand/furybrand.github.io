@@ -98,4 +98,11 @@ Attempt Installation                                    [Install/Upgrade Databas
 ```shell
 $ docker container prune  #清理掉所有处于终止状态的容器。
 $ docker exec -it GRcontainerID /bin/bash #进入容器的终端，进入后通过exit退出
+$ ddocker port mymysql #列出指定的容器mymysql的端口映射
+$ docker images #显示镜像列表
+$ docker ps #列出正在运行中的容器
+$ docker ps -a #列出所有容器
+$ docker stop mymysql #停止mymysql这个容器
+$ docker rm mymysql #删除mymysql这个容器
+$ doker load -i image_mysql.tar #导入指定的使用 docker save 命令导出的镜像。
 ```
