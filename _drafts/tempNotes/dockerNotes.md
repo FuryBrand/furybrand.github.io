@@ -1,3 +1,4 @@
+## 书
 ```shell
 $ docker pull ubuntu:18.04
 $ docker run -it ubuntu:18.04 bash
@@ -38,4 +39,63 @@ $ docker [container] cp data test:/tmp/
 $ docker container diff test
 $ docker container port test
 $ docker update ——cpu-quota 1000000 test
+```
+
+## 以Docker的形式部署MantisBT
+
+[DockerHub链接](https://hub.docker.com/r/xlrl/mantisbt)
+
+docker-compose.yml，windows下需要把`volumes`中的内容注释掉
+```
+mantisbt:
+  image: xlrl/mantisbt:latest
+  ports:
+    - "8989:80"
+  links:
+    - mysql
+  # volumes:
+    # - ./config:/var/www/html/config
+    # - ./custom:/var/www/html/custom
+  restart: always
+
+mysql:
+  image: mariadb:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=bugtracker
+    - MYSQL_USER=mantisbt
+    - MYSQL_PASSWORD=mantisbt
+  # volumes:
+    # - ./mysql:/var/lib/mysql
+  restart: always
+```
+
+启动命令`D:\myExplore\Docker\xlrl_mantisbt>docker-compose -f docker-compose.yml up`
+
+启动后的首次配置信息：
+
+```
+URL: http://localhost:8989/admin/install.php
+>>> username: administrator
+>>> password: root
+
+==================================================================================
+Installation Options
+==================================================================================
+Type of Database                                        MySQL/MySQLi
+Hostname (for Database Server)                          mysql
+Username (for Database)                                 mantisbt
+Password (for Database)                                 mantisbt
+Database name (for Database)                            bugtracker
+Admin Username (to create Database if required)         root
+Admin Password (to create Database if required)         root
+Print SQL Queries instead of Writing to the Database    [ ]
+Attempt Installation                                    [Install/Upgrade Database]
+==================================================================================
+```
+
+## 实际用过的
+```shell
+$ docker container prune  #清理掉所有处于终止状态的容器。
+$ docker exec -it GRcontainerID /bin/bash #进入容器的终端，进入后通过exit退出
 ```
