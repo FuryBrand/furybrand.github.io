@@ -1,6 +1,7 @@
 - [书](#书)
 - [以Docker的形式部署MantisBT](#以docker的形式部署mantisbt)
 - [实际用过的](#实际用过的)
+- [Linux相关](#Linux相关)
 
 ## 书
 ```shell
@@ -109,4 +110,11 @@ $ docker ps -a #列出所有容器
 $ docker stop mymysql #停止mymysql这个容器
 $ docker rm mymysql #删除mymysql这个容器
 $ doker load -i image_mysql.tar #导入指定的使用 docker save 命令导出的镜像。
+```
+
+## Linux相关
+```
+#yum源配置的路径
+/etc/yum.repos.d/CentOS-Base.repo
+
 ```
