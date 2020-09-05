@@ -9,6 +9,7 @@ header-mask: 0.3
 catalog:    false
 tags:
     - Linux
+    - 技术
 ---
 这篇[博文](https://www.cnblogs.com/zoulongbin/p/6187238.html)和这篇[博文](https://github.com/ice7mayu/tutorial/blob/master/doc/crontab.md)对crontab有较为详细的介绍。如果日后链接失效了，可以email我。
 这个[web版的时间合法性校验工具](https://crontab.guru/)特别好用。

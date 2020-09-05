@@ -96,7 +96,7 @@ SELINUXTYPE=targeted
 
 启动成功后，通过本机无法连接数据库，排查是防火墙的原因，但是我即使开放了端口也依然无法访问，最后只能停掉了防火墙。但是停掉防火墙之后又会导致Docker没法把MySQL给run起来。。。。。最后暂时只能run的时候打开防火墙，run起来之后关闭防火墙。。。。。
 
-关于CentOS7的默认防火墙firewall的一些操作。
+关于CentOS7的默认防火墙firewall的一些操作。更多linux命令参考[我的Linux常用命令（持续更新）]({% post_url 2018-07-11-my-linux-basic-instructions %})
 ```shell
 # 查看firewall服务状态
 $ systemctl status firewalld
@@ -104,10 +104,13 @@ $ systemctl status firewalld
 $ firewall-cmd --state
 # 启动firewalld.service服务
 $ service firewalld start
+Redirecting to /bin/systemctl start mysqld.service
 # 重启firewalld.service服务
 $ service firewalld restart
+Redirecting to /bin/systemctl restart mysqld.service
 # 关闭firewalld.service服务
 $ service firewalld stop
+Redirecting to /bin/systemctl stop mysqld.service
 # 查看防火墙规则
 $ firewall-cmd --list-all
 # 查询端口是否开放

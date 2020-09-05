@@ -9,7 +9,9 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Linux
+    - 技术
 ---
+
 
 Kali Linux含有多种渗透测试软件，是一个测试自家wifi是否可以被轻易攻破的好工具（大雾😀）。我的PC都是Win10系统的，所以还是把这个系统装到U盘里比较合适。
 

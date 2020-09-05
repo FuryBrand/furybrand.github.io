@@ -8,6 +8,7 @@ header-mask: 0.3
 catalog:    false
 tags:
     - Linux
+    - 技术
 ---
 
 ##目录

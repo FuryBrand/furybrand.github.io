@@ -9,6 +9,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Python
+    - 技术
 ---
 
 pip是PyPA推荐的用于管理Python包的工具，现在Python的安装包中已经自带了该工具。[GitHub地址](https://github.com/pypa/pip)

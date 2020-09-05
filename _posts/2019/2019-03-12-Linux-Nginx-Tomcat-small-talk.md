@@ -9,6 +9,8 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Linux
+    - Nginx
+    - 技术
 ---
 
 这两天解决了几个环境的问题，觉得自己对于http请求在请求过程中是如何流传的，以及Nginx的反向代理功能有了更深的认识。

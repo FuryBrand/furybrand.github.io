@@ -9,6 +9,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - 技术
+    - Git
 ---
 
 **本教程针对Git的初学者**

@@ -86,17 +86,6 @@ tags:
 |less xix.sh |进入less程序。/字符串，为向下查找。?字符串，为向上查找。 |
 |ll &#124; less |针对文件夹内文件很多的情况，这样就可以显示全了 |
 
-## 查看系统资源占用 [鸣谢](https://www.cnblogs.com/chengJAVA/p/6115061.html)
-
-| 命令 | 简介 | 备注 
-| - | - | - 
-|free |总体内存占用的查看 | 1.默认按kb显示，free -m来用mb表示<br>2.Mem行，total=used+free，其中buffers和cached虽然计算在used内， 但其实为可用内存。<br>3.下一行是刨除buffers和cache的结果，是真实的可用内存。<br>Swap：内存交换区的使用情况。| 
-|ps auxw &#124; head -1;ps auxw&#124;sort -rn -k4&#124;head -5 |查看内存占用前五的进程 | 
-|ps auxw&#124;head -1;ps auxw&#124;sort -rn -k3&#124;head -5 |查看CPU占用前五的进程 | 
-|top |查看系统整体的负载情况 | 
-|ps -ef &#124; grep xixi &#124; grep -v 'grep' &#124; awk '{print $2}' |输出xixi相关的进程的PID |可以配合for循环加kill -9就清理调相关的进程
-
-
 ## SCP
 scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令。本地←→远程
 
@@ -125,3 +114,46 @@ vim有12种编辑模式，其中6种是basic modes。Normal mode、Visual mode�
 | - | - | - 
 | Normal mode | u | 撤销（等同于Microsoft Office中的Ctrl + z）
 | Normal mode | Ctrl + r | 恢复撤销（等同于Microsoft Office中的Ctrl + y）
+
+## 查看系统资源占用相关命令
+[鸣谢](https://www.cnblogs.com/chengJAVA/p/6115061.html)
+
+| 命令 | 简介 | 备注 
+| - | - | - 
+|free |总体内存占用的查看 | 1.默认按kb显示，free -m来用mb表示<br>2.Mem行，total=used+free，其中buffers和cached虽然计算在used内， 但其实为可用内存。<br>3.下一行是刨除buffers和cache的结果，是真实的可用内存。<br>Swap：内存交换区的使用情况。| 
+|ps auxw &#124; head -1;ps auxw&#124;sort -rn -k4&#124;head -5 |查看内存占用前五的进程 | 
+|ps auxw&#124;head -1;ps auxw&#124;sort -rn -k3&#124;head -5 |查看CPU占用前五的进程 | 
+|top |查看系统整体的负载情况 | 
+|ps -ef &#124; grep xixi &#124; grep -v 'grep' &#124; awk '{print $2}' |输出xixi相关的进程的PID |可以配合for循环加kill -9就清理调相关的进程
+
+## CentOS7的默认防火墙firewall
+
+```shell
+# 查看firewall服务状态
+$ systemctl status firewalld
+# 查看firewall的状态
+$ firewall-cmd --state
+# 启动firewalld.service服务
+$ service firewalld start
+Redirecting to /bin/systemctl start mysqld.service
+# 重启firewalld.service服务
+$ service firewalld restart
+Redirecting to /bin/systemctl restart mysqld.service
+# 关闭firewalld.service服务
+$ service firewalld stop
+Redirecting to /bin/systemctl stop mysqld.service
+# 查看防火墙规则
+$ firewall-cmd --list-all
+# 查询端口是否开放
+$ firewall-cmd --query-port=8080/tcp
+# 开放80端口
+$ firewall-cmd --permanent --add-port=80/tcp
+# 移除端口
+$ firewall-cmd --permanent --remove-port=8080/tcp
+# 重启防火墙(修改配置后要重启防火墙)
+$ firewall-cmd --reload
+```
+
+## 更新记录
+
+- 2020年9月5日，增加firewall
