@@ -63,11 +63,11 @@ $ docker run --name ibteam-mysql -p 3358:3306 -v /qcteam/mysql:/var/lib/mysql -e
 - `-d`后台运行容器，并返回容器ID。
 - `mysql:5.7`指定镜像名称和tag。
 
-## 5.启动的坑
+## 5.踩坑开始
 
 实际总是没有想象中的那么顺利。踩坑开始~
 
-#### 5.1 错误1
+#### 5.1 错误1-启动失败
 
 ```
 [root@Server-i-ez15oy6wta ~]# docker run --name ibteam-mysql -v /qcteam/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw-haha -d mysql:5.7 -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin
@@ -92,7 +92,7 @@ SELINUX=disabled
 SELINUXTYPE=targeted
 ```
 
-#### 5.2 错误2
+#### 5.2 错误2-端口不通
 
 启动成功后，通过本机无法连接数据库，排查是防火墙的原因，但是我即使开放了端口也依然无法访问，最后只能停掉了防火墙。但是停掉防火墙之后又会导致Docker没法把MySQL给run起来。。。。。最后暂时只能run的时候打开防火墙，run起来之后关闭防火墙。。。。。
 
@@ -123,6 +123,91 @@ $ firewall-cmd --permanent --remove-port=8080/tcp
 $ firewall-cmd --reload
 ```
 
+#### 5.3 错误3-admin账号无法访问
+
+本机的客户端连接的时候提示`Access denied for user 'admin'@'172.17.0.1' (using password: YES)`。本质就是需要进行特定ip的访问授权，但是奇怪的是root账号没有进行任何设置直接登录就没有问题。忘记在哪里看到的资料了，好像是MySQL的Docker镜像为了方便使用，给root默认开了各种情况下的访问授权。总之，咱还是先记录下处理过程吧
+
+```
+[root@Server-i-ez15oy6wta ~]# docker exec -it ibteam-mysql bash
+root@559218d389cb:/# mysql
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@559218d389cb:/# mysql -uroot -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 38
+Server version: 5.7.31 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select host, user from user;
++-----------+---------------+
+| host      | user          |
++-----------+---------------+
+| %         | admin         |
+| %         | root          |
+| localhost | mysql.session |
+| localhost | mysql.sys     |
+| localhost | root          |
++-----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select host, user, plugin from user;
++-----------+---------------+-----------------------+
+| host      | user          | plugin                |
++-----------+---------------+-----------------------+
+| localhost | root          | mysql_native_password |
+| localhost | mysql.session | mysql_native_password |
+| localhost | mysql.sys     | mysql_native_password |
+| %         | root          | mysql_native_password |
+| %         | admin         | mysql_native_password |
++-----------+---------------+-----------------------+
+5 rows in set (0.00 sec)
+
+mysql> create user 'admin'@'172.17.0.1' identified with mysql_native_password by 'b9b580de15e01d71855306fbcb89343106a8cf99343b7bbbb0f5eab94fddd809';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant all privileges on *.* to 'admin'@'172.17.0.1' with grant option;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select host, user, plugin from user;
++------------+---------------+-----------------------+
+| host       | user          | plugin                |
++------------+---------------+-----------------------+
+| localhost  | root          | mysql_native_password |
+| localhost  | mysql.session | mysql_native_password |
+| localhost  | mysql.sys     | mysql_native_password |
+| %          | root          | mysql_native_password |
+| %          | admin         | mysql_native_password |
+| 172.17.0.1 | admin         | mysql_native_password |
++------------+---------------+-----------------------+
+7 rows in set (0.00 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+```
+
+#### 5.4 错误4-nginx转发问题
+
+其实严格意义来说这不是一个错误。由于服务器端口受限，只有固定的数个端口对外开放，故我想用nginx进行代理，将mysql的TCP请求根据url的不同转给特定的后端Docker容器来处理。经过调研之后发现可行，但是需要在编译nginx的时候追加参数`--with-stream_ssl_preread_module`[from nginx.org](http://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html)。无奈我这nginx是yum装的啊。。。。重新进行编译，发现一堆的依赖没有安装，披荆斩棘安了5个依赖，不行了，哥们我实在整不动了。。。。放一个[stackoverflow的链接](https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151)吧，具体的思路是从这里来的。
+
+
 ## 参考文章
 
 - [Docker离线部署images及启动容器](https://blog.csdn.net/little_pig_lxl/article/details/89499406)
@@ -130,3 +215,4 @@ $ firewall-cmd --reload
 
 ## 更新日志
 - 2020年9月3日：初稿。
+- 2020年9月7日：增加`5.3 错误3-admin账号无法访问`
