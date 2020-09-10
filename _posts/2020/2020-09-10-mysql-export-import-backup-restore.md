@@ -55,9 +55,9 @@ Running: mysqldump.exe --defaults-file="c:\users\steveliu\appdata\local\temp\tmp
 
 执行过程的log如下：
 ```
-18:34:56 Restoring D:\liuwuxin\Documents\dumps\Dump20200910-1.sql
-Running: mysql.exe --defaults-file="c:\users\liuwuxin\appdata\local\temp\tmp1af9r7.cnf"  --protocol=tcp --host=11.51.193.15 --user=root --port=6379 --default-character-set=utf8 --comments  < "D:\\liuwuxin\\Documents\\dumps\\Dump20200910-1.sql"
-18:39:49 Import of D:\liuwuxin\Documents\dumps\Dump20200910-1.sql has finished
+18:34:56 Restoring D:\steveliu\Documents\dumps\Dump20200910-1.sql
+Running: mysql.exe --defaults-file="c:\users\steveliu\appdata\local\temp\tmp1af9r7.cnf"  --protocol=tcp --host=11.51.193.15 --user=root --port=6379 --default-character-set=utf8 --comments  < "D:\\steveliu\\Documents\\dumps\\Dump20200910-1.sql"
+18:39:49 Import of D:\steveliu\Documents\dumps\Dump20200910-1.sql has finished
 ```
 
 ## 更新日志
