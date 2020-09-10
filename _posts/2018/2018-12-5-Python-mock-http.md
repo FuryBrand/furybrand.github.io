@@ -9,7 +9,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Python
-    - 技术
+    - 技术相关
 ---
 
 更新日志：

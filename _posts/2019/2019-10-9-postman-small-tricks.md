@@ -9,7 +9,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Postman
-    - 技术
+    - 技术相关
 ---
 
 `Postman`应该是目前比较好用的测试HTTP接口的工具，由于它可以发送几乎所有类型的HTTP请求，所以堪称是“全能战士”。另附[官网链接](https://www.getpostman.com/)。

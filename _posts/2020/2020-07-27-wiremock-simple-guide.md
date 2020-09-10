@@ -8,7 +8,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Mock
-    - 技术
+    - 技术相关
 ---
 
 

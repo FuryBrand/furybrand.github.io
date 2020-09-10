@@ -10,6 +10,7 @@ catalog:    true
 tags:
     - 杂文
     - Windows
+    - 技术相关
 ---
 
 

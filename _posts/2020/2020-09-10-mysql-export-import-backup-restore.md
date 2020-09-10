@@ -8,7 +8,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - MySQL
-    - 技术
+    - 技术相关
 ---
 
 > 说一千道一万，其实聊的就是mysqldump😀

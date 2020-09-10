@@ -9,7 +9,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Selenium
-    - 技术
+    - 技术相关
 ---
 
 - [背景](#%e8%83%8c%e6%99%af)
