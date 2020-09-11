@@ -8,7 +8,7 @@ header-img: "img/home-bg.jpg"
 header-mask: 0.3
 catalog:    true
 tags:
-    - 技术
+    - 技术相关
 ---
 
 180915：发现了一个貌似很全的介绍markdown语法的[网站](https://www.appinn.com/markdown/)

@@ -9,6 +9,7 @@ catalog:    true
 tags:
     - 面试
     - 杂文
+    - 技术相关
 ---
 
 

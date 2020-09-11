@@ -8,7 +8,7 @@ header-img: "img/home-bg.jpg"
 header-mask: 0.3
 catalog:    true
 tags:
-    - 技术
+    - 技术相关
 ---
 
 正则表达式就是对字符串操作的一种逻辑公式。有时候使用正则表达式会起到事半功倍的效果。

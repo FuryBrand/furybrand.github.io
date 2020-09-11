@@ -9,6 +9,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - 杂文
+    - 技术相关
 ---
 
 ## 引子

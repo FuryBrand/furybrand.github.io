@@ -9,7 +9,7 @@ catalog:    true
 tags:
     - MySQL
     - Docker
-    - 技术
+    - 技术相关
 ---
 
 

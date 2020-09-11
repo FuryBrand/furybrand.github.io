@@ -8,7 +8,7 @@ header-img: "img/home-bg.jpg"
 header-mask: 0.3
 catalog:    true
 tags:
-    - 技术
+    - 技术相关
     - Git
 ---
 
