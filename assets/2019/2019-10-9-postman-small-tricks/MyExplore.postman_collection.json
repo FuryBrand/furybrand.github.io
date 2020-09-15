@@ -6,6 +6,508 @@
 	},
 	"item": [
 		{
+			"name": "WireMock",
+			"item": [
+				{
+					"name": "192.168.75.60",
+					"item": [
+						{
+							"name": "group1-get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.75.60:8888/get/thiss",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"75",
+										"60"
+									],
+									"port": "8888",
+									"path": [
+										"get",
+										"thiss"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "group2-get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "ab",
+										"value": "cd",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.75.60:8888/get/ab?f=dd",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"75",
+										"60"
+									],
+									"port": "8888",
+									"path": [
+										"get",
+										"ab"
+									],
+									"query": [
+										{
+											"key": "f",
+											"value": "dd",
+											"description": "d"
+										},
+										{
+											"key": "sdf",
+											"value": "234",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "group1-set",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"request\": {\r\n        \"url\": \"/get/thiss\",\r\n        \"method\": \"GET\"\r\n    },\r\n    \"response\": {\r\n        \"status\": 200,\r\n        \"body\": \"Here it is!\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.75.60:8888/__admin/mappings",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"75",
+										"60"
+									],
+									"port": "8888",
+									"path": [
+										"__admin",
+										"mappings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "group2-set",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"fb9c349c-c457-4680-b2d1-b55258ea8424\",\r\n  \"request\": {\r\n    \"urlPathPattern\": \"/get/ab\",\r\n    \"method\": \"GET\",\r\n    \"headers\": {\r\n      \"ab\": {\r\n        \"equalTo\": \"cd\"\r\n      }\r\n    },\r\n    \"queryParameters\": {\r\n      \"f\": {\r\n        \"contains\": \"dd\"\r\n      }\r\n    },\r\n    \"bodyPatterns\": []\r\n  },\r\n  \"response\": {\r\n    \"status\": 200,\r\n    \"body\": \"oh no\"\r\n  },\r\n  \"uuid\": \"fb9c349c-c457-4680-b2d1-b55258ea8424\",\r\n  \"priority\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.75.60:8888/__admin/mappings",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"75",
+										"60"
+									],
+									"port": "8888",
+									"path": [
+										"__admin",
+										"mappings"
+									]
+								},
+								"description": "https://stackoverflow.com/questions/50523008/wiremock-query-parameter-json-stub-file"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "set-message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"request\": {\r\n        \"url\": \"/get/message\",\r\n        \"method\": \"GET\"\r\n    },\r\n    \"response\": {\r\n        \"status\": 200,\r\n        \"body\": \"Here it is!\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/__admin/mappings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"__admin",
+								"mappings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-message",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/get/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set-use query params & headers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"fb9c349c-c457-4680-b2d1-b55258ea8424\",\r\n  \"request\": {\r\n    \"urlPathPattern\": \"/get/message\",\r\n    \"method\": \"GET\",\r\n    \"headers\": {\r\n      \"name\": {\r\n        \"equalTo\": \"liutianyu\"\r\n      }\r\n    },\r\n    \"queryParameters\": {\r\n      \"sex\": {\r\n        \"contains\": \"male\"\r\n      }\r\n    },\r\n    \"bodyPatterns\": []\r\n  },\r\n  \"response\": {\r\n    \"status\": 200,\r\n    \"body\": \"He is a cool gay.\"\r\n  },\r\n  \"uuid\": \"fb9c349c-c457-4680-b2d1-b55258ea8424\",\r\n  \"priority\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/__admin/mappings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"__admin",
+								"mappings"
+							]
+						},
+						"description": "https://stackoverflow.com/questions/50523008/wiremock-query-parameter-json-stub-file"
+					},
+					"response": []
+				},
+				{
+					"name": "get-use query params",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "name",
+								"value": "liutianyu",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/get/message?sex=male",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get",
+								"message"
+							],
+							"query": [
+								{
+									"key": "sex",
+									"value": "male",
+									"description": "d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Mock",
+			"item": [
+				{
+					"name": "获取值",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.75.41/getReturn",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"75",
+								"41"
+							],
+							"path": [
+								"getReturn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取值 Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/getReturn",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"getReturn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置返回值",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.75.41/setReturn?value={\"result\":\"success\",\"message\":\"\",\"data\":[{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110008263\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044933\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214001\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214002\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]},{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110005442\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044934\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214003\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214004\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]}]}",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"75",
+								"41"
+							],
+							"path": [
+								"setReturn"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "{\"result\":\"success\",\"message\":\"\",\"data\":[{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110008263\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044933\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214001\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214002\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]},{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110005442\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044934\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214003\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214004\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]}]}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置返回值form",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "value",
+									"value": "{\n    \"errcode\": 0,\n    \"errmsg\": \"ok\",\n    \"data\": \"balabalabalabalabalabalabalabalabalabalabalaba\"\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.75.41/setReturn",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"75",
+								"41"
+							],
+							"path": [
+								"setReturn"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "{\"result\":\"success\",\"message\":\"\",\"data\":[{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110008263\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044933\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214001\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214002\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]},{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110005442\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044934\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214003\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214004\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]}]}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置返回值form Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "value",
+									"value": "{\n    \"errcode\": 0,\n    \"errmsg\": \"ok\",\n    \"data\": \"balabalabalabalabalabalabalabalabalabalabalaba\"\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.75.41/setReturn",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"75",
+								"41"
+							],
+							"path": [
+								"setReturn"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "{\"result\":\"success\",\"message\":\"\",\"data\":[{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110008263\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044933\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214001\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214002\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]},{\"deptNo\":\"EBU4398046516144\",\"state\":\"10\",\"whNo\":\"110005442\",\"supplierNo\":\"EMS4398046587167\",\"receiveLevel\":\"1\",\"customerPin\":\"hongdou\",\"djbh\":\"JA2180913044934\",\"goodsStatus\":\"100\",\"itemList\":[{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214003\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C15\"},{\"state\":\"10\",\"goodsName\":\"CES\",\"sku\":\"HD20181214004\",\"gg1DM\":\"B01\",\"sl\":11,\"gg2DM\":\"C10\"}]}]}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置返回值 Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "value",
+									"value": "{\n    \"errcode\": 0,\n    \"errmsg\": \"ok\",\n    \"data\": \"{\\\"headertotal\\\":2,\\\"header\\\":[{\\\"batchid\\\":\\\"XXXEDI2017091401\\\",\\\"documentid\\\":1,\\\"transportcompany\\\":\\\"51000001\\\",\\\"warehousecode\\\":\\\"BJ001\\\",\\\"orderno\\\":\\\"50512003\\\",\\\"customerorderno\\\":\\\"22170258\\\",\\\"shipmentdate\\\":\\\"2017/11/14\\\",\\\"customercode\\\":\\\"9200010\\\",\\\"crmcode\\\":\\\"OFHQT0218\\\",\\\"customername\\\":\\\"POP HEADQUARTER\\\",\\\"customerdesc\\\":\\\"杨德如\\\",\\\"addr\\\":\\\"北京市朝阳区金盏乡马各村南工业区西排16号\\\",\\\"tel\\\":\\\"13600352718\\\",\\\"loaddt\\\":\\\"2017/12/25 13:01:01 \\\",\\\"salesorderno\\\":\\\"SOR-XXXXXXX\\\",\\\"salesordercomments\\\":\\\"SOR-XX\\\",\\\"textfield1\\\":\\\"test\\\",\\\"textfield2\\\":\\\"test\\\",\\\"textfield3\\\":\\\"test\\\",\\\"detail\\\":{\\\"detailtotal\\\":1,\\\"products\\\":[{\\\"batchid\\\":\\\"XXXEDI2017091401\\\",\\\"detailid\\\":1,\\\"lineno\\\":\\\"1\\\",\\\"orderno\\\":\\\"50512003\\\",\\\"product\\\":\\\"005657\\\",\\\"desc\\\":\\\"PJ BE Luminous Label\\\",\\\"descchi\\\":\\\"PJ发光瓶标\\\",\\\"btca\\\":\\\"1\\\",\\\"clbt\\\":\\\"60 PC\\\",\\\"qty\\\":\\\"1\\\",\\\"um\\\":\\\"Pieces\\\",\\\"weight\\\":\\\"8.33 KG\\\",\\\"dimension\\\":\\\"0.1312 M3\\\"}]}},{\\\"batchid\\\":\\\"XXXEDI2017091401\\\",\\\"documentid\\\":1,\\\"transportcompany\\\":\\\"51000001\\\",\\\"warehousecode\\\":\\\"BJ001\\\",\\\"orderno\\\":\\\"50520001\\\",\\\"customerorderno\\\":\\\"22170258\\\",\\\"shipmentdate\\\":\\\"2017/11/14\\\",\\\"customercode\\\":\\\"9200010\\\",\\\"crmcode\\\":\\\"OFHQT0218\\\",\\\"customername\\\":\\\"POP HEADQUARTER\\\",\\\"customerdesc\\\":\\\"杨德如\\\",\\\"addr\\\":\\\"北京市朝阳区金盏乡马各村南工业区西排16号\\\",\\\"tel\\\":\\\"13600352718\\\",\\\"loaddt\\\":\\\"2017/12/25 13:01:01 \\\",\\\"salesorderno\\\":\\\"SOR-XXXXXXX\\\",\\\"salesordercomments\\\":\\\"SOR-XX\\\",\\\"textfield1\\\":\\\"test\\\",\\\"textfield2\\\":\\\"test\\\",\\\"textfield3\\\":\\\"test\\\",\\\"detail\\\":{\\\"detailtotal\\\":1,\\\"products\\\":[{\\\"batchid\\\":\\\"XXXEDI2017091401\\\",\\\"detailid\\\":1,\\\"lineno\\\":\\\"1\\\",\\\"orderno\\\":\\\"50520001\\\",\\\"product\\\":\\\"012207\\\",\\\"desc\\\":\\\"PJ BE Luminous Label\\\",\\\"descchi\\\":\\\"PJ发光瓶标\\\",\\\"btca\\\":\\\"1\\\",\\\"clbt\\\":\\\"60 PC\\\",\\\"qty\\\":\\\"1200\\\",\\\"um\\\":\\\"Pieces\\\",\\\"weight\\\":\\\"8.33 KG\\\",\\\"dimension\\\":\\\"0.1312 M3\\\"}]}}]}\"\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/setReturn",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"setReturn"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "1.参数化",
 			"event": [
 				{
@@ -191,12 +693,7 @@
 							"value": "{\"vehicleCode\":\"C001_001\",\"deviceCode\":\"D001_001\",\"type\":1,\"uuid\":\"4561acdawf\",\"authorityData\":\"7ef648848b403a668f543d13b60b1b71\"}",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://192.168.75.41/setReturn",
@@ -275,7 +772,10 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{{data}}"
+					"raw": "{{data}}",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://192.168.75.41/getReturn",
@@ -304,7 +804,7 @@
 							"//手动修改要查询单号",
 							"var orderNumber = 'LWX4398046632103';",
 							"//url和请求体*如果“Body”中的报文有换行的情况，那么参数postBody可能需要基于换行的报文进行URL编码。",
-							"var postUrl = 'https://http://192.168.75.41/getSign';",
+							"var postUrl = 'https://192.168.75.41/getSign';",
 							"var postBody = 'value={\"orderno\":\"' + orderNumber + '\",\"key\":\"asfjoaslnjklgalsdfjl\"}';",
 							"//组装请求体",
 							"const echoPostRequest = {",
@@ -352,7 +852,10 @@
 							"value": "{\"orderno\":\"{{orderno}}\",\"sign\":\"{{sign}}\"}",
 							"type": "text"
 						}
-					]
+					],
+					"options": {
+						"urlencoded": {}
+					}
 				},
 				"url": {
 					"raw": "http://192.168.75.41/getReturn",
@@ -383,10 +886,13 @@
 					"formdata": [
 						{
 							"key": "value",
-							"value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz\n48UmVzcG9uc2U+PFJlc3VsdHM+c3VjY2VzczxSZXN1bHRzPjwv\nUmVzcG9uc2U+",
+							"value": "SGVsbG8h",
 							"type": "text"
 						}
-					]
+					],
+					"options": {
+						"formdata": {}
+					}
 				},
 				"url": {
 					"raw": "http://192.168.75.41/setReturn",
@@ -420,6 +926,48 @@
 					],
 					"path": [
 						"getReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.重复发送请求——Runner的使用",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests['Response has data value'] = jsonData.form.foo === data.value"
+						],
+						"id": "c91acc41-a261-4662-8952-549082f94043"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"value": "{{value}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "postman-echo.com/{{path}}",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"{{path}}"
 					]
 				}
 			},

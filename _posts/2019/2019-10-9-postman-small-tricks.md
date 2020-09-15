@@ -72,7 +72,21 @@ tags:
 ![Body]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/8.png)
 ![Pre-request_Script]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/9.png)
 
+## 6.重复发送请求——Runner的使用
+
+背景：为了测试Web页面的翻页功能，需要一些数据做支持。之前尝试过使用Selenium，这次尝试使用Postman。以后有机会可以试试jmeter，应该也可以做到。
+
+方案：使用Postman的Runner功能，对指定接口进行多次请求。可以参考[Postman的官方手册](https://learning.postman.com/docs/running-collections/working-with-data-files/)，其实我也是用了官方的接口做范例的。踩过的坑是MS Excel在保存csv文件的时候，将原本的`,`保存成了`空格`，导致导入给Postman的时候没法正确识别。
+
+步骤：
+1. 下载`写在最前面`中附的Collection`MyExplore`并使用Request`6.重复发送请求——Runner的使用`。（以我的实际场景来说，我是使用了Postman的Import-Raw Text功能，配合Chrome的copy-copy as cURL(bash)来导入的，这样就不用设置cookie等参数了，很方便。[参考](https://m.weibo.cn/status/4544056790628230?)）
+2. 进入`Runner`，选择Collection，勾选需要执行的`Request`。设定循环次数15次，设置延迟时间，选择数据源文件[点我下载import_data.csv]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/import_data.csv)后Run就可以了。如果每次调用时的入参有多个，那么预览的时候数据的展示一定是下面所示的那样。如果不是的话，大概率是csv文件有问题。除了csv文件以外，还支持json的方式导入数据，但是做数据的话，我觉得csv会方便一点。
+
+![Runner]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/10.png)
+
+
 
 ## 更新日志
 
-2020年3月30日：追加**5.在请求前的请求**
+2020年3月30日：追加`5.在请求前的请求`
+2020年9月15日：追加`重复发送请求——Runner的使用`
