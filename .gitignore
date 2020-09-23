@@ -2,6 +2,5 @@ _site
 .sass-cache
 .jekyll-metadata
 .gitpod.yml
-# _config.yml
 .theia/
 .jekyll-cache/
