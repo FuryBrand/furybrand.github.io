@@ -70,6 +70,7 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git pull| 获取远程仓库的最新版本并合并到本地| |
 | git push| 将本地修改推到远程仓库| |
 | git branch dev-xixi| 以当前分支创建一个dev-xixi的分支| 也可以用git checkout -b dev-xixi |
+| git branch -al| 查看本地及远程的所有分支| |
 | git remote -v| 查看git的服务器地址| |
 | git remote show origin| 提供有关远程的一些信息| 也可以看到远程地址|
 | git help remote| 查看remote的详细说明| |
@@ -110,6 +111,70 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git stash drop 0| 删除序列号为0的stash||
 | git stash clear| 清空stash中的所有内容||
 
+## commit后回滚
+
+```shell
+gitpod /workspace/furybrand.github.io $ git push
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 418 bytes | 418.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/FuryBrand/furybrand.github.io.git
+ ! [remote rejected] master -> master (refusing to allow an OAuth App to create or update workflow `.github/workflows/jekyll.yml` without `workflow` scope)
+error: failed to push some refs to 'https://github.com/FuryBrand/furybrand.github.io.git'
+gitpod /workspace/furybrand.github.io $ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+gitpod /workspace/furybrand.github.io $ git reset --soft HEAD^
+gitpod /workspace/furybrand.github.io $ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    .travis.yml -> ..travis.yml
+        modified:   .github/workflows/jekyll.yml
+
+gitpod /workspace/furybrand.github.io $ git restore .github/workflows/jekyll.yml
+gitpod /workspace/furybrand.github.io $ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    .travis.yml -> ..travis.yml
+        modified:   .github/workflows/jekyll.yml
+
+gitpod /workspace/furybrand.github.io $ git restore .github/workflows/jekyll.yml --staged
+gitpod /workspace/furybrand.github.io $ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    .travis.yml -> ..travis.yml
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .github/workflows/jekyll.yml
+
+gitpod /workspace/furybrand.github.io $ git restore .github/workflows/jekyll.yml
+gitpod /workspace/furybrand.github.io $ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    .travis.yml -> ..travis.yml
+
+```
 
 ## git初始化仓库
 
@@ -145,6 +210,8 @@ git push -u origin --all
 git push -u origin --tags
 ```
 
+## 更新日志
+2020年9月23日：追加回滚操作
 
 [Github]: https://github.com/
 [vsts]: https://visualstudio.microsoft.com/zh-hans/team-services/
