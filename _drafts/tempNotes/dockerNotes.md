@@ -110,6 +110,7 @@ $ docker ps -a #列出所有容器
 $ docker stop mymysql #停止mymysql这个容器
 $ docker rm mymysql #删除mymysql这个容器
 $ doker load -i image_mysql.tar #导入指定的使用 docker save 命令导出的镜像。
+$ docker run --name some-redis -p 22000:6379 -d redis:5.0.5 #首次启动redis
 ```
 
 ## Linux相关
