@@ -18,6 +18,31 @@ pie title Pets adopted by volunteers
   "Rats" : 35
 ```
 
+```mermaid!
+journey
+    title 一个产品需求的一生
+    section 需求调研
+      需求文档: 5: PM
+    section 需求评审
+      研发设计文档、排期: 5: SDE,PM,SDET
+      研发设计文档、排期: 5: SDET,PM,SDE
+    section 设计评审
+      会议纪要: 5: SDE,SDET,PM
+    section 开发及提测
+      接口文档: 5: SDE
+      单测报告: 5: SDE
+      自测报告: 5: SDE
+      代码评审: 5: SDE
+      提测: 5: SDE
+    section 冒烟测试
+      测试开始报告: 5: SDET
+    section 测试执行
+      测试完成报告: 5: SDET,SDE,PM
+    section 上线流程
+      上线流程: 5: SDE,SDET,PM
+```
+
+
 <style>
 table{
 border:1px solid #ccc;
