@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "《鸟叔的Linux私房菜-基础学习篇（第三版）》学习笔记-Part01-Linux的规则与安装"
+title:  "《鸟哥的Linux私房菜-基础学习篇（第三版）》学习笔记-Part01-Linux的规则与安装"
 subtitle:   ""
 author:     "Steve"
 header-img: "img/home-bg.jpg"
