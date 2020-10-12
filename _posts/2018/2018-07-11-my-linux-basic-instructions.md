@@ -49,7 +49,7 @@ tags:
 |truncate |将文件变为指定大小，可用于创建测试用的垃圾文件，或用于清理日志 | find ./ -name '*.out' &#124; xargs truncate -s 0 |
 |yum -y install |centos下安装软件 |yum -y install git 
 |& |job control，将命令放在后台继续执行 |tar -zpcf /tmp/etc.tar.gz /etc &
-|ln -s /home/logs /export/logs/xixixi/ |创建一个软链接关联两个文件夹
+|ln -s /export/logs/xixixi/ logs |在当前目录创建一个软链接logs关联指定路径
 
 ## 账户，修改密码相关
 
