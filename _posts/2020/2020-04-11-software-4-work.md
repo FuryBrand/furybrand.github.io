@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "工欲善其事必先利其器"
-subtitle:   "工程师的推荐软件"
+subtitle:   "工程师的推荐软件(Windows)"
 date:       2020-04-11 12:00:00
 author:     "Steve"
 header-img: "img/home-bg.jpg"

@@ -1,0 +1,109 @@
+---
+layout:     post
+title:      "记从Windows办公迁移至MAC办公"
+subtitle:   "MacOS软件推荐"
+date:       2020-10-24 15:52:00
+author:     "Steve"
+header-img: "img/home-bg.jpg"
+header-mask: 0.3
+catalog:    true
+tags:
+    - 杂文
+    - MAC
+    - 技术相关
+---
+
+
+> 由于一些特殊原因，告别了亲爱的Lenovo T490，开始用MacBook Pro（2019,10.15.7 (19H2)）了
+
+## 适应新的机器
+
+建议阅读[知乎上的这篇文章](https://zhuanlan.zhihu.com/p/83863239?from_voters_page=true)，首先对手上的新机器有所了解。作者的一个观点很好，用使用iPhone的角度去理解MAC，摒弃Windows的一些操作习惯。
+
+效率控可以再看下官网提供的这些东西:
+- [Mac 键盘快捷键](https://support.apple.com/zh-cn/HT201236)
+- [Mac 上 Safari 浏览器中的键盘快捷键和手势](https://support.apple.com/zh-cn/guide/safari/cpsh003/mac)
+- [在 Mac 上截屏或录制屏幕](https://support.apple.com/zh-cn/guide/mac-help/mh26782/mac)
+
+## 一些常见的软件
+
+有些软件下载下来后没有通过Mac的安全检查，比如`MySQLWorkbench`，此时需要如下路径进行允许`🍎 -> 系统偏好设置 -> 安全性与隐私`
+
+#### Homebrew
+
+一款MacOS上的包管理工具。[官网](https://brew.sh/)
+
+安装命令，在终端中执行`$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+
+好多软件都可以通过这个来安装，如果觉得安装别的软件时速度很慢，可以考虑网上搜一下换个源。
+
+#### git
+
+[官网](https://git-scm.com/download/mac)已经给出了安装方式`$ brew install git`。
+
+#### Visual Studio Code
+
+直接[官网](https://code.visualstudio.com/)选择MAC版本下载安装即可。
+
+#### Python
+
+直接[官网](https://www.python.org/ftp/python/3.9.0/python-3.9.0-macosx10.9.pkg)下载安装包安装。
+
+#### MySQLWorkbench
+
+MySQL的图形化客户端，虽然没那么好用，但是至少有啊😅
+
+直接[官网](https://dev.mysql.com/downloads/workbench/)选择MAC版本下载安装即可。
+
+#### FreeMind
+
+免费开源的思维导图工具。
+
+直接[官网](http://freemind.sourceforge.net/wiki/index.php/Download)选择MAC版本下载安装即可。
+
+#### iTerm
+
+直接[官网](https://www.iterm2.com/)下载安装包安装。
+
+如何保存密码？先在任意位置创建一个文件用以保存登陆脚本，并赋予权限（我直接chmod 777了😅）。
+
+![效果图]({{ site.url }}assets/2020/2020-10-24-software-4-work-MAC/Jietu20201024-163022.jpg)
+
+```ssh
+#!/usr/bin/expect
+
+set timeout 30
+spawn ssh -p [lindex $argv 0] [lindex $argv 1]@[lindex $argv 2]
+expect {
+        "(yes/no)?"
+        {send "yes\n";exp_continue}
+        "password:"
+        {send "[lindex $argv 3]\n"}
+}
+interact
+```
+
+然后在iTerm中进入`Command O -> Edit Profiles -> +`后按照下图配置即可。
+
+![效果图]({{ site.url }}assets/2020/2020-10-24-software-4-work-MAC/Jietu20201024-165248.jpg)
+
+#### docker
+
+直接[官网](https://www.docker.com/get-started)选择MAC版本下载安装即可。
+
+#### Fiddler
+
+没有经典版可以用，但是可以下载Fiddler Everywhere来用。访问[官网](https://www.telerik.com/download/fiddler-everywhere)输入邮箱，选好系统版本即可下载。
+
+#### Postman
+
+直接[官网](https://www.postman.com/downloads/)下载安装即可。
+
+#### iShot
+
+很好用的截图工具，可以直接通过快捷键`option a`来唤醒，标记完成后直接进入剪贴板。虽然拿到Windows上是人人都有的功能，但是对比了系统自带的截图工具，和腾讯推出的`截图`软件，这款iShot让我感动到哭。
+
+从App Store中[下载](https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E5%BD%95%E5%B1%8F-2020%E5%85%A8%E6%96%B0%E9%AB%98%E5%BA%A6/id1485844094?mt=12)即可。
+
+## 更新日志
+- 2020年10月24日：初稿。
