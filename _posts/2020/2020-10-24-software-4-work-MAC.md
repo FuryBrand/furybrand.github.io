@@ -105,5 +105,27 @@ interact
 
 从App Store中[下载](https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E5%BD%95%E5%B1%8F-2020%E5%85%A8%E6%96%B0%E9%AB%98%E5%BA%A6/id1485844094?mt=12)即可。
 
+#### SwitchHosts!
+
+直接[官网](https://github.com/oldj/SwitchHosts/releases/tag/v3.5.4)下载安装即可。
+
+#### 网易MuMu
+
+MacOS上的软件太少了，逼着我用移动端的软件😭
+
+直接[官网](http://mumu.163.com/baidu/)选择MAC版本下载安装即可。
+
+#### VirtualBox
+
+为了防止有些软件只能在windows上使用，搞个虚拟机预备着。镜像正在下载，后面看看如何再来更新。
+
+直接[官网](https://www.virtualbox.org/wiki/Downloads)选择MAC版本下载安装即可。
+
+#### Folx
+
+有免费版和付费的高级版，我这用的是免费版，其实目前就是挂着下windows的镜像。知乎上有人推荐就下来试试
+
+直接[官网](https://mac.eltima.com/folx-download.html)下载安装即可。
+
 ## 更新日志
 - 2020年10月24日：初稿。
