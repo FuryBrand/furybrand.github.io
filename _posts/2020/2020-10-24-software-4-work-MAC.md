@@ -119,11 +119,11 @@ MacOS上的软件太少了，逼着我用移动端的软件😭
 
 为了防止有些软件只能在windows上使用，搞个虚拟机预备着。镜像正在下载，后面看看如何再来更新。
 
-直接[官网](https://www.virtualbox.org/wiki/Downloads)选择MAC版本下载安装即可。
-
-Windows预览版的镜像[下载地址](https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewserver?wa=wsignin1.0)，发现一问题，貌似这东西需要有windows Insider计划的账号才行。。。。。。。
+直接[官网](https://www.virtualbox.org/wiki/Downloads)选择MAC版本下载安装即可。Windows预览版的镜像[下载地址](https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewserver?wa=wsignin1.0)，发现一问题，貌似这东西需要有windows Insider计划的账号才行。。。。。。。
 
 20.10.26更新：没有预览版账号也不要紧，可以去大名鼎鼎的[msdnitellyou](https://msdn.itellyou.cn/)上下载。不过由于下载地址是ed2k的链接，所以我们还需要用到同样大名鼎鼎的[迅雷](https://dl.xunlei.com/#mod02)。
+
+下载好之后可以参考该[博文](https://www.cnblogs.com/andong2015/p/7688120.html)进行安装。
 
 #### Folx
 
@@ -136,6 +136,10 @@ Windows预览版的镜像[下载地址](https://www.microsoft.com/en-us/software
 试过好几款Ditto的替代品，这个算是免费软件中最好的了吧（虽然和Ditto差了好多😭）。
 
 直接[App Store](https://apps.apple.com/cn/app/flycut-clipboard-manager/id442160987?mt=12)中下载即可。
+
+#### jdk
+
+直接从[AdoptOpenJDK](https://adoptopenjdk.net/index.html?variant=openjdk8&jvmVariant=hotspot)上下载安装即可。
 
 ## 更新日志
 - 2020年10月24日：初稿。
