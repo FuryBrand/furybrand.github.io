@@ -203,78 +203,7 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-#### 5.4 错误4-设置MySQL不区分表名的大小写
-
-数据好不容易迁移完了，然后有一个应用起来之后，web页面提示数据库表不存在。一看，发现这个库的表名中有大写，然后把错误提示中的SQL语句放到客户端执行下，发现迁移前的数据库可以正常执行，迁移后的docker版的MySQL就提示表不存在。好吧，应该要配置docker版的MySQL不区分表名大小写。需要在`/etc/mysql/mysql.conf.d/mysqld.cnf`中添加`lower_case_table_names=1`。处理过程如下：
-- 先将docker容器中的文件复制到宿主机。
-- 然后添加`lower_case_table_names=1`
-- 随后将文件复制到容器中。
-- 最后重启容器（如果防火墙不关闭的话，容器会启动失败，如果防火墙开启的话，即使端口打开也会访问不到，这个问题的原因后面再研究）
-
-命令行存档如下：
-```
-[root@Server-i-jwvdl9av3u steve]# docker cp 1a0495313ae1:/etc/mysql/mysql.conf.d/mysqld.cnf .
-[root@Server-i-jwvdl9av3u steve]# vim mysqld.cnf
-[root@Server-i-jwvdl9av3u steve]# cat mysqld.cnf
-# Copyright (c) 2014, 2016, Oracle and/or its affiliates. All rights reserved.
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License, version 2.0,
-# as published by the Free Software Foundation.
-#
-# This program is also distributed with certain software (including
-# but not limited to OpenSSL) that is licensed under separate terms,
-# as designated in a particular file or component or in included license
-# documentation.  The authors of MySQL hereby grant you an additional
-# permission to link the program and your derivative works with the
-# separately licensed software that they have included with MySQL.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License, version 2.0, for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
-
-#
-# The MySQL  Server configuration file.
-#
-# For explanations see
-# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
-
-[mysqld]
-pid-file        = /var/run/mysqld/mysqld.pid
-socket          = /var/run/mysqld/mysqld.sock
-datadir         = /var/lib/mysql
-#log-error      = /var/log/mysql/error.log
-# By default we only accept connections from localhost
-#bind-address   = 127.0.0.1
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-lower_case_table_names=1
-[root@Server-i-jwvdl9av3u steve]# docker cp mysqld.cnf 1a0495313ae1:/etc/mysql/mysql.conf.d/mysqld.cnf
-[root@Server-i-jwvdl9av3u steve]# docker exec -it 1a0495313ae1 /bin/bash
-root@1a0495313ae1:/# cat /etc/mysql/mysql.conf.d/mysqld.cnf
-# Copyright (c) 2014, 2016, Oracle and/or its affiliates. All rights reserved.
-# ---------------same with above---------------
-# blah blah blah...
-# ---------------same with above---------------
-lower_case_table_names=1
-[root@Server-i-jwvdl9av3u steve]# docker stop 1a0495313ae1
-1a0495313ae1
-[root@Server-i-jwvdl9av3u steve]# service firewalld start
-Redirecting to /bin/systemctl start firewalld.service
-[root@Server-i-jwvdl9av3u steve]# docker start 1a0495313ae1
-1a0495313ae1
-[root@Server-i-jwvdl9av3u steve]# service firewalld stop
-Redirecting to /bin/systemctl stop firewalld.service
-```
-
-如此费事的原因是MySQL的镜像中不包含vim等文本编辑功能。可以安装，也可以通过上面的docker cp命令。思路来自[stackoverflow](https://stackoverflow.com/questions/30853247/how-do-i-edit-a-file-after-i-shell-to-a-docker-container)
-
-#### 5.5 错误4-nginx转发至多MySQL容器
+#### 5.4 错误3-nginx转发至多MySQL容器
 
 其实严格意义来说这不是一个错误。由于服务器端口受限，只有固定的数个端口对外开放，故我想用nginx进行代理，将mysql的TCP请求根据url的不同转给特定的后端Docker容器来处理。经过调研之后发现可行，但是需要在编译nginx的时候追加参数`--with-stream_ssl_preread_module`([link2 nginx.org](http://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html))。无奈我这nginx是yum装的啊。。。。重新进行编译，发现一堆的依赖没有安装，披荆斩棘安了5个依赖，不行了，哥们我实在整不动了。。。。放一个[stackoverflow的链接](https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151)吧，具体的思路是从这里来的。
 
@@ -321,6 +250,23 @@ stream {
 
 我想，如果为了隔离权限的话，其实用账号来隔离也可以，只是相对更加麻烦一些。。。。。。。。。
 
+#### 5.5 错误4-docker_start的诡异错误
+
+这套环境运行了一段时间，一次某位研发哥哥验证自己工具类在并发情况下是否有问题，将咱的redis打懵了。然后我试图重启redis失败，尝试重启一个MySQL容器也失败。会报如下错误：
+
+```
+[root@Server-i-jwvdl9av3u ~]# docker start 27b674ae128c
+Error response from daemon: driver failed programming external connectivity on endpoint some-redis (83255f39845510dfbe82e85066017862c4acfd66771b02641b328c82a843b07a):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 22000 -j DNAT --to-destination 172.17.0.4:6379 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1))
+Error: failed to start containers: 27b674ae128c
+
+[root@Server-i-jwvdl9av3u ~]# docker run --name some-redis1 -p 22003:6379 -d redis:5.0.5
+dc17ca309e57bf06b58495c9a32233b8101e7ecce7554c72941a49be65329468
+docker: Error response from daemon: driver failed programming external connectivity on endpoint some-redis1 (e926ed6af5f4ee1bfebf71364d7efa89138bcb01ef8b1608ec145dacad1bc1dc):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 22003 -j DNAT --to-destination 172.17.0.4:6379 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1)).
+```
+
+一顿尝试无果后，最后的解决方式是stop了所有的容器之后，`kill -9 dockerd`（因为暂时装的原生docker，也不知道怎么正常退出😅）。然后重新启动docker再启动容器就好。
 
 ## 参考文章
 
@@ -331,6 +277,5 @@ stream {
 ## 更新日志
 
 - 2020年9月3日：初稿。
-- 2020年9月7日：增加`5.3 错误3-admin账号无法访问`
-- 2020年9月8日：增加`nginx转发至多MySQL容器`
-- 2020年9月11日：增加`设置MySQL不区分表名的大小写`
+- 2020年9月：增加`5.3 错误3-admin账号无法访问`、`nginx转发至多MySQL容器`、`设置MySQL不区分表名的大小写`
+- 2020年10月：增加`docker_start的诡异错误`，将`设置MySQL不区分表名的大小写`移走
