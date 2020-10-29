@@ -266,7 +266,7 @@ docker: Error response from daemon: driver failed programming external connectiv
  (exit status 1)).
 ```
 
-一顿尝试无果后，最后的解决方式是stop了所有的容器之后，`kill -9 dockerd`（因为暂时装的原生docker，也不知道怎么正常退出😅）。然后重新启动docker再启动容器就好。
+一顿尝试无果后，最后的解决方式是stop了所有的容器之后，`kill -9 dockerd`（因为暂时装的原生docker，也不知道怎么正常退出😅）。然后重新启动docker再启动容器就好。不过确认了一点，run的时候给的参数，在start或者restart的时候都会带上，不用担心端口映射被搞丢的情况发生。
 
 ## 参考文章
 
