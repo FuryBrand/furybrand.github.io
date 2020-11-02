@@ -9,7 +9,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - 杂文
-    - MAC
+    - macOS
     - 技术相关
 ---
 
@@ -141,6 +141,11 @@ MacOS上的软件太少了，逼着我用移动端的软件😭
 
 直接从[AdoptOpenJDK](https://adoptopenjdk.net/index.html?variant=openjdk8&jvmVariant=hotspot)上下载安装即可。
 
+#### telnet
+
+利用上面提到的`Homebrew`来安装。命令为：**brew install telnet**
+
 ## 更新日志
 - 2020年10月24日：初稿。
-- 2020年10月26日：追加windows镜像下来链接和flycut。
+- 2020年10月：追加windows镜像下来链接和flycut。
+- 2020年11月：追加telnet。
