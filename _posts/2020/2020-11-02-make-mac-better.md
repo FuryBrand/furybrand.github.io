@@ -25,11 +25,11 @@ tags:
 
 **Launchpad -> Automator -> 快速操作**
 
-![01]({{ site.url }}assets/2020/2020-11-02-make-mac-better/01.heic)
+![01]({{ site.url }}assets/2020/2020-11-02-make-mac-better/01.jpg)
 
 **按下图进行配置 -> cmd s -> 输入“Open_With_Code”**
 
-![02]({{ site.url }}assets/2020/2020-11-02-make-mac-better/02.heic)
+![02]({{ site.url }}assets/2020/2020-11-02-make-mac-better/02.jpg)
 
 ```shell
 for f in "$@"
@@ -40,7 +40,7 @@ done
 
 **在Finder中右击文件夹就可以找到刚刚创建的快速操作了**
 
-![03]({{ site.url }}assets/2020/2020-11-02-make-mac-better/03.heic)
+![03]({{ site.url }}assets/2020/2020-11-02-make-mac-better/03.jpg)
 
 ## 图片的格式及画质转换
 
@@ -48,8 +48,20 @@ done
 
 **打开图片 -> 文件 -> 导出**
 
-![04]({{ site.url }}assets/2020/2020-11-02-make-mac-better/04.heic)
-![05]({{ site.url }}assets/2020/2020-11-02-make-mac-better/05.heic)
+![04]({{ site.url }}assets/2020/2020-11-02-make-mac-better/04.jpg)
+![05]({{ site.url }}assets/2020/2020-11-02-make-mac-better/05.jpg)
+
+## 更改截图之后的默认保存位置
+
+截图的几个快捷键：
+- `shift cmd 3`：全屏截图
+- `shift cmd 4`：局部截图
+- `shift cmd 4 space`：窗口截图
+- `shift cmd 6`：Touch Bar截图
+
+默认的保存位置是桌面，可以通过在终端中执行`defaults write com.apple.screencapture location ~/use/work/picture`命令，将默认的保存路径调整至指定的路径**~/use/work/picture**。
+
 
 ## 更新日志
 - 2020年11月02日：初稿。
+- 2020年11月：追加截图保存位置。

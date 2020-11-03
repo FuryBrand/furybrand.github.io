@@ -57,9 +57,15 @@ MySQL的图形化客户端，虽然没那么好用，但是至少有啊😅
 
 #### FreeMind
 
-免费开源的思维导图工具。
+免费开源的思维导图工具。20.11.03更新：FreeMind在macOS上的兼容性可以用非常糟糕来形容。于是找到了其替代品SciaReto。
 
 直接[官网](http://freemind.sourceforge.net/wiki/index.php/Download)选择MAC版本下载安装即可。
+
+#### SciaReto
+
+免费开源的思维导图工具。
+
+直接去github上取[最新的release](https://github.com/raydac/netbeans-mmd-plugin/releases)吧。
 
 #### iTerm
 
@@ -148,4 +154,4 @@ MacOS上的软件太少了，逼着我用移动端的软件😭
 ## 更新日志
 - 2020年10月24日：初稿。
 - 2020年10月：追加windows镜像下来链接和flycut。
-- 2020年11月：追加telnet。
+- 2020年11月：追加telnet、SciaReto。
