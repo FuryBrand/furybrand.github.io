@@ -2,7 +2,6 @@
 layout: post
 title:  "我的Linux常用命令（持续更新）"
 date:   2018-07-11 22:46:49 +0800
-subtitle:   ""
 author:     "Steve"
 header-img: "img/home-bg.jpg"
 header-mask: 0.3
@@ -48,8 +47,9 @@ tags:
 |history |可以打印出之前所输入过的命令，然后用!123就可以指定第123号命令 | 
 |truncate |将文件变为指定大小，可用于创建测试用的垃圾文件，或用于清理日志 | find ./ -name '*.out' &#124; xargs truncate -s 0 |
 |yum -y install |centos下安装软件 |yum -y install git 
-|& |job control，将命令放在后台继续执行 |tar -zpcf /tmp/etc.tar.gz /etc &
 |ln -s /export/logs/xixixi/ logs |在当前目录创建一个软链接logs关联指定路径
+| \Enter | 将超长的命令转为多行，注意“\”和回车之间没有空格等
+
 
 ## 账户，修改密码相关
 
@@ -107,14 +107,120 @@ lrzsz是一个unix通信套件提供的X，Y，和ZModem文件传输协议。<br
 
 ## vim
 
-按道理，vim应该抽空做专题的，不过先暂时做个记录吧。
+~~按道理，vim应该抽空做专题的，不过先暂时做个记录吧。~~拒绝重复造轮子，需要学习vim的朋友，直接去[鸟站](https://linux.vbird.org/linux_basic/centos7/0310vi.php)把`第九章、vim 程式編輯器`看完，就从入门到精通了。当然也可以去vim的[官网](https://www.vim.org/docs.php)上找到一些有用的资料。我这里只是记录下我的笔记。
 
 vim有12种编辑模式，其中6种是basic modes。Normal mode、Visual mode、Select mode、Insert mode、Cmdline mode、Ex mode
 
-| 模式 | 命令 | 功能 
-| - | - | - 
-| Normal mode | u | 撤销（等同于Microsoft Office中的Ctrl + z）
-| Normal mode | Ctrl + r | 恢复撤销（等同于Microsoft Office中的Ctrl + y）
+```mermaid!
+graph LR
+	A[Normal mode] -->|i,I,o,O,a,A,r,R| B[Insert mode]
+	B -- ESC --> A
+	A -->|:/?| C[Cmdline mode]
+	C -- ESC --> A
+```
+
+#### Normal mode
+
+光标移动，复制粘贴，批量删除等
+
+| 命令 | 功能 
+| - | - 
+| h,j,k,l | 移动光标⬅️,⬇️,⬆️,➡️
+| 数字 hjkl方向键 | 向指定方向移动一定步数
+| Ctrl f | 向下翻页
+| Ctrl b | 向上翻页
+| 数字 space | 向右步进指定数字的步数
+| 0 或 Home | 移动到该行最前
+| $ 或 End | 移动到该行最后
+| G | 移动到这个文件的最后一行
+| 数字 G | 移动到这个文件的第“数字”行
+| x | 等同于delete
+| X | 等同于backspace
+| dd | 删除光标所在行
+| d1G | 删除光标所在行至第一行的所有数据
+| dG | 删除从光标所在行到最后一行的所有数据
+| yy | 复制光标所在行
+| 数字 yy | 复制光标所在的及向下的“数字”行
+| p 或 P | 粘贴
+| u | 撤销（等同于Microsoft Office中的Ctrl z）
+| Ctrl r | 恢复撤销（等同于Microsoft Office中的Ctrl y）
+
+
+#### Cmdline mode
+
+搜索替换
+
+| 命令 | 功能 
+| - | - 
+| /word | 向下查找“word”字符串
+| ?word | 向上查找“word”字符串
+| n | 继续执行上一次的查找
+| N | 反向执行上一次的查找
+| :10,15s/word1/word2/g | 在10至15行中查找“word1”并将其替换为“word2”
+| :1,$s/word1/word2/gc | 全局查找“word1”并将其替换为“word2”
+| :1,$s/word1/word2/g | 全局查找“word1”并将其替换为“word2”，但是每一次替换前都需要确认。
+
+环境更改
+
+| 命令 | 功能 
+| - | - 
+| :set nu | 显示行号
+| :set nonu | 取消显示行号
+| :syntax on | 语法高亮开
+| :syntax off | 语法高亮关
+
+文件保存等
+
+| 命令 | 功能 
+| - | - 
+| :w | 保存
+| :w! | 强制保存
+| :q | 退出
+| :q! | 强制退出
+| :wq | 保存并推出
+| :wfile2 | 将文件另存为“file2”
+| :rfile | 将文件"file"中的内容追加到目前光标所在位置的后面
+| :! ls /home | 暂时离开当前编辑页并执行一个linux命令
+
+多文件编辑
+
+| 命令 | 功能 
+| - | - 
+| :files | 列出目前vim打开的所有文件
+| :n | 编辑下一个文件
+| :N | 编辑上一个文件
+
+多窗口编辑
+
+| 命令 | 功能 
+| - | - 
+| :sp | 当前文件多窗口显示
+| :sp /etc/hosts | 在新窗口中打开新文件
+| ctrl w j或k | 光标焦点在上下窗口中移动，注意ctrl和w放开后再按方向键
+| ctrl w q | 结束当前窗口
+
+
+#### Visual mode、Select mode
+
+| 命令 | 功能 
+| - | - 
+| v | 字符选择
+| V | 行选择
+| Ctrl v| 块选择
+| y | 将被选择部分复制
+| d | 将被选择部分删除
+
+## job control
+
+| 命令 | 功能 
+| - | - 
+| ls -lh & | &用以将当前命令放到后台执行，注意stdout和stderr的重定向
+| Ctrl z | 将程序暂停
+| Ctrl c | 将程序强行停止
+| jobs -l | 查看后台的工作状态
+| fg %1 | 将后台中的第一个任务拿到前台来执行
+| bg %2 | 将后台暂停的第2个任务变为后台执行 
+
 
 ## 查看系统资源占用相关命令
 [鸣谢](https://www.cnblogs.com/chengJAVA/p/6115061.html)
@@ -157,4 +263,5 @@ $ firewall-cmd --reload
 
 ## 更新记录
 
-- 2020年9月5日，增加firewall
+- 2020年9月：增加firewall
+- 2020年11月：整理vim

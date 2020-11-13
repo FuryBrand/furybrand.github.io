@@ -36,7 +36,7 @@ tags:
 
 1. HeidiSQL，这个就很厉害了。ta不仅可以连接MySql，还可以连接MS SQL Server、SQLite等5种数据库。同时支持sql格式化等操作。只是在我这连接测试环境MySql数据库时，偶尔闪退🤦‍♂️。所以不是工作中的主力，而是平时使用的主力。[官网](https://www.heidisql.com/)
 2. SQLyog，俗称小海豚。这是我平时工作的主力工具，由于使用的是开源版本，导致连格式化sql都做不到。好在，测试工作的话，平时常用的sql就那些，写一次以后就能一直用了。倒也没有太大影响。[GitHub主页](https://github.com/webyog/sqlyog-community)
-3. AnotherRedisDesktopManager，redis客户端，其实我没咋用过(⊙﹏⊙)。不过8.3K的Star，应该能挺好用吧。[GitHub主页]https://github.com/qishibo/AnotherRedisDesktopManager)
+3. AnotherRedisDesktopManager，redis客户端，其实我没咋用过(⊙﹏⊙)。不过8.3K的Star，应该能挺好用吧。[GitHub主页](https://github.com/qishibo/AnotherRedisDesktopManager)
 
 ## SSH
 
@@ -66,6 +66,7 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 1. Visual Studio Code，VS Code一生推。ta已经不是一个简单的编辑工具了，甚至可以算是一个IDE。同时大量的插件让ta可以做很多事情。最常用的就是文本内容对比、格式化XML/JSON/EDI。[GitHub主页](https://github.com/microsoft/vscode)
 2. editplus，同事ZP推荐的，还没有亲自体验。[官网](https://www.editplus.com/) 
 3. Notepad++，同事LGX推荐的，还没有亲自体验。[官网](https://notepad-plus-plus.org/)
+4. Typora专为markdown而生的文本编辑器，支持mermaid，用markdown来画图实在是太香了。[官网]（https://typora.io/）
 
 ## UML建模
 

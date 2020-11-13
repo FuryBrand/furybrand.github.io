@@ -71,9 +71,11 @@ MySQL的图形化客户端，虽然没那么好用，但是至少有啊😅
 
 直接[官网](https://www.iterm2.com/)下载安装包安装。
 
-如何保存密码？先在任意位置创建一个文件用以保存登陆脚本，并赋予权限（我直接chmod 777了😅）。
+如何保存密码？先在任意位置创建一个文件（我在`~/.ssh/`中创建了一个`ssh_login`文件）用以保存登陆脚本，并赋予权限（我直接`chmod 777 ssh_login`了😅）。
 
 ![效果图]({{ site.url }}assets/2020/2020-10-24-software-4-work-MAC/Jietu20201024-163022.jpg)
+
+下面是脚本文本，复制即用～
 
 ```ssh
 #!/usr/bin/expect
@@ -89,7 +91,7 @@ expect {
 interact
 ```
 
-然后在iTerm中进入`Command O -> Edit Profiles -> +`后按照下图配置即可。
+然后在iTerm中进入`Command O -> Edit Profiles -> +`后按照下图配置即可。Send text at start中填写脚本路径及参数`~/.ssh/ssh_login 22 root 10.170.220.34 2FGP%czQ@1`
 
 ![效果图]({{ site.url }}assets/2020/2020-10-24-software-4-work-MAC/Jietu20201024-165248.jpg)
 
@@ -151,7 +153,11 @@ MacOS上的软件太少了，逼着我用移动端的软件😭
 
 利用上面提到的`Homebrew`来安装。命令为：**brew install telnet**
 
+#### Typora
+
+Typora专为markdown而生的文本编辑器，支持mermaid，用markdown来画图实在是太香了。[官网]（https://typora.io/）
+
 ## 更新日志
 - 2020年10月24日：初稿。
-- 2020年10月：追加windows镜像下来链接和flycut。
+- 2020年10月：追加windows镜像下载链接和flycut。
 - 2020年11月：追加telnet、SciaReto。
