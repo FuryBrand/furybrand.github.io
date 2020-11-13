@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "我的Linux常用命令（持续更新）"
-date:   2018-07-11 22:46:49 +0800
+date:   2018-07-11 22:46:49
 author:     "Steve"
 header-img: "img/home-bg.jpg"
 header-mask: 0.3
@@ -9,9 +9,10 @@ catalog:    true
 tags:
     - Linux
 ---
+
 最近在通过《鸟哥的Linux私房菜》系统得学习linux。可是工作中还是要用Linux的，有些命令啥的就是现学现用，这个笔记就是记录这个的。
 
-## 常用
+## 常规
 
 | 命令 | 简介 | 备注
 | - | - | -
@@ -38,7 +39,7 @@ tags:
 |echo > catalina.out  |清空日志文件 | 
 |find /export -size +1000k |查找指定目录下，大小大于1000k的文件 | 
 |find /export/ -name '*log*' |指定目录下，模糊查找 | 
-|find的两个参数一起用来清理日志| for i in \`find /export/Domains -name '*.log' -size +10000k\`; do echo > $i; done | 
+|find的两个参数一起用来清理日志| for i in "find /export/Domains -name '*.log' -size +10000k"; do echo > $i; done | 忘了是不是这么写的了，是双引号包裹的吗？懵逼了
 |rm |慎用，删除文件 | 
 |rm -rf /var/log/ |完全删除该文件夹 | 
 |chmod -R 777 |将文件夹以及子文件夹的权限都设置为777，R不能小写。 chmod -R 777 download | 
