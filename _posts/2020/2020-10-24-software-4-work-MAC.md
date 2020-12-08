@@ -67,6 +67,12 @@ MySQL的图形化客户端，虽然没那么好用，但是至少有啊😅
 
 直接去github上取[最新的release](https://github.com/raydac/netbeans-mmd-plugin/releases)吧。
 
+#### DesktopNaotu
+
+基于百度FEX团队的开源产品[KityMinder](https://github.com/fex-team/kityminder-core)的本地离线运行的版本。
+
+直接去github上取[最新的release](https://github.com/NaoTu/DesktopNaotu/releases)吧。
+
 #### iTerm
 
 直接[官网](https://www.iterm2.com/)下载安装包安装。
@@ -157,7 +163,24 @@ MacOS上的软件太少了，逼着我用移动端的软件😭
 
 Typora专为markdown而生的文本编辑器，支持mermaid，用markdown来画图实在是太香了。[官网]（https://typora.io/）
 
+#### LICEcap
+
+LICEcap是轻量级的gif录制软件，功能上没有Windows平台上独占的ScreenToGif多，但是胜在跨平台。[官网]（https://www.cockos.com/licecap/）、[github主页]（https://github.com/justinfrankel/licecap）
+
+#### LibreOffice
+
+已经好几年没用过LibreOffice了，界面让我感到惊艳。[官网]（https://www.cockos.com/licecap/）
+
+#### The Unarchiver
+
+可以解压rar格式的免费软件。[App Store](https://apps.apple.com/us/app/the-unarchiver/id425424353?mt=12)上下载即可。
+
+#### JMeter
+
+利用上面提到的`Homebrew`来安装。命令为：**brew install jmeter**。相关说明[参考](https://formulae.brew.sh/formula/jmeter)
+
 ## 更新日志
 - 2020年10月24日：初稿。
 - 2020年10月：追加windows镜像下载链接和flycut。
-- 2020年11月：追加telnet、SciaReto。
+- 2020年11月：追加telnet、SciaReto、Typora、LICEcap、DesktopNaotu、LibreOffice。
+- 2020年12月：追加The Unarchiver、JMeter。

@@ -84,9 +84,23 @@ tags:
 
 ![Runner]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/10.png)
 
+## 7.活用cURL
 
+curl是一个命令行工具，可以用URL来传输数据。[官网](https://curl.se/)，[github主页](https://github.com/curl/curl)
+
+很多软件都支持curl有不同程度的支持。
+- Chrome：导出
+- Postman：导出&导入
+- JMeter：导入
+
+Postman的导入可以参考：
+![curl导入]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/311606208094_.pic_hd.jpg)
+
+Postman的导出可以参考：
+![curl导出]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/iShot2020-12-08_18.17.47.jpg)
 
 ## 更新日志
 
 2020年3月30日：追加`5.在请求前的请求`
 2020年9月15日：追加`重复发送请求——Runner的使用`
+2020年12月8日：追加`活用cURL`

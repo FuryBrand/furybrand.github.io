@@ -50,7 +50,8 @@ cd 是 /usr/bin/cd
 
 ## 变量
 
-变量创建、修改、删除、升级环境变量（export）；""、''、``之间的区别，可以引用变量、内部是纯文本、会被优先执行。bash中的变量也有一定的命名规则。
+变量创建、修改、删除、升级环境变量（export）；
+""、''、``之间的区别，可以引用变量、内部是纯文本（没法引用变量）、会被优先执行。bash中的变量也有一定的命名规则。
 
 ```bash shell
 [root@Server-i-jwvdl9av3u ~]# name=liutianyu
@@ -68,7 +69,7 @@ liutianyu:xixixi
 
 [root@Server-i-jwvdl9av3u ~]# exit
 exit
-[root@Server-i-jwvdl9av3u ~]# export name
+[root@Server-i-jwvdl9av3u ~]# export name       #将自定义变量变为环境变量
 [root@Server-i-jwvdl9av3u ~]# bash
 [root@Server-i-jwvdl9av3u ~]# echo $name
 liutianyu:xixixi
@@ -86,19 +87,22 @@ liutianyu xixixi
 [root@Server-i-jwvdl9av3u kernel]# myname='$name xixixi'
 [root@Server-i-jwvdl9av3u kernel]# echo $myname
 $name xixixi
+[root@Server-i-jwvdl9av3u ~]# echo $$
+20014   #
 ```
 
 环境变量
 
 ```bash shell
 [root@Server-i-jwvdl9av3u kernel]# env
-HOME=/root
-SHELL=/bin/bash
-HISTSIZE=1000
+HOME=/root          #用户的主文件夹
+SHELL=/bin/bash     #默认的shell
+HISTSIZE=1000       #历史命令的最大条目
 MAIL=/var/spool/mail/root
-LANG=zh_CN.UTF-8
+PATH=/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin     #执行文件的默认查找路径，使用:进行间隔
+LANG=zh_CN.UTF-8    #语系数据
 ...
-[root@Server-i-jwvdl9av3u kernel]# env
+[root@Server-i-jwvdl9av3u kernel]# set
 myname='$name xixixi'
 name=liutianyu
 OSTYPE=linux-gnu
@@ -106,6 +110,9 @@ HOSTTYPE=x86_64
 MACHTYPE=x86_64-redhat-linux-gnu
 ...
 ```
+
+?是一个特殊的变量，是命令执行之后回传的“错误码”，若无错误则是0.
+
 
 
 ## 更新记录
