@@ -52,6 +52,7 @@ Running: mysqldump.exe --defaults-file="c:\users\steveliu\appdata\local\temp\tmp
 ## 导入&还原
 
 本质是通过mysql这个工具（客户端、命令）来执行sql脚本。如`$ mysql -uroot -p123456 < Dump20200910-1.sql`。也可以通过可视化的客户端来进行导入，`MySQL Workbench`就是个不错的选择。
+![选项]({{ site.url }}assets/2020/2020-09-10-mysql-export-import-backup-restore/iShot2020-12-15.jpg)
 
 执行过程的log如下：
 ```
@@ -62,3 +63,4 @@ Running: mysql.exe --defaults-file="c:\users\steveliu\appdata\local\temp\tmp1af9
 
 ## 更新日志
 - 2020年9月10日：初稿。
+- 2020年12月：追加导入的MySQL Workbench的截图。

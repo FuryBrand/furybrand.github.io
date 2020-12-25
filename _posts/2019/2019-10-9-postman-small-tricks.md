@@ -21,7 +21,7 @@ tags:
 
 ## 写在最前面
 
-下面的所有内容都从Postman中导出来了，下载后可以直接导入后使用（[点我下载Postman导出的Collections]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/MyExplore.postman_collection.json)）。不过由于示例的服务是我局域网内的一个临时接口，所以可能只能作为语法参考了。或者参考这篇文章（[Python-mock一个提供http协议的服务]({% post_url 2018-12-5-Python-mock-http %})）来在本机提供一个临时接口以供调用。
+下面的所有内容都从Postman中导出来了，下载后可以直接导入后使用（[点我下载Postman导出的Collections]({{ site.url }}assets/2019/2019-10-9-postman-small-tricks/MyExplore_Blog.postman_collection.json)）。不过由于示例的服务是我局域网内的一个临时接口，所以可能只能作为语法参考了。或者参考这篇文章（[Python-mock一个提供http协议的服务]({% post_url 2018-12-5-Python-mock-http %})）来在本机提供一个临时接口以供调用。
 
 ## 不可不知的大前提
 

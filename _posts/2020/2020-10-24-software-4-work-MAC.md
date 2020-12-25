@@ -179,6 +179,109 @@ LICEcap是轻量级的gif录制软件，功能上没有Windows平台上独占的
 
 利用上面提到的`Homebrew`来安装。命令为：**brew install jmeter**。相关说明[参考](https://formulae.brew.sh/formula/jmeter)
 
+#### MySQL
+
+利用上面提到的`Homebrew`来安装。5.7版本的安装命令为：**brew install mysql@5.7**。下面记录下安装完成之后的相关信息。
+
+```shell
+==> Installing dependencies for mysql@5.7: openssl@1.1
+==> Installing mysql@5.7 dependency: openssl@1.1
+==> Pouring openssl@1.1-1.1.1i.catalina.bottle.tar.gz
+==> Caveats
+A CA file has been bootstrapped using certificates from the system
+keychain. To add additional certificates, place .pem files in
+  /usr/local/etc/openssl@1.1/certs
+
+and run
+  /usr/local/opt/openssl@1.1/bin/c_rehash
+
+openssl@1.1 is keg-only, which means it was not symlinked into /usr/local,
+because macOS provides LibreSSL.
+
+If you need to have openssl@1.1 first in your PATH run:
+  echo 'export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find openssl@1.1 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+  export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+==> Summary
+🍺  /usr/local/Cellar/openssl@1.1/1.1.1i: 8,067 files, 18.5MB
+==> Installing mysql@5.7
+==> Pouring mysql@5.7-5.7.32.catalina.bottle.2.tar.gz
+==> /usr/local/Cellar/mysql@5.7/5.7.32/bin/mysqld --initialize-insecure --use
+==> Caveats
+We've installed your MySQL database without a root password. To secure it run:
+    mysql_secure_installation
+
+MySQL is configured to only allow connections from localhost by default
+
+To connect run:
+    mysql -uroot
+
+mysql@5.7 is keg-only, which means it was not symlinked into /usr/local,
+because this is an alternate version of another formula.
+
+If you need to have mysql@5.7 first in your PATH run:
+  echo 'export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find mysql@5.7 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
+
+
+To have launchd start mysql@5.7 now and restart at login:
+  brew services start mysql@5.7
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/mysql@5.7/bin/mysql.server start
+==> Summary
+🍺  /usr/local/Cellar/mysql@5.7/5.7.32: 319 files, 234.4MB
+==> Caveats
+==> openssl@1.1
+A CA file has been bootstrapped using certificates from the system
+keychain. To add additional certificates, place .pem files in
+  /usr/local/etc/openssl@1.1/certs
+
+and run
+  /usr/local/opt/openssl@1.1/bin/c_rehash
+
+openssl@1.1 is keg-only, which means it was not symlinked into /usr/local,
+because macOS provides LibreSSL.
+
+If you need to have openssl@1.1 first in your PATH run:
+  echo 'export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find openssl@1.1 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+  export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+==> mysql@5.7
+We've installed your MySQL database without a root password. To secure it run:
+    mysql_secure_installation
+
+MySQL is configured to only allow connections from localhost by default
+
+To connect run:
+    mysql -uroot
+
+mysql@5.7 is keg-only, which means it was not symlinked into /usr/local,
+because this is an alternate version of another formula.
+
+If you need to have mysql@5.7 first in your PATH run:
+  echo 'export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find mysql@5.7 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
+
+
+To have launchd start mysql@5.7 now and restart at login:
+  brew services start mysql@5.7
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/mysql@5.7/bin/mysql.server start
+```
+
+
 ## 更新日志
 - 2020年10月24日：初稿。
 - 2020年10月：追加windows镜像下载链接和flycut。
