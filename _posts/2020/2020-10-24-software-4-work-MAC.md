@@ -37,6 +37,8 @@ tags:
 
 好多软件都可以通过这个来安装，如果觉得安装别的软件时速度很慢，可以考虑网上搜一下换个源。
 
+如果想要**临时**取消`$ brew install XXX`时默认触发的升级操作的话，可以执行该命令`$ export HOMEBREW_NO_AUTO_UPDATE=true`。
+
 #### git
 
 [官网](https://git-scm.com/download/mac)已经给出了安装方式`$ brew install git`。
@@ -48,6 +50,8 @@ tags:
 #### Python
 
 直接[官网](https://www.python.org/ftp/python/3.9.0/python-3.9.0-macosx10.9.pkg)下载安装包安装。
+
+安装pip，`$ python3 -m pip install --upgrade pip setuptools wheel`
 
 #### MySQLWorkbench
 
@@ -281,9 +285,12 @@ Or, if you don't want/need a background service you can just run:
   /usr/local/opt/mysql@5.7/bin/mysql.server start
 ```
 
+#### npm
+
+利用上面提到的`Homebrew`来安装。安装命令为：**brew install npm**。
 
 ## 更新日志
 - 2020年10月24日：初稿。
 - 2020年10月：追加windows镜像下载链接和flycut。
 - 2020年11月：追加telnet、SciaReto、Typora、LICEcap、DesktopNaotu、LibreOffice。
-- 2020年12月：追加The Unarchiver、JMeter。
+- 2020年12月：追加The Unarchiver、JMeter、npm。
