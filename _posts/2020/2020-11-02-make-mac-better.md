@@ -51,9 +51,9 @@ done
 ![04]({{ site.url }}assets/2020/2020-11-02-make-mac-better/04.jpg)
 ![05]({{ site.url }}assets/2020/2020-11-02-make-mac-better/05.jpg)
 
-## 更改截图之后的默认保存位置
+## 更改系统截图之后的默认保存位置
 
-截图的几个快捷键：
+系统自带截图功能的几个快捷键：
 - `shift cmd 3`：全屏截图
 - `shift cmd 4`：局部截图
 - `shift cmd 4 space`：窗口截图
@@ -61,7 +61,26 @@ done
 
 默认的保存位置是桌面，可以通过在终端中执行`defaults write com.apple.screencapture location ~/use/work/picture`命令，将默认的保存路径调整至指定的路径**~/use/work/picture**。
 
+## 修改环境变量
+
+网上查，说`~/.bash_profile`是最高优的用户级别环境变量的配置文件，于是在里面配置了如下内容，以使`~/.bin/chromedriver`可以直接使用：
+
+```shell
+export PATH="$PATH:$HOME/.bin"
+```
+
+但是一直不生效，后来才知道，原来我现在版本的macOS默认使用的终端是zshell，ta默认是加载`~/.zprofile`的。进去一看，发现已经有内容了。于是追加了一下，整体内容如下：
+
+```shell
+
+# Setting PATH for Python 3.9
+# The original version is saved in .zprofile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}"
+PATH="$PATH:$HOME/.bin"
+export PATH
+```
 
 ## 更新日志
 - 2020年11月02日：初稿。
 - 2020年11月：追加截图保存位置。
+- 2020年12月：追加修改环境变量。
