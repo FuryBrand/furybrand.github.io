@@ -289,8 +289,18 @@ Or, if you don't want/need a background service you can just run:
 
 利用上面提到的`Homebrew`来安装。安装命令为：**brew install npm**。
 
+#### drawio-desktop
+
+流程图的好手，但是貌似易用性较之Microsoft Viso还是差点意思。drawio-desktop是diagrams.net的桌面版，直接去[github release地址](https://github.com/jgraph/drawio-desktop/releases/)下载吧。
+
+#### Scroll-Reverser
+
+Mac的触控板和的方向非常诡异（手往左上移动，图片也往左上移动😓我想让ta往又下移动啊），在设置里反转之后，鼠标的滚轮居然也反了，干～.～。通过Scroll-Reverser完美解决。[Github地址](https://github.com/pilotmoon/Scroll-Reverser)、[官网地址](https://pilotmoon.com/scrollreverser/)
+
+
 ## 更新日志
 - 2020年10月24日：初稿。
 - 2020年10月：追加windows镜像下载链接和flycut。
 - 2020年11月：追加telnet、SciaReto、Typora、LICEcap、DesktopNaotu、LibreOffice。
 - 2020年12月：追加The Unarchiver、JMeter、npm。
+- 2021年1月：追加drawio-desktop、Scroll-Reverser。
