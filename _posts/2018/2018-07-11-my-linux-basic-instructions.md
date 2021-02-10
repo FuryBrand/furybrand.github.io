@@ -17,7 +17,7 @@ tags:
 | 命令 | 简介 | 备注
 | - | - | -
 |pwd |显示当前路径 |
-|mv |重命名或移动 |
+|mv |重命名或移动 | -f 强制移动，若有重名文件直接覆盖
 |cp |复制 |-r 递归将子文件全部复制 
 |mkdir |创建文件夹 | -p 递归创建所有需要的目录
 |/sbin/ifconfig |获取ip地址 | 
@@ -37,8 +37,8 @@ tags:
 |which python |查找python的安装路径 | 
 |alias vi |通过alias来查找别名对应的命令 | 
 |echo > catalina.out  |清空日志文件 | 
-|find /export -size +1000k |查找指定目录下，大小大于1000k的文件 | 
-|find /export/ -name '*log*' |指定目录下，模糊查找 | 
+|find /export -size +1000k |查找指定目录下（默认递归），大小大于1000k的文件 | 
+|find /export/ -name 'log' |指定目录下（默认递归），查找名为log的文件，此时支持通配符 | 
 |find的两个参数一起用来清理日志| for i in "find /export/Domains -name '*.log' -size +10000k"; do echo > $i; done | 忘了是不是这么写的了，是双引号包裹的吗？懵逼了
 |rm |慎用，删除文件 | 
 |rm -rf /var/log/ |完全删除该文件夹 | 
@@ -71,6 +71,24 @@ tags:
 | - | - | - 
 |tar -cvjpf etc.tar.bz2 ./ngin |打包 |
 |tar -xvjf　etc.tar.bz2 |解压缩 |
+
+## 裁切字符串
+
+```
+myvar="boobar";
+${myvar:3}   #输出bar
+${myvar:3:2}    #输出ba
+${myvar: -4}    #输出obar 注：中间的空格是必须的
+${variable#word}    #从字符串开头使用非贪婪模式匹配
+phone="666-657-2657"
+${phone#*-}    #输出657-2657
+${variable##word}    #从字符串开头使用贪婪模式匹配
+${phone##*-}    #输出2657
+${variable%word}    #从字符串结尾使用非贪婪模式匹配
+${phone%-*}    #输出666-657
+${variable%%word}    #从字符串结尾使用贪婪模式匹配
+${phone%%-*}    #输出666
+```
 
 ## Nginx
 
@@ -262,7 +280,20 @@ $ firewall-cmd --permanent --remove-port=8080/tcp
 $ firewall-cmd --reload
 ```
 
+## 批量解压文件到压缩包文件名的文件夹中
+
+```
+for i in `ls /data/app/mobile/lib`
+do
+unzip $i -d /data/app/mobile/lib/${i%-*}
+done
+```
+
+参考截取字符串
+
+
 ## 更新记录
 
 - 2020年9月：增加firewall
 - 2020年11月：整理vim
+- 2021年1月：批量解压
