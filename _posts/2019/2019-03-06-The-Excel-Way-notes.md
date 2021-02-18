@@ -83,7 +83,7 @@ tags:
 - 5.不符合数据透视表的规范，尽可能把一类的内容放到一列里面。如右图所示
 - 6.错误的理解0，"0和空值是不一样的，这在计算平均分等情况下会被体现出来"
 - 7.分裂表格，就是将一个表格以人类方便的方式拆分了
-![01]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/01.png)
+![01]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/01.png)
 - 8.数字的文本化，为了计算方便，需要输入数字的地方一定要只填数字，如果一定要单位的话，有两种办法，一种是追加一列来记录单位。另一种是Ctrl+1->自定义--0分。显示时会带有分，但是实际是数字。并且在明确知道数字的范围的情况下，通过数字有效性（整数／小数）来限定输入，可以在一定程度上来防止录入错误。
 - 9.内容不统一，格式等各方面吧
 - 10.单元格非原子化，一个单元格就放一个不可分割的最小的信息。
@@ -124,7 +124,7 @@ tags:
 ### 30-函数的学习路径
 
 函数的分类：
-![02]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/02.png)
+![02]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/02.png)
 
 ### 31-名称的命名
 
@@ -230,7 +230,7 @@ tags:
 
 ### 39-if函数概述
 
-![03]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/03.jpg)
+![03]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/03.jpg)
 
 | 内容 | 函数 | 结果
 | - | - | -
@@ -263,23 +263,23 @@ IF(F2=5,1000,“”)))))
 
 and和or的具体意思就不说了
 
-![04]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/04.png)
+![04]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/04.png)
 
 随便举一个例子：`=IF(OR(E4>7,F4>2,SUM(G4:I4)>3000),"重要员工","")`
 
 ### 42-vlookup函数介绍以及基本用法
 
-![05]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/05.jpg)
+![05]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/05.jpg)
 
 vlokup函数的使用条件：
 
-![06]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/06.jpg)
+![06]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/06.jpg)
 
 使用后的效果：
 
-![07]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/07.png)
+![07]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/07.png)
 
-[练习]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng.xlsx)
+[练习]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng.xlsx)
 
 答案：
 
@@ -318,4 +318,4 @@ match函数可以返回一个指定字符在一行或者一列数据中的排序
 
 index函数，可以根据横纵坐标返回一个区域内的具体值。
 	
-[具体例子]({{ site.url }}assets/2018/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng2.xlsx)
+[具体例子]({{ site.url }}assets/2019/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng2.xlsx)
