@@ -37,7 +37,8 @@ tags:
 1. HeidiSQL，这个就很厉害了。ta不仅可以连接MySql，还可以连接MS SQL Server、SQLite等5种数据库。同时支持sql格式化等操作。只是在我这连接测试环境MySql数据库时，偶尔闪退🤦‍♂️。所以不是工作中的主力，而是平时使用的主力。[官网](https://www.heidisql.com/)
 2. SQLyog，俗称小海豚。这是我平时工作的主力工具，由于使用的是开源版本，导致连格式化sql都做不到。好在，测试工作的话，平时常用的sql就那些，写一次以后就能一直用了。倒也没有太大影响。[GitHub主页](https://github.com/webyog/sqlyog-community)
 3. MySQL Workbench。提供了Windows版本，我在Windows上没试过...[官网](https://dev.mysql.com/downloads/workbench/)
-4. AnotherRedisDesktopManager，redis客户端，其实我没咋用过(⊙﹏⊙)。不过8.3K的Star，应该能挺好用吧。[GitHub主页](https://github.com/qishibo/AnotherRedisDesktopManager)
+4. DBeaver。有个很厉害的伙伴在用，我没试用过。[官网](https://dbeaver.io/)
+5. AnotherRedisDesktopManager，redis客户端，其实我没咋用过(⊙﹏⊙)。不过8.3K的Star，应该能挺好用吧。[GitHub主页](https://github.com/qishibo/AnotherRedisDesktopManager)
 
 ## SSH
 
@@ -78,4 +79,4 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 - 2020年7月27日：追加Wox和synergy
 - 2020年9月2日：追加JUDE
 - 2020年9月11日：追加AnotherRedisDesktopManager
-- 2021年2月18日：追加MySQL Workbench
+- 2021年2月：追加MySQL Workbench、DBeaver
