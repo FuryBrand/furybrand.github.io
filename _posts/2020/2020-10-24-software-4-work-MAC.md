@@ -105,7 +105,7 @@ interact
 
 ![效果图]({{ site.url }}assets/2020/2020-10-24-software-4-work-MAC/Jietu20201024-165248.jpg)
 
-一个小坑：如果在执行的过程中出现了类似`zsh: event not found:_+`的报错，那么可能是密码中包含了shell的关键字，比如我的是**2FGP%c!_+**，此时需要使用escape character `\`，即将命令写为`~/.ssh/ssh_login 22 root 10.170.220.34 2FGP%c\!_+`
+一个小坑：如果在执行的过程中出现了类似`zsh: event not found:_+`的报错，那么可能是密码中包含了shell的关键字，比如我的是**2FGP%c!_+**，此时需要使用escape character “\”，即将命令写为`~/.ssh/ssh_login 22 root 10.170.220.34 2FGP%c\!_+`
 
 #### docker
 
@@ -301,6 +301,55 @@ Or, if you don't want/need a background service you can just run:
 
 Mac的触控板和的方向非常诡异（手往左上移动，图片也往左上移动😓我想让ta往又下移动啊），在设置里反转之后，鼠标的滚轮居然也反了，干～.～。通过Scroll-Reverser完美解决。[Github地址](https://github.com/pilotmoon/Scroll-Reverser)、[官网地址](https://pilotmoon.com/scrollreverser/)
 
+#### 视频下载
+
+YouTube上的视频下载需要使用`youtube-dl`（[官网](http://ytdl-org.github.io/youtube-dl/index.html)[GitHub工程地址](https://github.com/ytdl-org/youtube-dl)）和`FFmpeg`（[官网](https://ffmpeg.org/)）。
+
+`youtube-dl`是使用了官方手册指导进行安装（注意youtube-dl还依赖python）。
+```
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+```
+
+`FFmpeg`是使用了`Homebrew`来安装。安装命令为：**brew install ffmpeg**
+
+简单的使用手册：
+```
+# 查看该视频的各种格式
+liutianyu@ZMC Downloads % youtube-dl --list-formats https://www.youtube.com/watch\?v=zFQV0kw5saM
+[youtube] zFQV0kw5saM: Downloading webpage
+[info] Available formats for zFQV0kw5saM:
+format code  extension  resolution note
+249          webm       audio only tiny   52k , webm_dash container, opus @ 52k (48000Hz), 4.44MiB
+250          webm       audio only tiny   69k , webm_dash container, opus @ 69k (48000Hz), 5.96MiB
+140          m4a        audio only tiny  129k , m4a_dash container, mp4a.40.2@129k (44100Hz), 11.06MiB
+251          webm       audio only tiny  137k , webm_dash container, opus @137k (48000Hz), 11.71MiB
+160          mp4        256x144    144p   53k , mp4_dash container, avc1.4d400c@  53k, 30fps, video only, 4.58MiB
+278          webm       256x144    144p   84k , webm_dash container, vp9@  84k, 30fps, video only, 7.23MiB
+133          mp4        426x240    240p  120k , mp4_dash container, avc1.4d4015@ 120k, 30fps, video only, 10.31MiB
+242          webm       426x240    240p  170k , webm_dash container, vp9@ 170k, 30fps, video only, 14.57MiB
+134          mp4        640x360    360p  226k , mp4_dash container, avc1.4d401e@ 226k, 30fps, video only, 19.35MiB
+243          webm       640x360    360p  365k , webm_dash container, vp9@ 365k, 30fps, video only, 31.23MiB
+135          mp4        854x480    480p  351k , mp4_dash container, avc1.4d401f@ 351k, 30fps, video only, 30.07MiB
+244          webm       854x480    480p  650k , webm_dash container, vp9@ 650k, 30fps, video only, 55.55MiB
+136          mp4        1280x720   720p 1205k , mp4_dash container, avc1.4d401f@1205k, 30fps, video only, 103.00MiB
+247          webm       1280x720   720p 1320k , webm_dash container, vp9@1320k, 30fps, video only, 112.80MiB
+18           mp4        640x360    360p  650k , avc1.42001E, 30fps, mp4a.40.2 (44100Hz), 55.61MiB
+22           mp4        1280x720   720p 1338k , avc1.64001F, 30fps, mp4a.40.2 (44100Hz) (best)
+# 下载所有语言的字幕、并将视频进行合并
+liutianyu@ZMC Downloads % youtube-dl --write-sub --all-subs -f 136+140 https://www.youtube.com/watch\?v=zFQV0kw5saM
+[youtube] zFQV0kw5saM: Downloading webpage
+[download] Destination: 【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.f136.mp4
+[download] 100% of 103.00MiB in 00:40
+[download] Destination: 【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.f140.m4a
+[download] 100% of 11.06MiB in 00:04
+[ffmpeg] Merging formats into "【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.mp4"
+Deleting original file 【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.f136.mp4 (pass -k to keep)
+Deleting original file 【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.f140.m4a (pass -k to keep)
+```
+
+更多的使用方式[【备份】youtube-dl使用介绍](https://www.jianshu.com/p/6bae57859325)
+
 
 ## 更新日志
 - 2020年10月24日：初稿。
@@ -308,3 +357,4 @@ Mac的触控板和的方向非常诡异（手往左上移动，图片也往左�
 - 2020年11月：追加telnet、SciaReto、Typora、LICEcap、DesktopNaotu、LibreOffice。
 - 2020年12月：追加The Unarchiver、JMeter、npm。
 - 2021年1月：追加drawio-desktop、Scroll-Reverser。
+- 2021年1月：追加视频下载。
