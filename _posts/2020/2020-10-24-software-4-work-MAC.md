@@ -337,7 +337,7 @@ format code  extension  resolution note
 18           mp4        640x360    360p  650k , avc1.42001E, 30fps, mp4a.40.2 (44100Hz), 55.61MiB
 22           mp4        1280x720   720p 1338k , avc1.64001F, 30fps, mp4a.40.2 (44100Hz) (best)
 # 下载所有语言的字幕、并将视频进行合并
-liutianyu@ZMC Downloads % youtube-dl --write-sub --all-subs -f 136+140 https://www.youtube.com/watch\?v=zFQV0kw5saM
+liutianyu@ZMC Downloads % youtube-dl --write-sub --all-subs --write-auto-sub -f 136+140 https://www.youtube.com/watch\?v=zFQV0kw5saM
 [youtube] zFQV0kw5saM: Downloading webpage
 [download] Destination: 【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.f136.mp4
 [download] 100% of 103.00MiB in 00:40
