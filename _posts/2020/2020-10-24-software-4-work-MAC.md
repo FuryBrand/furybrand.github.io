@@ -147,6 +147,9 @@ MacOS上的软件太少了，逼着我用移动端的软件😭
 
 ![设置图]({{ site.url }}assets/2020/2020-10-24-software-4-work-MAC/iShot2021-02-09.png)
 
+关闭Windows的自动更新：Windwos+R，输入“gpedit.msc”回车，在本地注册表编辑器中依次打开：计算机配置-管理模板-Windows组件-windows 更新，在右侧将“配置自动更新”和“允许自动更新立即安装”的状态改为“已禁用”，重启电脑，查看一下。参考[永久关闭win10自动更新
+](https://answers.microsoft.com/zh-hans/windows/forum/all/%E6%B0%B8%E4%B9%85%E5%85%B3%E9%97%ADwin10%E8%87%AA/29ebb211-8189-4c96-abab-31a851cc75a9)
+
 #### Folx
 
 有免费版和付费的高级版，我这用的是免费版，其实目前就是挂着下windows的镜像。知乎上有人推荐就下来试试
