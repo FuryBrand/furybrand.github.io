@@ -298,7 +298,7 @@ Or, if you don't want/need a background service you can just run:
 
 #### drawio-desktop
 
-流程图的好手，但是貌似易用性较之Microsoft Viso还是差点意思。drawio-desktop是diagrams.net的桌面版，直接去[github release地址](https://github.com/jgraph/drawio-desktop/releases/)下载吧。
+流程图的好手，但是貌似易用性较之Microsoft Viso还是差点意思，不过可以打开vsdx也算是挺牛了。drawio-desktop是diagrams.net的桌面版，直接去[github release地址](https://github.com/jgraph/drawio-desktop/releases/)下载吧。
 
 #### Scroll-Reverser
 
