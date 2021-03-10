@@ -28,7 +28,7 @@ tags:
 
 C/C++
 
-Nginx是C++写的，所以在性能上肯定会比较强。名字的含银是engine x。原作者是俄罗斯人。
+Nginx是C++写的，所以在性能上肯定会比较强。名字的含义是engine x。原作者是俄罗斯人。
 
 HTTP server
 
