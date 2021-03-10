@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="For Love To Love">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="為愛 而熱愛">
+    
+    <meta property="og:image" content="http://furybrand.gitee.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.gitee.io//page3/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.gitee.io//page3/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Page Header -->
+
+
+
+
+
+
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="site-heading">
+        
+          <h1>For Love To Love</h1>
+          <span class="subheading">為愛 而熱愛</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2020/07/30/fiddler-simple-guide/">
+        <h2 class="post-title">
+            HTTP代理调试工具——Fiddler简易实践
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  最近测试了一些移动端的东西，Fiddler用的突然多了起来，做下记录吧。
+
+
+简介
+
+摘自官网上简介Fiddler Everywhere: The Web Debugging Proxy Tool Loved by Users Just Got Better. Log all HTTP(S) traffic between your computer and the Internet....
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on July 30, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/07/27/wiremock-simple-guide/">
+        <h2 class="post-title">
+            HTTP接口的Mock工具——WireMock简易手册
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  第一版是真的简易手册，简易到只是简单使用一下下
+
+
+上周TTJ找到我，说我之前搞的那个python写的http接口mock工具用不了了。原因是不知怎么回事，nginx的配置文件被清空了。
+鄙人便想“那就正好直接部署下WireMock试试吧”。
+
+1.简介
+
+官网上的一句话简介WireMock is a simulator for HTTP-based APIs. Some might ...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on July 27, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/06/02/bat-notes/">
+        <h2 class="post-title">
+            bat的使用笔记
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  批处理就随用随查了，感觉也没必要单独学习。所以这里就记录下怎么用bat的，然后积累些bat的用法
+
+
+爱徒ZP吐槽说“A刚提了一版前端，B又改了bug也要部署一版🤦‍”。
+鄙人心有不忍，说“是不是可以尝试写个bat文件来把整个流程自动化起来”。
+故有了第一部分1. 删除文件夹+npm build+jar打包。
+
+1. 删除文件夹+npm build+jar打包
+
+注：主要内容都是ZP完...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on June 2, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/05/20/Notes-dataStructure-and-algorithm/">
+        <h2 class="post-title">
+            《重学数据结构与算法》的学习笔记
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  学过的东西总是要还给老师的……..
+
+
+重学数据结构与算法……我觉得甚至可以有机会开一个“那些年还给老师的知识”或者“专业课重修”系列。明明区块链还没有搞清楚，貌似工作上以后还要对接AI的测试了。😔慢慢找人慢慢来吧，这个着急也没用，还是要一步一个脚印来。AI是机器人学习算法呗，那我从算法搞起。不过也是恰好同事发现了这个课程，推广期间只要一元钱。买不了吃亏，买不了上当。买了就学下去吧，反...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on May 20, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/04/11/software-4-work/">
+        <h2 class="post-title">
+            工欲善其事必先利其器
+        </h2>
+        
+        <h3 class="post-subtitle">
+            工程师的推荐软件(Windows)
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  free software和open source software中有很多带劲的软件。推荐走一波
+
+
+我的“怪癖”，要么用买的软件，要么用免费软件，当然如果迫不得已的话，那啥都能用了😀。免费软件也可以细分两种，一种是free software免费使用，但是源代码不对外开放，可能一些高级功能会收费啥的。另一种是open source software就是源代码开源，免费使用。至于能不能...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on April 11, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/04/06/spiced-beef/">
+        <h2 class="post-title">
+            xin食:酱牛肉(正菜)
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  2020年的疫情期间，母上大人寄了好多的酱牛肉过来，极大的丰富了隔离初期的伙食
+
+
+食材
+
+我这次的食材有：牛腱肉1kg、卤肉香料若干（干辣椒、八角、花椒、小茴香、香叶、桂皮、孜然）
+煎牛肉的方法貌似挺多的，我也是参考了B站上的两个视频还有母上大人传授的手段进行腌制，味道还行😂
+
+步骤
+
+
+  锅中放入卤肉香料若干（干辣椒、八角、花椒、小茴香、香叶、桂皮、孜然），煮5分钟后盛出晾凉。香...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on April 6, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/04/06/curried-chicken/">
+        <h2 class="post-title">
+            xin食:咖喱鸡块(主食)
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  从小就爱吃这口，现在自己做一做发现味道也不错
+
+
+食材
+
+我这次的食材有：胡萝卜一大根、土豆一个、好侍咖喱块一盒、超市买的冷冻鸡腿肉丁300g。
+鸡肉换成火腿亲测可行，好像也可以换成牛肉，但是我没试过。图省事直接买的鸡腿肉丁，据说鸡胸肉口感最好。喜欢吃洋葱或者彩椒也可以加，但是小学的时候母上大人做过一次，我特别不喜欢，所以我坚决不会加了😂
+
+步骤
+
+
+  鸡腿肉解冻洗净备用，我会用小苏...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on April 6, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/04/05/xin-mi-lu/">
+        <h2 class="post-title">
+            xin食:xin米露(甜品)
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  经典的夏日甜品…..
+
+
+食材
+
+其实西米露就随便搭配吧，只要里面有西米就好😂。
+我这次的食材有：仙草（凉粉）、三色大芋圆、西米、椰奶。
+仙草可以换成龟苓膏。椰奶可以换成牛奶+椰子粉，或者就是牛奶也行。也可以加水果，试过不踩坑的有草莓、芒果、火龙果（红心的会更好看些）。
+
+步骤
+
+
+  由于是买的盒装仙草，所以直接按照说明书，50g仙草粉+500ml开水搅拌均匀晾凉就好。做了一大碗的量...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on April 5, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/03/26/xin-shi/">
+        <h2 class="post-title">
+            新栏目：xin食
+        </h2>
+        
+        <h3 class="post-subtitle">
+            开启或快手，或无需厨艺的极简料理篇章
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  “生活是最好的老师”，让我们成为了厨子、理发师…..
+
+
+xin料理
+
+由于众所周知的疫情原因，从2月3号返回帝都以来，一直到3月15号重返职场。每天的食物都是自己料理。之前从未想过会有这样的日子，为了满足自己的胃，让自己吃的开心，所以尝试了一些快手或无需掌握刀工火候等技能的极简料理。简或是简单，或是简便。为了做个记录，所以打算开始新栏目xin食
+
+治大国，若烹小鲜
+
+脑子里想着美食栏...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on March 26, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2019/11/30/5G-vscode-online/">
+        <h2 class="post-title">
+            5G和VSCodeOnline
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                引子
+
+很奇怪吧，5G和VSCodeOnline什么鬼啊，这对儿组合。其实我也觉得有点奇怪，只是结合前两参加的世界5G大会加上了解到了VS Code Online，使我今天突然有所感想。
+
+5G的到来真的会对我们的生活造成很大影响，甚至这个影响很快就会到来了。
+
+世界5G大会
+
+前段时间有幸参与了京东物流的京东LoMir 5G智能物流平台的测试工作，所以有机会参加上周的世界5G大会。
+
+
+
+...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Steve on November 30, 2019
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page2">← Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page4">Older Posts →</a>
+    </li>
+    
+</ul>
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0025" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="35">技术相关</a>
+        
+                <a data-sort="0050" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0051" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="9">xin食</a>
+        
+                <a data-sort="0054" href="/archive/?tag=Linux" title="Linux" rel="6">Linux</a>
+        
+                <a data-sort="0054" href="/archive/?tag=Python" title="Python" rel="6">Python</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0057" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0057" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0057" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0057" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0058" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0058" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0058" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+    
+    <img src="/img/avatar.jpg">
+    
+    
+    <p>拍拍照、码码字、写写笔记，记录我眼中的世界</p>
+    
+    <!-- SNS Link -->
+    
+
+
+<ul class="list-inline">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+  </div>
+</section>
+
+                <!-- Friends Blog -->
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2021
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="记一场关于Nginx配置文件及网络问题排查步骤的分享 - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="有伙伴想听一下在排查网络环境问题上的一些经验。Nginx是一个避不开的话题，正好顺便把Nginx的一些内容一起过一下吧。下面算是该场分享的文本稿。
+">
+    
+    <meta property="article:published_time" content="2021-03-09T11:22:49Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="技术相关">
+    
+    <meta property="article:tag" content="Nginx">
+    
+    
+    <meta property="og:image" content="http://furybrand.gitee.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.gitee.io//2021/03/09/nginx-config-file/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>记一场关于Nginx配置文件及网络问题排查步骤的分享 - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.gitee.io//2021/03/09/nginx-config-file/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                        <a class="tag" href="/archive/?tag=Nginx" title="Nginx">Nginx</a>
+                        
+                    </div>
+                    <h1>记一场关于Nginx配置文件及网络问题排查步骤的分享</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on March 9, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>有伙伴想听一下在排查网络环境问题上的一些经验。Nginx是一个避不开的话题，正好顺便把Nginx的一些内容一起过一下吧。下面算是该场分享的文本稿。</p>
+
+<h2 id="文本稿">文本稿</h2>
+
+<h4 id="开篇">开篇</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.001.jpeg" alt="开篇"></p>
+
+<p>大家好，我是XXX。今天和大家聊一聊Nginx的配置文件及排查网络问题步骤。</p>
+
+<h4 id="nginx是什么">Nginx是什么？</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.002.jpeg" alt="Nginx是什么？"></p>
+
+<p>C/C++</p>
+
+<p>Nginx是C++写的，所以在性能上肯定会比较强。名字的含义是engine x。原作者是俄罗斯人。</p>
+
+<p>HTTP server</p>
+
+<p>Nginx可以作为HTTP server来代理一些静态资源文件。图片、css、js啥的</p>
+
+<p>Reverse proxy server</p>
+
+<p>平时的工作中，接触最多的可能就是Nginx作为反向代理服务器的情况了。反向代理服务器是一种代理服务器，通常位于专用网络中的防火墙后面，并将客户端请求定向到适当的后端服务器。 反向代理提供了更高级别的抽象和控制，以确保客户端和服务器之间网络流量的顺畅流动。测试环境的话，一般是两种情况。</p>
+<ol>
+  <li>一台服务器中部署了多个Web服务，利用服务器的Nginx，配合客户端机器的host（或者内网的DNS）来做访问上的隔离。如果不这么搞的话，用ip加端口来访问也不是不可以。</li>
+  <li>对于前后端分离式的部署架构，如前端是VUE的静态工程，后端多个Java应用提供HTTP接口的情况。Nginx可以作为HTTP server代理VUE工程，然后将特定的请求定向到后端服务。可以通过这种手段来解决跨域问题。</li>
+</ol>
+
+<p>TCP/UDP proxy server</p>
+
+<p>Nginx可以作为TCP/UDP的代理服务器，在之前的文章中，我试图利用Nginx代理MySQL服务。理论上可行，但是最终因为机器的编辑环境的依赖问题没有继续下去。</p>
+
+<p>Mail proxy server(POP3, IMAP, SMTP)</p>
+
+<p>既然可以搞定运输层的协议，那么基于TCP/IP的这些邮件协议也都不在话下了。</p>
+
+<p>Load Balancing</p>
+
+<p>反向代理的进阶就是负载均衡了。说白了就是活太多了干不过来，那就多来几个人干吧。具体的策略和配置在后面会有具体介绍，这里就不多说了。</p>
+
+<p>FastCGI/SCGI/uwsgi</p>
+
+<p>这个也有点意思，稍微说两句。前两个协议是给PHP用的，最后一个是给Python用的。像平时我们用Java应用的使用，Nginx是直接将HTTP转给了后端的Java应用的。但是其实Nginx也可以处理一下，将HTTP转成uwsgi之类的协议和后端通信。能猜到原因是啥吗？对，因为PHP和Python的效率较低，直接处理HTTP的效率不高，所以先由Nginx这个由C++写的程序处理一下，减轻后端服务的压力。再深的东西我也不懂了。</p>
+
+<p>…</p>
+
+<p>Nginx支持的还不止这些，比如ta还可以作为mp4的视频流的代理。但是我没有具体研究了。</p>
+
+<h4 id="config-file">Config File</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.003.jpeg" alt="Config_File"></p>
+
+<p>Default config file - nginx.conf</p>
+
+<p>Nginx的默认配置文件是“Nginx.conf“，根据安装路径的不同位置也不一定在哪。</p>
+
+<p>“include domains/*;”</p>
+
+<p>注意“Nginx.conf“中的“include domains/*;”的用法，会将指定路径下的内容全部载入到一起作为配置文件生效。最后在程序中应该是一个文件，所以此时是存在优先级的问题的。</p>
+
+<p>Server Block(listen directive &amp; server_name entries &amp; location)</p>
+
+<p>当一个请求进来的时候，Nginx会先判断应该是哪个server来处理这个请求。此时listen命令有最高优先级，若匹配到则无需关心server_name。listen决定了这个server块儿监听的是哪个ip和端口。示例中监听的是HTTP请求的默认端口80。当匹配到了多个server，此时会用server_name项来进行匹配。server_name支持通配符的匹配。有自己的优先级规则。server_name之后就是location的匹配了，location支持正则，也有多个优先级，重点说一个。“常规字符串匹配，如果有多个location都能匹配的话，优先匹配表达式最长的location”。匹配到了某一个location之后，会根据proxy_pass进行定向。若配置成了ip+端口，就直接转发走了。若配置成了upstream里配置的参数，则会使用负载均衡策略生效。另外查询log的话，参考access_log和error_log。</p>
+
+<p>关于server块儿的介绍，具体可以参考<a href="/2020/09/02/nginx/">T-记一次Nginx分享</a>中的2.1，2.2。</p>
+
+<h4 id="load-balancing">Load balancing</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.004.jpeg" alt="Load_balancing"></p>
+
+<p>提前声明，这部分都总结前人和官网的说明，我没有手动试验过。</p>
+
+<p>round-robin(default)</p>
+
+<p>轮询调度，就是一个一个来，标记为down的是手动下线的。标记为backup的是当所有的机器都不可用时才会用到ta。</p>
+
+<p>least-connected</p>
+
+<p>最小连接数，因为不是所有的请求，在服务器端的处理时长都相同。如果有些请求堆积了，那就让别人来处理，大原则是保持最小连接数。</p>
+
+<p>ip-hash</p>
+
+<p>相同来源的ip，会给到某个特定的后端服务。用以解决session在多个后端服务中不共享的问题。但是现在如果走算法的话可以解决这个问题。</p>
+
+<p>server weights</p>
+
+<p>权重，按照我们分配的权重分配。</p>
+
+<h4 id="load-balancing3rd-party">Load balancing(3rd party)</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.005.jpeg" alt="Load_balancing_3rd_party"></p>
+
+<p>fair</p>
+
+<p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
+
+<p>url_hash</p>
+
+<p>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。</p>
+
+<h4 id="serving-static-content">Serving Static Content</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.006.jpeg" alt="Serving_Static_Content"></p>
+
+<p>稍微介绍下<a href="https://github.com/FuryBrand/localized-kityminder">localized-kityminder</a>的部署架构。</p>
+
+<h4 id="http-request">Http Request</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.007.jpeg" alt="Http_Request"></p>
+
+<p>稍微介绍下HTTP请求的流程。重点是多级缓存。对应了为啥我们配置了Host还要清理浏览器缓存等问题。</p>
+
+<p>ping</p>
+
+<p>ping无法判断tcp/ip配置的是否正确，但是可以看下本机的host配置的是否正确。</p>
+
+<p>telnet</p>
+
+<p>telnet可以判断指定端口是否可用。</p>
+
+<p>curl</p>
+
+<p>curl是通过命令行发送HTTP请求，是真正的走了HTTP协议的。</p>
+
+<h4 id="share-an-issue-of-go-live">share an issue of go-live</h4>
+
+<p><img src="http://furybrand.gitee.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.008.jpeg" alt="share_an_issue_of_go-live"></p>
+
+<p>分享一个上线过程中的问题。UAT环境验证通过的版本，上到线上之后就不好用了。发现有些资源请求不到。原来公司在域名到服务器那一层用了负载均衡，导致新版本的资源文件请求到了IP1上。乱了。</p>
+
+<h4 id="end">End</h4>
+
+<p>我前面说的全部内容，在一些情况下可能都是假的。所以具体问题具体分析，逻辑才是无敌的。为逻辑干杯🍻</p>
+
+<h2 id="相关资料">相关资料</h2>
+
+<ul>
+  <li><a href="https://www.nginx.com/resources/glossary/reverse-proxy-server/">What Is a Reverse Proxy Server?(nginx.com)</a></li>
+  <li><a href="https://nginx.org/en/">nginx.org offical site</a></li>
+  <li><a href="https://nginx.org/en/docs/">nginx.org documentation</a></li>
+  <li><a href="http://hg.nginx.org/nginx">nginx.org change log</a></li>
+  <li><a href="http://hg.nginx.org/nginx/archive/tip.zip">nginx.org source code(zip)</a></li>
+  <li><a href="http://nginx.org/en/docs/http/request_processing.html">How nginx processes a request(nginx.org)</a></li>
+</ul>
+
+<h2 id="更新日志">更新日志</h2>
+<ul>
+  <li>2021年03月09日：初稿。</li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/02/17/finance-calculator/" data-toggle="tooltip" data-placement="top" title="财务计算器">
+                        Previous<br>
+                        <span>财务计算器</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0025" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="35">技术相关</a>
+        
+                <a data-sort="0050" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0051" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="9">xin食</a>
+        
+                <a data-sort="0054" href="/archive/?tag=Linux" title="Linux" rel="6">Linux</a>
+        
+                <a data-sort="0054" href="/archive/?tag=Python" title="Python" rel="6">Python</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0057" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0057" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0057" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0057" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0058" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0058" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0058" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2021
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

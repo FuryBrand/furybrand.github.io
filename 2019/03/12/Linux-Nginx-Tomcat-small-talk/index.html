@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Linux-浅谈Nginx的反向代理 即http请求经历了什么😀 - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="这两天解决了几个环境的问题，觉得自己对于http请求在请求过程中是如何流传的，以及Nginx的反向代理功能有了更深的认识。
+">
+    
+    <meta property="article:published_time" content="2019-03-12T15:20:25Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="Linux">
+    
+    <meta property="article:tag" content="Nginx">
+    
+    <meta property="article:tag" content="技术相关">
+    
+    
+    <meta property="og:image" content="http://furybrand.gitee.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.gitee.io//2019/03/12/Linux-Nginx-Tomcat-small-talk/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>Linux-浅谈Nginx的反向代理 即http请求经历了什么😀 - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.gitee.io//2019/03/12/Linux-Nginx-Tomcat-small-talk/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Linux" title="Linux">Linux</a>
+                        
+                        <a class="tag" href="/archive/?tag=Nginx" title="Nginx">Nginx</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                    </div>
+                    <h1>Linux-浅谈Nginx的反向代理 即http请求经历了什么😀</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on March 12, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>这两天解决了几个环境的问题，觉得自己对于http请求在请求过程中是如何流传的，以及Nginx的反向代理功能有了更深的认识。</p>
+
+<p>写出来正好可以梳理一下思路。但是目前只是有一个大体的认识，所以英文标题为<code class="language-plaintext highlighter-rouge">small talk</code>，就是聊聊自己的看法，千万带着质疑的态度看，因为没准会有各种纰漏呢ε=ε=ε=┏(゜ロ゜;)┛</p>
+
+<h2 id="一个http请求的一生">一个http请求的一生</h2>
+
+<p>标题开的有点大，细节东西太多了，不过如果是Linux+Nginx+Tomcat的话，大体上符合下面图的样子。</p>
+
+<p>这里要说明一下，这个图是按照俺们公司的测试环境绘制的，实际线上环境的话，nginx可能是单独的一台服务器，不止实现反向代理，还有缓存负载均衡等功能。而相应的tomcat服务也会部署到不同的服务器上。甚至catA会同时存在数个为了应付高并发的情况。</p>
+
+<p><img src="http://furybrand.gitee.io/assets/2019/2019-03-12-Linux-Nginx-Tomcat-small-talk/tupian1.png" alt="http请求的一生"></p>
+
+<h3 id="为什么可以通过域名访问到服务器">为什么可以通过域名访问到服务器？</h3>
+
+<p>首先我们看第一步<code class="language-plaintext highlighter-rouge">①我要访问catA.xixi.com</code>。为啥在浏览器输入了<code class="language-plaintext highlighter-rouge">catA.xixi.com</code>之后，浏览器就会把请求发送到指定的服务器上呢？</p>
+
+<p>测试环境的话，就要归功于hosts的配置了，一般都用<a href="https://github.com/oldj/SwitchHosts">SwitchHosts</a>来进行配置，配置好之后当浏览器要访问的时候会先去配置中看下是否有有指定的服务器ip地址，如果有的话，请求就直接打给这个服务器了。</p>
+
+<p>那么为啥我访问<code class="language-plaintext highlighter-rouge">www.jd.com</code>买东西的时候不用配置hosts呢？难道我们每个人的PC都记住了全世界网站服务器的ip地址吗？</p>
+
+<p>当然不是啦，这里要说一下，其实互联网在发展之初是没有<code class="language-plaintext highlighter-rouge">域名</code>这个概念的，两台计算机在通信的时候都是通过ip地址去找对方的，但是这也太麻烦了吧，对人类很不友好，记不住啊。所以<code class="language-plaintext highlighter-rouge">域名</code>以及<code class="language-plaintext highlighter-rouge">DNS(Domain Name Server，域名服务器)</code>也就应运而生了。当我们让浏览器访问<code class="language-plaintext highlighter-rouge">www.jd.com</code>的时候，计算机会去DNS上查找这个域名对应的ip地址，然后发请求发出去。不过由于测试环境的域名不会注册到DNS上，所以就要通过配置hosts来进行访问了。</p>
+
+<h3 id="nginx是如何接到请求的又是怎么找到cata的">Nginx是如何接到请求的？又是怎么找到catA的？</h3>
+
+<p>这就要读一下Nginx的配置文件了，路径在可能在<code class="language-plaintext highlighter-rouge">/services/nginx/conf/nginx.conf</code>。不过为了方便管理，还是习惯在该文件的最后加上一句话<code class="language-plaintext highlighter-rouge">include domains/*</code>，这样就可以在<code class="language-plaintext highlighter-rouge">/services/nginx/conf/domains/</code>下针对不同域名维护不同的配置文件了。要是人工维护的话怎么都行，要是通过程序维护的话，这种分割显然更加的合理。</p>
+
+<p>ok那我们假定<code class="language-plaintext highlighter-rouge">/services/nginx/conf/domains/</code>下有如下文件。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>catA.xixi.com
+catB.xixi.com
+catC.xixi.com
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>看一下配置文件<code class="language-plaintext highlighter-rouge">catA.xixi.com</code>的内容：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td>
+<td class="rouge-code"><pre><span class="o">[</span>root@host-192-168-75-40 domains]# <span class="nb">cat </span>catA.xixi.com
+        upstream tomcat_catA.xixi.com <span class="o">{</span>
+                server 127.0.0.1:8105  <span class="nv">weight</span><span class="o">=</span>10 <span class="nv">max_fails</span><span class="o">=</span>2 <span class="nv">fail_timeout</span><span class="o">=</span>30s<span class="p">;</span>
+                <span class="o">}</span>
+server
+                <span class="o">{</span>
+                listen                   80<span class="p">;</span>
+                server_name              catA.xixi.com<span class="p">;</span>
+                access_log               /services/nginx/logs/catA.xixi.com/catA.xixi.com_access.log main<span class="p">;</span>
+                error_log                /services/nginx/logs/catA.xixi.com/catA.xixi.com_error.log warn<span class="p">;</span>
+                error_page 411 <span class="o">=</span> @my_error<span class="p">;</span>
+                location @my_error <span class="o">{</span>
+                 <span class="o">}</span>
+                root /export/data/tomcatRoot/catA.xixi.com/<span class="p">;</span>
+      location / <span class="o">{</span>
+        proxy_next_upstream     http_500 http_502 http_503 http_504 error <span class="nb">timeout </span>invalid_header<span class="p">;</span>
+        proxy_set_header        Host  <span class="nv">$host</span><span class="p">;</span>
+        proxy_set_header        X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+        proxy_pass              http://tomcat_catA.xixi.com<span class="p">;</span>
+        expires                 1d<span class="p">;</span>
+        <span class="o">}</span>
+        location /logs/ <span class="o">{</span>
+                autoindex       off<span class="p">;</span>
+                deny all<span class="p">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>从中我们可以看到，Nginx启动后就会默认监听80端口，我们都知道80端口是http的默认请求端口。那么当客户端浏览器中url输入<code class="language-plaintext highlighter-rouge">catA.xixi.com</code>的时候，客户端机器会根据DNS或者本机的hosts，将请求打到对应服务器的80端口。而Nginx监听到了80端口的这个请求，就会自动根据请求地址的不同转发给不同的端口。<code class="language-plaintext highlighter-rouge">127.0.0.1:8105</code>就是本机的8105端口<a href="/jekyll/update/2018/03/19/explanation.html#127.0.0.1">点我了解更多</a>。我们可以通过简单的几个命令来验证一下。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="o">[</span>root@host-192-168-75-40 catA.xixi.com]# netstat <span class="nt">-tunlp</span> | <span class="nb">grep </span>8105
+tcp        0      0 :::8105                     :::<span class="k">*</span>                        LISTEN      477747/java
+<span class="o">[</span>root@host-192-168-75-40 catA.xixi.com]# ps <span class="nt">-ef</span> | <span class="nb">grep </span>477747
+root     477747      1  5 Jun28 ?        01:38:59 /export/servers/jdk1.8.0_112/bin/java <span class="nt">-Djava</span>.util.logging.config.file<span class="o">=</span>/export/home/tomcat/domains/catA.xixi.com/server1/conf/logging.properties <span class="nt">-Djava</span>.util.logging.manager<span class="o">=</span>org.apache.juli.ClassLoaderLogManager <span class="nt">-Djava</span>.library.path<span class="o">=</span>/usr/local/lib <span class="nt">-server</span> <span class="nt">-Xms1024m</span> <span class="nt">-Xmx1024m</span> <span class="nt">-XX</span>:MaxPermSize<span class="o">=</span>256m <span class="nt">-Djava</span>.awt.headless<span class="o">=</span><span class="nb">true</span> <span class="nt">-Dsun</span>.net.client.defaultConnectTimeout<span class="o">=</span>60000 <span class="nt">-Dsun</span>.net.client.defaultReadTimeout<span class="o">=</span>60000 <span class="nt">-Djmagick</span>.systemclassloader<span class="o">=</span>no <span class="nt">-Dnetworkaddress</span>.cache.ttl<span class="o">=</span>300 <span class="nt">-Dsun</span>.net.inetaddr.ttl<span class="o">=</span>300 <span class="nt">-Djdk</span>.tls.ephemeralDHKeySize<span class="o">=</span>2048 <span class="nt">-Djava</span>.protocol.handler.pkgs<span class="o">=</span>org.apache.catalina.webresources <span class="nt">-Djava</span>.endorsed.dirs<span class="o">=</span>/export/servers/apache-tomcat-8.0.41/endorsed <span class="nt">-classpath</span> /export/servers/apache-tomcat-8.0.41/bin/bootstrap.jar:/export/servers/apache-tomcat-8.0.41/bin/tomcat-juli.jar <span class="nt">-Dcatalina</span>.base<span class="o">=</span>/export/home/tomcat/domains/catA.xixi.com/server1 <span class="nt">-Dcatalina</span>.home<span class="o">=</span>/export/servers/apache-tomcat-8.0.41 <span class="nt">-Djava</span>.io.tmpdir<span class="o">=</span>/export/home/tomcat/domains/catA.xixi.com/server1/temp org.apache.catalina.startup.Bootstrap <span class="nt">-config</span> /export/home/tomcat/domains/catA.xixi.com/server1/conf/server.xml start
+root     589021 411050  0 17:25 pts/3    00:00:00 <span class="nb">grep </span>477747
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>可以看出端口8105正在被一个PID为477747的java应用监听着。而这个服务正是<code class="language-plaintext highlighter-rouge">catA.xixi.com</code>对应的web应用。顺便看下tomcat的配置文件。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td>
+<td class="rouge-code"><pre><span class="o">[</span>root@host-192-168-75-40 conf]# <span class="nb">cat</span>  /export/home/tomcat/domains/catA.xixi.com/server1/conf/server.xml
+&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s1">'1.0'</span> <span class="nv">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span>?&gt;
+ &lt;Server <span class="nv">port</span><span class="o">=</span><span class="s2">"9105"</span> <span class="nv">shutdown</span><span class="o">=</span><span class="s2">"SHUTDOWN"</span><span class="o">&gt;</span>
+  &lt;Listener <span class="nv">className</span><span class="o">=</span><span class="s2">"org.apache.catalina.core.AprLifecycleListener"</span> <span class="nv">SSLEngine</span><span class="o">=</span><span class="s2">"on"</span> /&gt;
+  &lt;Listener <span class="nv">className</span><span class="o">=</span><span class="s2">"org.apache.catalina.core.JreMemoryLeakPreventionListener"</span> /&gt;
+  &lt;Listener <span class="nv">className</span><span class="o">=</span><span class="s2">"org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"</span> /&gt;
+
+  &lt;GlobalNamingResources&gt;
+    &lt;Resource <span class="nv">name</span><span class="o">=</span><span class="s2">"UserDatabase"</span> <span class="nv">auth</span><span class="o">=</span><span class="s2">"Container"</span>
+              <span class="nb">type</span><span class="o">=</span><span class="s2">"org.apache.catalina.UserDatabase"</span>
+              <span class="nv">description</span><span class="o">=</span><span class="s2">"User database that can be updated and saved"</span>
+              <span class="nv">factory</span><span class="o">=</span><span class="s2">"org.apache.catalina.users.MemoryUserDatabaseFactory"</span>
+              <span class="nv">pathname</span><span class="o">=</span><span class="s2">"conf/tomcat-users.xml"</span> /&gt;
+  &lt;/GlobalNamingResources&gt;
+
+  &lt;Service <span class="nv">name</span><span class="o">=</span><span class="s2">"Catalina"</span><span class="o">&gt;</span>
+    &lt;Connector <span class="nv">port</span><span class="o">=</span><span class="s2">"8105"</span> <span class="nv">protocol</span><span class="o">=</span><span class="s2">"HTTP/1.1"</span> <span class="nv">connectionTimeout</span><span class="o">=</span><span class="s2">"20000"</span> <span class="nv">redirectPort</span><span class="o">=</span><span class="s2">"8443"</span>  <span class="nv">URIEncoding</span><span class="o">=</span><span class="s2">"gbk"</span> <span class="nv">useBodyEncodingForURI</span><span class="o">=</span><span class="s2">"true"</span>/&gt;
+    &lt;Engine <span class="nv">name</span><span class="o">=</span><span class="s2">"Catalina"</span> <span class="nv">defaultHost</span><span class="o">=</span><span class="s2">"localhost"</span> <span class="nv">jvmRoute</span><span class="o">=</span><span class="s2">"s1"</span><span class="o">&gt;</span>
+
+      &lt;Realm <span class="nv">className</span><span class="o">=</span><span class="s2">"org.apache.catalina.realm.UserDatabaseRealm"</span>
+             <span class="nv">resourceName</span><span class="o">=</span><span class="s2">"UserDatabase"</span>/&gt;
+      &lt;Host <span class="nv">name</span><span class="o">=</span><span class="s2">"localhost"</span>  <span class="nv">appBase</span><span class="o">=</span><span class="s2">"webapps"</span>
+            <span class="nv">unpackWARs</span><span class="o">=</span><span class="s2">"false"</span> <span class="nv">autoDeploy</span><span class="o">=</span><span class="s2">"false"</span>
+            <span class="nv">xmlValidation</span><span class="o">=</span><span class="s2">"false"</span> <span class="nv">xmlNamespaceAware</span><span class="o">=</span><span class="s2">"false"</span><span class="o">&gt;</span>
+
+      &lt;/Host&gt;
+    &lt;/Engine&gt;
+  &lt;/Service&gt;
+&lt;/Server&gt;
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>从这个配置文件中可以看出来，该应用启动之后就去监听8105端口了。以上一个请求就可以顺利通过Nginx交给Tomcat应用来处理了。</p>
+
+<p>不过请求从来都是一来一回，至于服务器响应的数据怎么回到浏览器，估计是原路返回？这个我也暂时不确定，以后再来更新吧。</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/03/06/The-Excel-Way-notes/" data-toggle="tooltip" data-placement="top" title="Excel-《表格之道》的笔记">
+                        Previous<br>
+                        <span>Excel-《表格之道》的笔记</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/06/26/html-js-test/" data-toggle="tooltip" data-placement="top" title="这是一个测试jekyll上如何写html和js的测试页面">
+                        Next<br>
+                        <span>这是一个测试jekyll上如何写html和js的测试页面</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0025" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="35">技术相关</a>
+        
+                <a data-sort="0050" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0051" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="9">xin食</a>
+        
+                <a data-sort="0054" href="/archive/?tag=Linux" title="Linux" rel="6">Linux</a>
+        
+                <a data-sort="0054" href="/archive/?tag=Python" title="Python" rel="6">Python</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0057" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0057" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0057" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0057" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0058" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0058" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0058" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2021
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
