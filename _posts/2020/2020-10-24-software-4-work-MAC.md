@@ -39,6 +39,32 @@ tags:
 
 如果想要**临时**取消`$ brew install XXX`时默认触发的升级操作的话，可以执行该命令`$ export HOMEBREW_NO_AUTO_UPDATE=true`。
 
+```
+Steve@ZBMAC-C657521M local % brew list
+aom			fribidi			guile			libev			libsoxr			libxcb			node			python@3.9		tcl-tk			xz
+bdw-gc			gdbm			harfbuzz		libevent		libtasn1		libxdmcp		opencore-amr		rav1e			telnet			zeromq
+c-ares			gettext			icu4c			libffi			libtiff			libxext			openjpeg		readline		tesseract		zimg
+cairo			giflib			jemalloc		libidn2			libtool			libxrender		openssl@1.1		rtmpdump		theora
+dav1d			git			jmeter			libogg			libunistring		little-cms2		opus			rubberband		unbound
+ffmpeg			glib			jpeg			libpng			libvidstab		lzo			p11-kit			sdl2			webp
+flac			gmp			lame			libpthread-stubs	libvorbis		mpdecimal		pcre			snappy			x264
+fontconfig		gnutls			leptonica		libsamplerate		libvpx			mysql@5.7		pcre2			speex			x265
+freetype		gobject-introspection	libass			libsndfile		libx11			nettle			pixman			sqlite			xorgproto
+frei0r			graphite2		libbluray		libsodium		libxau			nghttp2			pkg-config		srt			xvid
+another-redis-desktop-manager                                                                                                  picgo
+Steve@ZBMAC-C657521M local % brew list jmeter
+/usr/local/Cellar/jmeter/5.3/bin/jmeter
+/usr/local/Cellar/jmeter/5.3/libexec/backups/ (20 files)
+/usr/local/Cellar/jmeter/5.3/libexec/bin/ (184 files)
+/usr/local/Cellar/jmeter/5.3/libexec/docs/ (2083 files)
+/usr/local/Cellar/jmeter/5.3/libexec/extras/ (20 files)
+/usr/local/Cellar/jmeter/5.3/libexec/lib/ (114 files)
+/usr/local/Cellar/jmeter/5.3/libexec/licenses/ (143 files)
+/usr/local/Cellar/jmeter/5.3/libexec/printable_docs/ (72 files)
+```
+
+- `brew upgrade jmeter`升级jmeter
+
 #### git
 
 [官网](https://git-scm.com/download/mac)已经给出了安装方式`$ brew install git`。
@@ -189,6 +215,10 @@ LICEcap是轻量级的gif录制软件，功能上没有Windows平台上独占的
 #### JMeter
 
 利用上面提到的`Homebrew`来安装。命令为：**brew install jmeter**。相关说明[参考](https://formulae.brew.sh/formula/jmeter)
+
+响应结果的中文若显示为乱码（不是一坨横线）的，需要在`/usr/local/Cellar/jmeter/5.0/libexec/bin`中的`jmeter.properties`文件进行如下设置`sampleresult.default.encoding=UTF-8`
+
+如果中文显示为一坨横线，则是语言与外观不兼容导致。处理方式为`JMeter->Options->Look and Feel->Metal`
 
 #### MySQL
 
