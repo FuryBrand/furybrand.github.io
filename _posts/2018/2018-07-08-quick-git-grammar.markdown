@@ -71,7 +71,7 @@ Git的背景在这里就不过多的交代了。Git可以说是当今使用范�
 | git push| 将本地修改推到远程仓库| |
 | git branch dev-xixi| 以当前分支创建一个dev-xixi的分支| 也可以用git checkout -b dev-xixi |
 | git branch -al| 查看本地及远程的所有分支| |
-| git remote -v| 查看git的服务器地址| |
+| git remote -v| 查看git的服务器地址| 使用q来退出 |
 | git remote show origin| 提供有关远程的一些信息| 也可以看到远程地址|
 | git help remote| 查看remote的详细说明| |
 | git blame -L 123,125 ./xixi/heihei.txt| 查看heihei.txt文件第123-125行最新的修改人及时间 | 去掉 -L也可以，就是查全文，按**q**来退出 |
