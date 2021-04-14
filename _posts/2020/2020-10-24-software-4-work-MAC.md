@@ -334,6 +334,10 @@ Or, if you don't want/need a background service you can just run:
 
 Mac的触控板和的方向非常诡异（手往左上移动，图片也往左上移动😓我想让ta往又下移动啊），在设置里反转之后，鼠标的滚轮居然也反了，干～.～。通过Scroll-Reverser完美解决。[Github地址](https://github.com/pilotmoon/Scroll-Reverser)、[官网地址](https://pilotmoon.com/scrollreverser/)
 
+#### keka
+
+7-zip官网上推荐的工具，我就用过给压缩包增加密码这样的简单功能。[官网](https://www.keka.io/en/)。[下载链接](https://d.keka.io/)
+
 #### 视频下载
 
 YouTube上的视频下载需要使用`youtube-dl`（[官网](http://ytdl-org.github.io/youtube-dl/index.html)[GitHub工程地址](https://github.com/ytdl-org/youtube-dl)）和`FFmpeg`（[官网](https://ffmpeg.org/)）。
@@ -391,3 +395,4 @@ Deleting original file 【これで決まり！】新井恵理那のふるさと
 - 2020年12月：追加The Unarchiver、JMeter、npm。
 - 2021年1月：追加drawio-desktop、Scroll-Reverser。
 - 2021年1月：追加视频下载。
+- 2021年4月：追加keka。
