@@ -53,8 +53,22 @@ WireMock是可以根据请求的内容做一些逻辑的，既请求内容不同
 
 内容不多，希望能有用。说实在的，因为也不是自己用，所以确实没有研究很深。顺便说下自己的技术观，常规工具类的东西，现用现学就行。类似nginx之类的高频使用的工具，可以尝试深挖一下。不过最好把时间用在底层原理，技术核心的学习上。新技术总是层出不穷，不可能都学完。但是新技术很多时候是为了解决某类问题而产生的，其底层技术都有一样的，所以底层技术要搞扎实。但是不是说不去“拥抱”新技术。要辩证的看，没有一种技术可以解决所有问题的。这也就需要了解新技术产生的历史，为什么来？怎么来？到哪去？
 
+## 实战记录
+
+下面的所有内容都保存在JMeter(Ver5.4.1)的jmx文件中了，下载后可以直接打开使用（[点我下载jmx文件]({{ site.url }}assets/2020/2020-07-27-wiremock-simple-guide/myJmeterTestPlanExplore.jmx)）。
+
+#### 请求url的正则匹配
+
+遇到一个接口发现请求url中带有加入了时间戳的token信息，于是需要被mock的接口可以支持正则匹配。设置与自测分别参考`[man][group01]setMessageRegex`和`[man][group01]getMessageRegex`。
+
+过程中用到的一些网站：
+- [官方手册](http://wiremock.org/docs/request-matching/)，参考“Regex matching on path and query”部分。
+- [stackoverflow上的一篇帖子](https://stackoverflow.com/questions/51085155/wiremock-not-matching-regex)
+- [一个贼强的正则工具网站](https://regex101.com/r/B3XACf/1)，看着很厉害，可以各种调试啥的，我就简单试了下我的正则是否能匹配上。
+
 ## 更新日志
 - 2020年7月27日：初稿。
+- 2021年5月6日：追加实战记录“请求url的正则匹配”
 
 ## 友链
 - [官网](http://wiremock.org/)
