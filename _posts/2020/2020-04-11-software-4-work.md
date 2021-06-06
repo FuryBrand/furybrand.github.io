@@ -29,6 +29,7 @@ tags:
 - 文件管理——Everything，找文件特别方便，而且很快。[官网](https://www.voidtools.com/)
 - 跨系统跨设备共享一套键鼠——Synergy，在局域网内可以跨系统共享一套键鼠，如果您有两个机器（如：Windows+Ubuntu），可以像连接扩展屏幕一样用一套键鼠来控制两个机器[官网](https://symless.com/synergy) [GitHub主页](https://github.com/symless/synergy-core)
 - 快捷启动器——Wox，`被誉为 Alfred 的 Windows 版最佳替代品`，通过Alt+Space激活一个文本框，可以实现快捷查找文件、应用启动器、网页检索、词典等功能。依赖`Everything`、`Python`。具体请看[GitHub主页](https://github.com/Wox-launcher/Wox)
+- IOS投屏工具——Free Airplay Receiver for windows，实现了Airplay的接收端功能，不只有windows版，还有Linux版等，方便手机演示内容用。具体请看[GitHub主页](https://github.com/xfirefly/Airplay-SDK/tree/master/windows-receiver)
 
 ## 数据库
 
