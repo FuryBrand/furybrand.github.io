@@ -23,6 +23,7 @@ tags:
 - 截图工具
 	1. snipaste，在同事FNN电脑上发现的，是聊天工具常见组件的加强版，有个牛逼的功能是可以讲截的图pin在页面上，用来做对比好用极了。[官网](https://www.snipaste.com/)
 	2. ShareX，安装之后键盘上的*PrintScreen*突然变得高频起来了，牛逼之处在于可以长截图。推测是锁定窗体之后模拟进行滚动实现的，推测哈，不一定是。不过安装就完事儿了对吧。[GitHub主页](https://github.com/ShareX/ShareX)
+	3. automatic-screenshotter，看名字就知道这是专门为“狠人”准备的工具。它的主要功能就是全自动截图，我是设置了每隔5s进行一次截图。由于我个人对记忆极其不信任，为了防止测试过程中的一些细节无法精准还原所以安装了个软件。[官网](https://www.donationcoder.com/software/mouser/popular-apps/automatic-screenshotter)
 - 剪贴板工具——Ditto，虽然win10自带了云同步剪贴板，这款工具实在是太强了。貌似可以无线记录复制过的文本和图片（我怕把硬盘搞爆了，所以设置了上限，不过上限有点大——999999999条😁所以记得把缓存文件的位置改下，我的缓存文件有18G.......）。能记录图片就很牛逼了，还支持文本的检索，那找之前复制过的测试环境服务器密码简直就是分分钟。[官网](https://ditto-cp.sourceforge.io/)
 - HOST切换工具——SwitchHosts，地球人都知道的快速切换本机Host文件的工具。[GitHub主页](https://github.com/oldj/SwitchHosts)
 - 录屏工具——ScreenToGif，可以录制屏幕并转换为Gif动图，同时可以进行简单的编辑，增加字幕等。简直就是报bug神器，Jira上可以直接预览，聊天工具基本也支持直接预览。语言描述很麻烦的问题，一个录屏就可以轻松描述。[GitHub主页](https://github.com/NickeManarin/ScreenToGif)
@@ -81,3 +82,4 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 - 2020年9月2日：追加JUDE
 - 2020年9月11日：追加AnotherRedisDesktopManager
 - 2021年2月：追加MySQL Workbench、DBeaver
+- 2021年6月：追加Free Airplay Receiver for windows、automatic-screenshotter
