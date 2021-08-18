@@ -123,6 +123,37 @@ $ firewall-cmd --permanent --remove-port=8080/tcp
 $ firewall-cmd --reload
 ```
 
+**2021年8月18日更新**
+
+关闭firewalld会引入别的问题，比如重启某个容器的时候会产生如下报错。
+
+```shell
+[root@Server-i-jwvdl9av3u ~]# docker restart fff8182066ff
+Error response from daemon: Cannot restart container fff8182066ff: driver failed programming external connectivity on endpoint mysql-v1 (b9de0189a32b84faab60c29fb8d9922b5eaeb6f684f231b8651534a0fe880847):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3358 -j DNAT --to-destination 172.17.0.3:3306 ! -i docker0: iptables: No chain/target/match by that name.
+```
+
+目前docker在宿主机上是以原生应用程序的方式运行的，docker在做镜像内和宿主机间的端口映射是通过一个名为docker0的interface来完成的（通过下面的ifconfig可以确认）。将该interface添加至firewalld的管理中就可以避免docker和firewalld的冲突。也就可以解决端口不通的问题。
+
+```shell
+[root@Server-i-jwvdl9av3u ~]# ifconfig
+docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+        inet6 fe80::42:3eff:fec6:d897  prefixlen 64  scopeid 0x20<link>
+        ether 02:42:3e:c6:d8:97  txqueuelen 0  (Ethernet)
+        RX packets 33235054040  bytes 47398854406962 (43.1 TiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 43848079027  bytes 12940616216545 (11.7 TiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+使用如下命令将interface docker0加入到firewalld的trusted zone
+
+```shell
+[root@Server-i-jwvdl9av3u ~]# firewall-cmd --permanent --zone=trusted --change-interface=docker0
+[root@Server-i-jwvdl9av3u ~]# firewall-cmd --reload
+```
+
+同时配合上面提到的firewalld的相关操作将端口开放即可彻底解决该问题。
 #### 5.3 错误3-admin账号无法访问
 
 本机的客户端连接的时候提示`Access denied for user 'admin'@'172.17.0.1' (using password: YES)`。本质就是需要进行特定ip的访问授权，但是奇怪的是root账号没有进行任何设置直接登录就没有问题。忘记在哪里看到的资料了，好像是MySQL的Docker镜像为了方便使用，给root默认开了各种情况下的访问授权。总之，咱还是先记录下处理过程吧
@@ -273,9 +304,11 @@ docker: Error response from daemon: driver failed programming external connectiv
 - [Docker离线部署images及启动容器](https://blog.csdn.net/little_pig_lxl/article/details/89499406)
 - [linux防火墙查看状态firewall、iptable](https://www.cnblogs.com/zxg-blog/p/9835263.html)
 - [stackoverflow：How do I edit a file after I shell to a Docker container?](https://stackoverflow.com/questions/30853247/how-do-i-edit-a-file-after-i-shell-to-a-docker-container)
+- [CentOS7, CentOS8 firewalld docker 端口映射问题，firewall开放端口后，还是不能访问，解决方案](https://www.jianshu.com/p/0767eca968e6)
 
 ## 更新日志
 
 - 2020年9月3日：初稿。
 - 2020年9月：增加`5.3 错误3-admin账号无法访问`、`nginx转发至多MySQL容器`、`设置MySQL不区分表名的大小写`
 - 2020年10月：增加`docker_start的诡异错误`，将`设置MySQL不区分表名的大小写`移走
+- 2021年8月18日：补充“5.2 错误2-端口不通”，待解决问题closed。
