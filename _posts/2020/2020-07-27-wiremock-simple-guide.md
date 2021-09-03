@@ -47,7 +47,7 @@ WireMock支持两种工作方式：
   - 使用Chrome的插件。[三方制作的插件在Chrome Webstore上的地址](https://chrome.google.com/webstore/detail/wiremock-extension/ikiaofdpbmofgmlhajfnhdjelkleljbl?utm_source=chrome-ntp-icon)
   - 使用WireMock自带的UI界面`http://localhost:8080/__admin/swagger-ui`
 
-WireMock是可以根据请求的内容做一些逻辑的，既请求内容不同，返回值也不同。具体设置方式还是参考[官网手册](http://wiremock.org/docs/request-matching/)。我这里附一个Postman的[导出文件]({{ site.url }}assets/2020/2020-07-27-wiremock-simple-guide/ExportFrom-liutianyu.postman_collection.json)，可以本地启动服务试一下。
+WireMock是可以根据请求的内容做一些逻辑的，既请求内容不同，返回值也不同。具体设置方式还是参考[官网手册](http://wiremock.org/docs/request-matching/)。我这里附一个Postman的[导出文件的压缩包]({{ site.url }}assets/2020/2020-07-27-wiremock-simple-guide/ExportFrom-liutianyu.postman_collection.zip)，可以本地启动服务试一下。
 
 ## 后记
 
@@ -55,7 +55,7 @@ WireMock是可以根据请求的内容做一些逻辑的，既请求内容不同
 
 ## 实战记录
 
-下面的所有内容都保存在JMeter(Ver5.4.1)的jmx文件中了，下载后可以直接打开使用（[点我下载jmx文件]({{ site.url }}assets/2020/2020-07-27-wiremock-simple-guide/myJmeterTestPlanExplore.jmx)）。
+下面的所有内容都保存在JMeter(Ver5.4.1)的jmx文件中了，下载解压后可以直接打开使用（[点我下载jmx文件压缩包]({{ site.url }}assets/2020/2020-07-27-wiremock-simple-guide/myJmeterTestPlanExplore.zip)）。
 
 #### 请求url的正则匹配
 

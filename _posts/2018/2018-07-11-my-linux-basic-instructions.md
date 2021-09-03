@@ -18,12 +18,9 @@ tags:
 | - | - | -
 |pwd |显示当前路径 |
 |mv |重命名或移动 | -f 强制移动，若有重名文件直接覆盖
-|cp |复制 |-r 递归将子文件全部复制 
+|cp |复制（文件名支持通配符） |-r 递归将子文件全部复制
 |mkdir |创建文件夹 | -p 递归创建所有需要的目录
 |/sbin/ifconfig |获取ip地址 | 
-|zip -r mydata.zip mydata |把当前目录下面的mydata目录压缩为mydata.zip| 
-|unzip |解压zip文件。unzip xx.zip | 
-|tar |将文件压缩成tar文件| 
 |df -h |以磁盘分区为单位查看磁盘使用量 | 
 |du -sh ./ |获取当前目录的大小 |
 |du -h ./ |获取当前目录的下所有文件夹的大小（含子文件夹） | 
@@ -69,8 +66,10 @@ tags:
 
 | 命令 | 简介 | 备注 
 | - | - | - 
-|tar -cvjpf etc.tar.bz2 ./ngin |打包 |
-|tar -xvjf　etc.tar.bz2 |解压缩 |
+|tar -czvf test.tar.gz a |压缩 a.c文件为test.tar.gz |
+|tar -xzvf test.tar.gz |解压缩 |
+|zip -r mydata.zip mydata |把当前目录下面的mydata目录压缩为mydata.zip| 
+|unzip |解压zip文件。unzip xx.zip | 
 
 ## 裁切字符串
 
@@ -107,11 +106,12 @@ ${phone%%-*}    #输出666
 |ll &#124; less |针对文件夹内文件很多的情况，这样就可以显示全了 |
 
 ## SCP
-scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令。本地←→远程
+scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令。本地←→远程双向拷贝。前一个路径为源文件，后一个路径为目标文件
 
 | 命令 | 简介 | 备注 
 | - | - | - 
 |scp -P 2181 /etc/hosts root@10.182.74.205:/etc/ | 将本机的host文件通过2181端口以root权限复制到指定机器的/etc/目录下 |
+|scp -P 2181 root@10.182.74.205:/etc/hosts /root | 将远程服务器的host文件通过2181端口复制本机/root目录下 |
 
 ## lrzsz
 [lrzsz官网](http://freecode.com/projects/lrzsz/)<br>
