@@ -48,6 +48,7 @@ SSH工具PuTTY就挺带劲了，但是比起MobaXterm或者XShell来，缺少连
 
 1. SuperPuTTY，支持了多窗口，连接可以借助文件夹以树状形式存储。并且可以支持保存密码。（以明文保存密码，其实有些不安全，但是测试环境的话就问题不大。同时明文的话后续也好找，不会忘了密码）但是不支持文件传输。追加一下密码的保存方式，因为本质还是用的PuTTY，所以其实是用PuTTY的命令行来保存密码。即在**Extra PuTTY Auguments**中填入<b>-pw&nbsp;&nbsp;liutianyu@!U</b>[GitHub主页](https://github.com/jimradford/superputty)
 2. mRemoteNG，功能基本和SuperPuTTY相同，但是密码是以密文保存的。同时支持上传文件到远程服务器。[GitHub主页](https://github.com/mRemoteNG/mRemoteNG)
+3. Tera Term，没有深度使用过，就是下来试了下。反正可以用就是了。[Tera Term官网](https://ttssh2.osdn.jp/index.html.en)
 
 ## SFTP/FTP
 
@@ -76,6 +77,10 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 
 1. JUDE，小巧实用，最后一个社区版是5.5.2。[下载链接]({{ site.url }}assets/2020/2020-04-11-software-4-work/JUDE-Community-5-5-2.zip)
 
+## 系统工具
+1. Rufus, a free and open source USB stick writing tool。Ubuntu官网推荐的制作U盘启动盘的工具。[官网](https://rufus.ie/) 
+
+
 ## 更新日志
 - 2020年4月11日：初稿。
 - 2020年7月27日：追加Wox和synergy
@@ -83,3 +88,4 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 - 2020年9月11日：追加AnotherRedisDesktopManager
 - 2021年2月：追加MySQL Workbench、DBeaver
 - 2021年6月：追加Free Airplay Receiver for windows、automatic-screenshotter
+- 2021年9月：追加Rufus
