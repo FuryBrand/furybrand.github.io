@@ -112,6 +112,7 @@ scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令�
 | - | - | - 
 |scp -P 2181 /etc/hosts root@10.182.74.205:/etc/ | 将本机的host文件通过2181端口以root权限复制到指定机器的/etc/目录下 |
 |scp -P 2181 root@10.182.74.205:/etc/hosts /root | 将远程服务器的host文件通过2181端口复制本机/root目录下 |
+|scp -r -P 2181 root@10.182.74.205:/root /root | 将远程服务器/root下的所有文件及文件夹通过2181端口复制到本机/root目录下 |
 
 ## lrzsz
 [lrzsz官网](http://freecode.com/projects/lrzsz/)<br>
