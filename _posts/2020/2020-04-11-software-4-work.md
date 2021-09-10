@@ -79,6 +79,7 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 
 ## 系统工具
 1. Rufus, a free and open source USB stick writing tool。Ubuntu官网推荐的制作U盘启动盘的工具。[官网](https://rufus.ie/) 
+2. Wireless Network Watcher，可以查看同一局域网下全部计算机或设备，会显示IP地址、MAC地址、制造网卡的公司。[官网](https://www.nirsoft.net/utils/wireless_network_watcher.html)。我下了一份做备份，[下载链接]({{ site.url }}assets/2020/2020-04-11-software-4-work/wnetwatcher.zip)
 
 
 ## 更新日志
@@ -88,4 +89,4 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 - 2020年9月11日：追加AnotherRedisDesktopManager
 - 2021年2月：追加MySQL Workbench、DBeaver
 - 2021年6月：追加Free Airplay Receiver for windows、automatic-screenshotter
-- 2021年9月：追加Rufus
+- 2021年9月：追加Rufus、Wireless Network Watcher
