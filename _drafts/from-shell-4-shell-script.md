@@ -8,7 +8,7 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Linux
-    - 技术
+    - 技术相关
 ---
 
 本质上是《鸟哥的Linux私房菜》第三部分的内容，以前小打小闹写过一些，但是这次想系统的学习下。契机是想写一个用于备份mysql的shell script。对我来说虽然用python来写可能编写的效率更高，但是服务器端往往是python2，总归就是麻烦。正好可以系统的学习下shell script也挺好。需要系统学习的朋友右拐去[鸟站](https://linux.vbird.org/linux_basic/centos7/0320bash.php)吧，我这就记录些精简的“干货”。
