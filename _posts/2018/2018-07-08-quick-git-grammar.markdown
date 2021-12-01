@@ -183,8 +183,8 @@ Command line instructions
 You can also upload existing files from your computer using the instructions below.
 
 Git global setup
-git config --global user.name "liuwuxin1"
-git config --global user.email "liuwuxin@jd.com"
+git config --global user.name "liutianyu"
+git config --global user.email "liutianyu@x.com"
 
 Create a new repository
 git clone git@git.jd.com:class6/itat-auto-test.git
@@ -210,8 +210,81 @@ git push -u origin --all
 git push -u origin --tags
 ```
 
+## 删除所有提交记录
+
+因为拿git当作笔记软件，时间久了提交记录越来越多会导致.git文件夹非常臃肿（主要是存了一些二进制文件，我承认我的路子有点野，但是在内网同步盘不可用的情况下，git貌似是唯一的好用的云笔记选择了）
+下面的步骤是
+
+```shell
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace
+$ mv furybrand/ furybrand1
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace
+$ mkdir furybrand
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace
+$ cd furybrand
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand
+$ git init
+Initialized empty Git repository in D:/myWorkspace/furybrand/.git/
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ vi README.md
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ cp ../furybrand1/.git
+./          ../         .git/       .gitignore  .vscode/
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ cp ../furybrand1/.git/co
+COMMIT_EDITMSG  config
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ cp ../furybrand1/.git/co
+COMMIT_EDITMSG  config
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ cp ../furybrand1/.git/config ./.git/
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ git add .
+warning: LF will be replaced by CRLF in README.md.
+The file will have its original line endings in your working directory
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ git commit -m "Initial commit"
+[master (root-commit) 54d05a4] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ git push -f --set-upstream origin master
+info: detecting host provider for ''...
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 210 bytes | 210.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: Coding: Checking the pushed content...
+remote: Updating references: 100% (1/1)
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ cp ../furybrand1/* ./ -r
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ git add .
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ git commit -m "go"
+[master 3e207dc] go
+ 142 files changed, 428831 insertions(+), 1 deletion(-)
+ create mode 100644 PRODUCT/README.md
+ create mode 100644 temp.md
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand (master)
+$ git push
+info: detecting host provider for ''...
+Enumerating objects: 164, done.
+Counting objects: 100% (164/164), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (161/161), done.
+Writing objects: 100% (163/163), 89.59 MiB | 1.59 MiB/s, done.
+Total 163 (delta 10), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (10/10)
+remote: Coding: Checking the pushed content...
+remote: Updating references: 100% (1/1)
+   54d05a4..3e207dc  master -> master
+```
+
 ## 更新日志
-2020年9月23日：追加回滚操作
+- 2020年9月23日：追加回滚操作
+- 2021年12月1日：追加“删除所有提交记录”
 
 [Github]: https://github.com/
 [vsts]: https://visualstudio.microsoft.com/zh-hans/team-services/
