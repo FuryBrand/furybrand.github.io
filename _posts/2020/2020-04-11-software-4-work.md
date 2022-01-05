@@ -82,6 +82,20 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 1. Rufus, a free and open source USB stick writing tool。Ubuntu官网推荐的制作U盘启动盘的工具。[官网](https://rufus.ie/) 
 2. Wireless Network Watcher，可以查看同一局域网下全部计算机或设备，会显示IP地址、MAC地址、制造网卡的公司。[官网](https://www.nirsoft.net/utils/wireless_network_watcher.html)。我下了一份做备份，[下载链接]({{ site.url }}assets/2020/2020-04-11-software-4-work/wnetwatcher.zip)
 
+## Windows10小技巧
+
+### “微软拼音输入法”输入时间戳
+
+Windows 设置 ➡ 时间和语言 ➡ 语言 ➡ 中文(中华人民共和国) ➡ 选项 ➡ 微软拼音 ➡ 选项 ➡ 词库和自学习 ➡ 添加或编辑自定义短语 ➡ 添加
+
+然后拼音和短语，短语提供两个如下范例：
+```
+%yyyy%-%MM%-%dd% %HH%:%mm%:%ss%
+%yyyy%%MM%%dd%_%HH%%mm%%ss%
+```
+
+第一个输出格式样例为`2022-01-05 12:31:09`。第二个输出的格式样例为`20220105_123151`。
+
 
 ## 更新日志
 - 2020年4月11日：初稿。
@@ -91,3 +105,4 @@ Windows10 好像为了游戏直播还是啥所以具备了录屏功能，但是�
 - 2021年2月：追加MySQL Workbench、DBeaver
 - 2021年6月：追加Free Airplay Receiver for windows、automatic-screenshotter
 - 2021年9月：追加Rufus、Wireless Network Watcher
+- 2022年1月：追加“微软拼音输入法”输入时间戳
