@@ -243,7 +243,8 @@ graph LR
 
 
 ## 查看系统资源占用相关命令
-[鸣谢](https://www.cnblogs.com/chengJAVA/p/6115061.html)
+[鸣谢1](https://www.cnblogs.com/chengJAVA/p/6115061.html)
+[鸣谢2](https://www.cnblogs.com/x123811/p/7488167.html)
 
 | 命令 | 简介 | 备注 
 | - | - | - 
@@ -252,6 +253,22 @@ graph LR
 |ps auxw&#124;head -1;ps auxw&#124;sort -rn -k3&#124;head -5 |查看CPU占用前五的进程 | 
 |top |查看系统整体的负载情况 | 
 |ps -ef &#124; grep xixi &#124; grep -v 'grep' &#124; awk '{print $2}' |输出xixi相关的进程的PID |可以配合for循环加kill -9就清理调相关的进程
+
+#### 查看CPU信息
+
+```shell
+# 总核数 = 物理CPU个数 X 每颗物理CPU的核数 
+# 总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数
+
+# 查看物理CPU个数
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+
+# 查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+
+# 查看逻辑CPU的个数
+cat /proc/cpuinfo| grep "processor"| wc -l
+```
 
 ## CentOS7的默认防火墙firewall
 
