@@ -298,6 +298,131 @@ $ firewall-cmd --permanent --remove-port=8080/tcp
 $ firewall-cmd --reload
 ```
 
+## ubuntu18.04磁盘初始化及挂载
+[参考](https://blog.csdn.net/poisonchry/article/details/120475971)
+
+```shell
+root@ubuntu:~# fdisk -l
+Disk /dev/vda: 40 GiB, 42949672960 bytes, 83886080 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xb913566a
+
+Device     Boot Start      End  Sectors Size Id Type
+/dev/vda1  *     2048 83884031 83881984  40G 83 Linux
+
+
+Disk /dev/vdb: 500 GiB, 536870912000 bytes, 1048576000 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+root@ubuntu:~# fdisk /dev/vdb
+
+Welcome to fdisk (util-linux 2.31.1).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table.
+Created a new DOS disklabel with disk identifier 0xe0b399a9.
+
+Command (m for help): n
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (2048-1048575999, default 2048): 
+Last sector, +sectors or +size{K,M,G,T,P} (2048-1048575999, default 1048575999): 
+
+Created a new partition 1 of type 'Linux' and of size 500 GiB.
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+root@ubuntu:~# q
+
+Command 'q' not found, but can be installed with:
+
+snap install q                       # version 1.6.3-1, or
+apt  install python-q-text-as-data 
+apt  install python3-q-text-as-data
+
+See 'snap info q' for additional versions.
+
+root@ubuntu:~# fdisk -l
+Disk /dev/vda: 40 GiB, 42949672960 bytes, 83886080 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xb913566a
+
+Device     Boot Start      End  Sectors Size Id Type
+/dev/vda1  *     2048 83884031 83881984  40G 83 Linux
+
+
+Disk /dev/vdb: 500 GiB, 536870912000 bytes, 1048576000 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe0b399a9
+
+Device     Boot Start        End    Sectors  Size Id Type
+/dev/vdb1        2048 1048575999 1048573952  500G 83 Linux
+root@ubuntu:~# df -lh
+Filesystem      Size  Used Avail Use% Mounted on
+udev             32G     0   32G   0% /dev
+tmpfs           6.3G  8.8M  6.3G   1% /run
+/dev/vda1        40G  4.5G   33G  13% /
+tmpfs            32G   16K   32G   1% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs            32G     0   32G   0% /sys/fs/cgroup
+tmpfs           6.3G     0  6.3G   0% /run/user/0
+root@ubuntu:/mnt# mkfs.ext4 /dev/vdb1
+mke2fs 1.44.1 (24-Mar-2018)
+Creating filesystem with 131071744 4k blocks and 32768000 inodes
+Filesystem UUID: 21054d6d-ab15-4766-83e5-f85479f5124c
+Superblock backups stored on blocks: 
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+        4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+        102400000
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done     
+
+root@ubuntu:/mnt# 
+root@ubuntu:/mnt# mount /dev/vdb1 /mnt/vdb1
+root@ubuntu:/mnt# df -lh
+Filesystem      Size  Used Avail Use% Mounted on
+udev             32G     0   32G   0% /dev
+tmpfs           6.3G  8.8M  6.3G   1% /run
+/dev/vda1        40G  4.5G   33G  13% /
+tmpfs            32G   16K   32G   1% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs            32G     0   32G   0% /sys/fs/cgroup
+tmpfs           6.3G     0  6.3G   0% /run/user/0
+/dev/vdb1       492G   73M  467G   1% /mnt/vdb1
+root@bianyuanyun:/mnt# cat /etc/fstab
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/vda1 during installation
+UUID=af9f46d3-4314-44ae-b2bf-baba80ae6dfd /               ext4    errors=remount-ro 0       1
+/dev/vdb1 /mnt ext4 defaults 0 1
+```
+
+
 ## 批量解压文件到压缩包文件名的文件夹中
 
 ```
@@ -315,3 +440,4 @@ done
 - 2020年9月：增加firewall
 - 2020年11月：整理vim
 - 2021年1月：批量解压
+- 2022年1月：查看CPU信息、ubuntu18.04磁盘初始化及挂载
