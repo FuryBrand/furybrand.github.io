@@ -383,6 +383,14 @@ liutianyu@ZMC Downloads % youtube-dl --write-sub --all-subs --write-auto-sub -f 
 [ffmpeg] Merging formats into "【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.mp4"
 Deleting original file 【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.f136.mp4 (pass -k to keep)
 Deleting original file 【これで決まり！】新井恵理那のふるさとの味をご紹介！　恵理那とラピスの部屋#17-zFQV0kw5saM.f140.m4a (pass -k to keep)
+# 下载文件的命名
+youtube-dl -o '%(uploader)s_%(upload_date)s_%(playlist)s.%(ext)s_%(title)s' [url]
+
+# 指定最佳格式
+youtube-dl -f bestvideo+bestaudio [url]
+
+# 指定txt的url文件
+youtube-dl -a url.txt
 ```
 
 更多的使用方式[【备份】youtube-dl使用介绍](https://www.jianshu.com/p/6bae57859325)
