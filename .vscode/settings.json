@@ -1,0 +1,9 @@
+{
+    "jupyter.jupyterServerType": "local",
+    "workbench.editorAssociations": {
+        "*.md": "default"
+    },
+    "editor.wordWrap": "on",
+    "pasteImage.path": "${currentFileDir}/assets",
+    "pasteImage.showFilePathConfirmInputBox": true
+}
