@@ -9,3 +9,4 @@ This application of machine to machine communication allowed operators to make s
 This idea of being online was quickly adapted and advanced by universities in the following years as they understood the potential of computer networking.
 The thing that makes the computer communication network special is that it puts the workers that be the team members who are geographically distributed in touch not only with one another but with the information base with which they work all the time and this is obviously going to make a tremendous difference in how we plan organize and execute almost everything of any intellectual consequence.
 If we get into mode in which everything is handled electronically and your only identification is I'm going to plastic then you stick into the machinery 
+
