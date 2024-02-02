@@ -11,6 +11,9 @@ tags:
     - JS
 ---
 
+<input type="button" value="今天去哪吃" onclick="where2eat()">
+
+
 ```mermaid!
 pie title Pets adopted by volunteers
   "Dogs" : 386
@@ -177,6 +180,7 @@ return content - 1 + 1;
     版本信息：
     Ver0.4：去掉了异常输入校验，增加了对chrome的兼容性。
 </p>
+
 <script type="text/javascript">
     /* function checkSendpay(){
         var sendpay = document.getElementById("sendpay").value;
@@ -231,5 +235,45 @@ return content - 1 + 1;
         var sendpay = document.getElementById("sendpay").value;
         var loc = document.getElementById("getLoc").value;
         alert(sendpay.charAt(loc));
+    }
+    function where2eat(){
+        // 食堂及其对应的权重
+        const diningOptions = {
+            'A3': 1,
+            'A4': 1,
+            'B3': 1,
+            'B4': 1,
+            'B5': 1,
+            'C3': 1,
+            'C4': 1,
+            'A5': 1
+        };
+
+        // 计算总权重
+        const totalWeight = Object.values(diningOptions).reduce((sum, weight) => sum + weight, 0);
+
+        // 根据权重调整概率分布
+        const probabilityDistribution = Object.fromEntries(
+            Object.entries(diningOptions).map(([diningHall, weight]) => [diningHall, (weight / totalWeight).toFixed(2)])
+        );
+
+        // 随机选择食堂
+        function chooseDiningHall() {
+            // 生成一个随机数来选择食堂
+            const randomNumber = Math.random();
+            let currentSum = 0;
+
+            // 遍历概率分布，直到随机数被消耗完
+            for (const [diningHall, probability] of Object.entries(probabilityDistribution)) {
+                currentSum += parseFloat(probability);
+                if (randomNumber <= currentSum) {
+                    return diningHall;
+                }
+            }
+        }
+
+        // 选择一个食堂
+        const chosenDiningHall = chooseDiningHall();
+        alert(`今天去 ${chosenDiningHall} 吃!`);
     }
 </script>
