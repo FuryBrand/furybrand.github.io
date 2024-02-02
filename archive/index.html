@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Archive - For Love To Love">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="利而不害 為而不爭">
+    
+    <meta property="og:image" content="http://furybrand.gitee.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.gitee.io//archive/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>Archive - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.gitee.io//archive/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- 
+Credits: this page shamelessly borrowed a lot from:
+https://github.com/kitian616/jekyll-TeXt-theme
+-->
+<!-- Page Header -->
+
+
+
+
+
+
+
+<header class="intro-header" style="background-image: url('/img/tag-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="site-heading" id="tag-heading">
+        
+          <h1>Archive</h1>
+          <span class="subheading">利而不害 為而不爭</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<!-- Tags (as filter) -->
+			<div id="tag_cloud" class="tags tags-sup js-tags">
+				<a class="tag-button--all" data-encode="">
+					Show All
+					<sup>65</sup>
+				</a>
+
+				
+        
+				
+				
+				
+				<a data-sort="0028" data-encode="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" class="tag-button" title="技术相关" rel="37">
+					技术相关
+					<sup>37</sup>
+				</a>
+				
+				<a data-sort="0054" data-encode="xin%E9%A3%9F" class="tag-button" title="xin食" rel="11">
+					xin食
+					<sup>11</sup>
+				</a>
+				
+				<a data-sort="0055" data-encode="%E6%9D%82%E6%96%87" class="tag-button" title="杂文" rel="10">
+					杂文
+					<sup>10</sup>
+				</a>
+				
+				<a data-sort="0058" data-encode="Linux" class="tag-button" title="Linux" rel="7">
+					Linux
+					<sup>7</sup>
+				</a>
+				
+				<a data-sort="0059" data-encode="Python" class="tag-button" title="Python" rel="6">
+					Python
+					<sup>6</sup>
+				</a>
+				
+				<a data-sort="0062" data-encode="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" class="tag-button" title="我眼中的世界-拍拍照" rel="3">
+					我眼中的世界-拍拍照
+					<sup>3</sup>
+				</a>
+				
+				<a data-sort="0062" data-encode="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" class="tag-button" title="我眼中的世界-码码字" rel="3">
+					我眼中的世界-码码字
+					<sup>3</sup>
+				</a>
+				
+				<a data-sort="0062" data-encode="JS" class="tag-button" title="JS" rel="3">
+					JS
+					<sup>3</sup>
+				</a>
+				
+				<a data-sort="0062" data-encode="MySQL" class="tag-button" title="MySQL" rel="3">
+					MySQL
+					<sup>3</sup>
+				</a>
+				
+				<a data-sort="0062" data-encode="Nginx" class="tag-button" title="Nginx" rel="3">
+					Nginx
+					<sup>3</sup>
+				</a>
+				
+				<a data-sort="0062" data-encode="Windows" class="tag-button" title="Windows" rel="3">
+					Windows
+					<sup>3</sup>
+				</a>
+				
+				<a data-sort="0063" data-encode="%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" class="tag-button" title="授权转载" rel="2">
+					授权转载
+					<sup>2</sup>
+				</a>
+				
+				<a data-sort="0063" data-encode="%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" class="tag-button" title="摄影学习" rel="2">
+					摄影学习
+					<sup>2</sup>
+				</a>
+				
+				<a data-sort="0063" data-encode="Docker" class="tag-button" title="Docker" rel="2">
+					Docker
+					<sup>2</sup>
+				</a>
+				
+				<a data-sort="0063" data-encode="Java" class="tag-button" title="Java" rel="2">
+					Java
+					<sup>2</sup>
+				</a>
+				
+				<a data-sort="0063" data-encode="macOS" class="tag-button" title="macOS" rel="2">
+					macOS
+					<sup>2</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="%E5%8A%9E%E5%85%AC" class="tag-button" title="办公" rel="1">
+					办公
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="%E6%8A%80%E6%9C%AF" class="tag-button" title="技术" rel="1">
+					技术
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90" class="tag-button" title="持续集成" rel="1">
+					持续集成
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95" class="tag-button" title="测试方法" rel="1">
+					测试方法
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="%E8%B4%A2%E5%8A%A1" class="tag-button" title="财务" rel="1">
+					财务
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="%E9%9D%A2%E8%AF%95" class="tag-button" title="面试" rel="1">
+					面试
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="Fiddler" class="tag-button" title="Fiddler" rel="1">
+					Fiddler
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="Git" class="tag-button" title="Git" rel="1">
+					Git
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="HTTP" class="tag-button" title="HTTP" rel="1">
+					HTTP
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="JMeter" class="tag-button" title="JMeter" rel="1">
+					JMeter
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="Maven" class="tag-button" title="Maven" rel="1">
+					Maven
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="Mock" class="tag-button" title="Mock" rel="1">
+					Mock
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="Postman" class="tag-button" title="Postman" rel="1">
+					Postman
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="Selenium" class="tag-button" title="Selenium" rel="1">
+					Selenium
+					<sup>1</sup>
+				</a>
+				
+				<a data-sort="0064" data-encode="xin%E9%98%85" class="tag-button" title="xin阅" rel="1">
+					xin阅
+					<sup>1</sup>
+				</a>
+			</div>
+
+            <!-- Article List -->
+			<div class="mini-post-list js-result d-none">
+<section>
+				<span class="fa listing-seperator">
+					<span class="tag-text">2022</span>
+				</span><div class="post-preview item" data-tags="xin%E9%98%85">
+				    <a href="/2022/02/10/reading-note-how-to-read-a-book/">
+				        <h2 class="post-title">
+                            xin阅:《如何阅读一本书》
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div></section><section>
+				<span class="fa listing-seperator">
+					<span class="tag-text">2021</span>
+				</span><div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2021/09/05/braised-pork-with-brown-sauce/">
+				        <h2 class="post-title">
+                            xin食:红烧肉
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2021/09/05/stewed-spare-ribs-with-green-bean/">
+				        <h2 class="post-title">
+                            xin食:豆角炖排骨
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF,Linux">
+				    <a href="/2021/08/30/tx2-flash/">
+				        <h2 class="post-title">
+                            记录TX2开发板刷机
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="JMeter,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2021/03/17/use-jmeter-2-replace-postman/">
+				        <h2 class="post-title">
+                            用JMeter替换Postman
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            JMeter简易入门指南
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,Nginx">
+				    <a href="/2021/03/09/nginx-config-file/">
+				        <h2 class="post-title">
+                            记一场关于Nginx配置文件及网络问题排查步骤的分享
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="JS,%E8%B4%A2%E5%8A%A1">
+				    <a href="/2021/02/17/finance-calculator/">
+				        <h2 class="post-title">
+                            财务计算器
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div></section><section>
+				<span class="fa listing-seperator">
+					<span class="tag-text">2020</span>
+				</span><div class="post-preview item" data-tags="JS,%E6%9D%82%E6%96%87,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/12/25/test-case-template/">
+				        <h2 class="post-title">
+                            一种用于应对灵活变化的测试用例模版
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            测试用例模版之我见
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,macOS">
+				    <a href="/2020/11/02/make-mac-better/">
+				        <h2 class="post-title">
+                            MacOS-一些使用小技巧
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,MySQL,Docker">
+				    <a href="/2020/10/26/mysql-ops/">
+				        <h2 class="post-title">
+                            MySQL-环境问题汇总
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%9D%82%E6%96%87,macOS,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/10/24/software-4-work-MAC/">
+				        <h2 class="post-title">
+                            记从Windows办公迁移至MAC办公
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            MacOS软件推荐
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/10/12/honey-pomelo-tea/">
+				        <h2 class="post-title">
+                            xin食:蜂蜜柚子茶
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95,%E6%9D%82%E6%96%87">
+				    <a href="/2020/10/09/exception-checkpoints/">
+				        <h2 class="post-title">
+                            讨论如何覆盖异常
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,Linux">
+				    <a href="/2020/10/09/yum-apt/">
+				        <h2 class="post-title">
+                            Linux-yum与apt(我要用啥去管理软件？)
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,Python">
+				    <a href="/2020/09/27/python-virtualenv/">
+				        <h2 class="post-title">
+                            Python-virtualenv
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90">
+				    <a href="/2020/09/23/build-gh-pages-by-gh-actions/">
+				        <h2 class="post-title">
+                            利用Github Actions来构建发布Github Pages
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/09/15/norimaki-toufu-no-teriyaki/">
+				        <h2 class="post-title">
+                            xin食:日式照烧海苔豆腐
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="MySQL,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/09/10/mysql-export-import-backup-restore/">
+				        <h2 class="post-title">
+                            MySQL的导入与导出、备份与还原
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/09/06/Stewed-Beef-Brisket-with-tomato-and-potato-and-carrot/">
+				        <h2 class="post-title">
+                            xin食:番茄土豆胡萝卜炖牛腩
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/09/05/Pork-with-Spicy-Cabbage/">
+				        <h2 class="post-title">
+                            xin食:辣白菜五花肉
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="MySQL,Docker,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/09/03/mysql-by-docker/">
+				        <h2 class="post-title">
+                            记一次在测试环境云服务器上搭建运行在Docker中的MySQL
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD,Nginx,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/09/02/nginx/">
+				        <h2 class="post-title">
+                            T-记一次Nginx分享
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/08/19/susi/">
+				        <h2 class="post-title">
+                            xin食:寿司(主食)
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E9%9D%A2%E8%AF%95,%E6%9D%82%E6%96%87,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/08/09/SDET-guide-for-junior-interviewer/">
+				        <h2 class="post-title">
+                            【测试开发工程师】新人面试官生存指南——一些面试经验分享
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD,Maven,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,Java">
+				    <a href="/2020/08/08/maven/">
+				        <h2 class="post-title">
+                            T-记一次Maven分享
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Fiddler,HTTP,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/07/30/fiddler-simple-guide/">
+				        <h2 class="post-title">
+                            HTTP代理调试工具——Fiddler简易实践
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Mock,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/07/27/wiremock-simple-guide/">
+				        <h2 class="post-title">
+                            HTTP接口的Mock工具——WireMock简易手册
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,Windows">
+				    <a href="/2020/06/02/bat-notes/">
+				        <h2 class="post-title">
+                            bat的使用笔记
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,%E6%9D%82%E6%96%87">
+				    <a href="/2020/05/20/Notes-dataStructure-and-algorithm/">
+				        <h2 class="post-title">
+                            《重学数据结构与算法》的学习笔记
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%9D%82%E6%96%87,Windows,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2020/04/11/software-4-work/">
+				        <h2 class="post-title">
+                            工欲善其事必先利其器
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            工程师的推荐软件(Windows)
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/04/06/spiced-beef/">
+				        <h2 class="post-title">
+                            xin食:酱牛肉(正菜)
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/04/06/curried-chicken/">
+				        <h2 class="post-title">
+                            xin食:咖喱鸡块(主食)
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F">
+				    <a href="/2020/04/05/xin-mi-lu/">
+				        <h2 class="post-title">
+                            xin食:xin米露(甜品)
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="xin%E9%A3%9F,%E6%9D%82%E6%96%87">
+				    <a href="/2020/03/26/xin-shi/">
+				        <h2 class="post-title">
+                            新栏目：xin食
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            开启或快手，或无需厨艺的极简料理篇章
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div></section><section>
+				<span class="fa listing-seperator">
+					<span class="tag-text">2019</span>
+				</span><div class="post-preview item" data-tags="%E6%9D%82%E6%96%87,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2019/11/30/5G-vscode-online/">
+				        <h2 class="post-title">
+                            5G和VSCodeOnline
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Postman,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2019/10/09/postman-small-tricks/">
+				        <h2 class="post-title">
+                            Postman-几个小把戏
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Selenium,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2019/09/10/selenium-first-exploration/">
+				        <h2 class="post-title">
+                            Selenium初探
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97">
+				    <a href="/2019/08/11/nagoya-tokyo/">
+				        <h2 class="post-title">
+                            七泊八日的名古屋东京之行
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%9D%82%E6%96%87,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2019/07/13/impressions-of-MSTC2019/">
+				        <h2 class="post-title">
+                            测试团队如何更好的的保证软件产品质量——MTSC2019有感
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0">
+				    <a href="/2019/06/30/1128006-notes-2/">
+				        <h2 class="post-title">
+                            《手机摄影达人速成》的学习笔记（下）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0">
+				    <a href="/2019/06/30/1128006-notes/">
+				        <h2 class="post-title">
+                            《手机摄影达人速成》的学习笔记（上）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7">
+				    <a href="/2019/06/29/1905YanBian/">
+				        <h2 class="post-title">
+                            1905延边
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="JS">
+				    <a href="/2019/06/26/html-js-test/">
+				        <h2 class="post-title">
+                            这是一个测试jekyll上如何写html和js的测试页面
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Linux,Nginx,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2019/03/12/Linux-Nginx-Tomcat-small-talk/">
+				        <h2 class="post-title">
+                            Linux-浅谈Nginx的反向代理 即http请求经历了什么😀
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E5%8A%9E%E5%85%AC,Windows">
+				    <a href="/2019/03/06/The-Excel-Way-notes/">
+				        <h2 class="post-title">
+                            Excel-《表格之道》的笔记
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Java,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2019/03/03/Java-MessageFormat/">
+				        <h2 class="post-title">
+                            Java-用MessageFormat来替换占位符
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div></section><section>
+				<span class="fa listing-seperator">
+					<span class="tag-text">2018</span>
+				</span><div class="post-preview item" data-tags="Linux,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/12/16/kali-linux-live-USB-persistence/">
+				        <h2 class="post-title">
+                            Kali Linux-制作Live USB Persistence模式的启动盘
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Python,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/12/08/pip-command/">
+				        <h2 class="post-title">
+                            Python-pip的常用命令
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Python,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/12/05/Python-mock-http/">
+				        <h2 class="post-title">
+                            Python-mock一个提供http协议的服务
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Python,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/11/30/Python-datetime&amp;xlwt/">
+				        <h2 class="post-title">
+                            Python-浅解datetime和xlwt
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Python,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/11/28/Python2exe/">
+				        <h2 class="post-title">
+                            Python-将python文件打包成exe文件
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7">
+				    <a href="/2018/11/15/181103DaJueChanSi/">
+				        <h2 class="post-title">
+                            181103_北京_大觉禅寺
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97">
+				    <a href="/2018/10/15/ErYouTaiShan/">
+				        <h2 class="post-title">
+                            二游泰山、初见趵突泉
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97">
+				    <a href="/2018/10/10/1808Japan-kansai/">
+				        <h2 class="post-title">
+                            1808_日本_关西
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Python,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/09/06/python-change-pwd-linux-server/">
+				        <h2 class="post-title">
+                            Python-批量修改Linux服务器的密码
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Linux,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/08/22/vbird-linux-note-part-01/">
+				        <h2 class="post-title">
+                            《鸟哥的Linux私房菜-基础学习篇（第三版）》学习笔记-Part01-Linux的规则与安装
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7">
+				    <a href="/2018/07/26/1806Dalian-GuangLuIsland/">
+				        <h2 class="post-title">
+                            1806_大连_广鹿岛
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/07/23/my-basic-regular-expression/">
+				        <h2 class="post-title">
+                            正则表达式基本规则
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Linux">
+				    <a href="/2018/07/11/my-linux-basic-instructions/">
+				        <h2 class="post-title">
+                            我的Linux常用命令（持续更新）
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3,Git">
+				    <a href="/2018/07/08/quick-git-grammar/">
+				        <h2 class="post-title">
+                            Git简明教程-从不会到能用？还是只是连接远称仓库？（笑）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%9D%82%E6%96%87">
+				    <a href="/2018/05/12/Software-recommendation-Pythonista/">
+				        <h2 class="post-title">
+                            软件推荐-ios上的python利器Pythonista
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="Linux,%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/05/04/Linux-crontab-clearLogFile/">
+				        <h2 class="post-title">
+                            Linux-利用crontab定时清理日志
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="">
+				    <a href="/jekyll/update/2018/03/19/welcome-to-jekyll/">
+				        <h2 class="post-title">
+                            Welcome to Jekyll!
+				        </h2>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3">
+				    <a href="/2018/03/19/quick-markdown-grammar/">
+				        <h2 class="post-title">
+                            Markdown简明语法教程
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div>
+<div class="post-preview item" data-tags="">
+				    <a href="/2018/03/18/explanation/">
+				        <h2 class="post-title">
+                            名词解释大全
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            
+				        </h3>
+				        
+				    </a>
+					<hr>
+				</div></section>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    async('/js/jquery.tagcloud.js',function(){
+        $.fn.tagcloud.defaults = {
+            //size: {start: 1, end: 1, unit: 'em'},
+            color: {start: '#bbbbee', end: '#2f93b4'},
+        };
+        $('#tag_cloud a').tagcloud();
+    })
+</script>
+<script src="/js/archive.js"></script>
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
