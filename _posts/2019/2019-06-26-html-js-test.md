@@ -236,6 +236,16 @@ return content - 1 + 1;
         var loc = document.getElementById("getLoc").value;
         alert(sendpay.charAt(loc));
     }
+
+    async function copyTextToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            console.log('成功');
+        } catch (err) {
+            console.log('无法使用复制功能');
+        }
+    }
+
     function where2eat(){
         // 食堂及其对应的权重
         const diningOptions = {
@@ -274,6 +284,9 @@ return content - 1 + 1;
 
         // 选择一个食堂
         const chosenDiningHall = chooseDiningHall();
+        copyTextToClipboard(chosenDiningHall)
         alert(`今天去 ${chosenDiningHall} 吃!`);
     }
+
+
 </script>
