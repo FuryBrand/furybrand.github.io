@@ -1,0 +1,523 @@
+[
+  
+    {
+      "title"    : "xin阅:《如何阅读一本书》",
+      "subtitle" : "",
+      "tags"     : "xin阅",
+      "url"      : "/2022/02/10/reading-note-how-to-read-a-book/",
+      "date"     : "2022-02-10 12:30:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:红烧肉",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2021/09/05/braised-pork-with-brown-sauce/",
+      "date"     : "2021-09-05 19:30:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:豆角炖排骨",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2021/09/05/stewed-spare-ribs-with-green-bean/",
+      "date"     : "2021-09-05 19:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "记录TX2开发板刷机",
+      "subtitle" : "",
+      "tags"     : "技术, Linux",
+      "url"      : "/2021/08/30/tx2-flash/",
+      "date"     : "2021-08-30 10:13:16 +0000"
+    } ,
+  
+    {
+      "title"    : "用JMeter替换Postman",
+      "subtitle" : "JMeter简易入门指南",
+      "tags"     : "JMeter, 技术相关",
+      "url"      : "/2021/03/17/use-jmeter-2-replace-postman/",
+      "date"     : "2021-03-17 20:35:00 +0000"
+    } ,
+  
+    {
+      "title"    : "记一场关于Nginx配置文件及网络问题排查步骤的分享",
+      "subtitle" : "",
+      "tags"     : "技术相关, Nginx",
+      "url"      : "/2021/03/09/nginx-config-file/",
+      "date"     : "2021-03-09 11:22:49 +0000"
+    } ,
+  
+    {
+      "title"    : "财务计算器",
+      "subtitle" : "",
+      "tags"     : "JS, 财务",
+      "url"      : "/2021/02/17/finance-calculator/",
+      "date"     : "2021-02-17 08:37:25 +0000"
+    } ,
+  
+    {
+      "title"    : "一种用于应对灵活变化的测试用例模版",
+      "subtitle" : "测试用例模版之我见",
+      "tags"     : "JS, 杂文, 技术相关",
+      "url"      : "/2020/12/25/test-case-template/",
+      "date"     : "2020-12-25 10:57:25 +0000"
+    } ,
+  
+    {
+      "title"    : "MacOS-一些使用小技巧",
+      "subtitle" : "",
+      "tags"     : "技术相关, macOS",
+      "url"      : "/2020/11/02/make-mac-better/",
+      "date"     : "2020-11-02 18:10:00 +0000"
+    } ,
+  
+    {
+      "title"    : "MySQL-环境问题汇总",
+      "subtitle" : "",
+      "tags"     : "技术相关, MySQL, Docker",
+      "url"      : "/2020/10/26/mysql-ops/",
+      "date"     : "2020-10-26 18:10:00 +0000"
+    } ,
+  
+    {
+      "title"    : "记从Windows办公迁移至MAC办公",
+      "subtitle" : "MacOS软件推荐",
+      "tags"     : "杂文, macOS, 技术相关",
+      "url"      : "/2020/10/24/software-4-work-MAC/",
+      "date"     : "2020-10-24 15:52:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:蜂蜜柚子茶",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/10/12/honey-pomelo-tea/",
+      "date"     : "2020-10-12 16:23:25 +0000"
+    } ,
+  
+    {
+      "title"    : "讨论如何覆盖异常",
+      "subtitle" : "",
+      "tags"     : "技术相关, 测试方法, 杂文",
+      "url"      : "/2020/10/09/exception-checkpoints/",
+      "date"     : "2020-10-09 12:13:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux-yum与apt(我要用啥去管理软件？)",
+      "subtitle" : "",
+      "tags"     : "技术相关, Linux",
+      "url"      : "/2020/10/09/yum-apt/",
+      "date"     : "2020-10-09 04:32:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Python-virtualenv",
+      "subtitle" : "",
+      "tags"     : "技术相关, Python",
+      "url"      : "/2020/09/27/python-virtualenv/",
+      "date"     : "2020-09-27 19:10:00 +0000"
+    } ,
+  
+    {
+      "title"    : "利用Github Actions来构建发布Github Pages",
+      "subtitle" : "",
+      "tags"     : "技术相关, 持续集成",
+      "url"      : "/2020/09/23/build-gh-pages-by-gh-actions/",
+      "date"     : "2020-09-23 21:50:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:日式照烧海苔豆腐",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/09/15/norimaki-toufu-no-teriyaki/",
+      "date"     : "2020-09-15 20:32:00 +0000"
+    } ,
+  
+    {
+      "title"    : "MySQL的导入与导出、备份与还原",
+      "subtitle" : "",
+      "tags"     : "MySQL, 技术相关",
+      "url"      : "/2020/09/10/mysql-export-import-backup-restore/",
+      "date"     : "2020-09-10 21:18:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:番茄土豆胡萝卜炖牛腩",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/09/06/Stewed-Beef-Brisket-with-tomato-and-potato-and-carrot/",
+      "date"     : "2020-09-06 22:51:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:辣白菜五花肉",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/09/05/Pork-with-Spicy-Cabbage/",
+      "date"     : "2020-09-05 18:51:00 +0000"
+    } ,
+  
+    {
+      "title"    : "记一次在测试环境云服务器上搭建运行在Docker中的MySQL",
+      "subtitle" : "",
+      "tags"     : "MySQL, Docker, 技术相关",
+      "url"      : "/2020/09/03/mysql-by-docker/",
+      "date"     : "2020-09-03 21:18:00 +0000"
+    } ,
+  
+    {
+      "title"    : "T-记一次Nginx分享",
+      "subtitle" : "",
+      "tags"     : "授权转载, Nginx, 技术相关",
+      "url"      : "/2020/09/02/nginx/",
+      "date"     : "2020-09-02 12:25:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:寿司(主食)",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/08/19/susi/",
+      "date"     : "2020-08-19 12:41:00 +0000"
+    } ,
+  
+    {
+      "title"    : "【测试开发工程师】新人面试官生存指南——一些面试经验分享",
+      "subtitle" : "",
+      "tags"     : "面试, 杂文, 技术相关",
+      "url"      : "/2020/08/09/SDET-guide-for-junior-interviewer/",
+      "date"     : "2020-08-09 12:14:00 +0000"
+    } ,
+  
+    {
+      "title"    : "T-记一次Maven分享",
+      "subtitle" : "",
+      "tags"     : "授权转载, Maven, 技术相关, Java",
+      "url"      : "/2020/08/08/maven/",
+      "date"     : "2020-08-08 18:21:00 +0000"
+    } ,
+  
+    {
+      "title"    : "HTTP代理调试工具——Fiddler简易实践",
+      "subtitle" : "",
+      "tags"     : "Fiddler, HTTP, 技术相关",
+      "url"      : "/2020/07/30/fiddler-simple-guide/",
+      "date"     : "2020-07-30 12:47:00 +0000"
+    } ,
+  
+    {
+      "title"    : "HTTP接口的Mock工具——WireMock简易手册",
+      "subtitle" : "",
+      "tags"     : "Mock, 技术相关",
+      "url"      : "/2020/07/27/wiremock-simple-guide/",
+      "date"     : "2020-07-27 20:07:00 +0000"
+    } ,
+  
+    {
+      "title"    : "bat的使用笔记",
+      "subtitle" : "",
+      "tags"     : "技术相关, Windows",
+      "url"      : "/2020/06/02/bat-notes/",
+      "date"     : "2020-06-02 23:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "《重学数据结构与算法》的学习笔记",
+      "subtitle" : "",
+      "tags"     : "技术相关, 杂文",
+      "url"      : "/2020/05/20/Notes-dataStructure-and-algorithm/",
+      "date"     : "2020-05-20 23:13:00 +0000"
+    } ,
+  
+    {
+      "title"    : "工欲善其事必先利其器",
+      "subtitle" : "工程师的推荐软件(Windows)",
+      "tags"     : "杂文, Windows, 技术相关",
+      "url"      : "/2020/04/11/software-4-work/",
+      "date"     : "2020-04-11 12:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:酱牛肉(正菜)",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/04/06/spiced-beef/",
+      "date"     : "2020-04-06 15:59:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:咖喱鸡块(主食)",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/04/06/curried-chicken/",
+      "date"     : "2020-04-06 14:47:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xin食:xin米露(甜品)",
+      "subtitle" : "",
+      "tags"     : "xin食",
+      "url"      : "/2020/04/05/xin-mi-lu/",
+      "date"     : "2020-04-05 22:53:00 +0000"
+    } ,
+  
+    {
+      "title"    : "新栏目：xin食",
+      "subtitle" : "开启或快手，或无需厨艺的极简料理篇章",
+      "tags"     : "xin食, 杂文",
+      "url"      : "/2020/03/26/xin-shi/",
+      "date"     : "2020-03-26 12:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "5G和VSCodeOnline",
+      "subtitle" : "",
+      "tags"     : "杂文, 技术相关",
+      "url"      : "/2019/11/30/5G-vscode-online/",
+      "date"     : "2019-11-30 10:19:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Postman-几个小把戏",
+      "subtitle" : "",
+      "tags"     : "Postman, 技术相关",
+      "url"      : "/2019/10/09/postman-small-tricks/",
+      "date"     : "2019-10-09 10:44:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Selenium初探",
+      "subtitle" : "",
+      "tags"     : "Selenium, 技术相关",
+      "url"      : "/2019/09/10/selenium-first-exploration/",
+      "date"     : "2019-09-10 13:06:25 +0000"
+    } ,
+  
+    {
+      "title"    : "七泊八日的名古屋东京之行",
+      "subtitle" : "",
+      "tags"     : "我眼中的世界-码码字",
+      "url"      : "/2019/08/11/nagoya-tokyo/",
+      "date"     : "2019-08-11 10:13:16 +0000"
+    } ,
+  
+    {
+      "title"    : "测试团队如何更好的的保证软件产品质量——MTSC2019有感",
+      "subtitle" : "",
+      "tags"     : "杂文, 技术相关",
+      "url"      : "/2019/07/13/impressions-of-MSTC2019/",
+      "date"     : "2019-07-13 07:04:16 +0000"
+    } ,
+  
+    {
+      "title"    : "《手机摄影达人速成》的学习笔记（下）",
+      "subtitle" : "",
+      "tags"     : "摄影学习",
+      "url"      : "/2019/06/30/1128006-notes-2/",
+      "date"     : "2019-06-30 15:57:25 +0000"
+    } ,
+  
+    {
+      "title"    : "《手机摄影达人速成》的学习笔记（上）",
+      "subtitle" : "",
+      "tags"     : "摄影学习",
+      "url"      : "/2019/06/30/1128006-notes/",
+      "date"     : "2019-06-30 13:57:25 +0000"
+    } ,
+  
+    {
+      "title"    : "1905延边",
+      "subtitle" : "",
+      "tags"     : "我眼中的世界-拍拍照",
+      "url"      : "/2019/06/29/1905YanBian/",
+      "date"     : "2019-06-29 15:38:16 +0000"
+    } ,
+  
+    {
+      "title"    : "这是一个测试jekyll上如何写html和js的测试页面",
+      "subtitle" : "",
+      "tags"     : "JS",
+      "url"      : "/2019/06/26/html-js-test/",
+      "date"     : "2019-06-26 15:20:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux-浅谈Nginx的反向代理 即http请求经历了什么😀",
+      "subtitle" : "",
+      "tags"     : "Linux, Nginx, 技术相关",
+      "url"      : "/2019/03/12/Linux-Nginx-Tomcat-small-talk/",
+      "date"     : "2019-03-12 15:20:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Excel-《表格之道》的笔记",
+      "subtitle" : "",
+      "tags"     : "办公, Windows",
+      "url"      : "/2019/03/06/The-Excel-Way-notes/",
+      "date"     : "2019-03-06 14:25:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Java-用MessageFormat来替换占位符",
+      "subtitle" : "",
+      "tags"     : "Java, 技术相关",
+      "url"      : "/2019/03/03/Java-MessageFormat/",
+      "date"     : "2019-03-03 15:57:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Kali Linux-制作Live USB Persistence模式的启动盘",
+      "subtitle" : "",
+      "tags"     : "Linux, 技术相关",
+      "url"      : "/2018/12/16/kali-linux-live-USB-persistence/",
+      "date"     : "2018-12-16 01:46:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Python-pip的常用命令",
+      "subtitle" : "",
+      "tags"     : "Python, 技术相关",
+      "url"      : "/2018/12/08/pip-command/",
+      "date"     : "2018-12-08 14:44:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Python-mock一个提供http协议的服务",
+      "subtitle" : "",
+      "tags"     : "Python, 技术相关",
+      "url"      : "/2018/12/05/Python-mock-http/",
+      "date"     : "2018-12-05 13:00:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Python-浅解datetime和xlwt",
+      "subtitle" : "",
+      "tags"     : "Python, 技术相关",
+      "url"      : "/2018/11/30/Python-datetime&xlwt/",
+      "date"     : "2018-11-30 15:50:25 +0000"
+    } ,
+  
+    {
+      "title"    : "Python-将python文件打包成exe文件",
+      "subtitle" : "",
+      "tags"     : "Python, 技术相关",
+      "url"      : "/2018/11/28/Python2exe/",
+      "date"     : "2018-11-28 13:48:25 +0000"
+    } ,
+  
+    {
+      "title"    : "181103_北京_大觉禅寺",
+      "subtitle" : "",
+      "tags"     : "我眼中的世界-拍拍照",
+      "url"      : "/2018/11/15/181103DaJueChanSi/",
+      "date"     : "2018-11-15 14:37:16 +0000"
+    } ,
+  
+    {
+      "title"    : "二游泰山、初见趵突泉",
+      "subtitle" : "",
+      "tags"     : "我眼中的世界-码码字",
+      "url"      : "/2018/10/15/ErYouTaiShan/",
+      "date"     : "2018-10-15 13:56:16 +0000"
+    } ,
+  
+    {
+      "title"    : "1808_日本_关西",
+      "subtitle" : "",
+      "tags"     : "我眼中的世界-码码字",
+      "url"      : "/2018/10/10/1808Japan-kansai/",
+      "date"     : "2018-10-10 14:37:16 +0000"
+    } ,
+  
+    {
+      "title"    : "Python-批量修改Linux服务器的密码",
+      "subtitle" : "",
+      "tags"     : "Python, 技术相关",
+      "url"      : "/2018/09/06/python-change-pwd-linux-server/",
+      "date"     : "2018-09-06 12:02:49 +0000"
+    } ,
+  
+    {
+      "title"    : "《鸟哥的Linux私房菜-基础学习篇（第三版）》学习笔记-Part01-Linux的规则与安装",
+      "subtitle" : "",
+      "tags"     : "Linux, 技术相关",
+      "url"      : "/2018/08/22/vbird-linux-note-part-01/",
+      "date"     : "2018-08-22 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "1806_大连_广鹿岛",
+      "subtitle" : "",
+      "tags"     : "我眼中的世界-拍拍照",
+      "url"      : "/2018/07/26/1806Dalian-GuangLuIsland/",
+      "date"     : "2018-07-26 14:37:16 +0000"
+    } ,
+  
+    {
+      "title"    : "正则表达式基本规则",
+      "subtitle" : "",
+      "tags"     : "技术相关",
+      "url"      : "/2018/07/23/my-basic-regular-expression/",
+      "date"     : "2018-07-23 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "我的Linux常用命令（持续更新）",
+      "subtitle" : "",
+      "tags"     : "Linux",
+      "url"      : "/2018/07/11/my-linux-basic-instructions/",
+      "date"     : "2018-07-11 22:46:49 +0000"
+    } ,
+  
+    {
+      "title"    : "Git简明教程-从不会到能用？还是只是连接远称仓库？（笑）",
+      "subtitle" : "",
+      "tags"     : "技术相关, Git",
+      "url"      : "/2018/07/08/quick-git-grammar/",
+      "date"     : "2018-07-08 10:42:49 +0000"
+    } ,
+  
+    {
+      "title"    : "软件推荐-ios上的python利器Pythonista",
+      "subtitle" : "",
+      "tags"     : "杂文",
+      "url"      : "/2018/05/12/Software-recommendation-Pythonista/",
+      "date"     : "2018-05-12 06:27:49 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux-利用crontab定时清理日志",
+      "subtitle" : "",
+      "tags"     : "Linux, 技术相关",
+      "url"      : "/2018/05/04/Linux-crontab-clearLogFile/",
+      "date"     : "2018-05-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Welcome to Jekyll!",
+      "subtitle" : "",
+      "tags"     : "",
+      "url"      : "/jekyll/update/2018/03/19/welcome-to-jekyll/",
+      "date"     : "2018-03-19 02:09:49 +0000"
+    } ,
+  
+    {
+      "title"    : "Markdown简明语法教程",
+      "subtitle" : "",
+      "tags"     : "技术相关",
+      "url"      : "/2018/03/19/quick-markdown-grammar/",
+      "date"     : "2018-03-19 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "名词解释大全",
+      "subtitle" : "",
+      "tags"     : "",
+      "url"      : "/2018/03/18/explanation/",
+      "date"     : "2018-03-18 00:00:00 +0000"
+    } 
+  
+]

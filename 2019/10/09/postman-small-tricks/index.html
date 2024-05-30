@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Postman-几个小把戏 - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Postman应该是目前比较好用的测试HTTP接口的工具，由于它可以发送几乎所有类型的HTTP请求，所以堪称是“全能战士”。另附官网链接。
+">
+    
+    <meta property="article:published_time" content="2019-10-09T10:44:25Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="Postman">
+    
+    <meta property="article:tag" content="技术相关">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2019/10/09/postman-small-tricks/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>Postman-几个小把戏 - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2019/10/09/postman-small-tricks/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Postman" title="Postman">Postman</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                    </div>
+                    <h1>Postman-几个小把戏</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on October 9, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p><code class="language-plaintext highlighter-rouge">Postman</code>应该是目前比较好用的测试HTTP接口的工具，由于它可以发送几乎所有类型的HTTP请求，所以堪称是“全能战士”。另附<a href="https://www.getpostman.com/">官网链接</a>。</p>
+
+<p>由于没有中文版，我发现了一个中国版的<code class="language-plaintext highlighter-rouge">Postman</code>，名叫<code class="language-plaintext highlighter-rouge">ApiPost</code>，另附<a href="https://www.apipost.cn">官网链接</a>。这个我没用，但是瞄了一眼界面，可以说和<code class="language-plaintext highlighter-rouge">Postman</code>一毛一样，评价貌似也可以，需要的兄弟可以试试看。</p>
+
+<p>今天我主要是来分享几个我常用的小把戏。所以默认读者已经用过<code class="language-plaintext highlighter-rouge">Postman</code>发送过请求，如果想看一些更详细的文章的话，这里有一个<a href="http://www.51testing.com/zhuanti/postman.htm">51testing的专题</a>。另附一个<a href="https://blog.csdn.net/fxbin123/article/details/80428216">Postman使用方法的博客</a>。</p>
+
+<h2 id="写在最前面">写在最前面</h2>
+
+<p>下面的所有内容都从Postman中导出来了，下载后可以直接导入后使用（<a href="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/MyExplore_Blog.postman_collection.json">点我下载Postman导出的Collections</a>）。不过由于示例的服务是我局域网内的一个临时接口，所以可能只能作为语法参考了。或者参考这篇文章（<a href="/2018/12/05/Python-mock-http/">Python-mock一个提供http协议的服务</a>）来在本机提供一个临时接口以供调用。</p>
+
+<h2 id="不可不知的大前提">不可不知的大前提</h2>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">Pre-request Script</code>中的脚本在发送请求前会自动执行，脚本语言是Javascript，默认内置了一些JS库，比如<code class="language-plaintext highlighter-rouge">CryptoJS</code>。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">View -&gt; Show Postman Console</code>是很好用的调试工具，可以看到请求具体发送出去的信息，也可以看到脚本中<code class="language-plaintext highlighter-rouge">console.log("");</code>打印出的信息。</li>
+</ul>
+
+<h2 id="1参数化">1.参数化</h2>
+
+<p>很多时候我们测试不可能一次通过，而验证问题或者复现问题只需要在报文中改一个唯一的值，比如<em>订单号</em>、<em>身份证号码</em>、<em>手机号码</em>等等，就可以。这里我们利用参数化可以简单实现这个需求。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Request Headers</code>和<code class="language-plaintext highlighter-rouge">Request Body</code>中的内容都可以通过{{paramName}}的形式进行参数化。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/1.png" alt="参数化">
+<img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/2.png" alt="脚本"></p>
+
+<h2 id="2如何应对一个有签名算法的接口">2.如何应对一个有签名算法的接口</h2>
+
+<p>为了防止接口调用的过程中被恶意攻击篡改，一般暴露在公网的接口往往都需要调用方携带签名进行请求。那么如何应对一个有签名算法的接口呢？</p>
+
+<p>两个系统对接时一般都会有对接的接口文档，如果需要签名的话，一般会提供相应的加密算法的源码。开发兄弟往往可以拿着源码直接去写程序了，而我们如果在<code class="language-plaintext highlighter-rouge">Postman</code>上使用这样一个接口的话，就需要我们用Javascript来实现对应的加密算法了😓</p>
+
+<p>一般的签名都是用到了MD5算法，好在<code class="language-plaintext highlighter-rouge">Postman</code>中内置了<code class="language-plaintext highlighter-rouge">CryptoJS</code>可以轻松处理它。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/3.png" alt="签名"></p>
+
+<h2 id="3网站需要登录咋整">3.网站需要登录咋整</h2>
+
+<p>说起登录就很容易联想起Http身份认证了，这个要具体问题具体分析。举个最简单的例子，设置路由器的时候，网页会弹出一个弹窗要求输入用户名和密码，这种身份认证是<code class="language-plaintext highlighter-rouge">HTTP Basic Authentication</code>，可以在<code class="language-plaintext highlighter-rouge">Postman</code>主窗口中的<code class="language-plaintext highlighter-rouge">Authorization</code>进行配置即可。</p>
+
+<p>我要聊的是通过Session和Cookie实现的登录。之前处理过这样的问题，架构是前端独立的Vue应用，后端业务逻辑为Java应用。通过日志拿到了前端调用后端的请求报文，但是想自己模拟的时候发现直接发送请求会被登录拦住。这时候最简单的处理方式就是通过浏览器登录，然后用F12开发者工具拿到对应的cookie后通过<code class="language-plaintext highlighter-rouge">Postman</code>直接带着cookie就可以发送请求了。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/4.png" alt="浏览器">
+<img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/5.png" alt="Cookie"></p>
+
+<h2 id="4base64编解码和tests">4.base64编解码和Tests</h2>
+
+<p>有时和外部接口交互的时候规定了传输的编码格式比如base64等。对我们来说肯定是utf8有可读性了。那么就需要将入参报文和出参报文进行base64的编解码。编码自然是参考<a href="#1%e5%8f%82%e6%95%b0%e5%8c%96">1.参数化</a>，在<code class="language-plaintext highlighter-rouge">Pre-request Script</code>中进行编码。为了提到出参的可读性，在<code class="language-plaintext highlighter-rouge">Tests</code>中进行解码，将原本的以base64编码的出参转换成可读的utf8编码格式并展示在<code class="language-plaintext highlighter-rouge">Test Results</code>中。详情参考下面两图。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/6.png" alt="Pre-request_Script">
+<img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/7.png" alt="Tests"></p>
+
+<p>这里有一个坑，我当时阻塞了很久，从本节的第一张图可以看出来，出参是分了多行的。这也是我当时实测接口的状况，导致做转换时，<code class="language-plaintext highlighter-rouge">Tests</code>中的第6行一直报错。后来才发现原来是换行符的锅。所以才有了第3行去换行去回车的代码。</p>
+
+<h2 id="5在请求前的请求">5.在请求前的请求</h2>
+
+<p>有点绕口，其实就是在点击<code class="language-plaintext highlighter-rouge">Send</code>按钮后，在此请求发出去前，先通过Pre-request Script执行一次http请求，从而获取一些信息。我的实际场景是外部系统和我交互的时候需要签名，而研发那边提供了一个http接口，我先调这个接口就可以得到签名。省的我自己写签名的算法了。那么问题来了，我不能每次请求都手动调下研发提供的然后手动填sign吧，这样好麻烦。所以就在报文正式请求前先请求一次提供签名的接口，然后将得到的签名填到sign上，从而实现偷懒，具体不同的接口在参数上可能有所区别，抛砖引玉吧。详情参考下面两图。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/8.png" alt="Body">
+<img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/9.png" alt="Pre-request_Script"></p>
+
+<h2 id="6重复发送请求runner的使用">6.重复发送请求——Runner的使用</h2>
+
+<p>背景：为了测试Web页面的翻页功能，需要一些数据做支持。之前尝试过使用Selenium，这次尝试使用Postman。以后有机会可以试试jmeter，应该也可以做到。</p>
+
+<p>方案：使用Postman的Runner功能，对指定接口进行多次请求。可以参考<a href="https://learning.postman.com/docs/running-collections/working-with-data-files/">Postman的官方手册</a>，其实我也是用了官方的接口做范例的。踩过的坑是MS Excel在保存csv文件的时候，将原本的<code class="language-plaintext highlighter-rouge">,</code>保存成了<code class="language-plaintext highlighter-rouge">空格</code>，导致导入给Postman的时候没法正确识别。</p>
+
+<p>步骤：</p>
+<ol>
+  <li>下载<code class="language-plaintext highlighter-rouge">写在最前面</code>中附的Collection<code class="language-plaintext highlighter-rouge">MyExplore</code>并使用Request<code class="language-plaintext highlighter-rouge">6.重复发送请求——Runner的使用</code>。（以我的实际场景来说，我是使用了Postman的Import-Raw Text功能，配合Chrome的copy-copy as cURL(bash)来导入的，这样就不用设置cookie等参数了，很方便。<a href="https://m.weibo.cn/status/4544056790628230?">参考</a>）</li>
+  <li>进入<code class="language-plaintext highlighter-rouge">Runner</code>，选择Collection，勾选需要执行的<code class="language-plaintext highlighter-rouge">Request</code>。设定循环次数15次，设置延迟时间，选择数据源文件<a href="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/import_data.csv">点我下载import_data.csv</a>后Run就可以了。如果每次调用时的入参有多个，那么预览的时候数据的展示一定是下面所示的那样。如果不是的话，大概率是csv文件有问题。除了csv文件以外，还支持json的方式导入数据，但是做数据的话，我觉得csv会方便一点。</li>
+</ol>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/10.png" alt="Runner"></p>
+
+<h2 id="7活用curl">7.活用cURL</h2>
+
+<p>curl是一个命令行工具，可以用URL来传输数据。<a href="https://curl.se/">官网</a>，<a href="https://github.com/curl/curl">github主页</a></p>
+
+<p>很多软件都支持curl有不同程度的支持。</p>
+<ul>
+  <li>Chrome：导出</li>
+  <li>Postman：导出&amp;导入</li>
+  <li>JMeter：导入</li>
+</ul>
+
+<p>Postman的导入可以参考：
+<img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/311606208094_.pic_hd.jpg" alt="curl导入"></p>
+
+<p>Postman的导出可以参考：
+<img src="http://furybrand.github.io/assets/2019/2019-10-9-postman-small-tricks/iShot2020-12-08_18.17.47.jpg" alt="curl导出"></p>
+
+<h2 id="更新日志">更新日志</h2>
+
+<p>2020年3月30日：追加<code class="language-plaintext highlighter-rouge">5.在请求前的请求</code>
+2020年9月15日：追加<code class="language-plaintext highlighter-rouge">重复发送请求——Runner的使用</code>
+2020年12月8日：追加<code class="language-plaintext highlighter-rouge">活用cURL</code></p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/10/selenium-first-exploration/" data-toggle="tooltip" data-placement="top" title="Selenium初探">
+                        Previous<br>
+                        <span>Selenium初探</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/11/30/5G-vscode-online/" data-toggle="tooltip" data-placement="top" title="5G和VSCodeOnline">
+                        Next<br>
+                        <span>5G和VSCodeOnline</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="37">技术相关</a>
+        
+                <a data-sort="0054" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0055" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0059" href="/archive/?tag=Python" title="Python" rel="6">Python</a>
+        
+                <a data-sort="0062" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0062" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0062" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0062" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0062" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0062" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0063" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0063" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0063" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0063" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0063" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

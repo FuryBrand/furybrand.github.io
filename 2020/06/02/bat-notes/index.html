@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="bat的使用笔记 - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  批处理就随用随查了，感觉也没必要单独学习。所以这里就记录下怎么用bat的，然后积累些bat的用法
+
+">
+    
+    <meta property="article:published_time" content="2020-06-02T23:00:00Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="技术相关">
+    
+    <meta property="article:tag" content="Windows">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2020/06/02/bat-notes/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>bat的使用笔记 - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2020/06/02/bat-notes/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                        <a class="tag" href="/archive/?tag=Windows" title="Windows">Windows</a>
+                        
+                    </div>
+                    <h1>bat的使用笔记</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on June 2, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<blockquote>
+  <p>批处理就随用随查了，感觉也没必要单独学习。所以这里就记录下怎么用bat的，然后积累些bat的用法</p>
+</blockquote>
+
+<p><strong>爱徒</strong>ZP吐槽说“A刚提了一版前端，B又改了bug也要部署一版🤦‍”。<code class="language-plaintext highlighter-rouge">&lt;br&gt;</code>
+鄙人心有不忍，说“是不是可以尝试写个bat文件来把整个流程自动化起来”。<code class="language-plaintext highlighter-rouge">&lt;br&gt;</code>
+故有了第一部分 <code class="language-plaintext highlighter-rouge">1. 删除文件夹+npm build+jar打包</code>。</p>
+
+<h2 id="1-常用cmd命令">1. 常用cmd命令</h2>
+
+<h4 id="查找端口占用">查找端口占用</h4>
+
+<pre><code class="language-cmd">C:\Users\liutianyu&gt;netstat -ano |findstr "8083"
+  TCP    0.0.0.0:8083           0.0.0.0:0              LISTENING       21392
+  TCP    127.0.0.1:8083         127.0.0.1:8918         TIME_WAIT       0
+  TCP    127.0.0.1:8083         127.0.0.1:9586         TIME_WAIT       0
+</code></pre>
+
+<h4 id="追ip数据包访问目标时所选择的路径">追IP数据包访问目标时所选择的路径</h4>
+
+<pre><code class="language-cmd">C:\Users\liutianyu&gt;tracert www.baidu.com
+
+通过最多 30 个跃点跟踪
+到 www.a.shifen.com [220.181.38.149] 的路由:
+
+  1     *
+</code></pre>
+
+<h2 id="2-删除文件夹npm-buildjar打包">2. 删除文件夹+npm build+jar打包</h2>
+
+<p>注：主要内容都是ZP完成，我只是稍微做了一丢丢优化。好了，废话不多说，先贴文件内容：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td>
+<td class="rouge-code"><pre>@echo off
+:@=========================================
+:@注：defaultBranch为默认分支，若有需要可自行修改
+:@=========================================
+set defaultBranch=master_test
+echo 目前配置的默认分支为%defaultBranch%
+set /p branch=请输入要打包的分支名，若使用默认配置则回车即可：
+if  "%branch%"=="" (set branch=%defaultBranch%)
+rd /s /Q .\dist\
+mkdir dist
+echo 开始将分支切换为%branch%
+git checkout %branch%
+echo 开始拉取代码
+git fetch
+git pull
+echo 完成代码拉取！
+echo ********************************************
+echo 开始npm build
+call npm -v
+call npm run build
+echo ********************************************
+cd dist
+echo 开始打war包
+jar -cvf test.war *
+echo 结束
+pause
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p><a href="http://furybrand.github.io/assets/2020/2020-06-02-bat-notes/buildRobot.bat">下载bat文件</a></p>
+
+<p>知识点：</p>
+
+<ul>
+  <li>windows的bat文件要用GBK编码，不然会出现乱码的情况。</li>
+  <li>@echo off命令行中就不会出现具体的命令输入，只会有echo的输出以及命令的标准输出。</li>
+  <li>set可以设置变量，=号要紧跟变量名。后续使用变量时要用%%来包裹起来。</li>
+  <li>rd来删除文件夹</li>
+  <li>当使用一些外部命令的时候，可以使用call来进行调用，不然脚本会停止不会继续。（不过不知道为啥git没问题，npm执行后就会卡住）</li>
+  <li>pause，脚本执行结束后可以暂停</li>
+</ul>
+
+<h2 id="3-备份数据库">3. 备份数据库</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+</pre></td>
+<td class="rouge-code"><pre>@echo off
+
+REM 声明采用UTF-8编码
+chcp 65001
+
+echo.
+echo MySQL数据库备份脚本
+echo.
+echo *****************************
+echo.
+echo 备份日期：%date%
+echo 备份时间：%time%
+echo.
+echo *****************************
+echo.
+echo 开始备份...
+echo.
+::set nowtime=%date:~3,4%年%date:~8,2%月%date:~11,2%日%time:~0,2%时%time:~3,2%分
+set "nowtime=%date:~3,4%%date:~8,2%%date:~11,2% %time:~0,2%%time:~3,2%"
+set "nowtime=%nowtime: =0%"
+::数据库名称
+set dbname=forlovetolove
+::数据库的账号
+set user=root
+::数据库密码
+set password=xixixihahaha
+::数据库地址
+set host=127.0.0.1
+::数据库端口
+set port_num=3306
+
+::执行导出操作
+ "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump" --column-statistics=0 --default-character-set=utf8mb4 -P%port_num% -h%host% -u%user% -p%password% %dbname%  &gt; %dbname%_%nowtime%.sql
+
+echo.
+echo MySQL数据库备份完成
+echo.
+
+@echo on
+@pause
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p><a href="http://furybrand.github.io/assets/2020/2020-06-02-bat-notes/mysqlBackupRobot.bat">下载bat文件</a></p>
+
+<p>知识点：</p>
+
+<ul>
+  <li>由于没有配置环境变量，导致mysqldump需要使用绝对路径来执行。对于绝对路径的命令执行，如果路径中包含中文，使用双引号包住就可以使用了。</li>
+  <li>如果使用mysqldump时出现 <code class="language-plaintext highlighter-rouge">mysqldump: Couldn't execute 'SELECT COLUMN_NAME, JSON_EXTRACT(HISTOGRAM, '$."number-of-buckets-specified"') FROM information_schema.COLUMN_STATISTICS WHERE SCHEMA_NAME = 'spv' AND TABLE_NAME = '_task_work';': Unknown table 'COLUMN_STATISTICS' in information_schema (1109)</code>的错误，则使用 <code class="language-plaintext highlighter-rouge">--column-statistics=0</code>来处理。</li>
+</ul>
+
+<h2 id="4-批量开启软件call和start的区别">4. 批量开启软件（call和start的区别）</h2>
+
+<p>为了隔离cookie，进行多账号的测试。将Chrome进行了双开（实际开了8个🤭）。如何进行Chrome双开，可以参考<a href="https://m.weibo.cn/7331931433/4523466369984896">微博链接</a>。每次点点点很麻烦，最后生成的脚本如下。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre>start MyGoogleChrome.lnk
+start test1.lnk
+start test2.lnk
+start test3.lnk
+start test4.lnk
+start test5.lnk
+start test6.lnk
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p><a href="http://furybrand.github.io/assets/2020/2020-06-02-bat-notes/launch_all_chrome.bat">下载bat文件</a></p>
+
+<p>知识点：</p>
+
+<p>最初尝试了call命令，发现只能打开一个Chrome，后面的都不执行了。后来查了下，大概总结如下。<code class="language-plaintext highlighter-rouge">不是100%确定</code>，但是我不太想自己研究了😜</p>
+
+<p>call设计之初是在当前的进程中执行另一个bat文件，可以传参也可以接收该bat文件的执行结果出参。可以理解为将多个bat文件编排顺序执行。但是同时也只有收到另一个bat文件的执行完成的指令后才会继续执行。相较于call的调用，start就是执行，完全另起一个进程，虽然可以传递参数，但是不会接收执行完成的出参接口。</p>
+
+<h2 id="5-查看笔记本电脑电池健康度">5. 查看笔记本电脑电池健康度</h2>
+
+<p>在cmd窗口执行 <code class="language-plaintext highlighter-rouge">powercfg /batteryreport /output "D:\DianChi.html"</code>命令后，电池使用情况会输出至指定路径。其中DESIGN CAPACITY是设计容量，FULL CHARGE CAPACITY是完全充满的容量，计算一下就可以知道电池损耗了。</p>
+
+<h2 id="6使用ssh">6.使用SSH</h2>
+
+<p>在cmd窗口执行 <code class="language-plaintext highlighter-rouge">ssh -p 22 nvidia@10.10.10.27"</code>命令后，键入密码即可连接。好像Windows默认没有这个功能，需要额外在windows附加功能中启用。</p>
+
+<h2 id="7md5sha1sha256">7.MD5、SHA1、SHA256</h2>
+
+<p>Windows自带的命令行可以计算MD5值。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre>C:\Users\gavin\Downloads&gt;certutil -hashfile digiKam-7.8.0-Win64.exe md5
+MD5 的 digiKam-7.8.0-Win64.exe 哈希:
+aded053df9d385926a3232156faa36ca
+CertUtil: -hashfile 命令成功完成。
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>注：把“md5”换成“SHA1”、“SHA256”即可计算别的值。</p>
+
+<h2 id="8使用diskpart">8.使用diskpart</h2>
+
+<h4 id="81解决window不能自动分配移动硬盘盘符的问题">8.1.解决Window不能自动分配移动硬盘盘符的问题</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>C:\Users\gavin&gt;diskpart
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td>
+<td class="rouge-code"><pre>Microsoft DiskPart 版本 10.0.22621.1
+Copyright (C) Microsoft Corporation.
+在计算机上: SURFACELAPTOPGO
+DISKPART&gt; list disk
+  磁盘 ###  状态           大小     可用     Dyn  Gpt
+  --------  -------------  -------  -------  ---  ---
+  磁盘 0    联机              238 GB      0 B        *
+  磁盘 1    联机             3726 GB      0 B        *
+  磁盘 2    联机              232 GB      0 B
+  磁盘 3    联机             3726 GB      0 B        *
+DISKPART&gt; select disk 2
+磁盘 2 现在是所选磁盘。
+DISKPART&gt; list part
+  分区 ###       类型              大小     偏移量
+  -------------  ----------------  -------  -------
+  分区      1    主要                 232 GB  1024 KB
+DISKPART&gt; select partition 1
+分区 1 现在是所选分区。
+DISKPART&gt; attributes volume
+只读                   : 否
+隐藏                   : 否
+没有默认驱动器号       : 是
+卷影副本               : 否
+DISKPART&gt; attributes volume clear hidden
+卷属性清除成功。
+DISKPART&gt; attributes volume clear NoDefaultDriveLetter
+卷属性清除成功。
+DISKPART&gt; attributes volume
+只读                   : 否
+隐藏                   : 否
+没有默认驱动器号       : 否
+卷影副本               : 否
+DISKPART&gt;
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+<h2 id="更新日志">更新日志</h2>
+
+<ul>
+  <li>2020年6月2日：初稿，<strong>1. 删除文件夹+npm build+jar打包</strong>。</li>
+  <li>2020年7月5日：增加<strong>2. 备份数据库</strong>。</li>
+  <li>2020年10月12日：增加<strong>3. 批量开启软件（call和start的区别）</strong>。</li>
+  <li>2021年5月19日:增加<strong>4. 常用cmd命令</strong>
+</li>
+  <li>2021年9月5日:增加<strong>追IP数据包访问目标时所选择的路径</strong>
+</li>
+  <li>2022年7月15日：增加<strong>6.使用SSH</strong>
+</li>
+  <li>2022年12月5日：增加<strong>7.MD5、SHA1、SHA256</strong>
+</li>
+  <li>2023年2月4日：增加<strong>8.使用diskpart</strong>
+</li>
+</ul>
+
+<h2 id="友链">友链</h2>
+
+<ul>
+  <li><a href="https://www.cnblogs.com/-mrl/p/10775960.html">“2. 备份数据库”的bat内容是来自这里</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/05/20/Notes-dataStructure-and-algorithm/" data-toggle="tooltip" data-placement="top" title="《重学数据结构与算法》的学习笔记">
+                        Previous<br>
+                        <span>《重学数据结构与算法》的学习笔记</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/07/27/wiremock-simple-guide/" data-toggle="tooltip" data-placement="top" title="HTTP接口的Mock工具——WireMock简易手册">
+                        Next<br>
+                        <span>HTTP接口的Mock工具——WireMock简易手册</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="37">技术相关</a>
+        
+                <a data-sort="0054" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0055" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0058" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0059" href="/archive/?tag=Python" title="Python" rel="6">Python</a>
+        
+                <a data-sort="0062" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0062" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0062" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0062" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0062" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0062" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0063" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0063" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0063" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0063" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0063" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
