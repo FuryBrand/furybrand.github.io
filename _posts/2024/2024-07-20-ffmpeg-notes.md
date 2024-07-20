@@ -49,12 +49,12 @@ file '3.mp4'
    - preset medium：设置编码为 medium 。其实不指定也行，medium就是默认值。preset的设置会影响编码的速度和质量平衡，我实际测试过veryslow，质量并没有显著提高，medium是我认为最优的选项。
    - map_metadata 0：复制输入文件的元数据。
    - tag:v hvc1：为输出视频设置标签 hvc1。可以解决转码后的文件不被iPhone识别的问题。
-   - map 0\:v:0：从输入文件中选择第一个视频流。
+   - map 0&#58;&#118;&#58;0：从输入文件中选择第一个视频流。
    - map 0:a：保留所有的音频流。
    - map 0:s：保留所有的音频流。
 
    ```bash
-   ffmpeg -i E:\\2h265\\XXXX.mp4 -c:v libx265 -preset medium -map_metadata 0 -tag:v hvc1 -map 0\:v:0 -map 0:a E:\\2h265_output\\XXXX.mp4
+   ffmpeg -i E:&#92;2h265&#92;XXXX.mp4 -c:v libx265 -preset medium -map_metadata 0 -tag:v hvc1 -map 0&#58;&#118;&#58;0 -map 0:a E:&#92;2h265_output&#92;XXXX.mp4
    ```
 
 2. **GPU转码（NVIDIA平台）**：
@@ -62,7 +62,7 @@ file '3.mp4'
    - -c:v hevc_nvenc：使用NVIDA的GPU进行H.265编码，逻辑上和FFmpeg编译的版本有关系，不过我的NVDIA GeForce RTX 4060可以直接使用。
 
    ```bash
-   ffmpeg -i E:\\2h265\\XXXX.mp4 -c:v hevc_nvenc -preset medium -map_metadata 0 -tag:v hvc1 -map 0\:v:0 -map 0:a E:\\2h265_output\\XXXX.mp4
+   ffmpeg -i E:&#92;2h265&#92;XXXX.mp4 -c:v hevc_nvenc -preset medium -map_metadata 0 -tag:v hvc1 -map 0&#58;&#118;&#58;0 -map 0:a E:&#92;2h265_output&#92;XXXX.mp4
    ```
 
 #### 我的转码程序
