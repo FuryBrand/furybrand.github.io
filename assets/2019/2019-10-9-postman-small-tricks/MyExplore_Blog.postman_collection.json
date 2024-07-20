@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "8b6b98c1-b998-42ed-a302-b40f15834f55",
+		"name": "MyExplore_Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1.参数化",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bd6ff3f7-e310-499e-9675-826a485bcf1b",
+						"exec": [
+							"//创建一个临时变量",
+							"var orderNo = Math.round(new Date().getTime());",
+							"//打印日志，可以在View -> Show Postman Console中看到",
+							"console.log('生成的订单号为：' + orderNo);",
+							"//给参数赋值",
+							"pm.environment.set('orderNo', orderNo);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "value",
+							"value": "{\n    \"errcode\": 0,\n    \"errmsg\": \"ok\",\n    \"orderno\": \"{{orderNo}}\"\n}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.75.41/setReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"setReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.如何应对一个有签名算法的接口",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7ecd0226-b55b-43a4-92ab-d321a794c44f",
+						"exec": [
+							"/*-------------引入一些方法-开始----------*/\r",
+							"//由于原生JavaScript不支持jQuery的each方法，这里偷懒找了个each方法的实现放到最前面了。\r",
+							"// 通过字面量方式实现的函数each\r",
+							"var each =  function(object, callback){\r",
+							"  var type = (function(){\r",
+							"          switch (object.constructor){\r",
+							"            case Object:\r",
+							"                return 'Object';\r",
+							"            case Array:\r",
+							"                return 'Array';\r",
+							"            case NodeList:\r",
+							"                return 'NodeList';\r",
+							"            default:\r",
+							"                return 'null';\r",
+							"        }\r",
+							"    })();\r",
+							"    // 为数组或类数组时, 返回: index, value\r",
+							"    if(type === 'Array' || type === 'NodeList'){\r",
+							"        // 由于存在类数组NodeList, 所以不能直接调用every方法\r",
+							"        [].every.call(object, function(v, i){\r",
+							"            return callback.call(v, i, v) === false ? false : true;\r",
+							"        });\r",
+							"    }\r",
+							"    // 为对象格式时,返回:key, value\r",
+							"    else if(type === 'Object'){\r",
+							"        for(var i in object){\r",
+							"            if(callback.call(object[i], i, object[i]) === false){\r",
+							"                break;\r",
+							"            }\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"/*-------------引入一些方法-结束----------*/\r",
+							"/**\r",
+							" * 接口要求将原有入参按照key进行升序排列后，拼接字符串。将字符串进行MD5计算后赋值给`authorityData`。再加上原有入参一起发送。\r",
+							" * 原始报文示例：{\"vehicleCode\":\"C001_001\",\"deviceCode\":\"D001_001\",\"type\":1,\"uuid\":\"4561acdawf\"}\r",
+							" * 签名后报文示例：{\"vehicleCode\":\"C001_001\",\"deviceCode\":\"D001_001\",\"type\":1,\"uuid\":\"4561acdawf\",\"authorityData\":\"7ef648848b403a668f543d13b60b1b71\"}\r",
+							" */\r",
+							"//原始报文\r",
+							"var inputstr = '{\"vehicleCode\":\"C001_001\",\"deviceCode\":\"D001_001\",\"type\":1,\"uuid\":\"4561acdawf\"}';\r",
+							"//将入参转换为json对象\r",
+							"var inputjso = JSON.parse(inputstr);\r",
+							"//对json对象的入参进行排序\r",
+							"var inputKey = [];\r",
+							"each(inputjso, function(key, val) { inputKey[inputKey.length] = key;  });\r",
+							"inputKey.sort();\r",
+							"//拼接MD5计算前的字符串\r",
+							"var str_md5 = '';\r",
+							"each(inputKey, function(i, key) {\r",
+							"  str_md5 = str_md5 + key + \"=\" + inputjso[key] + \"&\";\r",
+							"});\r",
+							"console.log('计算前的字符串为：' + str_md5.slice(0,-1));\r",
+							"//MD5计算\r",
+							"var str_md5_sign = CryptoJS.MD5(str_md5.slice(0,-1)).toString().toLowerCase();\r",
+							"//拼接签名后的报文\r",
+							"inputjso.authorityData = str_md5_sign;\r",
+							"console.log('签名后的报文为：' + JSON.stringify(inputjso));\r",
+							"//替换请求主体中的临时变量\r",
+							"pm.environment.set('message', JSON.stringify(inputjso));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{message}}"
+				},
+				"url": {
+					"raw": "http://192.168.75.41/setReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"setReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.网站需要登录咋整",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2cb8826d-490a-4c9b-bc9d-80d94ed449b9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "balabalabala",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "value",
+							"value": "{\"vehicleCode\":\"C001_001\",\"deviceCode\":\"D001_001\",\"type\":1,\"uuid\":\"4561acdawf\",\"authorityData\":\"7ef648848b403a668f543d13b60b1b71\"}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.75.41/setReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"setReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.base64编解码和Tests",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "54d0a403-a313-4c2d-ab7c-6741ef4bef74",
+						"exec": [
+							"// 1. 先声明变量和报文的拼装，用于后续方便修改",
+							"var orderNo = 'TYCH14205';",
+							"var data = '<Request><errcode>0</errcode><errmsg>ok</errmsg><orderno>' + orderNo + '</orderno></Request>'",
+							"console.log('请求明文:' + intermediate);",
+							"// 2. 由于原始报文为utf-8编码的，故先将原始的报文转变为“中间态”。然后再将其转换至相应的其他编码形式。",
+							"//    其中'Utf8'和'Base64'可以互换也可以改为其他的编码格式。",
+							"var intermediate = CryptoJS.enc.Utf8.parse(data);",
+							"console.log('-------intermediate-------:' + intermediate);",
+							"data = CryptoJS.enc.Base64.stringify(intermediate);",
+							"console.log('实际请求:' + data)",
+							"",
+							"// 3. 替换请求中的参数",
+							"pm.environment.set(\"data\", data);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "58604e71-87d4-43ea-804f-4bde9f3ba7a5",
+						"exec": [
+							"console.log(\"-------responseBody-------\" + responseBody);",
+							"// 去掉返回值中的换行符及回车符",
+							"var str = responseBody.replace(/[\\r\\n]/g,\"\");",
+							"// base64转utf-8",
+							"var intermediate = CryptoJS.enc.Base64.parse(str);",
+							"var utf8 = CryptoJS.enc.Utf8.stringify(intermediate);",
+							"console.log(\"出参转明文为：\" + utf8);",
+							"pm.test(\"出参转明文为：\" + utf8,function(){",
+							"    pm.response.to.have.status(200);",
+							"    // pm.expect(pm.response.text()).to.include('code\":\"000000\",\"msg\":\"成功\"'); //用出参的内容做是否成功的判断。",
+							"})",
+							"",
+							"//Postman的test-scripts用法示例",
+							"//https://learning.postman.com/docs/postman/scripts/test-scripts/",
+							"//Postman的解码base64数据示例",
+							"//https://learning.postman.com/docs/postman/scripts/test-examples/#decode-base64-data",
+							"",
+							"//模拟的出参可以做实验用：",
+							"//PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz",
+							"//48UmVzcG9uc2U+PFJlc3VsdHM+c3VjY2VzczxSZXN1bHRzPjwv",
+							"//UmVzcG9uc2U+"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{data}}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.75.41/getReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"getReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.在请求前的请求",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f1a561c9-81a7-42bc-ba7e-d9b3e6fb0cf6",
+						"exec": [
+							"//手动修改要查询单号",
+							"var orderNumber = 'LWX4398046632103';",
+							"//url和请求体*如果“Body”中的报文有换行的情况，那么参数postBody可能需要基于换行的报文进行URL编码。",
+							"var postUrl = 'https://192.168.75.41/getSign';",
+							"var postBody = 'value={\"orderno\":\"' + orderNumber + '\",\"key\":\"asfjoaslnjklgalsdfjl\"}';",
+							"//组装请求体",
+							"const echoPostRequest = {",
+							"  url: postUrl,",
+							"  method: 'POST',",
+							"  header:'Content-Type:application/x-www-form-urlencoded',",
+							"  body: {",
+							"    mode: 'x-www-form-urlencoded',",
+							"    raw: postBody",
+							"  }};",
+							"var sign;",
+							"//发送请求，并在处理返回的内容res后进行参数的替换",
+							"pm.sendRequest(echoPostRequest, function (err, res) {",
+							"    console.log(res.json());",
+							"    sign = res.json()[\"sign\"];",
+							"    pm.environment.set(\"orderNo\", orderNumber);",
+							"    pm.environment.set(\"sign\", sign);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "002bd08c-3115-4250-aef8-afddd498e4b9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "value",
+							"value": "{\"orderno\":\"{{orderno}}\",\"sign\":\"{{sign}}\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.75.41/getReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"getReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.重复发送请求——Runner的使用",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests['Response has data value'] = jsonData.form.foo === data.value"
+						],
+						"id": "077cb8a6-ad3d-4f4c-97cd-98edbe0db8ba"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"value": "{{value}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "postman-echo.com/{{path}}",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "准备用-设置返回值form",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "value",
+							"value": "SGVsbG8h",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.75.41/setReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"setReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "准备用-获取设置好的返回值",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.75.41/getReturn",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"75",
+						"41"
+					],
+					"path": [
+						"getReturn"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

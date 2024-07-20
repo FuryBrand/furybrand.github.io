@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="一种用于应对灵活变化的测试用例模版 - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  经过了小半年的尝试，终于有了一个我相对满意的模版了～
+
+">
+    
+    <meta property="article:published_time" content="2020-12-25T10:57:25Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="JS">
+    
+    <meta property="article:tag" content="杂文">
+    
+    <meta property="article:tag" content="技术相关">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2020/12/25/test-case-template/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>一种用于应对灵活变化的测试用例模版 - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2020/12/25/test-case-template/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=JS" title="JS">JS</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文">杂文</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                    </div>
+                    <h1>一种用于应对灵活变化的测试用例模版</h1>
+                    
+                    <h2 class="subheading">测试用例模版之我见</h2>
+                    <span class="meta">Posted by Steve on December 25, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<blockquote>
+  <p>经过了小半年的尝试，终于有了一个我相对满意的模版了～</p>
+</blockquote>
+
+<h2 id="测试用例模版到底应该用啥">测试用例模版到底应该用啥？</h2>
+
+<p>标准化是体现专业性的捷径，之前推了Excel版用例的标准化。后来组织调整，来到了创新业务的条线，就一直在考虑是否要启用思维导图的方式来作为测试用例的载体。</p>
+
+<p>其实去年在公司的某个创新项目中就进行了一下探索，但是存在一些未解决的问题。现在拿出来说，一方面是为了配合敏捷开发模型中的快速迭代。另一方面我觉得我的模版达到了一个小里程碑。所以聊一下。</p>
+
+<p>目前整个业界对于测试用例的编写载体，基本有3种。</p>
+<ul>
+  <li>Excel</li>
+  <li>思维导图</li>
+  <li>TestLink、HP ALM等或开源，或收费的测试用例管理平台</li>
+</ul>
+
+<p>TestLink没有试用过，但是HP ALM可以理解为一个加强版的，云端的带有测试用例模板的Excel。从成本（使用、迁移）来说，Excel和思维导图的成本都较低。下面我将这两种形式稍微做下对比：</p>
+
+<ul>
+  <li>Excel
+    <ul>
+      <li>优势：
+        <ul>
+          <li>可以模板化，从而规范测试用例的编写，进而输出相对合规和高品质的测试用例。</li>
+          <li>可以归档，针对稳定的功能模块，可以相对方便的复用。</li>
+          <li>进度数据很好统计。</li>
+          <li>可以非常直观的展现流程性的内容。</li>
+        </ul>
+      </li>
+      <li>劣势：
+        <ul>
+          <li>编写耗时较长。</li>
+          <li>文字阅读量大，评审过程非常痛苦。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>思维导图
+    <ul>
+      <li>优势：
+        <ul>
+          <li>编写耗时较短。</li>
+          <li>验证点简单直观。</li>
+        </ul>
+      </li>
+      <li>劣势：
+        <ul>
+          <li>基本没法归档。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>可能有朋友会说，思维导图还有“无法统计进度”、“很难模版化”这两个弊病呢。我在当前版本的测试用例模版中一定程度上解决了。</p>
+
+<h2 id="一种用于应对灵活变化的测试用例模版ver10">一种用于应对灵活变化的测试用例模版Ver1.0</h2>
+
+<h4 id="归档与继承">归档与继承</h4>
+
+<p>测试用例在指导测试执行以外，还可能有两个作用<code class="language-plaintext highlighter-rouge">归档</code>（已有业务逻辑的传承，可供新人学习使用）、<code class="language-plaintext highlighter-rouge">继承</code>（回归测试等测试执行时无需再新写用例）。</p>
+
+<p>其实从现在来看，随着敏捷开发替代了瀑布开发，传统的Full Test， Regression Test(Round X), Sanity Test等相对少了，用例继承的机会也变少了。所以<code class="language-plaintext highlighter-rouge">继承</code>变成了伪需求。</p>
+
+<p>而新员工对于老流程的熟悉，其实可以用业务流程总结的文档以及自动化测试用例脚本来熟悉。所以<code class="language-plaintext highlighter-rouge">归档</code>的诉求也解决了。</p>
+
+<h4 id="载体">载体</h4>
+
+<p>为了避免商业付费和数据安全，试过几款软件，最后选择了百度脑图的本地版DesktopNaotu，可以从<a href="https://github.com/NaoTu/DesktopNaotu/releases">github</a>上下载。</p>
+
+<h4 id="模版说明">模版说明</h4>
+
+<p>测试用例模版如下：
+<img src="http://furybrand.github.io/assets/2020/2020-12-25-test-case-template/testCaseTemplate.png" alt="测试用例模版"></p>
+
+<p><a href="http://furybrand.github.io/assets/2020/2020-12-25-test-case-template/testCaseTemplate_Ver1.0.km">点我下载软件的.km源文件</a></p>
+
+<p>从上面的截图可以看出，测试用例主要分4个板块，<code class="language-plaintext highlighter-rouge">需求梳理</code>、<code class="language-plaintext highlighter-rouge">测试准备</code>、<code class="language-plaintext highlighter-rouge">测试用例</code>、<code class="language-plaintext highlighter-rouge">定制化体测内容</code>。</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">需求梳理</code>：主要包含以逻辑的角度拆解需求，以上线过程的角度拆解上线注意事项，以线上运营的角度拆解配置及需求点的合理性。暂时列出了这些，实际可以根据具体的条线或者项目组进行特别设计。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">测试准备</code>：这部分是在梳理好需求之后，写用例的过程中会得到，在实际测试开始前，需要做哪些准备工作，比如业务主数据的维护，人员权限的配置等。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">测试用例</code>：测试用例相对复杂，我在后面详细说。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">定制化体测内容</code>：一般来讲，我们可能有一个提测模版。但是为了减少测试和研发的沟通成本，我将提测内容以定制化的方式体现。就是我们要测试什么，需要研发提供具体的哪些东西，甚至需要一些操作节点的日志关键字。这样做也可以帮助测试梳理逻辑。也能在一定程度上提高研发的提测质量。</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">测试用例</code>的话，考虑到可读性，单独抽出来，在这里说。分如下几点：</p>
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">流程</code>：主要是体现业务流程的用例，会区分步骤，同时每一个步骤内部还会以Note的形式加入<code class="language-plaintext highlighter-rouge">前提条件</code>、<code class="language-plaintext highlighter-rouge">步骤描述</code>、<code class="language-plaintext highlighter-rouge">预期结果</code>、<code class="language-plaintext highlighter-rouge">备注信息</code>、<code class="language-plaintext highlighter-rouge">Failed原因</code>等内容，完全是符合传统用例规范的。old fashion but effective</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">功能点</code>：为分支流程的单点测试主要列关键点即可。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">回归</code>：顾名思义，需要做回归的场景。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">异常</code>：设计的一些异常场景。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">结果</code>：每一个步骤或者功能点的结果是需要手动标记的，初始是<code class="language-plaintext highlighter-rouge">-n</code>;通过的话是<code class="language-plaintext highlighter-rouge">-p</code>;被阻塞是<code class="language-plaintext highlighter-rouge">-b</code>；有问题（bug）是<code class="language-plaintext highlighter-rouge">-f</code>；本次不执行是<code class="language-plaintext highlighter-rouge">-NA</code>；注意，千万要按照该标准执行，下面会有一个结果统计工具，是按照该标准统计的。</li>
+</ul>
+
+<h2 id="工具进度计算器">工具：进度计算器</h2>
+
+<p>在DesktopNaotu软件中，右键“测试用例”节点，选择“Export Node”，将节点复制后，粘贴至下面的文本框中，可以计算进度。</p>
+
+<p>请输入用例内容：</p>
+<textarea rows="15" cols="80" id="testCase"></textarea>
+<p><input type="button" value="统计" onclick="count()">
+</p>
+<p>-n（new）的数量：<pan id="underline_n"></pan></p>
+<p>-p（passed）的数量：<pan id="underline_p"></pan></p>
+<p>-b（blocked）的数量：<pan id="underline_b"></pan></p>
+<p>-f（failed）的数量：<pan id="underline_f"></pan></p>
+<p>-NA（not available）的数量：<pan id="underline_na"></pan></p>
+<p>总数量为<b id="underline_all"></b>；
+    通过(p+NA)的数量为<b id="underline_all_p"></b>；
+    通过率(通过/总数)为<b id="underline_all_p_na_rate"></b>
+</p>
+<p>
+    阻塞率(阻塞/总数)为<b id="underline_all_b_rate"></b>
+    错误率(错误/总数)为<b id="underline_all_f_rate"></b>
+    未执行率(未执行/总数)为<b id="underline_all_n_rate"></b>
+</p>
+<script type="text/javascript">
+    function count() {
+        var testCase = document.getElementById("testCase").value;
+        var count_n = getCharCount(testCase, '-n');
+        var count_f = getCharCount(testCase, '-f');
+        var count_p = getCharCount(testCase, '-p');
+        var count_b = getCharCount(testCase, '-b');
+        var count_na = getCharCount(testCase, '-NA');
+        document.getElementById("underline_n").innerHTML = count_n;
+        document.getElementById("underline_f").innerHTML = count_f;
+        document.getElementById("underline_p").innerHTML = count_p;
+        document.getElementById("underline_b").innerHTML = count_b;
+        document.getElementById("underline_na").innerHTML = count_na;
+        var count_all = count_n + count_f + count_p + count_na + count_b;
+        var count_all_p_na = count_p + count_na;
+        document.getElementById("underline_all").innerHTML = count_all;
+        document.getElementById("underline_all_p").innerHTML = count_all_p_na;
+        document.getElementById("underline_all_p_na_rate").innerHTML = getPercentage(count_all_p_na, count_all) + '%';
+        document.getElementById("underline_all_b_rate").innerHTML = getPercentage(count_b, count_all) + '%';
+        document.getElementById("underline_all_f_rate").innerHTML = getPercentage(count_f, count_all) + '%';
+        document.getElementById("underline_all_n_rate").innerHTML = getPercentage(count_n, count_all) + '%';
+    }
+    function getCharCount(str, char) {
+        var regex = new RegExp(char, 'g'); // 使用g表示整个字符串都要匹配
+        var result = str.match(regex);          //match方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
+        var count = !result ? 0 : result.length;
+        return count;
+    }
+    function getPercentage(num, total) {
+        // if\(num == 0 \|| total == 0){
+            // return 0;
+        // }
+        if(num == 0){
+            return 0;
+        }
+        if(total == 0){
+            return 0;
+        }
+        return (Math.round(num / total * 10000) / 100.00);// 小数点后两位百分比
+    }
+</script>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/11/02/make-mac-better/" data-toggle="tooltip" data-placement="top" title="MacOS-一些使用小技巧">
+                        Previous<br>
+                        <span>MacOS-一些使用小技巧</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/02/17/finance-calculator/" data-toggle="tooltip" data-placement="top" title="财务计算器">
+                        Next<br>
+                        <span>财务计算器</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="39">技术相关</a>
+        
+                <a data-sort="0056" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Python" title="Python" rel="7">Python</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0064" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0064" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0065" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

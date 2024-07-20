@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>For Love To Love</title>
+    <description>Write down &amp; share my person notes. 记录和分享我的个人笔记</description>
+    <link>http://furybrand.github.io//</link>
+    <atom:link href="http://furybrand.github.io//feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 20 Jul 2024 16:33:00 +0000</pubDate>
+    <lastBuildDate>Sat, 20 Jul 2024 16:33:00 +0000</lastBuildDate>
+    <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>FFmpeg-使用笔记</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;做了两年多的视频相关的产品了，这里记录一下ffmpeg在日常生活中的一些应用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;应该是传统视频领域中最强大的音视频处理软件了，但是由于是命令行软件，所以上手对于非软件行业的用户有一点点门槛。市面上很多音视频相关的软件都是基于FFmpeg做页面开发而来的。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ffmpeg.org/download.html&quot;&gt;官方下载链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;场景一视频裁切与拼接&quot;&gt;场景一：视频裁切与拼接&lt;/h2&gt;
+
+&lt;p&gt;废话少说，直接上命令行了。&lt;/p&gt;
+
+&lt;p&gt;使用ffmpeg截取并拼接视频的命令：&lt;/p&gt;
+
+&lt;div class=&quot;language-ssh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sudo&lt;/span&gt; ffmpeg -i /home/temp/20231021/ch09_20231017132740_3_0_1107.mp4 -ss &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:20:24 -to &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:23:55 -c:v copy -c:a copy &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;.mp4
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sudo&lt;/span&gt; ffmpeg -i /home/temp/20231021/ch09_20231017164347_3_0_6D08.mp4 -ss &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:27:57 -to &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:44:57 -c:v copy -c:a copy &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;.mp4
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sudo&lt;/span&gt; ffmpeg -i /home/temp/20231021/ch09_20231017212736_3_0_2504.mp4 -ss &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:24:11 -to &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:25:49 -c:v copy -c:a copy &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.mp4
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sudo&lt;/span&gt; ffmpeg -f concat -i file -c copy /data3/11011318471320206009.mp4
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;cat&lt;/span&gt; file
+&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; '1.mp4'
+&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; '2.mp4'
+&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; '3.mp4'
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;场景二视频转码h265&quot;&gt;场景二：视频转码H.265&lt;/h2&gt;
+
+&lt;p&gt;目前主流的视频是H.264编码的，H.265编码相对压缩比更高，实测各类电影、视频在进行H.265编码后，体积缩减至原始文件的六分之一左右。类似的相对较新的编码格式还有AV1、VP9，但是我没有进行实测。&lt;/p&gt;
+
+&lt;p&gt;使用FFmpeg转码时可以使用CPU也可以使用对应的GPU进行硬件加速。但是压缩比来看，CPU的效果明显更好。从时间成本来看，GPU加速进行转码的话，速度极快。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CPU转码&lt;/strong&gt;：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;-i：指定源文件&lt;/li&gt;
+      &lt;li&gt;-c:v libx265：指定视频编码为 libx265 ，也就是将视频重新编码为 H.265 格式。&lt;/li&gt;
+      &lt;li&gt;preset medium：设置编码为 medium 。其实不指定也行，medium就是默认值。preset的设置会影响编码的速度和质量平衡，我实际测试过veryslow，质量并没有显著提高，medium是我认为最优的选项。&lt;/li&gt;
+      &lt;li&gt;map_metadata 0：复制输入文件的元数据。&lt;/li&gt;
+      &lt;li&gt;tag:v hvc1：为输出视频设置标签 hvc1。可以解决转码后的文件不被iPhone识别的问题。&lt;/li&gt;
+      &lt;li&gt;map 0:v:0：从输入文件中选择第一个视频流。&lt;/li&gt;
+      &lt;li&gt;map 0:a：保留所有的音频流。&lt;/li&gt;
+      &lt;li&gt;map 0:s：保留所有的音频流。&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ffmpeg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; E:&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;2h265&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;XXXX.mp4 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt;:v libx265 &lt;span class=&quot;nt&quot;&gt;-preset&lt;/span&gt; medium &lt;span class=&quot;nt&quot;&gt;-map_metadata&lt;/span&gt; 0 &lt;span class=&quot;nt&quot;&gt;-tag&lt;/span&gt;:v hvc1 &lt;span class=&quot;nt&quot;&gt;-map&lt;/span&gt; 0&amp;amp;#58&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&amp;amp;#118&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&amp;amp;#58&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;0 &lt;span class=&quot;nt&quot;&gt;-map&lt;/span&gt; 0:a E:&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;2h265_output&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;XXXX.mp4
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;GPU转码（NVIDIA平台）&lt;/strong&gt;：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;-c:v hevc_nvenc：使用NVIDA的GPU进行H.265编码，逻辑上和FFmpeg编译的版本有关系，不过我的NVDIA GeForce RTX 4060可以直接使用。&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ffmpeg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; E:&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;2h265&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;XXXX.mp4 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt;:v hevc_nvenc &lt;span class=&quot;nt&quot;&gt;-preset&lt;/span&gt; medium &lt;span class=&quot;nt&quot;&gt;-map_metadata&lt;/span&gt; 0 &lt;span class=&quot;nt&quot;&gt;-tag&lt;/span&gt;:v hvc1 &lt;span class=&quot;nt&quot;&gt;-map&lt;/span&gt; 0&amp;amp;#58&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&amp;amp;#118&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&amp;amp;#58&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;0 &lt;span class=&quot;nt&quot;&gt;-map&lt;/span&gt; 0:a E:&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;2h265_output&amp;amp;#92&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;XXXX.mp4
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;我的转码程序&quot;&gt;我的转码程序&lt;/h4&gt;
+
+&lt;p&gt;我的程序需要满足以下几项需求：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;更高的压缩比，为了节省空间（省购买硬盘的钱）。&lt;/li&gt;
+  &lt;li&gt;保留手机拍摄视频的时间戳及地理位置信息，同时需要解决IOS、安卓的兼容性，因为我是双持用户，照片会两处备份。&lt;/li&gt;
+  &lt;li&gt;转码需要保留电影的多音轨、多字幕。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;程序是基于python的实现，安卓上是通过Termux来运行的。虽然平台不同，但是实测转码结果相同。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Windows版本&lt;/strong&gt;：&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://furybrand.github.io/assets/2024/2024-07-20-ffmpeg-notes/h264_to_h265_tool.zip&quot;&gt;Windows版命令行转码工具&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;安卓版本&lt;/strong&gt;：
+等写完再补充。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;更新日志&quot;&gt;更新日志&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2024年7月20日：初稿。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 20 Jul 2024 18:01:00 +0000</pubDate>
+        <link>http://furybrand.github.io//2024/07/20/ffmpeg-notes/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2024/07/20/ffmpeg-notes/</guid>
+        
+        <category>技术相关</category>
+        
+        <category>FFmpeg</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Python-控制Chrome的登录与窗口调整</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;GPT真的很好用，已经可以很大程度上辅助人写代码了。研发没时间弄，为了项目推进我直接开干&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1背景&quot;&gt;1.背景&lt;/h2&gt;
+
+&lt;p&gt;BS架构的视频相关项目，当前版本视频长期放置之后画面会延迟，为了帮助现场用起来所以搞了自动化的脚本对程序进行初始化，登陆Web系统，跳转指定页面，控制Chrome窗口位置并最大化。&lt;/p&gt;
+
+&lt;h2 id=&quot;2编程&quot;&gt;2.编程&lt;/h2&gt;
+
+&lt;p&gt;知识点清单：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;selenium，控制浏览器&lt;/li&gt;
+  &lt;li&gt;tkinter，绘制python程序窗体&lt;/li&gt;
+  &lt;li&gt;pygetwindow，控制系统的窗口&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://furybrand.github.io/assets/2024/2024-07-18-python-automatic-chrome/automate_chrome.py&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3实施&quot;&gt;3.实施&lt;/h2&gt;
+
+&lt;h4 id=&quot;知识点1将python打包exe可执行文件&quot;&gt;知识点1：将python打包exe可执行文件&lt;/h4&gt;
+&lt;p&gt;参考这里&lt;a href=&quot;/2018/11/28/Python2exe/&quot;&gt;Python-将python文件打包成exe文件&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;知识点2将python环境迁移至对象机器并离线安装&quot;&gt;知识点2：将python环境迁移至对象机器并离线安装&lt;/h4&gt;
+
+&lt;p&gt;主要目的是防止对象机器没有可靠外网。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;导出依赖列表&lt;/strong&gt;：
+在开发机器上，使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt;来创建一个包含所有已安装依赖的列表。在一个空文件夹中，打开命令行工具并执行以下命令：&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pip freeze &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; requirements.txt
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;这将在当前目录下创建一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requirements.txt&lt;/code&gt;文件，里面列出了所有已安装的包及其版本。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;下载依赖包&lt;/strong&gt;：
+接下来，使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip download&lt;/code&gt;命令来下载&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requirements.txt&lt;/code&gt;中列出的所有包及其依赖项。&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pip download &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; requirements.txt &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; ./
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;在目标机器上安装依赖&lt;/strong&gt;：
+在目标机器上，进入对应目录，使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip&lt;/code&gt;来安装这些包。执行以下命令：&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--no-index&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;验证安装&lt;/strong&gt;：
+安装完成后，可以使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip list&lt;/code&gt;命令来验证是否所有的包都已正确安装。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;更新日志&quot;&gt;更新日志&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2024年7月18日：初稿&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 18 Jul 2024 19:33:00 +0000</pubDate>
+        <link>http://furybrand.github.io//2024/07/18/python-automatic-chrome/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2024/07/18/python-automatic-chrome/</guid>
+        
+        <category>技术相关</category>
+        
+        <category>Python</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>xin阅:《如何阅读一本书》</title>
+        <description>&lt;h2 id=&quot;推介词&quot;&gt;推介词&lt;/h2&gt;
+
+&lt;p&gt;万事万物都有方法论，即便是艺术也一样。所以我认为一个人只要用心，在任何领域都可以成为专家（但是要想成为大师，就要靠天赋了）。《如何阅读一本书》其实就是一套教导读者如何阅读的方法论。现在社会，最大的公平就是接受教育的公平，有了知识、学识、经验才有机会跨越阶层的鸿沟。而最易实现的教育就是通过读书而进行的“自我教育”，所以教会人们阅读是非常重要的，而本书的目的就恰恰在此。我个人认为具备能阅读常规小说的水平时，就可以阅读这本书了，并且越早越好。&lt;/p&gt;
+
+&lt;h2 id=&quot;碎碎念&quot;&gt;碎碎念&lt;/h2&gt;
+
+&lt;p&gt;这本书其实不是今年读的，其实是去年读的。去年下半年受到B站Up主“所长林超”在B站的课程“给年轻人的跨学科工具箱”影响，意识到阅读的重要性，于是重拾起了阅读的习惯。说来惭愧，大学毕业之后好像就没有再做过啥深度阅读了。拾起了阅读的习惯之后，读的第一本书是《金字塔原理》，因为我有记笔记和刻意练习的习惯，所以过程中就一直在探索好的笔记记录及呈现的方式。从markdown到思维导图，最后买了mindmaster的永久会员。由于软件有登录数量限制，为了方便随时随地回顾复习，也为了推介好书，于是就有了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xin阅&lt;/code&gt;这个新栏目。&lt;/p&gt;
+
+&lt;h2 id=&quot;读书笔记&quot;&gt;读书笔记&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://furybrand.github.io/assets/xinyue/how_to_read_a_book.pdf&quot;&gt;pdf版读书笔记&lt;/a&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*仅用于个人复习强化记忆使用&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;更新日志&quot;&gt;更新日志&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2022年2月10日：初稿。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 10 Feb 2022 12:30:00 +0000</pubDate>
+        <link>http://furybrand.github.io//2022/02/10/reading-note-how-to-read-a-book/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2022/02/10/reading-note-how-to-read-a-book/</guid>
+        
+        <category>xin阅</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>xin食:红烧肉</title>
+        <description>&lt;h2 id=&quot;用时&quot;&gt;用时&lt;/h2&gt;
+
+&lt;p&gt;全程1.5小时以内&lt;/p&gt;
+
+&lt;h2 id=&quot;食材&quot;&gt;食材&lt;/h2&gt;
+
+&lt;p&gt;五花肉&lt;/p&gt;
+
+&lt;h2 id=&quot;调料&quot;&gt;调料&lt;/h2&gt;
+
+&lt;p&gt;油、料酒、冰糖、葱、姜、大料、桂皮、香叶、酱油、白糖、盐、腐乳汁&lt;/p&gt;
+
+&lt;h2 id=&quot;步骤&quot;&gt;步骤&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;直接热锅烫猪皮（去毛去腥），烙到大面积变硬，有些许焦&lt;/li&gt;
+  &lt;li&gt;热水泡5分钟后，将肉皮刮净（还是去毛）&lt;/li&gt;
+  &lt;li&gt;改刀切成大块&lt;/li&gt;
+  &lt;li&gt;将肉冷水下锅，加入花雕酒（或料酒），带水煮沸后将肉捞出&lt;/li&gt;
+  &lt;li&gt;空锅小火炒刚刚捞出的肉，将油逼出后捞出。（油可以炒菜炖鱼用）&lt;/li&gt;
+  &lt;li&gt;锅中加入油和冰糖炒糖色，冰糖化了之后有些黄的时候转小火（防止炒糊）继续炒，至枣红色的时候下肉翻炒上色。&lt;/li&gt;
+  &lt;li&gt;加入葱姜大料桂皮香叶后继续翻炒几下&lt;/li&gt;
+  &lt;li&gt;加入莫过食材的热水后，加入料酒、酱油、两勺糖一勺盐以及一些腐乳汁。&lt;/li&gt;
+  &lt;li&gt;大火烧开，小火炖20分钟左右（此时肉是颤颤巍巍的）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-09-05-braised-pork-with-brown-sauce/20210905193902.jpg&quot; alt=&quot;效果图&quot; /&gt;
+&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-09-05-braised-pork-with-brown-sauce/20210905193912.jpg&quot; alt=&quot;效果图&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tips&quot;&gt;Tips&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;第五步将五花肉的油逼出时，小火满满来，会出很多油的，若五花肉中保有的油太多，则会导致成品特别油腻。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料：&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://b23.tv/0jv6kj&quot;&gt;1947年老爷爷的红烧肉，老规矩做法追寻最传统的老味道，春节家宴上年味菜对决走起！&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 05 Sep 2021 19:30:00 +0000</pubDate>
+        <link>http://furybrand.github.io//2021/09/05/braised-pork-with-brown-sauce/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2021/09/05/braised-pork-with-brown-sauce/</guid>
+        
+        <category>xin食</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>xin食:豆角炖排骨</title>
+        <description>&lt;h2 id=&quot;用时&quot;&gt;用时&lt;/h2&gt;
+
+&lt;p&gt;全程4小时以内(食材准备2小时，两次炖共需1小时)&lt;/p&gt;
+
+&lt;h2 id=&quot;食材&quot;&gt;食材&lt;/h2&gt;
+
+&lt;p&gt;排骨、油豆角（品种有：一点红、家雀蛋、黄金沟。如果买不到的话，四季豆也是可以的）&lt;/p&gt;
+
+&lt;h2 id=&quot;调料&quot;&gt;调料&lt;/h2&gt;
+
+&lt;p&gt;油、葱、姜、八角、料酒、酱油、花椒面、胡椒粉、盐、糖&lt;/p&gt;
+
+&lt;h2 id=&quot;步骤&quot;&gt;步骤&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;精排（肋排吗？）泡水2小时。&lt;/li&gt;
+  &lt;li&gt;热锅凉油，加入&lt;strong&gt;葱、姜、八角&lt;/strong&gt;煸香&lt;/li&gt;
+  &lt;li&gt;加入排骨，大火煸炒&lt;/li&gt;
+  &lt;li&gt;加入花雕酒（若无则用料酒）、酱油、花椒面继续煸炒至变色&lt;/li&gt;
+  &lt;li&gt;加入老抽上色&lt;/li&gt;
+  &lt;li&gt;加入热水，水要盖过排骨。&lt;/li&gt;
+  &lt;li&gt;待水煮沸后漂去血沫。&lt;/li&gt;
+  &lt;li&gt;小火炖半小时后，称出备用。此时一般的排骨就能达到八分熟了。&lt;/li&gt;
+  &lt;li&gt;再中火煸炒豆角（过程中加入些许盐调味）&lt;/li&gt;
+  &lt;li&gt;将豆角加入到排骨中，大火加热后转小火炖，加入些许白糖提鲜，炖半小时（开盖炖）&lt;/li&gt;
+  &lt;li&gt;大火收汁然后加入一勺胡椒粉&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-09-05-stewed-spare-ribs-with-green-bean/20210905193750.jpg&quot; alt=&quot;效果图&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料：&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1p54y1V7Dy?from=search&amp;amp;seid=14842755527182873001&quot;&gt;爷爷的北方家常菜排骨炖豆角，做好还需要有一点讲究的&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 05 Sep 2021 19:00:00 +0000</pubDate>
+        <link>http://furybrand.github.io//2021/09/05/stewed-spare-ribs-with-green-bean/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2021/09/05/stewed-spare-ribs-with-green-bean/</guid>
+        
+        <category>xin食</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>记录TX2开发板刷机</title>
+        <description>&lt;h2 id=&quot;1刷机环境准备&quot;&gt;1.刷机环境准备&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;准备一台Ubuntu18.04.5 LTS的主机（没试过其他版本的）、一个支持HDMI接口的显示器（连接开发板用）、USB键鼠。&lt;/li&gt;
+  &lt;li&gt;从&lt;a href=&quot;https://developer.nvidia.com/login&quot;&gt;nvidia官网&lt;/a&gt;注册一个开发者账号。&lt;/li&gt;
+  &lt;li&gt;从&lt;a href=&quot;https://developer.nvidia.com/nvidia-sdk-manager&quot;&gt;nvidia官网&lt;/a&gt;下载skdmanager并安装（需登录开发者账号）。我用的是“祖传”版本，就直接那安装包装了（后面使用工具的时候还是需要开发者账号）。&lt;/li&gt;
+  &lt;li&gt;参考下面的命令更换Ubuntu主机apt的源（不然后面装CUDA之类的会失败）&lt;/li&gt;
+  &lt;li&gt;安装sdkmanager。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ sudo dpkg -i sdkmanager_1.5.0-7774_amd64.deb&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;通过终端打开sdkmanager后登录前面注册的账号。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ sdkmanager&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;更新apt源&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;steve@steve:~/Downloads&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; /etc/apt/sources.list /etc/apt/sources.list.bak
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; password &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;steve: 
+steve@steve:~/Downloads&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo chmod&lt;/span&gt; +w /etc/apt/sources.list
+steve@steve:~/Downloads&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vim /etc/apt/sources.list
+&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt;: vim: &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;not found
+steve@steve:~/Downloads&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;vim
+steve@steve:~/Downloads&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vim /etc/apt/sources.list
+steve@steve:~/Downloads&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cat&lt;/span&gt; /etc/apt/sources.list
+&lt;span class=&quot;c&quot;&gt;# 阿里源&lt;/span&gt;
+deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+steve@steve:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2开始刷机&quot;&gt;2.开始刷机&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-使sdk-manager识别硬件设备&quot;&gt;2.1 使SDK Manager识别硬件设备&lt;/h3&gt;
+
+&lt;p&gt;具体步骤为：拔掉开发板的电源，将开发板与主机通过USB连接，插上电源后，立即按下Recover键并保持，随后按下Reset键1秒后松开，随后松开Recover键），此时设备进入了刷机模式，SDK Manager应该可以正确识别硬件设备。（如果没有识别，可以通过页面上的refresh按钮进行刷新）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-08-30-tx2-flash/tu1.png&quot; alt=&quot;sdkmanager&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;22-点击continue等待系统烧录完成&quot;&gt;2.2 点击CONTINUE，等待系统烧录完成&lt;/h3&gt;
+
+&lt;p&gt;*第一次需要下载相关包，所以会很慢，需要耐心等待（我还遇到了几次重试的情况）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-08-30-tx2-flash/tu2.png&quot; alt=&quot;sdkmanager&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在系统烧录完成后会出现如下画面。保持该画面，继续进行下一步。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-08-30-tx2-flash/tu3.png&quot; alt=&quot;sdkmanager&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;23-初始化开发板上的ubuntu系统&quot;&gt;2.3 初始化开发板上的Ubuntu系统&lt;/h3&gt;
+
+&lt;p&gt;此时开发板上的系统已经烧录完成，就像重做电脑端的系统一样需要初始化，做一些基本的设置。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-08-30-tx2-flash/20211027222513.jpg&quot; alt=&quot;sdkmanager&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;过程中我们会设置开发板上Ubuntu系统的用户名密码。&lt;/p&gt;
+
+&lt;h3 id=&quot;24-安装jetson的sdk&quot;&gt;2.4 安装Jetson的SDK&lt;/h3&gt;
+
+&lt;p&gt;在Ubuntu18.04.5 LTS的主机上输入刚才设置到开发板上的用户名密码后点击“Install”。&lt;/p&gt;
+
+&lt;p&gt;*192.168.55.1是当开发板作为USB ethernet路由时的IP地址。&lt;/p&gt;
+
+&lt;p&gt;当SDK安装完成后，会出现如下画面。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-08-30-tx2-flash/tu4.png&quot; alt=&quot;sdkmanager&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-其它&quot;&gt;3. 其它&lt;/h2&gt;
+
+&lt;h3 id=&quot;31-安装jtop&quot;&gt;3.1 安装jtop&lt;/h3&gt;
+
+&lt;p&gt;jtop是性能监控工具。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装命令&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ sudo -H pip install -U jetson-stats&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;使用命令&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ jtop&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果pip没有装的话，需要&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;安装pip&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ sudo apt-get install python3-pip&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;安装jtop&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ sudo -H pip3 install -U jetson-stats&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;更新日志&quot;&gt;更新日志&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2021年10月27日：初稿。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 30 Aug 2021 10:13:16 +0000</pubDate>
+        <link>http://furybrand.github.io//2021/08/30/tx2-flash/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2021/08/30/tx2-flash/</guid>
+        
+        <category>技术</category>
+        
+        <category>Linux</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>用JMeter替换Postman</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;由于安全等原因，需要弃用Postman迁移至JMeter。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;下载及安装&quot;&gt;下载及安装&lt;/h2&gt;
+
+&lt;p&gt;macOS的话，安装及配置参考&lt;a href=&quot;/2020/10/24/software-4-work-MAC/&quot;&gt;记从Windows办公迁移至MAC办公&lt;/a&gt;，Windows的话，直接官网下载就好了。&lt;/p&gt;
+
+&lt;h2 id=&quot;简单入门&quot;&gt;简单入门&lt;/h2&gt;
+
+&lt;h4 id=&quot;新增一个thread-group&quot;&gt;新增一个Thread Group&lt;/h4&gt;
+
+&lt;p&gt;右键&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Test Plan&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Threads(Users)&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread Group&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;因为是代替Postman，所以目前保持如下设置即可，不用调整线程数等参数&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-17-use-jmeter-2-replace-postman/01.png&quot; alt=&quot;截图&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;新增一个http-request并尝试请求&quot;&gt;新增一个HTTP Request并尝试请求&lt;/h4&gt;
+
+&lt;p&gt;右键&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread Group&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Sampler&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTP Request&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;将HTTP接口的相关信息填入其中，如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-17-use-jmeter-2-replace-postman/02.png&quot; alt=&quot;截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;右键&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread Group&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Start&lt;/code&gt;或者通过上方的绿色播放按钮来执行。&lt;/p&gt;
+
+&lt;h4 id=&quot;查看结果并保留response报文&quot;&gt;查看结果并保留Response报文&lt;/h4&gt;
+
+&lt;p&gt;通过上面的步骤，可以发送请求，但是请求发送的成功失败，啥情况，咱不知道。所以需要增加两个Listener来看下结果。&lt;/p&gt;
+
+&lt;p&gt;右键&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread Group&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Listener&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;View Result Tree&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;右键&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread Group&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Listener&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Save Responses to a fail&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;此时再次尝试发送请求便可以通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;View Result Tree&lt;/code&gt;来看到响应的结果了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-17-use-jmeter-2-replace-postman/03.png&quot; alt=&quot;截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但是由于报文体中的内容并不能进行复制（或者说我暂时没有找到复制的方法），暂时通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Save Responses to a fail&lt;/code&gt;来将响应保存下来。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-17-use-jmeter-2-replace-postman/04.png&quot; alt=&quot;截图&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;增加http-header-manager&quot;&gt;增加HTTP Header Manager&lt;/h4&gt;
+
+&lt;p&gt;JMeter的话，相对Postman，很多东西需要自己维护好，若后端对于中文不识别，或者请求的报文体的格式没有正确识别的话，可能需要我们手动的维护下Header&lt;/p&gt;
+
+&lt;p&gt;右键&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread Group&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Config Element&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTP Header Manager&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-17-use-jmeter-2-replace-postman/05.png&quot; alt=&quot;截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;此时再次请求的话，可以在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;View Result Tree&lt;/code&gt;中的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt; - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request Headers&lt;/code&gt;中增加了刚刚设置好的Header了。&lt;/p&gt;
+
+&lt;p&gt;这里我曾经遇到过一个Bug，当时使用了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add from Clipboard&lt;/code&gt;按钮，页面看起来一起正常，但是请求的时候就在Header中莫名其妙的增加了一个空格，导致后端一直解析出错。后来删除了之后重新手撸了一遍就好了。&lt;/p&gt;
+
+&lt;h4 id=&quot;简单的参数化&quot;&gt;简单的参数化&lt;/h4&gt;
+
+&lt;p&gt;JMeter支持BeanShell的方式进行参数化，详细的使用方式参考官网，我这就是简单实现一个替换。&lt;/p&gt;
+
+&lt;p&gt;右键&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread Group&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pre Processors&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanShell PreProcessor&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-17-use-jmeter-2-replace-postman/06.png&quot; alt=&quot;截图&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;//这是一个注释，token是xixi拼装了当前的时间戳。
+String token = &quot;xixi&quot; + &quot;${__time(,)}&quot;;
+String name;
+String age;
+int flag = 2;
+switch (flag) {
+    case 1:
+        name = &quot;liutianyu&quot;;
+        age = &quot;18&quot;;
+        break;
+    case 2:
+        name = &quot;liuwuxin&quot;;
+        age = &quot;108&quot;;
+}
+vars.put(&quot;token&quot;, token);
+vars.put(&quot;name&quot;, name);
+vars.put(&quot;age&quot;, age);
+log.info(&quot;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&quot;);
+log.info(&quot;刚刚发送的数据flag为：&quot; + flag);
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;此时&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTP Request&lt;/code&gt;中需要做如下改造。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-17-use-jmeter-2-replace-postman/07.png&quot; alt=&quot;截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanShell PreProcessor&lt;/code&gt;中是可以打印日志的，日志通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JMeter&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Options&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Log Viewer&lt;/code&gt;来激活日志窗口。&lt;/p&gt;
+
+&lt;h2 id=&quot;更新日志&quot;&gt;更新日志&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2021年3月17日：初稿。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 17 Mar 2021 20:35:00 +0000</pubDate>
+        <link>http://furybrand.github.io//2021/03/17/use-jmeter-2-replace-postman/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2021/03/17/use-jmeter-2-replace-postman/</guid>
+        
+        <category>JMeter</category>
+        
+        <category>技术相关</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>记一场关于Nginx配置文件及网络问题排查步骤的分享</title>
+        <description>&lt;p&gt;有伙伴想听一下在排查网络环境问题上的一些经验。Nginx是一个避不开的话题，正好顺便把Nginx的一些内容一起过一下吧。下面算是该场分享的文本稿。&lt;/p&gt;
+
+&lt;h2 id=&quot;文本稿&quot;&gt;文本稿&lt;/h2&gt;
+
+&lt;h4 id=&quot;开篇&quot;&gt;开篇&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.001.jpeg&quot; alt=&quot;开篇&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;大家好，我是XXX。今天和大家聊一聊Nginx的配置文件及排查网络问题步骤。&lt;/p&gt;
+
+&lt;h4 id=&quot;nginx是什么&quot;&gt;Nginx是什么？&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.002.jpeg&quot; alt=&quot;Nginx是什么？&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;C/C++&lt;/p&gt;
+
+&lt;p&gt;Nginx是C++写的，所以在性能上肯定会比较强。名字的含义是engine x。原作者是俄罗斯人。&lt;/p&gt;
+
+&lt;p&gt;HTTP server&lt;/p&gt;
+
+&lt;p&gt;Nginx可以作为HTTP server来代理一些静态资源文件。图片、css、js啥的&lt;/p&gt;
+
+&lt;p&gt;Reverse proxy server&lt;/p&gt;
+
+&lt;p&gt;平时的工作中，接触最多的可能就是Nginx作为反向代理服务器的情况了。反向代理服务器是一种代理服务器，通常位于专用网络中的防火墙后面，并将客户端请求定向到适当的后端服务器。 反向代理提供了更高级别的抽象和控制，以确保客户端和服务器之间网络流量的顺畅流动。测试环境的话，一般是两种情况。&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;一台服务器中部署了多个Web服务，利用服务器的Nginx，配合客户端机器的host（或者内网的DNS）来做访问上的隔离。如果不这么搞的话，用ip加端口来访问也不是不可以。&lt;/li&gt;
+  &lt;li&gt;对于前后端分离式的部署架构，如前端是VUE的静态工程，后端多个Java应用提供HTTP接口的情况。Nginx可以作为HTTP server代理VUE工程，然后将特定的请求定向到后端服务。可以通过这种手段来解决跨域问题。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;TCP/UDP proxy server&lt;/p&gt;
+
+&lt;p&gt;Nginx可以作为TCP/UDP的代理服务器，在之前的文章中，我试图利用Nginx代理MySQL服务。理论上可行，但是最终因为机器的编辑环境的依赖问题没有继续下去。&lt;/p&gt;
+
+&lt;p&gt;Mail proxy server(POP3, IMAP, SMTP)&lt;/p&gt;
+
+&lt;p&gt;既然可以搞定运输层的协议，那么基于TCP/IP的这些邮件协议也都不在话下了。&lt;/p&gt;
+
+&lt;p&gt;Load Balancing&lt;/p&gt;
+
+&lt;p&gt;反向代理的进阶就是负载均衡了。说白了就是活太多了干不过来，那就多来几个人干吧。具体的策略和配置在后面会有具体介绍，这里就不多说了。&lt;/p&gt;
+
+&lt;p&gt;FastCGI/SCGI/uwsgi&lt;/p&gt;
+
+&lt;p&gt;这个也有点意思，稍微说两句。前两个协议是给PHP用的，最后一个是给Python用的。像平时我们用Java应用的使用，Nginx是直接将HTTP转给了后端的Java应用的。但是其实Nginx也可以处理一下，将HTTP转成uwsgi之类的协议和后端通信。能猜到原因是啥吗？对，因为PHP和Python的效率较低，直接处理HTTP的效率不高，所以先由Nginx这个由C++写的程序处理一下，减轻后端服务的压力。再深的东西我也不懂了。&lt;/p&gt;
+
+&lt;p&gt;…&lt;/p&gt;
+
+&lt;p&gt;Nginx支持的还不止这些，比如ta还可以作为mp4的视频流的代理。但是我没有具体研究了。&lt;/p&gt;
+
+&lt;h4 id=&quot;config-file&quot;&gt;Config File&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.003.jpeg&quot; alt=&quot;Config_File&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Default config file - nginx.conf&lt;/p&gt;
+
+&lt;p&gt;Nginx的默认配置文件是“Nginx.conf“，根据安装路径的不同位置也不一定在哪。&lt;/p&gt;
+
+&lt;p&gt;“include domains/*;”&lt;/p&gt;
+
+&lt;p&gt;注意“Nginx.conf“中的“include domains/*;”的用法，会将指定路径下的内容全部载入到一起作为配置文件生效。最后在程序中应该是一个文件，所以此时是存在优先级的问题的。&lt;/p&gt;
+
+&lt;p&gt;Server Block(listen directive &amp;amp; server_name entries &amp;amp; location)&lt;/p&gt;
+
+&lt;p&gt;当一个请求进来的时候，Nginx会先判断应该是哪个server来处理这个请求。此时listen命令有最高优先级，若匹配到则无需关心server_name。listen决定了这个server块儿监听的是哪个ip和端口。示例中监听的是HTTP请求的默认端口80。当匹配到了多个server，此时会用server_name项来进行匹配。server_name支持通配符的匹配。有自己的优先级规则。server_name之后就是location的匹配了，location支持正则，也有多个优先级，重点说一个。“常规字符串匹配，如果有多个location都能匹配的话，优先匹配表达式最长的location”。匹配到了某一个location之后，会根据proxy_pass进行定向。若配置成了ip+端口，就直接转发走了。若配置成了upstream里配置的参数，则会使用负载均衡策略生效。另外查询log的话，参考access_log和error_log。&lt;/p&gt;
+
+&lt;p&gt;关于server块儿的介绍，具体可以参考&lt;a href=&quot;/2020/09/02/nginx/&quot;&gt;T-记一次Nginx分享&lt;/a&gt;中的2.1，2.2。&lt;/p&gt;
+
+&lt;h4 id=&quot;load-balancing&quot;&gt;Load balancing&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.004.jpeg&quot; alt=&quot;Load_balancing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;提前声明，这部分都总结前人和官网的说明，我没有手动试验过。&lt;/p&gt;
+
+&lt;p&gt;round-robin(default)&lt;/p&gt;
+
+&lt;p&gt;轮询调度，就是一个一个来，标记为down的是手动下线的。标记为backup的是当所有的机器都不可用时才会用到ta。&lt;/p&gt;
+
+&lt;p&gt;least-connected&lt;/p&gt;
+
+&lt;p&gt;最小连接数，因为不是所有的请求，在服务器端的处理时长都相同。如果有些请求堆积了，那就让别人来处理，大原则是保持最小连接数。&lt;/p&gt;
+
+&lt;p&gt;ip-hash&lt;/p&gt;
+
+&lt;p&gt;相同来源的ip，会给到某个特定的后端服务。用以解决session在多个后端服务中不共享的问题。但是现在如果走算法的话可以解决这个问题。&lt;/p&gt;
+
+&lt;p&gt;server weights&lt;/p&gt;
+
+&lt;p&gt;权重，按照我们分配的权重分配。&lt;/p&gt;
+
+&lt;h4 id=&quot;load-balancing3rd-party&quot;&gt;Load balancing(3rd party)&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.005.jpeg&quot; alt=&quot;Load_balancing_3rd_party&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;fair&lt;/p&gt;
+
+&lt;p&gt;按后端服务器的响应时间来分配请求，响应时间短的优先分配。&lt;/p&gt;
+
+&lt;p&gt;url_hash&lt;/p&gt;
+
+&lt;p&gt;按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。&lt;/p&gt;
+
+&lt;h4 id=&quot;serving-static-content&quot;&gt;Serving Static Content&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.006.jpeg&quot; alt=&quot;Serving_Static_Content&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;稍微介绍下&lt;a href=&quot;https://github.com/FuryBrand/localized-kityminder&quot;&gt;localized-kityminder&lt;/a&gt;的部署架构。&lt;/p&gt;
+
+&lt;h4 id=&quot;http-request&quot;&gt;Http Request&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.007.jpeg&quot; alt=&quot;Http_Request&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;稍微介绍下HTTP请求的流程。重点是多级缓存。对应了为啥我们配置了Host还要清理浏览器缓存等问题。&lt;/p&gt;
+
+&lt;p&gt;ping&lt;/p&gt;
+
+&lt;p&gt;ping无法判断tcp/ip配置的是否正确，但是可以看下本机的host配置的是否正确。&lt;/p&gt;
+
+&lt;p&gt;telnet&lt;/p&gt;
+
+&lt;p&gt;telnet可以判断指定端口是否可用。&lt;/p&gt;
+
+&lt;p&gt;curl&lt;/p&gt;
+
+&lt;p&gt;curl是通过命令行发送HTTP请求，是真正的走了HTTP协议的。&lt;/p&gt;
+
+&lt;h4 id=&quot;share-an-issue-of-go-live&quot;&gt;share an issue of go-live&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://furybrand.github.io/assets/2021/2021-03-09-nginx-config-file/Nginx-data_masking-Ver0.8.008.jpeg&quot; alt=&quot;share_an_issue_of_go-live&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;分享一个上线过程中的问题。UAT环境验证通过的版本，上到线上之后就不好用了。发现有些资源请求不到。原来公司在域名到服务器那一层用了负载均衡，导致新版本的资源文件请求到了IP1上。乱了。&lt;/p&gt;
+
+&lt;h4 id=&quot;end&quot;&gt;End&lt;/h4&gt;
+
+&lt;p&gt;我前面说的全部内容，在一些情况下可能都是假的。所以具体问题具体分析，逻辑才是无敌的。为逻辑干杯🍻&lt;/p&gt;
+
+&lt;h2 id=&quot;相关资料&quot;&gt;相关资料&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.nginx.com/resources/glossary/reverse-proxy-server/&quot;&gt;What Is a Reverse Proxy Server?(nginx.com)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nginx.org/en/&quot;&gt;nginx.org offical site&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nginx.org/en/docs/&quot;&gt;nginx.org documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hg.nginx.org/nginx&quot;&gt;nginx.org change log&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hg.nginx.org/nginx/archive/tip.zip&quot;&gt;nginx.org source code(zip)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nginx.org/en/docs/http/request_processing.html&quot;&gt;How nginx processes a request(nginx.org)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;更新日志&quot;&gt;更新日志&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2021年03月09日：初稿。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 09 Mar 2021 11:22:49 +0000</pubDate>
+        <link>http://furybrand.github.io//2021/03/09/nginx-config-file/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2021/03/09/nginx-config-file/</guid>
+        
+        <category>技术相关</category>
+        
+        <category>Nginx</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>财务计算器</title>
+        <description>&lt;h1&gt;定投计算器&lt;/h1&gt;
+&lt;p&gt;投资时长：&lt;input type=&quot;text&quot; id=&quot;DCA_Time&quot; /&gt;年&lt;/p&gt;
+&lt;p&gt;预期年化收益率：&lt;input type=&quot;text&quot; id=&quot;DCA_incomeRate&quot; /&gt;%&lt;/p&gt;
+&lt;p&gt;每月存入：&lt;input type=&quot;text&quot; id=&quot;DCA_pay&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;&lt;input type=&quot;button&quot; value=&quot;计算&quot; onclick=&quot;DCA_calc(1)&quot; /&gt;
+&lt;input type=&quot;button&quot; value=&quot;清空&quot; onclick=&quot;DCA_calc(2)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;投资总收益：&lt;input type=&quot;text&quot; id=&quot;DCA_income&quot; /&gt;元&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+// 定投
+function DCA_calc(x){
+    if(x==1){
+        var money = document.getElementById(&quot;DCA_pay&quot;).value; // 每月存入
+        var per = document.getElementById(&quot;DCA_incomeRate&quot;).value; // 年化收益率
+        var year = document.getElementById(&quot;DCA_Time&quot;).value; // 投资时长
+        money = parseFloat(money);
+        monthPer = Math.pow(1 + per / 100, 1 / 12) - 1;
+        month = year * 12;
+        // 投资总收益
+        const DCA_income = money * (1 + monthPer) * (Math.pow(1 + monthPer, month) - 1) / monthPer
+        document.getElementById(&quot;DCA_income&quot;).value = DCA_income.toFixed(2);
+    }else if(x==2){
+        document.getElementById(&quot;DCA_pay&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;DCA_incomeRate&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;DCA_Time&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;DCA_income&quot;).value = &quot;&quot;;
+    }
+}
+&lt;/script&gt;
+
+&lt;h1&gt;收益率计算器&lt;/h1&gt;
+&lt;p&gt;买入价格：&lt;input type=&quot;text&quot; id=&quot;mairujia&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;卖出价格：&lt;input type=&quot;text&quot; id=&quot;maichujia&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;持有年限：&lt;input type=&quot;text&quot; id=&quot;chiyounianxian&quot; /&gt;年&lt;/p&gt;
+&lt;p&gt;&lt;input type=&quot;button&quot; value=&quot;计算&quot; onclick=&quot;jisuanTwo(1)&quot; /&gt;
+&lt;input type=&quot;button&quot; value=&quot;清空&quot; onclick=&quot;jisuanTwo(2)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;总收益率：&lt;input type=&quot;text&quot; id=&quot;zongshouyilv&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;年化收益率：&lt;input type=&quot;text&quot; id=&quot;nianhuashouyilv&quot; /&gt;元&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+// 计算收益率
+function jisuanTwo(x){
+    if(x==1){
+        var mairujiaNum = document.getElementById(&quot;mairujia&quot;).value;
+        var maichujiaNum = document.getElementById(&quot;maichujia&quot;).value;
+        var chiyounianxianNum  = document.getElementById(&quot;chiyounianxian&quot;).value;
+
+        console.log(mairujiaNum);
+        console.log(maichujiaNum);
+        console.log(chiyounianxianNum);
+        // 这里是总收益率，后面是%，所以要*100；
+        var zongshouyilv = (maichujiaNum - mairujiaNum)/mairujiaNum * 100;
+        console.log(zongshouyilv);
+        document.getElementById(&quot;zongshouyilv&quot;).value = zongshouyilv.toFixed(3);
+
+            var nianhuashouyilv = Math.pow(maichujiaNum/mairujiaNum, 1/chiyounianxianNum)-1;
+            console.log(nianhuashouyilv);
+
+        document.getElementById(&quot;nianhuashouyilv&quot;).value = (nianhuashouyilv*100).toFixed(3);
+    }else if(x==2){
+        document.getElementById(&quot;mairujia&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;maichujia&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;chiyounianxian&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;zongshouyilv&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;nianhuashouyilv&quot;).value = &quot;&quot;;
+    }
+
+}
+&lt;/script&gt;
+
+&lt;h1&gt;最终收益计算器&lt;/h1&gt;
+&lt;p&gt;本金：&lt;input type=&quot;text&quot; id=&quot;benjin&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;年华收益率：&lt;input type=&quot;text&quot; id=&quot;shouyilv&quot; /&gt;%&lt;/p&gt;
+&lt;p&gt;投资年限：&lt;input type=&quot;text&quot; id=&quot;touzinianxian&quot; /&gt;年&lt;/p&gt;
+&lt;p&gt;&lt;input type=&quot;button&quot; value=&quot;计算&quot; onclick=&quot;jisuanOne(1)&quot; /&gt;
+&lt;input type=&quot;button&quot; value=&quot;清空&quot; onclick=&quot;jisuanOne(2)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;最终收益：&lt;input type=&quot;text&quot; id=&quot;zuizhongshouyi&quot; /&gt;元&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+// 计算最终收益
+function jisuanOne(x){
+    if(x==1){
+        var benjinNum = new BigNumber(document.getElementById(&quot;benjin&quot;).value);
+        var shouyilvNum = new BigNumber(document.getElementById(&quot;shouyilv&quot;).value);
+        var touzinianxianNum = new BigNumber(document.getElementById(&quot;touzinianxian&quot;).value);
+        var shouyiNum = new BigNumber(1+shouyilvNum/100);
+        var zuizhongshouyi = benjinNum.multipliedBy(shouyiNum.pow(touzinianxianNum)).valueOf();
+        console.log(zuizhongshouyi);
+        if(String(zuizhongshouyi).indexOf(&quot;.&quot;)==-1){
+            document.getElementById(&quot;zuizhongshouyi&quot;).value =zuizhongshouyi
+            console.log(zuizhongshouyi);
+        }else{
+            var splitArr = String(zuizhongshouyi).split('.');
+            document.getElementById(&quot;zuizhongshouyi&quot;).value =splitArr[0]+'.'+splitArr[1].substr(0,3);
+            console.log(zuizhongshouyi);
+        }
+    }else if(x==2){
+        document.getElementById(&quot;benjin&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;shouyilv&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;touzinianxian&quot;).value = &quot;&quot;;
+        document.getElementById(&quot;zuizhongshouyi&quot;).value = &quot;&quot;;
+    }
+
+}
+&lt;/script&gt;
+
+&lt;h1&gt;非劳动收支平衡计算器&lt;/h1&gt;
+&lt;p&gt;本金：&lt;input type=&quot;text&quot; class=&quot;benjin&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;月定投：&lt;input type=&quot;text&quot; class=&quot;dingtoujine&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;年华收益率：&lt;input type=&quot;text&quot; class=&quot;nianhuashouyi&quot; /&gt;%&lt;/p&gt;
+&lt;p&gt;月支出：&lt;input type=&quot;text&quot; class=&quot;yuezhichu&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;&lt;input type=&quot;button&quot; value=&quot;计算&quot; onclick=&quot;jisuanFour(1)&quot; /&gt;
+&lt;input type=&quot;button&quot; value=&quot;清空&quot; onclick=&quot;jisuanFour(2)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;月均获得收益：&lt;input type=&quot;text&quot; class=&quot;yueshouyi&quot; /&gt;元&lt;/p&gt;
+&lt;p&gt;非劳动收支平衡所需时间：&lt;input type=&quot;text&quot; class=&quot;time&quot; /&gt;&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+// 非劳动收支平衡
+function jisuanFour(x){
+    if(x==1){
+        var benjin = $(&quot;.benjin&quot;).val();
+        var dingtoujine = $(&quot;.dingtoujine&quot;).val();
+        var nianhuashouyi = $(&quot;.nianhuashouyi&quot;).val();
+        var yuezhichu = $(&quot;.yuezhichu&quot;).val();
+
+        var monthYield = Math.pow(1 + nianhuashouyi / 100, 1 / 12) - 1;
+        var month = 0
+        var income = 0
+        do{
+            month++
+            var gain = (dingtoujine * (1 + monthYield) * (Math.pow(1 + monthYield, month) - 1)) / monthYield
+            var earning = benjin * Math.pow(1 + monthYield, month)
+            income = (gain + earning) * monthYield
+        }while(yuezhichu &gt; income)
+        $(&quot;.yueshouyi&quot;).val(income.toFixed(2));
+        $(&quot;.time&quot;).val(Math.floor(month / 12)+'年'+month % 12+'个月');
+    }else if(x==2){
+        document.getElementsByClassName(&quot;benjin&quot;)[0].value = &quot;&quot;;
+        document.getElementsByClassName(&quot;dingtoujine&quot;)[0].value = &quot;&quot;;
+        document.getElementsByClassName(&quot;nianhuashouyi&quot;)[0].value = &quot;&quot;;
+        document.getElementsByClassName(&quot;yuezhichu&quot;)[0].value = &quot;&quot;;
+    }
+
+}
+&lt;/script&gt;
+
+</description>
+        <pubDate>Wed, 17 Feb 2021 08:37:25 +0000</pubDate>
+        <link>http://furybrand.github.io//2021/02/17/finance-calculator/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2021/02/17/finance-calculator/</guid>
+        
+        <category>JS</category>
+        
+        <category>财务</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>一种用于应对灵活变化的测试用例模版</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;经过了小半年的尝试，终于有了一个我相对满意的模版了～&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;测试用例模版到底应该用啥&quot;&gt;测试用例模版到底应该用啥？&lt;/h2&gt;
+
+&lt;p&gt;标准化是体现专业性的捷径，之前推了Excel版用例的标准化。后来组织调整，来到了创新业务的条线，就一直在考虑是否要启用思维导图的方式来作为测试用例的载体。&lt;/p&gt;
+
+&lt;p&gt;其实去年在公司的某个创新项目中就进行了一下探索，但是存在一些未解决的问题。现在拿出来说，一方面是为了配合敏捷开发模型中的快速迭代。另一方面我觉得我的模版达到了一个小里程碑。所以聊一下。&lt;/p&gt;
+
+&lt;p&gt;目前整个业界对于测试用例的编写载体，基本有3种。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Excel&lt;/li&gt;
+  &lt;li&gt;思维导图&lt;/li&gt;
+  &lt;li&gt;TestLink、HP ALM等或开源，或收费的测试用例管理平台&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;TestLink没有试用过，但是HP ALM可以理解为一个加强版的，云端的带有测试用例模板的Excel。从成本（使用、迁移）来说，Excel和思维导图的成本都较低。下面我将这两种形式稍微做下对比：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Excel
+    &lt;ul&gt;
+      &lt;li&gt;优势：
+        &lt;ul&gt;
+          &lt;li&gt;可以模板化，从而规范测试用例的编写，进而输出相对合规和高品质的测试用例。&lt;/li&gt;
+          &lt;li&gt;可以归档，针对稳定的功能模块，可以相对方便的复用。&lt;/li&gt;
+          &lt;li&gt;进度数据很好统计。&lt;/li&gt;
+          &lt;li&gt;可以非常直观的展现流程性的内容。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;劣势：
+        &lt;ul&gt;
+          &lt;li&gt;编写耗时较长。&lt;/li&gt;
+          &lt;li&gt;文字阅读量大，评审过程非常痛苦。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;思维导图
+    &lt;ul&gt;
+      &lt;li&gt;优势：
+        &lt;ul&gt;
+          &lt;li&gt;编写耗时较短。&lt;/li&gt;
+          &lt;li&gt;验证点简单直观。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;劣势：
+        &lt;ul&gt;
+          &lt;li&gt;基本没法归档。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;可能有朋友会说，思维导图还有“无法统计进度”、“很难模版化”这两个弊病呢。我在当前版本的测试用例模版中一定程度上解决了。&lt;/p&gt;
+
+&lt;h2 id=&quot;一种用于应对灵活变化的测试用例模版ver10&quot;&gt;一种用于应对灵活变化的测试用例模版Ver1.0&lt;/h2&gt;
+
+&lt;h4 id=&quot;归档与继承&quot;&gt;归档与继承&lt;/h4&gt;
+
+&lt;p&gt;测试用例在指导测试执行以外，还可能有两个作用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;归档&lt;/code&gt;（已有业务逻辑的传承，可供新人学习使用）、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;继承&lt;/code&gt;（回归测试等测试执行时无需再新写用例）。&lt;/p&gt;
+
+&lt;p&gt;其实从现在来看，随着敏捷开发替代了瀑布开发，传统的Full Test， Regression Test(Round X), Sanity Test等相对少了，用例继承的机会也变少了。所以&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;继承&lt;/code&gt;变成了伪需求。&lt;/p&gt;
+
+&lt;p&gt;而新员工对于老流程的熟悉，其实可以用业务流程总结的文档以及自动化测试用例脚本来熟悉。所以&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;归档&lt;/code&gt;的诉求也解决了。&lt;/p&gt;
+
+&lt;h4 id=&quot;载体&quot;&gt;载体&lt;/h4&gt;
+
+&lt;p&gt;为了避免商业付费和数据安全，试过几款软件，最后选择了百度脑图的本地版DesktopNaotu，可以从&lt;a href=&quot;https://github.com/NaoTu/DesktopNaotu/releases&quot;&gt;github&lt;/a&gt;上下载。&lt;/p&gt;
+
+&lt;h4 id=&quot;模版说明&quot;&gt;模版说明&lt;/h4&gt;
+
+&lt;p&gt;测试用例模版如下：
+&lt;img src=&quot;http://furybrand.github.io/assets/2020/2020-12-25-test-case-template/testCaseTemplate.png&quot; alt=&quot;测试用例模版&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://furybrand.github.io/assets/2020/2020-12-25-test-case-template/testCaseTemplate_Ver1.0.km&quot;&gt;点我下载软件的.km源文件&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;从上面的截图可以看出，测试用例主要分4个板块，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;需求梳理&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;测试准备&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;测试用例&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;定制化体测内容&lt;/code&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;需求梳理&lt;/code&gt;：主要包含以逻辑的角度拆解需求，以上线过程的角度拆解上线注意事项，以线上运营的角度拆解配置及需求点的合理性。暂时列出了这些，实际可以根据具体的条线或者项目组进行特别设计。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;测试准备&lt;/code&gt;：这部分是在梳理好需求之后，写用例的过程中会得到，在实际测试开始前，需要做哪些准备工作，比如业务主数据的维护，人员权限的配置等。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;测试用例&lt;/code&gt;：测试用例相对复杂，我在后面详细说。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;定制化体测内容&lt;/code&gt;：一般来讲，我们可能有一个提测模版。但是为了减少测试和研发的沟通成本，我将提测内容以定制化的方式体现。就是我们要测试什么，需要研发提供具体的哪些东西，甚至需要一些操作节点的日志关键字。这样做也可以帮助测试梳理逻辑。也能在一定程度上提高研发的提测质量。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;测试用例&lt;/code&gt;的话，考虑到可读性，单独抽出来，在这里说。分如下几点：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;流程&lt;/code&gt;：主要是体现业务流程的用例，会区分步骤，同时每一个步骤内部还会以Note的形式加入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;前提条件&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;步骤描述&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;预期结果&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;备注信息&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Failed原因&lt;/code&gt;等内容，完全是符合传统用例规范的。old fashion but effective&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;功能点&lt;/code&gt;：为分支流程的单点测试主要列关键点即可。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;回归&lt;/code&gt;：顾名思义，需要做回归的场景。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;异常&lt;/code&gt;：设计的一些异常场景。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;结果&lt;/code&gt;：每一个步骤或者功能点的结果是需要手动标记的，初始是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-n&lt;/code&gt;;通过的话是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt;;被阻塞是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-b&lt;/code&gt;；有问题（bug）是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt;；本次不执行是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-NA&lt;/code&gt;；注意，千万要按照该标准执行，下面会有一个结果统计工具，是按照该标准统计的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;工具进度计算器&quot;&gt;工具：进度计算器&lt;/h2&gt;
+
+&lt;p&gt;在DesktopNaotu软件中，右键“测试用例”节点，选择“Export Node”，将节点复制后，粘贴至下面的文本框中，可以计算进度。&lt;/p&gt;
+
+&lt;p&gt;请输入用例内容：&lt;/p&gt;
+&lt;textarea rows=&quot;15&quot; cols=&quot;80&quot; id=&quot;testCase&quot;&gt;&lt;/textarea&gt;
+&lt;p&gt;&lt;input type=&quot;button&quot; value=&quot;统计&quot; onclick=&quot;count()&quot; /&gt;
+&lt;p&gt;-n（new）的数量：&lt;pan id=&quot;underline_n&quot;&gt;&lt;/pan&gt;&lt;/p&gt;
+&lt;p&gt;-p（passed）的数量：&lt;pan id=&quot;underline_p&quot;&gt;&lt;/pan&gt;&lt;/p&gt;
+&lt;p&gt;-b（blocked）的数量：&lt;pan id=&quot;underline_b&quot;&gt;&lt;/pan&gt;&lt;/p&gt;
+&lt;p&gt;-f（failed）的数量：&lt;pan id=&quot;underline_f&quot;&gt;&lt;/pan&gt;&lt;/p&gt;
+&lt;p&gt;-NA（not available）的数量：&lt;pan id=&quot;underline_na&quot;&gt;&lt;/pan&gt;&lt;/p&gt;
+&lt;p&gt;总数量为&lt;b id=&quot;underline_all&quot;&gt;&lt;/b&gt;；
+    通过(p+NA)的数量为&lt;b id=&quot;underline_all_p&quot;&gt;&lt;/b&gt;；
+    通过率(通过/总数)为&lt;b id=&quot;underline_all_p_na_rate&quot;&gt;&lt;/b&gt;
+&lt;/p&gt;
+&lt;p&gt;
+    阻塞率(阻塞/总数)为&lt;b id=&quot;underline_all_b_rate&quot;&gt;&lt;/b&gt;
+    错误率(错误/总数)为&lt;b id=&quot;underline_all_f_rate&quot;&gt;&lt;/b&gt;
+    未执行率(未执行/总数)为&lt;b id=&quot;underline_all_n_rate&quot;&gt;&lt;/b&gt;
+&lt;/p&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    function count() {
+        var testCase = document.getElementById(&quot;testCase&quot;).value;
+        var count_n = getCharCount(testCase, '-n');
+        var count_f = getCharCount(testCase, '-f');
+        var count_p = getCharCount(testCase, '-p');
+        var count_b = getCharCount(testCase, '-b');
+        var count_na = getCharCount(testCase, '-NA');
+        document.getElementById(&quot;underline_n&quot;).innerHTML = count_n;
+        document.getElementById(&quot;underline_f&quot;).innerHTML = count_f;
+        document.getElementById(&quot;underline_p&quot;).innerHTML = count_p;
+        document.getElementById(&quot;underline_b&quot;).innerHTML = count_b;
+        document.getElementById(&quot;underline_na&quot;).innerHTML = count_na;
+        var count_all = count_n + count_f + count_p + count_na + count_b;
+        var count_all_p_na = count_p + count_na;
+        document.getElementById(&quot;underline_all&quot;).innerHTML = count_all;
+        document.getElementById(&quot;underline_all_p&quot;).innerHTML = count_all_p_na;
+        document.getElementById(&quot;underline_all_p_na_rate&quot;).innerHTML = getPercentage(count_all_p_na, count_all) + '%';
+        document.getElementById(&quot;underline_all_b_rate&quot;).innerHTML = getPercentage(count_b, count_all) + '%';
+        document.getElementById(&quot;underline_all_f_rate&quot;).innerHTML = getPercentage(count_f, count_all) + '%';
+        document.getElementById(&quot;underline_all_n_rate&quot;).innerHTML = getPercentage(count_n, count_all) + '%';
+    }
+    function getCharCount(str, char) {
+        var regex = new RegExp(char, 'g'); // 使用g表示整个字符串都要匹配
+        var result = str.match(regex);          //match方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
+        var count = !result ? 0 : result.length;
+        return count;
+    }
+    function getPercentage(num, total) {
+        // if\(num == 0 \|| total == 0){
+            // return 0;
+        // }
+        if(num == 0){
+            return 0;
+        }
+        if(total == 0){
+            return 0;
+        }
+        return (Math.round(num / total * 10000) / 100.00);// 小数点后两位百分比
+    }
+&lt;/script&gt;
+&lt;/p&gt;
+</description>
+        <pubDate>Fri, 25 Dec 2020 10:57:25 +0000</pubDate>
+        <link>http://furybrand.github.io//2020/12/25/test-case-template/</link>
+        <guid isPermaLink="true">http://furybrand.github.io//2020/12/25/test-case-template/</guid>
+        
+        <category>JS</category>
+        
+        <category>杂文</category>
+        
+        <category>技术相关</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

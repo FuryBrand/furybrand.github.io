@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="记一次在测试环境云服务器上搭建运行在Docker中的MySQL - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  Docker真香~，作为轻量级的虚拟化技术，Docker有很多优势，具体，哎，后面再聊吧😀
+
+
+1.背景
+
+响应集团要求，测试环境集体上云。可是云数据库的资源木有了。。。。。所以只能申请一台云服务器自己来搭MySQL。刚好最近也在学Docker相关的东西。想来若各条线自己用自己的MySQL，那还是上Docker比较好。一方面自己是Docker的初学者，另一方面目前量级太小，也就没用上K...">
+    
+    <meta property="article:published_time" content="2020-09-03T21:18:00Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="MySQL">
+    
+    <meta property="article:tag" content="Docker">
+    
+    <meta property="article:tag" content="技术相关">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2020/09/03/mysql-by-docker/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>记一次在测试环境云服务器上搭建运行在Docker中的MySQL - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2020/09/03/mysql-by-docker/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=MySQL" title="MySQL">MySQL</a>
+                        
+                        <a class="tag" href="/archive/?tag=Docker" title="Docker">Docker</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                    </div>
+                    <h1>记一次在测试环境云服务器上搭建运行在Docker中的MySQL</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on September 3, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<blockquote>
+  <p>Docker真香~，作为轻量级的虚拟化技术，Docker有很多优势，具体，哎，后面再聊吧😀</p>
+</blockquote>
+
+<h2 id="1背景">1.背景</h2>
+
+<p>响应集团要求，测试环境集体上云。可是云数据库的资源木有了。。。。。所以只能申请一台云服务器自己来搭MySQL。刚好最近也在学Docker相关的东西。想来若各条线自己用自己的MySQL，那还是上Docker比较好。一方面自己是Docker的初学者，另一方面目前量级太小，也就没用上Kubernetes和Rancher啥的。</p>
+
+<h2 id="2安装docker">2.安装Docker</h2>
+
+<p>Docker的安装方式可以参考<a href="https://docs.docker.com/engine/install/">官方手册</a>。我的机器是CentOS8的，测试环境默认不能连接外网，而且这台机器的yum好像还有些问题，没法安装本地的rpm包。所以用了一个野路子来安装Docker。</p>
+
+<p>我用的是最新版本<a href="https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz">docker-19.03.12.tgz</a>，下载后上传至云服务器。以root用户来操作比较方便つ﹏⊂</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">tar </span>xzvf docker-19.03.12.tgz
+<span class="nv">$ </span><span class="nb">cp </span>docker/<span class="k">*</span> /usr/bin/
+<span class="nv">$ </span>dockerd &amp;
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>我这没有给docker加入到自启动中哈，所以每次需要手动启动docker。</p>
+
+<h2 id="3导入镜像">3.导入镜像</h2>
+
+<p>首先在可以联网的我的windows笔记本中下载镜像文件，mysql是提供了官方镜像文件在dockerhub上的<a href="https://hub.docker.com/_/mysql">网页链接</a>。</p>
+
+<p>由于原本测试环境用的是5.7版本的MySQL，故在我的windows笔记本中执行</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="o">&gt;</span>docker pull mysql:5.7
+<span class="o">&gt;</span>docker save mysql:5.7 <span class="o">&gt;</span> ./image_mysql.tar
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>将<code class="language-plaintext highlighter-rouge">image_mysql.tar</code>复制到云服务器后执行<code class="language-plaintext highlighter-rouge">$ docker load -i ./image_mysql.tar</code>命令即可载入镜像到docker。</p>
+
+<h2 id="4准备镜像">4.准备镜像</h2>
+
+<p>MySQL的用户数据可以由Docker容器来管理，参考<a href="https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume">Docker官方手册</a>。也可以放在宿主机的指定目录下，在启动容器的时候通过挂在的方式来载入，参考<a href="https://docs.docker.com/engine/tutorials/dockervolumes/#mount-a-host-directory-as-a-data-volume">Docker官方手册</a>。MySQL官方推荐第二种方式。故，需要创建自己的目录。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /qcteam/mysql
+<span class="nv">$ </span>docker run <span class="nt">--name</span> ibteam-mysql <span class="nt">-p</span> 3358:3306 <span class="nt">-v</span> /qcteam/mysql:/var/lib/mysql <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>my-secret-pw-haha <span class="nt">-e</span> <span class="nv">MYSQL_USER</span><span class="o">=</span>admin <span class="nt">-e</span> <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>admin <span class="nt">-d</span> mysql:5.7 <span class="nt">--skip-name-resolve</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>稍微解释下命令含义：</p>
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">--name ibteam-mysql</code>指定容器的名称为<strong>ibteam-mysql</strong>。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">-p 3358:3306</code>将容器内部的端口3306映射到宿主机的3358端口。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">-v /qcteam/mysql:/var/lib/mysql</code>将宿主机路径<code class="language-plaintext highlighter-rouge">/qcteam/mysql</code>挂载到容器的<code class="language-plaintext highlighter-rouge">/var/lib/mysql</code>下。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">-e MYSQL_ROOT_PASSWORD=my-secret-pw-haha等</code>是MySQL的环境变量，具体参考<a href="https://hub.docker.com/_/mysql">dockerhub</a>的<code class="language-plaintext highlighter-rouge">Environment Variables</code>部分。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">-d</code>后台运行容器，并返回容器ID。</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">mysql:5.7</code>指定镜像名称和tag。</li>
+</ul>
+
+<h2 id="5踩坑开始">5.踩坑开始</h2>
+
+<p>实际总是没有想象中的那么顺利。踩坑开始~</p>
+
+<h4 id="51-错误1-启动失败">5.1 错误1-启动失败</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre>[root@Server-i-ez15oy6wta ~]# docker run --name ibteam-mysql -v /qcteam/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw-haha -d mysql:5.7 -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin
+b9b580de15e01d71855306fbcb89343106a8cf99343b7bbbb0f5eab94fddd809
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:349: starting container process caused "process_linux.go:449: container init caused \"write /proc/self/attr/keycreate: permission denied\"": unknown.
+[root@Server-i-ez15oy6wta ~]# docker: Error response from daemon: OCI runtime create failed: container_linux.go:349: starting container process caused "process_linux.go:449: container init caused \"write /proc/self/attr/keycreate: permission denied\"": unknown.
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>原因是SELINUX开启导致docker run失败了。修改<code class="language-plaintext highlighter-rouge">/etc/selinux/config</code>文件，设置SELINUX=disabled。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre># This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these three values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<h4 id="52-错误2-端口不通">5.2 错误2-端口不通</h4>
+
+<p>启动成功后，通过本机无法连接数据库，排查是防火墙的原因，但是我即使开放了端口也依然无法访问，最后只能停掉了防火墙。但是停掉防火墙之后又会导致Docker没法把MySQL给run起来。。。。。最后暂时只能run的时候打开防火墙，run起来之后关闭防火墙。。。。。</p>
+
+<p>关于CentOS7的默认防火墙firewall的一些操作。更多linux命令参考<a href="/2018/07/11/my-linux-basic-instructions/">我的Linux常用命令（持续更新）</a></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td>
+<td class="rouge-code"><pre><span class="c"># 查看firewall服务状态</span>
+<span class="nv">$ </span>systemctl status firewalld
+<span class="c"># 查看firewall的状态</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--state</span>
+<span class="c"># 启动firewalld.service服务</span>
+<span class="nv">$ </span>service firewalld start
+Redirecting to /bin/systemctl start mysqld.service
+<span class="c"># 重启firewalld.service服务</span>
+<span class="nv">$ </span>service firewalld restart
+Redirecting to /bin/systemctl restart mysqld.service
+<span class="c"># 关闭firewalld.service服务</span>
+<span class="nv">$ </span>service firewalld stop
+Redirecting to /bin/systemctl stop mysqld.service
+<span class="c"># 查看防火墙规则</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--list-all</span>
+<span class="c"># 查询端口是否开放</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--query-port</span><span class="o">=</span>8080/tcp
+<span class="c"># 开放80端口</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--add-port</span><span class="o">=</span>80/tcp
+<span class="c"># 移除端口</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--remove-port</span><span class="o">=</span>8080/tcp
+<span class="c"># 重启防火墙(修改配置后要重启防火墙)</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--reload</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p><strong>2021年8月18日更新</strong></p>
+
+<p>关闭firewalld会引入别的问题，比如重启某个容器的时候会产生如下报错。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="o">[</span>root@Server-i-jwvdl9av3u ~]# docker restart fff8182066ff
+Error response from daemon: Cannot restart container fff8182066ff: driver failed programming external connectivity on endpoint mysql-v1 <span class="o">(</span>b9de0189a32b84faab60c29fb8d9922b5eaeb6f684f231b8651534a0fe880847<span class="o">)</span>:  <span class="o">(</span>iptables failed: iptables <span class="nt">--wait</span> <span class="nt">-t</span> nat <span class="nt">-A</span> DOCKER <span class="nt">-p</span> tcp <span class="nt">-d</span> 0/0 <span class="nt">--dport</span> 3358 <span class="nt">-j</span> DNAT <span class="nt">--to-destination</span> 172.17.0.3:3306 <span class="o">!</span> <span class="nt">-i</span> docker0: iptables: No chain/target/match by that name.
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>目前docker在宿主机上是以原生应用程序的方式运行的，docker在做镜像内和宿主机间的端口映射是通过一个名为docker0的interface来完成的（通过下面的ifconfig可以确认）。将该interface添加至firewalld的管理中就可以避免docker和firewalld的冲突。也就可以解决端口不通的问题。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="o">[</span>root@Server-i-jwvdl9av3u ~]# ifconfig
+docker0: <span class="nv">flags</span><span class="o">=</span>4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+        inet6 fe80::42:3eff:fec6:d897  prefixlen 64  scopeid 0x20&lt;<span class="nb">link</span><span class="o">&gt;</span>
+        ether 02:42:3e:c6:d8:97  txqueuelen 0  <span class="o">(</span>Ethernet<span class="o">)</span>
+        RX packets 33235054040  bytes 47398854406962 <span class="o">(</span>43.1 TiB<span class="o">)</span>
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 43848079027  bytes 12940616216545 <span class="o">(</span>11.7 TiB<span class="o">)</span>
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>使用如下命令将interface docker0加入到firewalld的trusted zone</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="o">[</span>root@Server-i-jwvdl9av3u ~]# firewall-cmd <span class="nt">--permanent</span> <span class="nt">--zone</span><span class="o">=</span>trusted <span class="nt">--change-interface</span><span class="o">=</span>docker0
+<span class="o">[</span>root@Server-i-jwvdl9av3u ~]# firewall-cmd <span class="nt">--reload</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>同时配合上面提到的firewalld的相关操作将端口开放即可彻底解决该问题。</p>
+<h4 id="53-错误3-admin账号无法访问">5.3 错误3-admin账号无法访问</h4>
+
+<p>本机的客户端连接的时候提示<code class="language-plaintext highlighter-rouge">Access denied for user 'admin'@'172.17.0.1' (using password: YES)</code>。本质就是需要进行特定ip的访问授权，但是奇怪的是root账号没有进行任何设置直接登录就没有问题。忘记在哪里看到的资料了，好像是MySQL的Docker镜像为了方便使用，给root默认开了各种情况下的访问授权。总之，咱还是先记录下处理过程吧</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+</pre></td>
+<td class="rouge-code"><pre>[root@Server-i-ez15oy6wta ~]# docker exec -it ibteam-mysql bash
+root@559218d389cb:/# mysql
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@559218d389cb:/# mysql -uroot -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 38
+Server version: 5.7.31 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt; use mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; select host, user from user;
++-----------+---------------+
+| host      | user          |
++-----------+---------------+
+| %         | admin         |
+| %         | root          |
+| localhost | mysql.session |
+| localhost | mysql.sys     |
+| localhost | root          |
++-----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql&gt; select host, user, plugin from user;
++-----------+---------------+-----------------------+
+| host      | user          | plugin                |
++-----------+---------------+-----------------------+
+| localhost | root          | mysql_native_password |
+| localhost | mysql.session | mysql_native_password |
+| localhost | mysql.sys     | mysql_native_password |
+| %         | root          | mysql_native_password |
+| %         | admin         | mysql_native_password |
++-----------+---------------+-----------------------+
+5 rows in set (0.00 sec)
+
+mysql&gt; create user 'admin'@'172.17.0.1' identified with mysql_native_password by 'b9b580de15e01d71855306fbcb89343106a8cf99343b7bbbb0f5eab94fddd809';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; grant all privileges on *.* to 'admin'@'172.17.0.1' with grant option;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; select host, user, plugin from user;
++------------+---------------+-----------------------+
+| host       | user          | plugin                |
++------------+---------------+-----------------------+
+| localhost  | root          | mysql_native_password |
+| localhost  | mysql.session | mysql_native_password |
+| localhost  | mysql.sys     | mysql_native_password |
+| %          | root          | mysql_native_password |
+| %          | admin         | mysql_native_password |
+| 172.17.0.1 | admin         | mysql_native_password |
++------------+---------------+-----------------------+
+7 rows in set (0.00 sec)
+
+mysql&gt; flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<h4 id="54-错误3-nginx转发至多mysql容器">5.4 错误3-nginx转发至多MySQL容器</h4>
+
+<p>其实严格意义来说这不是一个错误。由于服务器端口受限，只有固定的数个端口对外开放，故我想用nginx进行代理，将mysql的TCP请求根据url的不同转给特定的后端Docker容器来处理。经过调研之后发现可行，但是需要在编译nginx的时候追加参数<code class="language-plaintext highlighter-rouge">--with-stream_ssl_preread_module</code>(<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html">link2 nginx.org</a>)。无奈我这nginx是yum装的啊。。。。重新进行编译，发现一堆的依赖没有安装，披荆斩棘安了5个依赖，不行了，哥们我实在整不动了。。。。放一个<a href="https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151">stackoverflow的链接</a>吧，具体的思路是从这里来的。</p>
+
+<p><strong>10 hours later</strong></p>
+
+<p>早上八点到了单位开始尝试我前一天回去的路上想到的新方案，既然在Docker的宿主机上进行转发的路不通，那么是否可以借助其他条线的部署应用的云主机上的nginx来进行转发呢？反正目的是按照条线或者系统进行MySQL的隔离，那么就将转发方式由集中式转发变为分布式。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre>原预想
+10.0.0.1 (Docker &amp; nginx &amp; mysqls)
+mysql1.com ─┬─► nginx at 10.0.0.1:3358 ─┬─► mysql_docker at 10.0.0.1:1000
+mysql2.com ─┤                           ├─► mysql_docker at 10.0.0.1:1001
+mysql3.com ─┤                           ├─► mysql_docker at 10.0.0.1:1002
+新方案
+10.0.0.1 (Docker &amp; mysqls)
+10.0.1.1 (nginx &amp; Tomcat)
+10.0.1.2 (nginx &amp; Tomcat)
+10.0.1.3 (nginx &amp; Tomcat)
+mysql1.com ──► nginx at 10.0.1.1:3358 (eg: Other Tomcat Application work at 10.0.1.1:8001) ──► mysql_docker at 10.0.0.1:1000
+mysql2.com ──► nginx at 10.0.1.2:3358 (eg: Other Tomcat Application work at 10.0.1.2:8001) ──► mysql_docker at 10.0.0.1:1001
+mysql3.com ──► nginx at 10.0.1.3:3358 (eg: Other Tomcat Application work at 10.0.1.3:8001) ──► mysql_docker at 10.0.0.1:1002
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>结果发现，nginx可以支持TCP协议的转发，但是需要在编译nginx的时候追加参数<code class="language-plaintext highlighter-rouge">--with-stream</code>(<a href="http://nginx.org/en/docs/stream/ngx_stream_core_module.html">link2 nginx.org</a>)并且是在version 1.9.0以后才支持的。哥们一看10.0.1.1上的nginx版本是<code class="language-plaintext highlighter-rouge">nginx version: nginx/1.0.0</code>。😭哥们真的不搞了，不搞了。。。。。。。但是还是记录一下配置文件该怎么写吧，注意不要写到http的块儿里面。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre>stream {
+    # 添加socket转发的代理
+    upstream socket_proxy {
+        # 转发的目的地址和端口
+        server 11.51.192.224:3358 weight=5 max_fails=3 fail_timeout=30s;
+    }
+
+    # 提供转发的服务，即访问3358，会跳转至代理socket_proxy指定的转发地址
+    server {
+       listen 3358;
+       proxy_connect_timeout 1s;
+       proxy_timeout 3s;
+       proxy_pass socket_proxy;
+    }
+}
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p><strong>10 minutes later</strong></p>
+
+<p>我想，如果为了隔离权限的话，其实用账号来隔离也可以，只是相对更加麻烦一些。。。。。。。。。</p>
+
+<h4 id="55-错误4-docker_start的诡异错误">5.5 错误4-docker_start的诡异错误</h4>
+
+<p>这套环境运行了一段时间，一次某位研发哥哥验证自己工具类在并发情况下是否有问题，将咱的redis打懵了。然后我试图重启redis失败，尝试重启一个MySQL容器也失败。会报如下错误：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre>[root@Server-i-jwvdl9av3u ~]# docker start 27b674ae128c
+Error response from daemon: driver failed programming external connectivity on endpoint some-redis (83255f39845510dfbe82e85066017862c4acfd66771b02641b328c82a843b07a):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 22000 -j DNAT --to-destination 172.17.0.4:6379 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1))
+Error: failed to start containers: 27b674ae128c
+
+[root@Server-i-jwvdl9av3u ~]# docker run --name some-redis1 -p 22003:6379 -d redis:5.0.5
+dc17ca309e57bf06b58495c9a32233b8101e7ecce7554c72941a49be65329468
+docker: Error response from daemon: driver failed programming external connectivity on endpoint some-redis1 (e926ed6af5f4ee1bfebf71364d7efa89138bcb01ef8b1608ec145dacad1bc1dc):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 22003 -j DNAT --to-destination 172.17.0.4:6379 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1)).
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>一顿尝试无果后，最后的解决方式是stop了所有的容器之后，<code class="language-plaintext highlighter-rouge">kill -9 dockerd</code>（因为暂时装的原生docker，也不知道怎么正常退出😅）。然后重新启动docker再启动容器就好。不过确认了一点，run的时候给的参数，在start或者restart的时候都会带上，不用担心端口映射被搞丢的情况发生。</p>
+
+<h2 id="参考文章">参考文章</h2>
+
+<ul>
+  <li><a href="https://blog.csdn.net/little_pig_lxl/article/details/89499406">Docker离线部署images及启动容器</a></li>
+  <li><a href="https://www.cnblogs.com/zxg-blog/p/9835263.html">linux防火墙查看状态firewall、iptable</a></li>
+  <li><a href="https://stackoverflow.com/questions/30853247/how-do-i-edit-a-file-after-i-shell-to-a-docker-container">stackoverflow：How do I edit a file after I shell to a Docker container?</a></li>
+  <li><a href="https://www.jianshu.com/p/0767eca968e6">CentOS7, CentOS8 firewalld docker 端口映射问题，firewall开放端口后，还是不能访问，解决方案</a></li>
+</ul>
+
+<h2 id="更新日志">更新日志</h2>
+
+<ul>
+  <li>2020年9月3日：初稿。</li>
+  <li>2020年9月：增加<code class="language-plaintext highlighter-rouge">5.3 错误3-admin账号无法访问</code>、<code class="language-plaintext highlighter-rouge">nginx转发至多MySQL容器</code>、<code class="language-plaintext highlighter-rouge">设置MySQL不区分表名的大小写</code>
+</li>
+  <li>2020年10月：增加<code class="language-plaintext highlighter-rouge">docker_start的诡异错误</code>，将<code class="language-plaintext highlighter-rouge">设置MySQL不区分表名的大小写</code>移走</li>
+  <li>2021年8月18日：补充“5.2 错误2-端口不通”，待解决问题closed。</li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/02/nginx/" data-toggle="tooltip" data-placement="top" title="T-记一次Nginx分享">
+                        Previous<br>
+                        <span>T-记一次Nginx分享</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/05/Pork-with-Spicy-Cabbage/" data-toggle="tooltip" data-placement="top" title="xin食:辣白菜五花肉">
+                        Next<br>
+                        <span>xin食:辣白菜五花肉</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="39">技术相关</a>
+        
+                <a data-sort="0056" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Python" title="Python" rel="7">Python</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0064" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0064" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0065" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Git简明教程-从不会到能用？还是只是连接远称仓库？（笑） - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="本教程针对Git的初学者
+">
+    
+    <meta property="article:published_time" content="2018-07-08T10:42:49Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="技术相关">
+    
+    <meta property="article:tag" content="Git">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2018/07/08/quick-git-grammar/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>Git简明教程-从不会到能用？还是只是连接远称仓库？（笑） - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2018/07/08/quick-git-grammar/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                        <a class="tag" href="/archive/?tag=Git" title="Git">Git</a>
+                        
+                    </div>
+                    <h1>Git简明教程-从不会到能用？还是只是连接远称仓库？（笑）</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on July 8, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p><strong>本教程针对Git的初学者</strong></p>
+
+<p>今天介绍一下之前刚刚学的版本控制利器——Git。其实说实在的版本控制，我真正算是会用也就是今年。之前以前用Github啥的客户端直接就图形化操作，然后自己搞也不会出现冲突啥的。所以也就只知道皮毛而已。</p>
+
+<p>Git的背景在这里就不过多的交代了。Git可以说是当今使用范围最广的版本控制工具。由于“分支”概念的存在，所以特别是和多人合作，并行开发。好像之前大家用集中式版本管理工具SVN，我没用过所以不敢乱说。但是某东已经从SVN切换成了Git，想必Git必有过人之处吧。</p>
+
+<p>个人学习使用Git的话，还是要有个可以操练的东西才行，可以选择<a href="https://github.com/">Github</a>和<a href="https://visualstudio.microsoft.com/zh-hans/team-services/">Visual Studio Team Services</a>。Github是赫赫有名的开源项目托管的网站，缺点是免费用户的代码是开源的。VSTS的话，是微软的代码托管服务，如果是个人小团队（5人以下？）则可以免费使用。优点是代码闭源。</p>
+
+<p>今天以VSTS为例，和我一起走一波连接Git的远程仓库，毕竟连上了远称仓库之后，想怎么玩就怎么玩了，Git光看效果不大，还是要操练起来才行。</p>
+
+<h1 id="01下载安装git并在vsts上新建一个项目">01.下载安装Git，并在VSTS上新建一个项目</h1>
+<p>去官网下载<a href="https://git-scm.com/">Git</a>，然后一路下一步安装。（额，默认以windows为准了哈）
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/001.png" alt="下载Git"></p>
+
+<p>安装好Git之后，打开<code class="language-plaintext highlighter-rouge">Git Bash</code>，首先利用<a href="https://git-scm.com/book/zh/v1/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5"><code class="language-plaintext highlighter-rouge">ssh-keygen</code></a>命令来创建公钥，直接用默认路径就好，密码也可以留空，所以只需要敲击三次回车即可。随后用<code class="language-plaintext highlighter-rouge">cat ~/.ssh/id_rsa.pub</code>命令来查看生成的密钥。密钥稍后用。
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/002.png" alt="ssh"></p>
+
+<p>注册了微软账号之后，登陆应该要先建一个Team，因为我很久之前就建好了，这里就不演示了。然后在点击<code class="language-plaintext highlighter-rouge">New Project</code>。
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/003.png" alt="新建"></p>
+
+<p>填写<code class="language-plaintext highlighter-rouge">Project name</code>，<code class="language-plaintext highlighter-rouge">Version control</code>选择Git。<a href="https://docs.microsoft.com/zh-cn/vsts/work/work-items/guidance/choose-process?view=vsts">工作流</a>目前先默认就行，想要了解更多就去外链上看下吧。
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/004.png" alt="填写信息"></p>
+
+<p>创建成功了，选择<code class="language-plaintext highlighter-rouge">SSH</code>。后面的就是远程仓库地址。下不要关闭页面。
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/005.png" alt="仓库地址"></p>
+
+<p>点击<code class="language-plaintext highlighter-rouge">Manage SSH Keys</code>后，在弹出的页面上点击<code class="language-plaintext highlighter-rouge">Add</code>。将刚刚生成的密钥填写进去并<code class="language-plaintext highlighter-rouge">Save</code>
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/006.png" alt="添加ssh公钥">
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/007.png" alt="添加ssh公钥"></p>
+
+<p>回到刚才说不要关闭页面的页面，对项目进行初始化，展开下面的选项，并点击<code class="language-plaintext highlighter-rouge">Initialize</code>。
+<img src="http://furybrand.github.io/assets/2018/2018-07-08-quick-git-grammar/008.png" alt="初始化项目"></p>
+
+<p>至此，项目就创建成功了。授权也弄好了。</p>
+
+<h1 id="02clone项目">02.Clone项目</h1>
+<p>在<code class="language-plaintext highlighter-rouge">Git Bash</code>页面，然后进入到我们想要下载代码的文件夹中。输入<code class="language-plaintext highlighter-rouge">git clone 远称仓库地址</code>。因为Git Bash中的命令和linux中的一样，这里就不赘述了。
+<img src="http://furybrand.github.io/assets/2018-07-08-quick-git-grammar/009.png" alt="git_clone"></p>
+
+<p><a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">Git的官方介绍</a>已经很详细了，现在已经有了环境，就可以边看官方教程边学习了。除了官方的文档以外，<a href="https://www.liaoxuefeng.com/wiki/896043488029600/896067008724000">廖雪峰老师的教程</a>以及[菜鸟教程](https://www.runoob.com/git/git-tutorial.html也很不错。</p>
+
+<h1 id="xx附录-常用git命令">xx.附录-常用Git命令</h1>
+
+<h2 id="git-的使用">git 的使用</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>简介</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>git –version</td>
+      <td>查看git版本</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git clone xxx</td>
+      <td colspan="2">克隆仓库</td>
+      
+    </tr>
+    <tr>
+      <td>git add ./xixi/heihei.txt</td>
+      <td>将文件heihei.txt添加至staging area</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git add .</td>
+      <td>将当前目录下的所有文件加入到staging area</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git commit -m ‘添加一个heihei.txt文件’</td>
+      <td>将staging area中的文件提交到仓库</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git reset ./xixi/heihei.txt</td>
+      <td>撤销添加到staging area中的指定文件</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git status</td>
+      <td>查看当前仓库的状况</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git fetch</td>
+      <td>从远程仓库获取最新的信息</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git pull</td>
+      <td>获取远程仓库的最新版本并合并到本地</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git push</td>
+      <td>将本地修改推到远程仓库</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git branch dev-xixi</td>
+      <td>以当前分支创建一个dev-xixi的分支</td>
+      <td>也可以用git checkout -b dev-xixi</td>
+    </tr>
+    <tr>
+      <td>git branch -al</td>
+      <td>查看本地及远程的所有分支</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git remote -v</td>
+      <td>查看git的服务器地址</td>
+      <td>使用q来退出</td>
+    </tr>
+    <tr>
+      <td>git remote show origin</td>
+      <td>提供有关远程的一些信息</td>
+      <td>也可以看到远程地址</td>
+    </tr>
+    <tr>
+      <td>git help remote</td>
+      <td>查看remote的详细说明</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git blame -L 123,125 ./xixi/heihei.txt</td>
+      <td>查看heihei.txt文件第123-125行最新的修改人及时间</td>
+      <td>去掉 -L也可以，就是查全文，按<strong>q</strong>来退出</td>
+    </tr>
+    <tr>
+      <td>git restore ./</td>
+      <td>还原改动的文件</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git clean</td>
+      <td>清除未track的文件或文件夹，不能直接使用，一定要跟参数</td>
+      <td>-n 显示要删除哪些文件<br>-f 删除文件<br>-df 删除文件及文件夹</td>
+    </tr>
+    <tr>
+      <td>git log</td>
+      <td>查看历史提交(复杂模式)</td>
+      <td>git log –oneline</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="git-checkout的使用">git checkout的使用</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>简介</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>git checkout dev</td>
+      <td>切换至dev分支</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git checkout –– templates/index.html</td>
+      <td>放弃本地尚未commit的修改</td>
+      <td>谨慎使用，除非使用了git stash，不然只能去local history里面找之前的代码了</td>
+    </tr>
+    <tr>
+      <td>git checkout .</td>
+      <td>放弃本地尚未commit的<strong>所有</strong>修改</td>
+      <td>同上</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="git-config的使用">git config的使用</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>简介</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>git config ––global user.name “liutianyu”</td>
+      <td>设置全局的用户名</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git config ––global ––list</td>
+      <td>列出所有全局的配置项</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git config ––local ––list</td>
+      <td>在一个git repository下面使用，查看当前的配置</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git config ––local user.name “liutianyu”</td>
+      <td colspan="2">设置局部用户名</td>
+      
+    </tr>
+    <tr>
+      <td>git config ––local user.email “liutianyu@x.com”</td>
+      <td colspan="2">设置局部邮箱</td>
+      
+    </tr>
+    <tr>
+      <td>git config ––system ––unset credential.helper</td>
+      <td colspan="2">清除登录信息</td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="git-stash的使用">git stash的使用</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>简介</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>git stash save “xixi”</td>
+      <td colspan="2">创建名为“xixi”的stash，并将当前的工作区回归为初始状态。</td>
+      
+    </tr>
+    <tr>
+      <td>git stash list</td>
+      <td colspan="2">列出当前所有的stash</td>
+      
+    </tr>
+    <tr>
+      <td>git stash appley 0</td>
+      <td colspan="2">将序列号为0的stash中的内容恢复到当前的工作区，并且不删除</td>
+      
+    </tr>
+    <tr>
+      <td>git reset ––hard HEAD</td>
+      <td colspan="2">强制将当前的改动删掉，回归到初始状态。</td>
+      
+    </tr>
+    <tr>
+      <td>git stash pop 0</td>
+      <td colspan="2">将序列号为0的stash中的内容恢复到当前的工作区，并且删除</td>
+      
+    </tr>
+    <tr>
+      <td>git stash drop 0</td>
+      <td colspan="2">删除序列号为0的stash</td>
+      
+    </tr>
+    <tr>
+      <td>git stash clear</td>
+      <td colspan="2">清空stash中的所有内容</td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="commit后回滚">commit后回滚</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+</pre></td>
+<td class="rouge-code"><pre>gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git push
+Enumerating objects: 9, <span class="k">done</span><span class="nb">.</span>
+Counting objects: 100% <span class="o">(</span>9/9<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Delta compression using up to 16 threads
+Compressing objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, 418 bytes | 418.00 KiB/s, <span class="k">done</span><span class="nb">.</span>
+Total 5 <span class="o">(</span>delta 2<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>, pack-reused 0
+remote: Resolving deltas: 100% <span class="o">(</span>2/2<span class="o">)</span>, completed with 2 <span class="nb">local </span>objects.
+To https://github.com/FuryBrand/furybrand.github.io.git
+ <span class="o">!</span> <span class="o">[</span>remote rejected] master -&gt; master <span class="o">(</span>refusing to allow an OAuth App to create or update workflow <span class="sb">`</span>.github/workflows/jekyll.yml<span class="sb">`</span> without <span class="sb">`</span>workflow<span class="sb">`</span> scope<span class="o">)</span>
+error: failed to push some refs to <span class="s1">'https://github.com/FuryBrand/furybrand.github.io.git'</span>
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git status
+On branch master
+Your branch is ahead of <span class="s1">'origin/master'</span> by 1 commit.
+  <span class="o">(</span>use <span class="s2">"git push"</span> to publish your <span class="nb">local </span>commits<span class="o">)</span>
+
+nothing to commit, working tree clean
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git reset <span class="nt">--soft</span> HEAD^
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git status
+On branch master
+Your branch is up to <span class="nb">date </span>with <span class="s1">'origin/master'</span><span class="nb">.</span>
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+        renamed:    .travis.yml -&gt; ..travis.yml
+        modified:   .github/workflows/jekyll.yml
+
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git restore .github/workflows/jekyll.yml
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git status
+On branch master
+Your branch is up to <span class="nb">date </span>with <span class="s1">'origin/master'</span><span class="nb">.</span>
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+        renamed:    .travis.yml -&gt; ..travis.yml
+        modified:   .github/workflows/jekyll.yml
+
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git restore .github/workflows/jekyll.yml <span class="nt">--staged</span>
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git status
+On branch master
+Your branch is up to <span class="nb">date </span>with <span class="s1">'origin/master'</span><span class="nb">.</span>
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+        renamed:    .travis.yml -&gt; ..travis.yml
+
+Changes not staged <span class="k">for </span>commit:
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to update what will be committed<span class="o">)</span>
+  <span class="o">(</span>use <span class="s2">"git restore &lt;file&gt;..."</span> to discard changes <span class="k">in </span>working directory<span class="o">)</span>
+        modified:   .github/workflows/jekyll.yml
+
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git restore .github/workflows/jekyll.yml
+gitpod /workspace/furybrand.github.io <span class="nv">$ </span>git status
+On branch master
+Your branch is up to <span class="nb">date </span>with <span class="s1">'origin/master'</span><span class="nb">.</span>
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+        renamed:    .travis.yml -&gt; ..travis.yml
+
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<h2 id="git初始化仓库">git初始化仓库</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td>
+<td class="rouge-code"><pre>Command line instructions
+You can also upload existing files from your computer using the instructions below.
+
+Git global setup
+git config <span class="nt">--global</span> user.name <span class="s2">"liutianyu"</span>
+git config <span class="nt">--global</span> user.email <span class="s2">"liutianyu@x.com"</span>
+
+Create a new repository
+git clone git@git.jd.com:class6/itat-auto-test.git
+<span class="nb">cd </span>itat-auto-test
+<span class="nb">touch </span>README.md
+git add README.md
+git commit <span class="nt">-m</span> <span class="s2">"add README"</span>
+git push <span class="nt">-u</span> origin master
+ 
+Push an existing folder
+<span class="nb">cd </span>existing_folder
+git init
+git remote add origin git@git.jd.com:class6/itat-auto-test.git
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Initial commit"</span>
+git push <span class="nt">-u</span> origin master
+
+Push an existing Git repository
+<span class="nb">cd </span>existing_repo
+git remote rename origin old-origin
+git remote add origin git@git.jd.com:class6/itat-auto-test.git
+git push <span class="nt">-u</span> origin <span class="nt">--all</span>
+git push <span class="nt">-u</span> origin <span class="nt">--tags</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<h2 id="删除所有提交记录">删除所有提交记录</h2>
+
+<p>因为拿git当作笔记软件，时间久了提交记录越来越多会导致.git文件夹非常臃肿（主要是存了一些二进制文件，我承认我的路子有点野，但是在内网同步盘不可用的情况下，git貌似是唯一的好用的云笔记选择了）
+下面的步骤是</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+</pre></td>
+<td class="rouge-code"><pre>liutianyu@LX-WXZB MINGW64 /d/myWorkspace
+<span class="nv">$ </span><span class="nb">mv </span>furybrand/ furybrand1
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace
+<span class="nv">$ </span><span class="nb">mkdir </span>furybrand
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace
+<span class="nv">$ </span><span class="nb">cd </span>furybrand
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand
+<span class="nv">$ </span>git init
+Initialized empty Git repository <span class="k">in </span>D:/myWorkspace/furybrand/.git/
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>vi README.md
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span><span class="nb">cp</span> ../furybrand1/.git
+./          ../         .git/       .gitignore  .vscode/
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span><span class="nb">cp</span> ../furybrand1/.git/co
+COMMIT_EDITMSG  config
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span><span class="nb">cp</span> ../furybrand1/.git/co
+COMMIT_EDITMSG  config
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span><span class="nb">cp</span> ../furybrand1/.git/config ./.git/
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>git add <span class="nb">.</span>
+warning: LF will be replaced by CRLF <span class="k">in </span>README.md.
+The file will have its original line endings <span class="k">in </span>your working directory
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Initial commit"</span>
+<span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> 54d05a4] Initial commit
+ 1 file changed, 1 insertion<span class="o">(</span>+<span class="o">)</span>
+ create mode 100644 README.md
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>git push <span class="nt">-f</span> <span class="nt">--set-upstream</span> origin master
+info: detecting host provider <span class="k">for</span> <span class="s1">''</span>...
+Enumerating objects: 3, <span class="k">done</span><span class="nb">.</span>
+Counting objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, 210 bytes | 210.00 KiB/s, <span class="k">done</span><span class="nb">.</span>
+Total 3 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>, pack-reused 0
+remote: Coding: Checking the pushed content...
+remote: Updating references: 100% <span class="o">(</span>1/1<span class="o">)</span>
+Branch <span class="s1">'master'</span> <span class="nb">set </span>up to track remote branch <span class="s1">'master'</span> from <span class="s1">'origin'</span><span class="nb">.</span>
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span><span class="nb">cp</span> ../furybrand1/<span class="k">*</span> ./ <span class="nt">-r</span>
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>git add <span class="nb">.</span>
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"go"</span>
+<span class="o">[</span>master 3e207dc] go
+ 142 files changed, 428831 insertions<span class="o">(</span>+<span class="o">)</span>, 1 deletion<span class="o">(</span>-<span class="o">)</span>
+ create mode 100644 PRODUCT/README.md
+ create mode 100644 temp.md
+liutianyu@LX-WXZB MINGW64 /d/myWorkspace/furybrand <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>git push
+info: detecting host provider <span class="k">for</span> <span class="s1">''</span>...
+Enumerating objects: 164, <span class="k">done</span><span class="nb">.</span>
+Counting objects: 100% <span class="o">(</span>164/164<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Delta compression using up to 8 threads
+Compressing objects: 100% <span class="o">(</span>161/161<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>163/163<span class="o">)</span>, 89.59 MiB | 1.59 MiB/s, <span class="k">done</span><span class="nb">.</span>
+Total 163 <span class="o">(</span>delta 10<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>, pack-reused 0
+remote: Resolving deltas: 100% <span class="o">(</span>10/10<span class="o">)</span>
+remote: Coding: Checking the pushed content...
+remote: Updating references: 100% <span class="o">(</span>1/1<span class="o">)</span>
+   54d05a4..3e207dc  master -&gt; master
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<h2 id="更新日志">更新日志</h2>
+<ul>
+  <li>2020年9月23日：追加回滚操作</li>
+  <li>2021年12月1日：追加“删除所有提交记录”</li>
+</ul>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/05/12/Software-recommendation-Pythonista/" data-toggle="tooltip" data-placement="top" title="软件推荐-ios上的python利器Pythonista">
+                        Previous<br>
+                        <span>软件推荐-ios上的python利器Pythonista</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/07/11/my-linux-basic-instructions/" data-toggle="tooltip" data-placement="top" title="我的Linux常用命令（持续更新）">
+                        Next<br>
+                        <span>我的Linux常用命令（持续更新）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="39">技术相关</a>
+        
+                <a data-sort="0056" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Python" title="Python" rel="7">Python</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0064" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0064" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0065" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

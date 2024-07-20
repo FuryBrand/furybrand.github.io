@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="5G和VSCodeOnline - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="引子
+">
+    
+    <meta property="article:published_time" content="2019-11-30T10:19:25Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="杂文">
+    
+    <meta property="article:tag" content="技术相关">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2019/11/30/5G-vscode-online/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>5G和VSCodeOnline - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2019/11/30/5G-vscode-online/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文">杂文</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                    </div>
+                    <h1>5G和VSCodeOnline</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on November 30, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h2 id="引子">引子</h2>
+
+<p>很奇怪吧，<code class="language-plaintext highlighter-rouge">5G和VSCodeOnline</code>什么鬼啊，这对儿组合。其实我也觉得有点奇怪，只是结合前两参加的<strong>世界5G大会</strong>加上了解到了<strong>VS Code Online</strong>，使我今天突然有所感想。</p>
+
+<p>5G的到来真的会对我们的生活造成很大影响，甚至这个影响很快就会到来了。</p>
+
+<h2 id="世界5g大会">世界5G大会</h2>
+
+<p>前段时间有幸参与了京东物流的<code class="language-plaintext highlighter-rouge">京东LoMir 5G智能物流平台</code>的测试工作，所以有机会参加上周的世界5G大会。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-11-30-5G-vscode-online/01.JPEG.webp" alt="大会外景"></p>
+
+<p>5G铺天盖地的新闻让我这个不太关注5G的人也知道它有三大特性。</p>
+
+<ul>
+  <li>高带宽，5G的下行峰值速率，相对4G提升100倍，可以达到10Gbps，即下载速度达到每秒1.25G。</li>
+  <li>低时延，5G端到端传输时延为3～5ms；4G传输时延为是10～20ms。5G相对4G时延提升了70%。</li>
+  <li>大连接，5G每平方公里100万个连接，相对4G提升10倍。</li>
+</ul>
+
+<p>来大会参展的厂商还是挺多的，除了这有头有脸的大厂外，还有很多大众没怎么听过名字但是专注于ToB或某一具体领域的企业。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-11-30-5G-vscode-online/02.JPEG.webp" alt="大会合作伙伴"></p>
+
+<p>ToC的就是消费电子和各种娱乐设备了，主要是各品牌的手机、VR、4K高清直播。手机的话，在现场实际体验下载应用能达到200-300MB每秒，很快。VR的话，现场的设备还是需要连接HDMI线的。但是未来搭载5G芯片之后VR设备就可以做到摆脱线缆，身上背着一个电池包就可以。这样的VR体验一定是很方便的。4K高清直播在现场看确实很棒，很清晰。而且有趣的是还有家企业还提供了AI算法将1080P优化成4K的服务，优化效果还不错。</p>
+
+<p>但是说实在的，当时并没有很特别的感觉。因为我现在用着4G的老古董小米note3，下载速度能有4~5MB每秒。下载软件虽没有5G快，但是我又不天天更新。4G手机上看个视频也不卡。VR游戏在一些轰趴馆也玩过，貌似特别好的游戏也没多少。加上我本来对游戏也没有那么感冒，现在NS已经被我当作健身设备了，就每天半小时的有氧拳击。4K视频我是有点心水，但是4K的片源还是少，而且我也没有4K的设备😂😂。手头的投影仪才720P，笔记本也只有1080P的画质。所以4K离我还真是远🤦‍♂️🤦‍♂️。</p>
+
+<p>不过ToB以及一些特殊场景的话，确实有很酷的东西。比如中兴在网络基础建设上的端到端切片方案（同一物理资源下针对时延和带宽进行网络切片管理），以及边缘计算（云端提供主要算力，移动端也具备计算能力从而可以进一步降低时延）。京东在5G+智慧零售和5G+物流园区上的探索。华为就更厉害了，场地是别人家的两三个大，从网络基础建设到5G+的场景级解决方案还有各种自家的消费电子产品。</p>
+
+<p>总的来说，主要做了三类事情吧，网络基础建设、5G+各应用场景的解决方案、消费电子。5G+各应用场景的解决方案还是有点东西的，5G+工业园区，物流园区等，基于5G利用无人机、AI、大数据等实现园区的更高效更安全的作业。腾讯和360都有城市智慧大脑以及车联网。还有智慧警车、智慧路灯，基于5G的远程会诊医疗。以及电信三大运营商都展示了5G远称驾驶，会场现场在北京大兴亦庄，而实车在南京等地。经过咨询，转向指令在3ms内就可以给到远端的实车，但是由于视频编解码的问题，视频的延时要有100~200ms的延迟。这对于医疗会诊来说问题不大，但是对于驾车来说可能就是致命的，但是如果未来万物互联，基于车联网以及边缘计算，车是互相知道对方的位置的。这样的话，其实在非必要时刻是不需要人为介入的。</p>
+
+<p>说了这么多，其实就是由于5G的三大特性，导致AI、大数据、VR等都可以走出实验室，使大规模民用成为现实。但是什么时候能实现呢，我很期待。不过不知道5G到底能怎样真的改变我的生活，所以当时我又没有那么兴奋。不过5G我们中国走在了世界的前列，这着实让我感到骄傲。</p>
+
+<h2 id="vs-code-online">VS Code Online</h2>
+
+<p>这周几的时候？收到了知乎的推送<code class="language-plaintext highlighter-rouge">ipad pro 12.9寸适合用来办公吗</code>。一位答主提到了VS Code Online，我一直在用它，但是居然不知道还有online版本。工作的时候VS Code是必开的，写些python小工具还是很方便的。格式化json和xml甚至edi更是不在话下。今天得空鼓捣了一下online版本，很酷，超酷。我这篇文章就是在gitpod上敲出来的（虽然对中文输入的支持不太友好🤷‍♂️🤷‍♂️但是习惯了还是可以用的）。</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-11-30-5G-vscode-online/03.png" alt="vscodeonline"></p>
+
+<p>这简直就是我理想中的工作台啊，随时随地打开浏览器就开撸代码，而且环境配置在云端。一次配置，到处使用。天知道我在个人工作台道路上探索的多艰难🤣🤣</p>
+
+<p>最开始嫌弃笔记本太重了，搞了个CHIPFANCIER做了个Windows To Go的U盘，这样随便什么电脑，只要主板支持就可以立刻拥有自己的Windows工作台了。后来公司电脑上用了一次之后把电脑的指纹解锁搞坏了，密码还不记得了，导致为了开机废了很大劲。后来入手了GPD WIN，但是性能不给力，而且屏幕小。虽然是Windows的工作台了，但是不外接显示器基本用不了，接了显示器又要接鼠标键盘…..后来让我二手卖了。再后来迷上摄影，入手了iPad。这简直是我理想中的移动工作台，因为现在我的需求只是写写博客（VS Code + Git），简单修修照片，剪剪视频。因为我的媒体剪辑也不太专业，所以一台iPad就足够我用了。出门只要一台相机一部iPad就够用了，但是iPad上写博客总是不太舒服，虽然Pythonista上码字还好，但是还是比不上VS Code，同时它的stash上集成的git没有那么好用…..所以说实在的，没有一篇文章是通过iPad写的，顶多是改改错别字啥的…..</p>
+
+<p>现在好了，有了在线的IDE，浏览器上就可以撸代码。了解到了这，我突然醍醐灌顶了。这就是一个好例子，可能也是未来的发展方向。其实现在我们每个人的办公电脑性能都不低，但是并不是每天24小时的全负荷工作。而且说起来，业务人员、产品人员的PC可能性能过剩，同时研发在coding的时候并不需要太多的算力，调试的时候才需要。那么在随时可以高速互联的5G时代，我们是不是可以在终端不提供强大性能的设备，把算力集中在云端。同时本地也不用配置环境了，环境都在云端配置一次就好了。</p>
+
+<p>反推到手机上，以后可能都是云端游戏，云端应用。手机只是一个展示层而已。那么手机这样一个小设备就可以承担更加复杂的功能，因为后端有强大的算力支撑。想想就觉得很美好。</p>
+
+<p>另外把我测试结果放上：</p>
+
+<ul>
+  <li>VS Code Online: 微软现在已经在公测阶段了，可以去官网尝试一下。<a href="https://devblogs.microsoft.com/visualstudio/announcing-visual-studio-online-public-preview/">微软博客</a>
+</li>
+  <li>code-server：VS Code的服务端部署方案。 <a href="https://github.com/cdr/code-server">github地址</a>
+</li>
+  <li>gitpod：GitHub的在线IDE。使用github账号就能登陆，中文输入法输入英文或者数字时会出现重复，说白了就是有小bug，但是能用。不过在iPadOS上体验并不好<a href="https://www.gitpod.io/">官网链接</a>
+</li>
+  <li>Cloud Studio：腾讯的在线IDE。晚上刚试用，感觉比gitpod用着舒服，最棒的一点是在iPadOS上也使用的很棒。感觉后续要用作主力了。</li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/10/09/postman-small-tricks/" data-toggle="tooltip" data-placement="top" title="Postman-几个小把戏">
+                        Previous<br>
+                        <span>Postman-几个小把戏</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/03/26/xin-shi/" data-toggle="tooltip" data-placement="top" title="新栏目：xin食">
+                        Next<br>
+                        <span>新栏目：xin食</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="39">技术相关</a>
+        
+                <a data-sort="0056" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Python" title="Python" rel="7">Python</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0064" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0064" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0065" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

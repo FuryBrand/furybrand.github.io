@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Excel-《表格之道》的笔记 - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="15年的时候由于工作需要，在网易云课堂上学习了《表格之道》的课程，感谢谷老师的教导至今受益匪浅😀。由于公司网络不能访问OneNote，同时为了分享知识给大家。故将自己的笔记整理分享出来。当然只是一个框架和笔记而已，要是有时间的话，还是希望提升Excel的伙伴学习一下《表格之道(专业版)》，才99RMB也不贵，哈哈哈哈
+">
+    
+    <meta property="article:published_time" content="2019-03-06T14:25:25Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="办公">
+    
+    <meta property="article:tag" content="Windows">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2019/03/06/The-Excel-Way-notes/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>Excel-《表格之道》的笔记 - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2019/03/06/The-Excel-Way-notes/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E5%8A%9E%E5%85%AC" title="办公">办公</a>
+                        
+                        <a class="tag" href="/archive/?tag=Windows" title="Windows">Windows</a>
+                        
+                    </div>
+                    <h1>Excel-《表格之道》的笔记</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on March 6, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>15年的时候由于工作需要，在网易云课堂上学习了《表格之道》的课程，感谢谷老师的教导至今受益匪浅😀。由于公司网络不能访问OneNote，同时为了分享知识给大家。故将自己的笔记整理分享出来。当然只是一个框架和笔记而已，要是有时间的话，还是希望提升Excel的伙伴学习一下<a href="https://study.163.com/course/introduction/720001.htm">《表格之道(专业版)》</a>，才99RMB也不贵，哈哈哈哈</p>
+
+<ul>
+  <li>
+<a href="#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e8%a7%84%e8%8c%83%e6%95%b0%e6%8d%ae">第四章-规范数据</a>
+    <ul>
+      <li><a href="#20-%e6%a0%bc%e5%bc%8f%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5">20-格式的基本概念</a></li>
+      <li><a href="#21-%e6%97%a5%e6%9c%9f%e6%97%b6%e9%97%b4%e6%a0%bc%e5%bc%8f">21-日期时间格式</a></li>
+      <li><a href="#22-%e6%95%b0%e5%ad%97%e4%b8%8e%e6%96%87%e6%9c%ac%e7%9a%84%e8%bd%ac%e5%8c%96">22-数字与文本的转化</a></li>
+      <li><a href="#23-%e7%94%b5%e5%ad%90%e8%a1%a8%e6%a0%bc%e7%9a%84%e9%80%9a%e7%94%a8%e6%a0%bc%e5%bc%8f">23-电子表格的通用格式</a></li>
+      <li><a href="#24-27-%e9%80%9a%e7%94%a8%e6%a0%bc%e5%bc%8f%e7%bb%86%e5%88%99%e4%b8%8a%e4%b8%ad%e4%b8%8b%e6%80%bb%e7%bb%93">24-27-通用格式细则上中下总结</a></li>
+      <li><a href="#28-ctrll">28-Ctrl+L</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#%e7%ac%ac%e4%ba%94%e7%ab%a0%e5%ad%97%e6%ae%b5%e8%b0%83%e6%95%b4-%e5%85%ac%e5%bc%8f">第五章：字段调整-公式</a>
+    <ul>
+      <li><a href="#29-%e5%87%bd%e6%95%b0%e7%ae%80%e4%bb%8b">29-函数简介</a></li>
+      <li><a href="#30-%e5%87%bd%e6%95%b0%e7%9a%84%e5%ad%a6%e4%b9%a0%e8%b7%af%e5%be%84">30-函数的学习路径</a></li>
+      <li><a href="#31-%e5%90%8d%e7%a7%b0%e7%9a%84%e5%91%bd%e5%90%8d">31-名称的命名</a></li>
+      <li><a href="#32-%e5%90%8d%e7%a7%b0%e7%9a%84%e5%ba%94%e7%94%a8%e6%95%b0%e6%8d%ae%e9%aa%8c%e8%af%81">32-名称的应用、数据验证</a></li>
+      <li><a href="#33-%e7%9b%b8%e5%af%b9%e5%bc%95%e7%94%a8">33-相对引用</a></li>
+      <li><a href="#34-%e9%9b%b6%e4%bb%b6%e5%87%bd%e6%95%b0%e4%b9%8b%e7%bb%9f%e8%ae%a1%e5%87%bd%e6%95%b05-6">34-零件函数之统计函数5-6</a></li>
+      <li><a href="#35-%e9%9b%b6%e4%bb%b6%e5%87%bd%e6%95%b0%e4%b9%8b%e6%97%a5%e6%9c%9f%e5%87%bd%e6%95%b05-7">35-零件函数之日期函数5-7</a></li>
+      <li><a href="#36-%e9%9b%b6%e4%bb%b6%e5%87%bd%e6%95%b0%e4%b9%8b%e6%96%87%e6%9c%ac%e5%87%bd%e6%95%b0">36-零件函数之文本函数</a></li>
+      <li><a href="#38-%e9%9b%b6%e4%bb%b6%e5%87%bd%e6%95%b0%e4%b9%8b%e9%9a%8f%e6%9c%ba%e5%87%bd%e6%95%b0">38-零件函数之随机函数</a></li>
+      <li><a href="#39-if%e5%87%bd%e6%95%b0%e6%a6%82%e8%bf%b0">39-if函数概述</a></li>
+      <li><a href="#40-if%e5%87%bd%e6%95%b0%e5%b5%8c%e5%a5%97">40-if函数嵌套</a></li>
+      <li><a href="#41-if%e5%87%bd%e6%95%b0and%e5%92%8cor">41-if函数and和or</a></li>
+      <li><a href="#42-vlookup%e5%87%bd%e6%95%b0%e4%bb%8b%e7%bb%8d%e4%bb%a5%e5%8f%8a%e5%9f%ba%e6%9c%ac%e7%94%a8%e6%b3%95">42-vlookup函数介绍以及基本用法</a></li>
+      <li><a href="#43-vlookup%e7%9a%84%e5%85%b7%e4%bd%93%e5%ba%94%e7%94%a8">43-Vlookup的具体应用</a></li>
+      <li><a href="#44-vlookup%e6%a8%a1%e7%b3%8a%e6%9f%a5%e6%89%be">44-vlookup模糊查找</a></li>
+      <li><a href="#45-index%e4%b8%8ematch%e5%87%bd%e6%95%b0">45-index与match函数</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="第四章-规范数据">第四章-规范数据</h2>
+
+<h3 id="20-格式的基本概念">20-格式的基本概念</h3>
+
+<ul>
+  <li>数字在右，文本在左</li>
+  <li>时间日期的显示方式</li>
+  <li>数字与文本的转化</li>
+</ul>
+
+<h3 id="21-日期时间格式">21-日期时间格式</h3>
+
+<ul>
+  <li>日期就是一种特殊的表示的数字。在输入中，以减号或者除号来把日期间隔开来。</li>
+</ul>
+
+<h3 id="22-数字与文本的转化">22-数字与文本的转化</h3>
+
+<p>超长的数字会被自动的转化为科学记数法。解决方法就是将单元格格式变为文本。</p>
+
+<p>注意：不要在数字前加逗号来将超长的数字显示出来。这样本身是非常危险的。</p>
+
+<p>问题：从外部网页或者数据库中导出的表格，很多时候数字是以文本的形式保存的，如何将其转化为数字？
+答案：</p>
+<ul>
+  <li>1.将需要转换的数据选中，在左边的小叹号中选择转化为数字。</li>
+  <li>2.在任意空白处键入数字1，Ctrl+C，然后选择要转换的数据，Ctrl+Alt+V，选择运算中的“乘”。（格式需要调整一下，因为1的格式会被带进去）</li>
+  <li>3.大招：分列。选中要转换的列，然后在点击数据中的“分列”，之后点击“完成”。（但是我有个疑问，这样好像还是转换成了文本，只不过把小绿帽子摘掉了）</li>
+</ul>
+
+<h3 id="23-电子表格的通用格式">23-电子表格的通用格式</h3>
+
+<ul>
+  <li>数据分为前台和后台。</li>
+  <li>后台：存储、加工、分析、计算</li>
+  <li>前台：展示、传递</li>
+  <li>Excel本身就是为了后台</li>
+</ul>
+
+<h3 id="24-27-通用格式细则上中下总结">24-27-通用格式细则上中下总结</h3>
+
+<p>电子表格是简化了的数据库。</p>
+
+<p>问题：制作表格常见的10种错误有哪些？
+答案：</p>
+<ul>
+  <li>1.合并单元格。会导致数据透视表，筛选等功能失效。处理方法：选中单元格，点击开始–&gt;合并后居中，这样数据就会显示在第一行，此时需要将之前被合并的单元格填充上，选中需要填充的部分，按F5-&gt;Alt+s(定位条件)-&gt;Alt+k(空值)-&gt;确定-&gt;输入“=C2”-&gt;Ctrl+Enter(批量填充)。由于现在虽然显示的效果是对的，但是内部其实是公式，所以需要选中单元格，Ctrl+c，Ctrl+Alt+V，并选择数值，来转换一下</li>
+  <li>2.没有序号，为了回溯方便，相当于数据库中的ID</li>
+  <li>3.乱加表头，不要乱加没有用的东西，Excel表格是用来分析的，不是用来展示的</li>
+  <li>4.胡乱合计，合计数不应该出现在元数据中的。</li>
+  <li>5.不符合数据透视表的规范，尽可能把一类的内容放到一列里面。如右图所示</li>
+  <li>6.错误的理解0，”0和空值是不一样的，这在计算平均分等情况下会被体现出来”</li>
+  <li>7.分裂表格，就是将一个表格以人类方便的方式拆分了
+<img src="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/01.png" alt="01">
+</li>
+  <li>8.数字的文本化，为了计算方便，需要输入数字的地方一定要只填数字，如果一定要单位的话，有两种办法，一种是追加一列来记录单位。另一种是Ctrl+1-&gt;自定义–0分。显示时会带有分，但是实际是数字。并且在明确知道数字的范围的情况下，通过数字有效性（整数／小数）来限定输入，可以在一定程度上来防止录入错误。</li>
+  <li>9.内容不统一，格式等各方面吧</li>
+  <li>10.单元格非原子化，一个单元格就放一个不可分割的最小的信息。</li>
+</ul>
+
+<p>问题：一个好的电子表格是什么样的？	
+答案：</p>
+<ul>
+  <li>1.完整的字段标题</li>
+  <li>2.首字段做序号</li>
+  <li>3.数字和日期的正确</li>
+  <li>4.有效性避免错误</li>
+  <li>5.符合透视表的习惯</li>
+  <li>6.没有不规范项</li>
+</ul>
+
+<h3 id="28-ctrll">28-Ctrl+L</h3>
+
+<p>套用格式的意义（优势）：</p>
+<ul>
+  <li>1.更易于阅读(无论是在屏幕还是在打印机)</li>
+  <li>2.更易于添加数据</li>
+  <li>3.帮助完善字段标题</li>
+  <li>4.优秀的初级数据分析平台(排序，筛选，查重)</li>
+</ul>
+
+<p>套用格式应注意的问题：</p>
+<ul>
+  <li>1.结构化数据。在新增一列的时候，对一行添加公式，该公式会应用到所有的行中。有时候我们并不需要对所有的行都添加该公式，可以通过：表格工具（设计）-&gt;转换为区域。来取消套用格式</li>
+  <li>2.还原为数据表的方法</li>
+</ul>
+
+<h2 id="第五章字段调整-公式">第五章：字段调整-公式</h2>
+
+<h3 id="29-函数简介">29-函数简介</h3>
+
+<p>函数是一种编辑好的计算规则，输入等于好新增一个函数，按Tab键来完善。</p>
+
+<p>函数的主要用途：根据现有数据，新增一列字段。</p>
+
+<p>函数的目的：</p>
+<ul>
+  <li>1.承担计算工作</li>
+  <li>2.为分析做准备</li>
+</ul>
+
+<h3 id="30-函数的学习路径">30-函数的学习路径</h3>
+
+<p>函数的分类：
+<img src="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/02.png" alt="02"></p>
+
+<h3 id="31-名称的命名">31-名称的命名</h3>
+
+<p>单元格默认是以字母加数字来命名的，选中一个单元格在左上角可以重新命名该单元格。下次使用F3来引用该命名后的单元格(可以重命名一个区域的单元格，或者分散开的单元格)。</p>
+
+<p>如何批量的重命名单元格？</p>
+
+<p>答案：在满足特定格式的情况下(比如：左边一列是名称，右边一列是数据)先选中这两列，然后：公式-&gt;定义的名称-&gt;根据所选内容创建-&gt;已选定区域创建名称(根据实际情况选择，例子中是最左列)。</p>
+
+<p>可以使用名称管理器来删除单元格名称</p>
+
+<p>名称命名的规则有哪些：		
+答案：</p>
+<ul>
+  <li>Excel名称框不允许使用RC</li>
+  <li>空格会被下划线自动填充</li>
+  <li>与单元格相同的名称为避免冲突不得引用(32、A4)</li>
+  <li>符号只能包括.和_</li>
+</ul>
+
+<h3 id="32-名称的应用数据验证">32-名称的应用、数据验证</h3>
+
+<p>如何新建一个数据有效性的备选名称？</p>
+
+<p>答案：	选中需要创建的数据，点击-&gt;公式_定义的名称_根据所选内容创建</p>
+
+<h3 id="33-相对引用">33-相对引用</h3>
+
+<ul>
+  <li>相对引用</li>
+  <li>混合引用</li>
+  <li>绝对引用，在公式中选中单元格，按F4直接添加绝对引用</li>
+</ul>
+
+<h3 id="34-零件函数之统计函数5-6">34-零件函数之统计函数5-6</h3>
+
+<p>统计函数不需要掌握太多，这些就够用了，大部分的统计函数我们可以用数据透视表来完成。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>级别</th>
+      <th>函数名称</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>+</td>
+      <td>加</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>-</td>
+      <td>减</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>*</td>
+      <td>乘</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>/</td>
+      <td>除</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>power</td>
+      <td>开放次方</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>sum</td>
+      <td>求和</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>average</td>
+      <td>求平均</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>count</td>
+      <td>计数</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>max</td>
+      <td>最大值</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>min</td>
+      <td>最小值</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>sumif</td>
+      <td>条件求和</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>countif</td>
+      <td>条件计数</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>averageif</td>
+      <td>条件求平均</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>sumifs</td>
+      <td>多条件求和</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>counifs</td>
+      <td>多条件计数</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>averageifs</td>
+      <td>多条件求平均</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="35-零件函数之日期函数5-7">35-零件函数之日期函数5-7</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名称</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>today</td>
+      <td>返回今天日期</td>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>提取年份</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>提取月份</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>提取天数</td>
+    </tr>
+    <tr>
+      <td>weekday</td>
+      <td>计算周几</td>
+    </tr>
+    <tr>
+      <td>weeknum</td>
+      <td>计算第几周</td>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>日期函数（阿拉伯数字转日期）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="36-零件函数之文本函数">36-零件函数之文本函数</h3>
+
+<p>主要是由于表格不规范，“擦屁股”用的函数。</p>
+
+<p>拆</p>
+
+<ul>
+  <li>left</li>
+  <li>right</li>
+  <li>mid</li>
+  <li>分列(office2013新增,提取表格中一个身份证号中的出生日期，然后一拉，右下角选快速填充。之后使用-》数据（分列）来将其转换为日期)字符长度相同，或者明显标识</li>
+</ul>
+
+<p>合</p>
+
+<ul>
+  <li>CONCATENATE</li>
+  <li>&amp;</li>
+</ul>
+
+<p>转（不讲了，通过自定义格式的方法来处理）</p>
+
+<ul>
+  <li>text</li>
+  <li>Trim  删除多与空格</li>
+</ul>
+
+<p>量（字符串的长度）</p>
+
+<ul>
+  <li>len</li>
+</ul>
+
+<p>找</p>
+
+<ul>
+  <li>find</li>
+</ul>
+
+<h3 id="38-零件函数之随机函数">38-零件函数之随机函数</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名称</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RAND()</td>
+      <td>返回一个0-1的数，按F9来刷新</td>
+    </tr>
+    <tr>
+      <td>RANDBETWEEN(1,100)</td>
+      <td>返回一个给定范围内的整数</td>
+    </tr>
+    <tr>
+      <td>NORM.INV()</td>
+      <td>正态分布，选学</td>
+    </tr>
+    <tr>
+      <td>ROUND()</td>
+      <td>取整，可以选择保留的小数位</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="39-if函数概述">39-if函数概述</h3>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/03.jpg" alt="03"></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>内容</th>
+      <th>函数</th>
+      <th>结果</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3</td>
+      <td>IF(A2&gt;=2,”大”,”小”)</td>
+      <td>大</td>
+    </tr>
+    <tr>
+      <td>文本</td>
+      <td>IF(A3=”文本”,”1”,”2”)</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>FALSE</td>
+      <td>IF(A4,”正确”,”错误”)</td>
+      <td>错误</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>比较运算符</th>
+      <th>含义</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>=(等号)</td>
+      <td>等于</td>
+      <td>A1=B1</td>
+    </tr>
+    <tr>
+      <td>
+<blockquote>
+  <p>（大于号）</p>
+</blockquote>
+</td>
+      <td>大于</td>
+      <td>A1&gt;B1</td>
+    </tr>
+    <tr>
+      <td>&lt;（小于号）</td>
+      <td>小于</td>
+      <td>A1&lt;B1</td>
+    </tr>
+    <tr>
+      <td>
+<blockquote>
+  <p>=（大于等于号）</p>
+</blockquote>
+</td>
+      <td>大于等于</td>
+      <td>A1&gt;=B1</td>
+    </tr>
+    <tr>
+      <td>&lt;=（小于等于号）</td>
+      <td>小于等于</td>
+      <td>A1&lt;=B1</td>
+    </tr>
+    <tr>
+      <td>&lt;&gt;（不等号）</td>
+      <td>不等于</td>
+      <td>A1&lt;&gt;B1</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="40-if函数嵌套">40-if函数嵌套</h3>
+
+<p>多层嵌套的话，最好用回车来换行，看着清楚</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>=IF(F2=1,200,
+IF(F2=2,400,
+IF(F2=3,600,
+IF(F2=4,800,
+IF(F2=5,1000,“”)))))
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<h3 id="41-if函数and和or">41-if函数and和or</h3>
+
+<p>and和or的具体意思就不说了</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/04.png" alt="04"></p>
+
+<p>随便举一个例子：<code class="language-plaintext highlighter-rouge">=IF(OR(E4&gt;7,F4&gt;2,SUM(G4:I4)&gt;3000),"重要员工","")</code></p>
+
+<h3 id="42-vlookup函数介绍以及基本用法">42-vlookup函数介绍以及基本用法</h3>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/05.jpg" alt="05"></p>
+
+<p>vlokup函数的使用条件：</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/06.jpg" alt="06"></p>
+
+<p>使用后的效果：</p>
+
+<p><img src="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/07.png" alt="07"></p>
+
+<p><a href="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng.xlsx">练习</a></p>
+
+<p>答案：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>数字</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>=VLOOKUP(A10,$E$10:$F$12,2,0)</td>
+    </tr>
+    <tr>
+      <td>=VLOOKUP(A11,$E$10:$F$12,2,0)</td>
+    </tr>
+    <tr>
+      <td>=VLOOKUP(A12,$E$10:$F$12,2,0)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>注意：VLOOKUP还有一个兄弟函数，叫做HLOOKUP，当被查找表格呈现横着的状态时候使用。</p>
+
+<h3 id="43-vlookup的具体应用">43-Vlookup的具体应用</h3>
+
+<p>在选择被查找区域的时候，一定要被选取区域的首列为共同字段，并且区域包含了要添加的字段。</p>
+
+<p>为了防止vlookup出现不好看的现象（没有返回值的话，会出现#N/A），需要使用iferror函数，具体体现如下：<code class="language-plaintext highlighter-rouge">=IFERROR(VLOOKUP(C12,津贴发放,3,0),"")</code></p>
+
+<p>vlookup函数是可以做查询的</p>
+
+<h3 id="44-vlookup模糊查找">44-vlookup模糊查找</h3>
+
+<p>模糊查找非常的方便，可以判断一个区域的值。比如根据成绩判断评级，85-100的给S，直接用模糊查找，给出这样的一个小表格就够了</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <td>60</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <td>75</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <td>85</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>但是Vlookup函数并不能完全取代IF函数，只是两者在模糊查找方面各有所长。</p>
+
+<h3 id="45-index与match函数">45-index与match函数</h3>
+
+<p>match函数可以返回一个指定字符在一行或者一列数据中的排序位置。</p>
+
+<p>index函数，可以根据横纵坐标返回一个区域内的具体值。</p>
+
+<p><a href="http://furybrand.github.io/assets/2019/2019-03-06-The-Excel-Way-notes/diwuzhang-ziduantiaozheng2.xlsx">具体例子</a></p>
+
+<h2 id="附录日常使用的积累">附录，日常使用的积累</h2>
+
+<h4 id="日期计算">日期计算</h4>
+
+<p>Excel，两个日期相减得到的数字的单位是天。若想得到两个时间相差的分钟数，则<code class="language-plaintext highlighter-rouge">=(W3-U2)*24*60</code>。若需要格式化去展示则<code class="language-plaintext highlighter-rouge">=TEXT(W3-U2,"[h]小时mm分钟")</code>。</p>
+
+<h4 id="拼装字符串时对于日期时间的格式化">拼装字符串时对于“日期”、“时间”的格式化</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>单元格内容</th>
+      <th>公式</th>
+      <th>输出结果</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2021/8/17</td>
+      <td>=TEXT(C2,”yyyy-mm-dd”)</td>
+      <td>2021-08-17</td>
+    </tr>
+    <tr>
+      <td>2021/8/17</td>
+      <td>=YEAR(A1)&amp;”-“&amp;MONTH(A1)&amp;”-“&amp;DAY(A1)</td>
+      <td>2021-8-17</td>
+    </tr>
+    <tr>
+      <td>16:05:00</td>
+      <td>=TEXT(D2,”h:mm:ss”)</td>
+      <td>16:05:00</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/03/03/Java-MessageFormat/" data-toggle="tooltip" data-placement="top" title="Java-用MessageFormat来替换占位符">
+                        Previous<br>
+                        <span>Java-用MessageFormat来替换占位符</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/03/12/Linux-Nginx-Tomcat-small-talk/" data-toggle="tooltip" data-placement="top" title="Linux-浅谈Nginx的反向代理 即http请求经历了什么😀">
+                        Next<br>
+                        <span>Linux-浅谈Nginx的反向代理 即http请求经历了什么😀</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="39">技术相关</a>
+        
+                <a data-sort="0056" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0057" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0060" href="/archive/?tag=Python" title="Python" rel="7">Python</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0064" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0064" href="/archive/?tag=JS" title="JS" rel="3">JS</a>
+        
+                <a data-sort="0064" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0064" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0065" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2024
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
