@@ -25,19 +25,3 @@ jobs:
         with:
           target_branch: 'gh-pages'
           token: ${{ secrets.TOKEN_GITHUB }}
-
-
-# 设置 Ruby 版本
-- uses: ruby/setup-ruby@v1
-with:
-ruby-version: 2.7 # 指定你需要的 Ruby 版本
-
-# 安装依赖
-- name: Install dependencies
-run: bundle install
-
-# 使用 Jekyll Action 部署
-- uses: helaili/jekyll-action@v2
-with:
-target_branch: 'gh-pages'
-token: ${{ secrets.TOKEN_GITHUB }}
