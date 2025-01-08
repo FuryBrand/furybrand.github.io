@@ -4,3 +4,4 @@ _site
 .gitpod.yml
 .theia/
 .jekyll-cache/
+_config.yml
