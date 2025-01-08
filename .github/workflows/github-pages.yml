@@ -14,7 +14,7 @@ jobs:
       # 设置 Ruby 版本
       - uses: ruby/setup-ruby@v1
         with:
-        ruby-version: 3.3.6 # 指定你需要的 Ruby 版本
+          ruby-version: 3.3.6 # 指定你需要的 Ruby 版本
 
       # 安装依赖
       - name: Install dependencies
