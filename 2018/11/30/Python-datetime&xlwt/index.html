@@ -65,7 +65,6 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 
@@ -314,21 +313,21 @@
 14
 15
 </pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">datetime</span>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="c1"># 获取当天
-</span><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'today'</span><span class="p">,</span><span class="n">today</span><span class="p">)</span> <span class="c1">#today 2018-12-01 00:39:21.844169
+</span><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">today</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">today</span><span class="sh">'</span><span class="p">,</span><span class="n">today</span><span class="p">)</span> <span class="c1">#today 2018-12-01 00:39:21.844169
 # 获取7天前
-</span><span class="k">print</span><span class="p">(</span><span class="s">'7 days befor:'</span><span class="p">,</span> <span class="n">today</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span> <span class="c1">#7 days befor: 2018-11-24 00:39:21.844169
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">7 days befor:</span><span class="sh">'</span><span class="p">,</span> <span class="n">today</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span> <span class="c1">#7 days befor: 2018-11-24 00:39:21.844169
 # 将字符串的时间转换为datetime
-</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="s">"2018-11-30 0:39:25"</span><span class="p">,</span> <span class="s">"%Y-%m-%d %H:%M:%S"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'date:'</span><span class="p">,</span><span class="n">date</span><span class="p">)</span> <span class="c1">#date: 2018-12-01 00:39:25
+</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">strptime</span><span class="p">(</span><span class="sh">"</span><span class="s">2018-11-30 0:39:25</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">%Y-%m-%d %H:%M:%S</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">date:</span><span class="sh">'</span><span class="p">,</span><span class="n">date</span><span class="p">)</span> <span class="c1">#date: 2018-12-01 00:39:25
 # 获取两个datetime的日期差
 </span><span class="n">days</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span> <span class="o">-</span> <span class="n">today</span><span class="p">).</span><span class="n">days</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'days'</span><span class="p">,</span> <span class="n">days</span><span class="p">)</span> <span class="c1"># days -2
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">days</span><span class="sh">'</span><span class="p">,</span> <span class="n">days</span><span class="p">)</span> <span class="c1"># days -2
 # 补充一个坑，因为数据库中获取的时间可能没有具体是小时分钟数，所以在和today计算日期差的时候可能会不准，可以通过如下方法将today中的小时分钟抹去。
-</span><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">today</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">today</span><span class="p">().</span><span class="nf">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></td>
 </tr></tbody></table></code></pre></div></div>
 
@@ -594,7 +593,7 @@ file.save('xixi.xls')
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright © For Love To Love 2024
+                    Copyright © For Love To Love 2025
                     <br>
                     Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">

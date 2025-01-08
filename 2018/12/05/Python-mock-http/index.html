@@ -68,7 +68,6 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 
@@ -366,44 +365,44 @@
 37
 38
 </pre></td>
-<td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span> <span class="p">,</span><span class="n">jsonify</span><span class="p">,</span><span class="n">request</span>
+<td class="rouge-code"><pre><span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">Flask</span> <span class="p">,</span><span class="n">jsonify</span><span class="p">,</span><span class="n">request</span>
 
 <span class="c1"># 1. 先准备一个设置设置成功的提示
 </span><span class="n">set_success_msg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">"code"</span> <span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s">"msg"</span> <span class="p">:</span> <span class="s">"返回值设置成功"</span>
+    <span class="sh">"</span><span class="s">code</span><span class="sh">"</span> <span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">msg</span><span class="sh">"</span> <span class="p">:</span> <span class="sh">"</span><span class="s">返回值设置成功</span><span class="sh">"</span>
 <span class="p">}</span>
 
 <span class="c1"># 2. 准备一个全局变量来保存设置的返回值
 </span><span class="k">global</span> <span class="n">msg</span>
 
 <span class="c1"># 3. 将该文件初始化为一个Flask的服务
-</span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+</span><span class="n">app</span> <span class="o">=</span> <span class="nc">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 <span class="c1"># 4. 修改服务配置。
 # 这个据说是为了应对中文乱码的问题，但是我实际使用并没有这个问题。详情：ttp://docs.jinkan.org/docs/flask/config.html
-</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'JSON_AS_ASCII'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="sh">'</span><span class="s">JSON_AS_ASCII</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="c1"># 5. 通过装饰器为服务添加路由，从而决定url。methods中决定了支持的请求方式。
-</span><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/getReturn'</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'POST'</span><span class="p">,</span><span class="s">'GET'</span><span class="p">])</span>
+</span><span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/getReturn</span><span class="sh">'</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">POST</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">GET</span><span class="sh">'</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">getReturn</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s">'POST'</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s">'我们只支持POST请求哦'</span>
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">POST</span><span class="sh">'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">'</span><span class="s">我们只支持POST请求哦</span><span class="sh">'</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">global</span> <span class="n">msg</span>
         <span class="k">return</span> <span class="n">msg</span>
 
-<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/setReturn'</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'POST'</span><span class="p">,</span><span class="s">'GET'</span><span class="p">])</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/setReturn</span><span class="sh">'</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">POST</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">GET</span><span class="sh">'</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">setReturn</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">msg</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'value'</span><span class="p">)</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">)</span>
     <span class="c1"># 由于通过values来获取的话，是拼在url上的，有最大长度限制，所以推荐使用form表单的形式进行提交和接收
 </span>    <span class="c1"># msg = request.form.get('value')
-</span>    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">set_success_msg</span><span class="p">)</span>
+</span>    <span class="k">return</span> <span class="nf">jsonify</span><span class="p">(</span><span class="n">set_success_msg</span><span class="p">)</span>
 
 <span class="c1"># 6. 以debug的方式运行程序，可以看到请求。
-</span><span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">'__main__'</span><span class="p">:</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></td>
 </tr></tbody></table></code></pre></div></div>
 
@@ -690,7 +689,7 @@ location / {
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright © For Love To Love 2024
+                    Copyright © For Love To Love 2025
                     <br>
                     Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">

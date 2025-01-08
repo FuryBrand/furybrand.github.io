@@ -5,9 +5,9 @@
     <description>Write down &amp; share my person notes. 记录和分享我的个人笔记</description>
     <link>http://furybrand.github.io//</link>
     <atom:link href="http://furybrand.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 20 Jul 2024 16:33:00 +0000</pubDate>
-    <lastBuildDate>Sat, 20 Jul 2024 16:33:00 +0000</lastBuildDate>
-    <generator>Jekyll v4.1.1</generator>
+    <pubDate>Wed, 08 Jan 2025 09:14:44 +0000</pubDate>
+    <lastBuildDate>Wed, 08 Jan 2025 09:14:44 +0000</lastBuildDate>
+    <generator>Jekyll v4.3.4</generator>
     
       <item>
         <title>FFmpeg-使用笔记</title>
@@ -40,9 +40,9 @@
 &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sudo&lt;/span&gt; ffmpeg -i /home/temp/20231021/ch09_20231017212736_3_0_2504.mp4 -ss &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:24:11 -to &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt;:25:49 -c:v copy -c:a copy &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.mp4
 &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sudo&lt;/span&gt; ffmpeg -f concat -i file -c copy /data3/11011318471320206009.mp4
 &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;cat&lt;/span&gt; file
-&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; '1.mp4'
-&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; '2.mp4'
-&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; '3.mp4'
+&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; &apos;1.mp4&apos;
+&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; &apos;2.mp4&apos;
+&lt;span class=&quot;k&quot;&gt;file&lt;/span&gt; &apos;3.mp4&apos;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;场景二视频转码h265&quot;&gt;场景二：视频转码H.265&lt;/h2&gt;
@@ -838,8 +838,8 @@ function jisuanOne(x){
             document.getElementById(&quot;zuizhongshouyi&quot;).value =zuizhongshouyi
             console.log(zuizhongshouyi);
         }else{
-            var splitArr = String(zuizhongshouyi).split('.');
-            document.getElementById(&quot;zuizhongshouyi&quot;).value =splitArr[0]+'.'+splitArr[1].substr(0,3);
+            var splitArr = String(zuizhongshouyi).split(&apos;.&apos;);
+            document.getElementById(&quot;zuizhongshouyi&quot;).value =splitArr[0]+&apos;.&apos;+splitArr[1].substr(0,3);
             console.log(zuizhongshouyi);
         }
     }else if(x==2){
@@ -881,7 +881,7 @@ function jisuanFour(x){
             income = (gain + earning) * monthYield
         }while(yuezhichu &gt; income)
         $(&quot;.yueshouyi&quot;).val(income.toFixed(2));
-        $(&quot;.time&quot;).val(Math.floor(month / 12)+'年'+month % 12+'个月');
+        $(&quot;.time&quot;).val(Math.floor(month / 12)+&apos;年&apos;+month % 12+&apos;个月&apos;);
     }else if(x==2){
         document.getElementsByClassName(&quot;benjin&quot;)[0].value = &quot;&quot;;
         document.getElementsByClassName(&quot;dingtoujine&quot;)[0].value = &quot;&quot;;
@@ -1026,11 +1026,11 @@ function jisuanFour(x){
 &lt;script type=&quot;text/javascript&quot;&gt;
     function count() {
         var testCase = document.getElementById(&quot;testCase&quot;).value;
-        var count_n = getCharCount(testCase, '-n');
-        var count_f = getCharCount(testCase, '-f');
-        var count_p = getCharCount(testCase, '-p');
-        var count_b = getCharCount(testCase, '-b');
-        var count_na = getCharCount(testCase, '-NA');
+        var count_n = getCharCount(testCase, &apos;-n&apos;);
+        var count_f = getCharCount(testCase, &apos;-f&apos;);
+        var count_p = getCharCount(testCase, &apos;-p&apos;);
+        var count_b = getCharCount(testCase, &apos;-b&apos;);
+        var count_na = getCharCount(testCase, &apos;-NA&apos;);
         document.getElementById(&quot;underline_n&quot;).innerHTML = count_n;
         document.getElementById(&quot;underline_f&quot;).innerHTML = count_f;
         document.getElementById(&quot;underline_p&quot;).innerHTML = count_p;
@@ -1040,13 +1040,13 @@ function jisuanFour(x){
         var count_all_p_na = count_p + count_na;
         document.getElementById(&quot;underline_all&quot;).innerHTML = count_all;
         document.getElementById(&quot;underline_all_p&quot;).innerHTML = count_all_p_na;
-        document.getElementById(&quot;underline_all_p_na_rate&quot;).innerHTML = getPercentage(count_all_p_na, count_all) + '%';
-        document.getElementById(&quot;underline_all_b_rate&quot;).innerHTML = getPercentage(count_b, count_all) + '%';
-        document.getElementById(&quot;underline_all_f_rate&quot;).innerHTML = getPercentage(count_f, count_all) + '%';
-        document.getElementById(&quot;underline_all_n_rate&quot;).innerHTML = getPercentage(count_n, count_all) + '%';
+        document.getElementById(&quot;underline_all_p_na_rate&quot;).innerHTML = getPercentage(count_all_p_na, count_all) + &apos;%&apos;;
+        document.getElementById(&quot;underline_all_b_rate&quot;).innerHTML = getPercentage(count_b, count_all) + &apos;%&apos;;
+        document.getElementById(&quot;underline_all_f_rate&quot;).innerHTML = getPercentage(count_f, count_all) + &apos;%&apos;;
+        document.getElementById(&quot;underline_all_n_rate&quot;).innerHTML = getPercentage(count_n, count_all) + &apos;%&apos;;
     }
     function getCharCount(str, char) {
-        var regex = new RegExp(char, 'g'); // 使用g表示整个字符串都要匹配
+        var regex = new RegExp(char, &apos;g&apos;); // 使用g表示整个字符串都要匹配
         var result = str.match(regex);          //match方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
         var count = !result ? 0 : result.length;
         return count;

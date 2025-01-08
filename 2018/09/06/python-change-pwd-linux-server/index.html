@@ -65,7 +65,6 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 
@@ -322,39 +321,6 @@
 11
 12
 13
-</pre></td>
-<td class="rouge-code"><pre>import paramiko
-import sys
-import os
-
-# 获取服务器配置文件的文件名
-file_name = input("请输入文件名（包含后缀如'servers.txt'），若不输入则默认读取'servers.txt'中的服务器信息：")
-if file_name == '':
-    file_name = sys.path[0]+'\servers.txt'
-else:
-    file_name = sys.path[0]+'
-
-## servers.txt
-
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
-<p>192.168.158.110 22 root testpwd110 admin admin@fuza1.
-192.168.158.111 22 root testpwd111 admin admin@fuza1.
-192.168.158.112 22 root testpwd112 admin admin@fuza1.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
 14
 15
 16
@@ -397,19 +363,17 @@ else:
 53
 54
 55
-56
 </pre></td>
-<td class="rouge-code"><pre>主要分了6个字段，`服务器ip地址`，`ssh端口`，`root`，`root的用户名`，`想要修改密码的用户`，`用户对应的密码`。每个字段用空格隔开。
+<td class="rouge-code"><pre>import paramiko
+import sys
+import os
 
-## 写在最后
-
-程序已经打包好了。[下载](http://furybrand.github.io/assets/2018/2018-09-06-python-change-pwd-linux-server/python-change-pwdVer0.2.zip)
-
-为了不瞎眼，必须要写个脚本来实现。主要收到这两篇博文的启发,谢谢！
-
-[鸣谢1](https://www.cnblogs.com/rainowl-ymj/p/7247287.html)
-[鸣谢2](http://blog.51cto.com/weixiaoxin/2063323)
-+file_name
+# 获取服务器配置文件的文件名
+file_name = input("请输入文件名（包含后缀如'servers.txt'），若不输入则默认读取'servers.txt'中的服务器信息：")
+if file_name == '':
+    file_name = sys.path[0]+'\\servers.txt'
+else:
+    file_name = sys.path[0]+'\\'+file_name
 
 # 判断文件是否存在
 if os.path.exists(file_name):
@@ -676,7 +640,7 @@ input("执行完毕，回车后关闭当前窗口")
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright © For Love To Love 2024
+                    Copyright © For Love To Love 2025
                     <br>
                     Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
