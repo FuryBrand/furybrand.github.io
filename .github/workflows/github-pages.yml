@@ -3,25 +3,31 @@ name: Build and deploy Jekyll site to GitHub Pages
 on:
   push:
     branches:
-      - master # or master before October 2020
+      - master # 或者你的默认分支
 
 jobs:
-  github-pages:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       # 设置 Ruby 版本
-      - uses: ruby/setup-ruby@v1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.6 # 指定你需要的 Ruby 版本
+          ruby-version: '3.3.6'
 
       # 安装依赖
       - name: Install dependencies
         run: bundle install
 
+      # 构建 Jekyll 站点
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
 
-      - uses: helaili/jekyll-action@v2
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          target_branch: 'gh-pages'
-          token: ${{ secrets.TOKEN_GITHUB }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
