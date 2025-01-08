@@ -7,3 +7,10 @@ https://du33169.tech/posts/notes/installcode-serverontermux/#%E7%AC%AC%E4%B8%80%
 
 ## 1.3.安装jekyll的运行环境
 https://klpbbs.com/thread-139616-1-1.html
+
+# 2.运行
+
+```shell
+code-server
+bundle exec jekyll serve
+```
