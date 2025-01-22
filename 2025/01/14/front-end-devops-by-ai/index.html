@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Write down &amp; share my person notes. 记录和分享我的个人笔记">
+    <meta name="keywords" content="furybrand, notes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="xin法-实战前端工程维护 - For Love To Love">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  组内现在没有前端同学，之前的工程是从其他组协调前端同学支持开发的。招聘一直不顺利，导致现在项目二期的时候又去借人，然后由于框架不同，又起了一个新工程……如果再这么搞，后面就是屎山代码无疑了。而且协调资源这个事情不牢靠，得遵循人家的排期和优先级。所以基于底线思维，我准备熟悉一下前端，尝试在AI的帮助下自己修改逻辑。本次的需求非常简单，修改一个后台跳转按钮的展示逻辑，如果是管理员就展示该按...">
+    
+    <meta property="article:published_time" content="2025-01-14T19:33:00Z">
+    
+    
+    <meta property="article:author" content="Steve">
+    
+    
+    <meta property="article:tag" content="技术相关">
+    
+    <meta property="article:tag" content="JS">
+    
+    <meta property="article:tag" content="xin实践">
+    
+    
+    <meta property="og:image" content="http://furybrand.github.io//img/avatar.jpg">
+    <meta property="og:url" content="http://furybrand.github.io//2025/01/14/front-end-devops-by-ai/">
+    <meta property="og:site_name" content="For Love To Love">
+    
+    <title>xin法-实战前端工程维护 - For Love To Love</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://furybrand.github.io//2025/01/14/front-end-devops-by-ai/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">For Love To Love</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="search-icon">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关">技术相关</a>
+                        
+                        <a class="tag" href="/archive/?tag=JS" title="JS">JS</a>
+                        
+                        <a class="tag" href="/archive/?tag=xin%E5%AE%9E%E8%B7%B5" title="xin实践">xin实践</a>
+                        
+                    </div>
+                    <h1>xin法-实战前端工程维护</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Steve on January 14, 2025</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<blockquote>
+  <p>组内现在没有前端同学，之前的工程是从其他组协调前端同学支持开发的。招聘一直不顺利，导致现在项目二期的时候又去借人，然后由于框架不同，又起了一个新工程……如果再这么搞，后面就是屎山代码无疑了。而且协调资源这个事情不牢靠，得遵循人家的排期和优先级。所以基于底线思维，我准备熟悉一下前端，尝试在AI的帮助下自己修改逻辑。本次的需求非常简单，修改一个后台跳转按钮的展示逻辑，如果是管理员就展示该按钮。这里做一个笔记，好帮助组内和其他遭遇类似处境的同学。</p>
+</blockquote>
+
+<h2 id="1-确认该前端工程所使用的技术栈">1. 确认该前端工程所使用的技术栈</h2>
+
+<p>我这个工程有一个简单的<code class="language-plaintext highlighter-rouge">README.md</code>，节省了我们该步骤的时间。如果没有这些，可以尝试通过工程内的目录结构询问AI，得到技术栈的信息。</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td>
+<td class="rouge-code"><pre><span class="gh"># Vue 3 + TypeScript + Vite</span>
+
+This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 <span class="sb">`&lt;script setup&gt;`</span> SFCs, check out the <span class="p">[</span><span class="nv">script setup docs</span><span class="p">](</span><span class="sx">https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup</span><span class="p">)</span> to learn more.
+
+<span class="gu">## Recommended Setup</span>
+<span class="p">
+-</span> <span class="p">[</span><span class="nv">VS Code</span><span class="p">](</span><span class="sx">https://code.visualstudio.com/</span><span class="p">)</span> + <span class="p">[</span><span class="nv">Vue - Official</span><span class="p">](</span><span class="sx">https://marketplace.visualstudio.com/items?itemName=Vue.volar</span><span class="p">)</span> <span class="p">(</span><span class="sx">previously</span> Volar) and disable Vetur
+<span class="p">
+-</span> Use <span class="p">[</span><span class="nv">vue-tsc</span><span class="p">](</span><span class="sx">https://github.com/vuejs/language-tools/tree/master/packages/tsc</span><span class="p">)</span> for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+
+<span class="gu">### Get Start</span>
+
+node -v &gt;=18
+
+npm install pnpm
+
+pnpm install
+
+pnpm run dev
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>基于上述的<code class="language-plaintext highlighter-rouge">README.md</code>，在AI的帮助下，我们了解到了一些关键信息。该工程使用了Vue3和TypeScript技术，并且使用Vite作为编译打包工具。开发工具使用的是VS Code + Vue插件。我们需要先安装node，然后通过node的包管理工具npm安装pnpm，然后pnpm会基于<code class="language-plaintext highlighter-rouge">package.json</code>、<code class="language-plaintext highlighter-rouge">pnpm-lock.yaml</code>文件安装相关依赖。最后用<code class="language-plaintext highlighter-rouge">pnpm run dev</code>命令，就可以在本地启动了。</p>
+
+<h2 id="2-准备系统环境并了解前端工程如何启动">2. 准备系统环境并了解前端工程如何启动</h2>
+
+<ul>
+  <li>
+<a href="https://nodejs.org/zh-cn">Node.js官网</a>下载安装包并安装。</li>
+  <li>命令行执行<code class="language-plaintext highlighter-rouge">npm install pnpm</code>
+</li>
+  <li>命令行执行<code class="language-plaintext highlighter-rouge">pnpm install</code>
+</li>
+  <li>命令行执行<code class="language-plaintext highlighter-rouge">pnpm run dev</code>
+</li>
+</ul>
+
+<p>看似很简单，但是其实每一步都可能有坑，但是不要紧，在思路整体明确，大方向确定的前提下，只需要一个一个问题去解决就好了。AI是个博学的好老师，但是他也有他的局限性，当前主流的与LLM交互的方式还是文本。对比人类他虽然有海量的知识，但是他缺少信息收集的媒介，在沟通时对问题掌握的信息就不全，更何况他还可能有“幻觉”。所以现阶段人类和AI搭配才能极大的提升生产力。</p>
+
+<p>扯远了，回来，我当时在执行<code class="language-plaintext highlighter-rouge">pnpm run dev</code>的时候报错如下。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre>liutianyu@ZB-BL657NBY MINGW64 /x/coding/Edge <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>pnpm run dev
+
+<span class="o">&gt;</span> edge@1.0.0 dev X:<span class="se">\c</span>oding<span class="se">\E</span>dge
+<span class="o">&gt;</span> vite
+
+error when starting dev server:
+Error: listen EADDRNOTAVAIL: address not available 36.110.181.172:8080
+    at Server.setupListenHandle <span class="o">[</span>as _listen2] <span class="o">(</span>node:net:1915:21<span class="o">)</span>      
+    at listenInCluster <span class="o">(</span>node:net:1994:12<span class="o">)</span>
+    at GetAddrInfoReqWrap.callback <span class="o">(</span>node:net:2203:7<span class="o">)</span>
+    at GetAddrInfoReqWrap.onlookupall <span class="o">[</span>as oncomplete] <span class="o">(</span>node:dns:132:8<span class="o">)</span>
+ ELIFECYCLE  Command failed with <span class="nb">exit </span>code 1.
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>尝试在代码库中寻找<code class="language-plaintext highlighter-rouge">36.110.181.172</code>无果。于是我递进式的问了以下几个问题。</p>
+
+<pre><code class="language-txt">----------------------------------------------------------------------------------------
+## 对话1：执行pnpm run dev命令后，系统自动做了哪些动作
+
+## 回答：
+
+执行 pnpm run dev 命令后，系统会自动执行以下动作：
+
+读取 package.json 文件：
+
+pnpm run dev 会首先查找项目根目录下的 package.json 文件，以找到与 dev 相关的脚本命令。
+查找 scripts 字段：
+
+在 package.json 文件中，pnpm 会查找 scripts 字段下的 dev 脚本。这个字段通常定义了一系列可以通过 pnpm run &lt;script&gt; 执行的命令。
+执行指定的命令：
+
+一旦找到 dev 脚本，pnpm 会执行该脚本中定义的命令。这通常是启动开发服务器的命令，例如 vite、webpack-dev-server、next dev 等，具体取决于项目的构建工具和配置。
+例如，如果 dev 脚本是 "vite", 那么 pnpm run dev 实际上是在执行 vite 命令，启动 Vite 开发服务器。
+启动开发环境：
+
+根据 dev 脚本的定义，通常会启动一个开发服务器。这可能包括以下动作：
+编译和打包源代码。
+监听文件变化并进行热重载（Hot Module Replacement）。
+在浏览器中打开项目的开发地址（通常是 http://localhost:3000 或其他端口）。
+处理依赖：
+
+在执行过程中，pnpm 可能会解析和加载项目的依赖，确保所有必要的包都可用。
+如果开发服务器需要的依赖没有安装，通常会出现错误提示。
+输出日志信息：
+
+pnpm 和开发服务器会在终端中输出相关的日志信息，包括编译进度、错误信息、警告以及开发服务器的运行地址等。
+通过这些步骤，pnpm run dev 为开发者提供了一个实时更新的开发环境，便于进行代码编写和调试。具体的行为可能会因项目的配置和使用的工具而有所不同。
+
+----------------------------------------------------------------------------------------
+## 对话2：package.json中的scripts如下：
+
+“scripts”: {
+“dev”: “vite”,
+“build”: “vue-tsc &amp;&amp; vite build”,
+“preview”: “vite preview”,
+“prepare”: “husky”,
+“test”: “vitest”,
+“test-unit”: “vitest -c vitest.unit.config.ts”,
+“lint:eslint”: “eslint --cache --max-warnings 0 "{src,mock}//*.{vue,js,ts,tsx}" --fix",
+“lint:prettier”: "prettier --write "src//.{js,ts,json,tsx,css,less,scss,vue,html,md}"",
+“lint:stylelint”: "stylelint --cache --fix "src/**/.{vue,css,scss,postcss,less}" --cache --cache-location node_modules/.cache/stylelint/”,
+“lint”: “pnpm lint:eslint &amp;&amp; pnpm lint:prettier &amp;&amp; pnpm lint:stylelint”
+},
+
+## 回答：
+
+在 package.json 文件中，scripts 字段定义了一系列可以通过 pnpm run &lt;script&gt; 来执行的命令。这些脚本用于简化常见的开发任务。让我们逐一了解你提供的这些脚本的作用：
+
+dev: "vite"
+
+启动 Vite 开发服务器。运行 pnpm run dev 时，项目会在开发模式下启动，支持热重载，方便开发和调试。
+build: "vue-tsc &amp;&amp; vite build"
+
+首先运行 vue-tsc 进行 TypeScript 类型检查，确保代码没有类型错误。
+然后运行 vite build，使用 Vite 进行生产环境的构建，将项目打包为可部署的静态文件。
+preview: "vite preview"
+
+启动一个本地服务器来预览生产构建的内容。这通常用于在部署之前验证构建结果。
+prepare: "husky"
+
+用于初始化 Husky，以便在项目中设置 Git 钩子。通常在安装依赖后自动执行。
+test: "vitest"
+
+运行 Vitest 测试框架，执行项目中的测试用例。
+test-unit: "vitest -c vitest.unit.config.ts"
+
+使用指定的配置文件 vitest.unit.config.ts 运行 Vitest，通常用于单元测试。
+lint:eslint: "eslint --cache --max-warnings 0 \"{src,mock}/**/*.{vue,js,ts,tsx}\" --fix"
+
+使用 ESLint 对指定目录中的文件进行语法检查和修复。
+--cache：启用缓存以加快后续运行速度。
+--max-warnings 0：将警告视为错误。
+--fix：自动修复可以修复的问题。
+lint:prettier: "prettier --write \"src/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\""
+
+使用 Prettier 格式化指定目录中的文件。
+lint:stylelint: "stylelint --cache --fix \"src/**/*.{vue,css,scss,postcss,less}\" --cache --cache-location node_modules/.cache/stylelint/"
+
+使用 Stylelint 检查和修复样式文件。
+--cache：启用缓存。
+--fix：自动修复可以修复的问题。
+--cache-location：指定缓存位置。
+lint: "pnpm lint:eslint &amp;&amp; pnpm lint:prettier &amp;&amp; pnpm lint:stylelint"
+
+依次运行 ESLint、Prettier 和 Stylelint，对项目进行全面的代码质量检查和格式化。
+这些脚本帮助开发者自动化常见的开发任务，提高开发效率和代码质量。根据项目需求，可以自定义和扩展这些脚本。
+
+----------------------------------------------------------------------------------------
+## 对话3：vite的启动配置文件是什么
+
+## 回答：
+Vite 的启动配置文件通常是 vite.config.js 或 vite.config.ts，具体取决于你使用的是 JavaScript 还是 TypeScript。这个配置文件用于定义 Vite 的各种配置选项，包括开发服务器设置、构建选项、插件配置等。
+
+典型的 Vite 配置文件结构
+以下是一个简单的 vite.config.js 示例：
+
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+  plugins: [vue()],
+  server: {
+    host: 'localhost',
+    port: 3000,
+    open: true, // 自动打开浏览器
+  },
+  build: {
+    outDir: 'dist', // 输出目录
+  },
+});
+
+如果你使用 TypeScript，可以使用 vite.config.ts：
+
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+  plugins: [vue()],
+  server: {
+    host: 'localhost',
+    port: 3000,
+    open: true,
+  },
+  build: {
+    outDir: 'dist',
+  },
+});
+
+配置文件的常用选项
+plugins: 用于配置 Vite 插件，例如 Vue、React 等框架插件。
+server: 配置开发服务器选项，如 host、port、open（自动打开浏览器）等。
+build: 配置构建选项，包括 outDir（输出目录）、rollupOptions（自定义 Rollup 选项）等。
+resolve: 配置模块解析选项，如别名设置。
+css: 配置 CSS 相关选项，如预处理器设置。
+使用 Vite 配置文件
+默认路径: Vite 会在项目根目录下自动寻找 vite.config.js 或 vite.config.ts。
+自定义路径: 如果你的配置文件不在默认路径，可以使用 vite --config &lt;path&gt; 来指定配置文件位置。
+这些配置选项可以根据项目的具体需求进行调整，以实现更复杂的功能和优化。Vite 的配置文件通过 defineConfig 函数来定义，这样可以获得更好的类型提示和错误检查，特别是在使用 TypeScript 时。
+
+</code></pre>
+
+<p>然后我在<code class="language-plaintext highlighter-rouge">vite.config.ts</code>中找到了如下配置：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td>
+<td class="rouge-code"><pre><span class="err">server:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">host:</span><span class="w"> </span><span class="err">'local.xxx.com'</span><span class="p">,</span><span class="w">
+    </span><span class="err">port:</span><span class="w"> </span><span class="mi">8080</span><span class="p">,</span><span class="w">
+    </span><span class="err">open:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="err">proxy:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">'^/camera/|^/event/|^/ws/|^/user/':</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">target:</span><span class="w"> </span><span class="err">'http://</span><span class="mf">192.168</span><span class="err">.</span><span class="mf">0.129</span><span class="err">:</span><span class="mi">8000</span><span class="err">'</span><span class="p">,</span><span class="w">
+        </span><span class="err">changeOrigin:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="err">ws:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="err">headers:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="err">referer:</span><span class="w"> </span><span class="err">'http://</span><span class="mf">192.168</span><span class="err">.</span><span class="mf">0.129</span><span class="err">:</span><span class="mi">8000</span><span class="err">'</span><span class="p">,</span><span class="w">
+          </span><span class="err">origin:</span><span class="w"> </span><span class="err">'http://</span><span class="mf">192.168</span><span class="err">.</span><span class="mf">0.129</span><span class="err">:</span><span class="mi">8000</span><span class="err">'</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>然后尝试<code class="language-plaintext highlighter-rouge">ping local.xxx.com</code>发现可达，且地址就是先前的<code class="language-plaintext highlighter-rouge">36.110.181.172</code>。那么就很明确了，估计前端同事在本地是有配置host的，那么解决方案就是：</p>
+
+<p>A. 修改配置文件中的host为<code class="language-plaintext highlighter-rouge">127.0.0.1</code>或者<code class="language-plaintext highlighter-rouge">localhost</code><br>
+B. 配置本机的host文件，将local.xxx.com指向<code class="language-plaintext highlighter-rouge">127.0.0.1</code></p>
+
+<p>我选择了B选项，毕竟不修改代码、尽量贴近原始的开发环境显然出错的风险较低。</p>
+
+<h2 id="3-学习前端工程的目录结构并尝试寻找需要修改逻辑的位置">3. 学习前端工程的目录结构并尝试寻找需要修改逻辑的位置</h2>
+
+<p>事后来看，这部分消耗的时间几乎是最多的，我用了半天左右的时间研究代码，因为完全没有前端经验，所以阅读起来很费事。感觉本质是不具备前端工程的思维，这部分没有办法，只能硬嗑。下面记录下我当时的思路。</p>
+
+<p>首先使用<code class="language-plaintext highlighter-rouge">dir /b</code>命令导出工程的根目录，然后和AI对话，学习每个文件夹的作用。为了方便，我直接把作用标记在下面了。</p>
+<pre><code class="language-txt">X:\coding\Edge&gt;dir /b    
+.eslintrc.cjs   `ESLint 配置文件，用于定义代码检查规则。`
+.gitignore  `Git 忽略文件，指定哪些文件或文件夹不应被 Git 版本控制。`
+.husky  `Husky 配置文件夹，用于 Git 钩子管理。`
+.prettierignore `指定 Prettier 格式化时应忽略的文件。`
+.prettierrc.cjs `Prettier 配置文件，用于代码格式化的规则。`
+.stylelintrc.json `Stylelint 配置文件，用于 CSS 的代码检查。`
+.vscode `VS Code 配置文件夹，通常包含项目特定的编辑器设置。`
+cert    `可能存放证书文件，通常用于 HTTPS 开发环境。`
+components.d.ts `TypeScript 的类型声明文件，可能是自动生成的，用于组件类型信息。`
+dist    `构建输出文件夹，存放生产环境的打包文件。`
+index.html  `项目的入口 HTML 文件。`
+node_modules    `存放通过 npm 或 pnpm 安装的依赖包。`
+package.json    `项目的元数据文件，包含项目的依赖、脚本和其他配置信息。`
+pnpm-lock.yaml  `pnpm 的锁定文件，确保项目依赖的一致性。`
+postcss.config.js   `PostCSS 的配置文件，用于处理 CSS。`
+public  `用于存放静态资源的文件夹，直接复制到构建输出中。`
+README.md   `项目的自述文件，通常包含项目的简介、安装和使用说明。`
+src `项目的源代码文件夹，包含应用的主要代码。`
+stats.html  `可能用于性能分析或构建报告的 HTML 文件。`
+tailwind.config.js  `Tailwind CSS 的配置文件，用于自定义 Tailwind 的主题和插件。`
+tsconfig.json   `TypeScript 配置文件，定义 TypeScript 编译器的选项。`
+tsconfig.node.json  `通常是为 Node.js 环境定制的 TypeScript 配置。`
+vite.config.ts  `Vite 的配置文件，用于定义构建和开发服务器的设置。`
+vite.config.ts.timestamp-1724318016989-dd586d9058247.mjs    ``
+vitest.config.ts    `用于 Vitest 测试框架的配置文件。`
+vitest.unit.config.ts   `用于 Vitest 测试框架的配置文件。`
+</code></pre>
+
+<p>ok，那么源代码应该在src文件夹中。</p>
+<pre><code class="language-txt">X:\coding\Edge&gt;cd src 
+
+X:\coding\Edge\src&gt;dir /b
+App.vue `这是 Vue.js 应用的根组件。通常包含应用的基本布局和路由出口（router-view）。`
+assets  `存放静态资源，如图像、字体等。通常会通过 Webpack 或 Vite 进行处理和打包。`
+auto-imports.d.ts   `自动生成的类型声明文件，通常用于自动导入功能的类型支持。这可能与某些插件（如 unplugin-auto-import）相关。`
+components  `存放可复用的 Vue 组件。组件是应用的基本构建块，通常用于封装 UI 元素和逻辑。`
+layout  `存放应用的布局组件。这些组件通常定义应用的整体结构，如导航栏、侧边栏、页脚等。`
+locales `存放国际化（i18n）资源文件，通常是 JSON 或 JavaScript 文件，用于多语言支持。`
+main.ts `应用的入口文件。在这里初始化 Vue 实例，注册全局组件、插件，并挂载到 DOM。`
+router  `存放路由配置文件。通常包含一个定义应用路由的文件（如 index.ts），使用 Vue Router 来管理页面导航。`
+services    `存放与业务逻辑相关的服务代码，通常用于与后端 API 交互、数据处理等。`
+stores  `存放状态管理相关文件，通常使用 Vuex 或 Pinia 来管理应用的全局状态。`
+styles  `存放全局样式文件，如 CSS、SCSS 等。可以包含应用的主题、变量和混入等。`
+types   `存放 TypeScript 类型定义文件，通常用于定义接口、类型别名和其他类型相关的内容。`
+utils   `存放工具函数和辅助库。这些函数通常是与业务无关的通用功能。`
+views   `存放页面级组件，这些组件通常对应于路由定义的页面。`
+vite-env.d.ts   `Vite 的环境变量类型声明文件，通常用于扩展 TypeScript 对 Vite 特定环境变量的支持。`
+__tests__   `存放测试文件。通常使用 Jest、Vitest 或其他测试框架进行单元测试、集成测试等。`
+</code></pre>
+
+<p>接下来就是死磕的重点，太长了我就不附对话记录了，重点说下问的思路。</p>
+<ul>
+  <li>问AI页面展示是通过哪些文件组合展示出来的</li>
+  <li>然后把可能的文件粘给AI让他帮忙做解读</li>
+  <li>如果解读的太粗略，就请AI用语法的维度做更细致的解读</li>
+</ul>
+
+<p>这样一点点抽丝剥茧，就可以定位到要修改的位置了。我大致记录下自己通过这个经历后，对前端工程的一个初步认识。</p>
+
+<p>关于文件的具体阅读顺序：</p>
+<ol>
+  <li>src\main.ts，是初始化文件，在我手上的工程中设置和初始化一个 Vue.js 应用程序，包括状态管理、路由和样式。文件中用到了’./router’、’./App.vue’。使用App.vue加载了touter</li>
+  <li>src\App.vue，设置了应用程序的全局配置，包括语言包和自定义的本地化配置，并使用 Element Plus 的组件来实现。</li>
+  <li>src\router\index.ts，router文件夹下只有这一个文件，这个文件整体上定义了一个基本的路由系统，并提供了动态添加路由和全局路由守卫的机制。实际在这里发现了一些视图组件<code class="language-plaintext highlighter-rouge">*.vue</code>和一个用户管理模块<code class="language-plaintext highlighter-rouge">import { useUser } from '@/stores'</code>
+</li>
+  <li>由于我是要修改一个按钮的展示逻辑，所以就在组件中继续挖，找到了<code class="language-plaintext highlighter-rouge">SideBar.vue</code>。</li>
+</ol>
+
+<p>关于VUE3的一些特性：</p>
+<ul>
+  <li>响应式数据：在 Vue.js 中，响应式数据是指当数据发生变化时，相关的视图会自动更新的数据。这种机制允许开发者专注于业务逻辑和数据管理，而不需要手动操作 DOM 来更新视图。</li>
+  <li>生命周期钩子：Vue 3 的生命周期钩子包括 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeUnmount、unmounted 等，用于在组件的不同阶段执行特定的逻辑。（用大白话讲就是页面元素被触发时会同步触发我们写好的逻辑）</li>
+</ul>
+
+<h2 id="4-尝试修改逻辑并测试代码">4. 尝试修改逻辑并测试代码</h2>
+
+<p><code class="language-plaintext highlighter-rouge">SideBar.vue</code>中定义了我要修改的按钮的展示逻辑，当前是通过userStore.url是否为空决定的。</p>
+
+<p>此处引入一个新概念<code class="language-plaintext highlighter-rouge">Pinia</code>：</p>
+<ul>
+  <li>Pinia 是 Vue 3 中的一种状态管理库，它被设计为 Vuex 的替代方案，提供了一种更现代、更轻量级的方式来管理应用程序的状态。</li>
+  <li>Pinia 中最核心的概念是 Store。Store 是 Pinia 的基础单元，用于管理应用程序的状态。每个 store 都是一个独立的模块，可以包含状态（state）、派生状态（getters）和改变状态的方法（actions）。</li>
+</ul>
+
+<p>由于需求是我需要用登录系统的用户角色判断一个按钮是否展示，所以去看了下userStore的属性，然后在User相关代码里新增了一行<code class="language-plaintext highlighter-rouge">console.log(role, site, userid, username, configurl)</code>。</p>
+
+<p>使用<code class="language-plaintext highlighter-rouge">pnpm run dev</code>启动工程尝试调试，发现了role的具体值，然后就是改原来的逻辑，将userStore.url的判断改为userStore.role的判断。</p>
+
+<p>再次测试，ok，没问题</p>
+
+<h2 id="5-学习前端工程如何打包">5. 学习前端工程如何打包</h2>
+
+<p>直接问到了答案，就一个命令<code class="language-plaintext highlighter-rouge">pnpm run build</code>就可以。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre></td>
+<td class="rouge-code"><pre>liutianyu@ZB-BL657NBY MINGW64 /x/coding/Edge <span class="o">(</span>master<span class="o">)</span>
+<span class="nv">$ </span>pnpm run build
+
+<span class="o">&gt;</span> edge@1.0.0 build X:<span class="se">\c</span>oding<span class="se">\E</span>dge
+<span class="o">&gt;</span> vue-tsc <span class="o">&amp;&amp;</span> vite build
+
+vite v5.2.11 building <span class="k">for </span>production...
+transforming <span class="o">(</span>7<span class="o">)</span> src<span class="se">\r</span>outer<span class="se">\i</span>ndex.tsBrowserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should <span class="k">do </span>it regularly: https://github.com/browserslist/update-db#readme
+✓ 1615 modules transformed.
+dist/assets/pinia-legacy-AaEUKLuD.js             3.74 kB │ <span class="nb">gzip</span>:   1.87 kB
+dist/assets/@vueuse/core-legacy-BtJbpWYn.js      3.87 kB │ <span class="nb">gzip</span>:   1.91 kB
+dist/assets/index-legacy-Bu8rlQgE.js             6.26 kB │ <span class="nb">gzip</span>:   3.13 kB
+dist/assets/index-legacy-B2FL9NkE.js             9.81 kB │ <span class="nb">gzip</span>:   4.22 kB
+dist/assets/vue-router-legacy-DjPqxA3w.js       22.77 kB │ <span class="nb">gzip</span>:   9.01 kB
+dist/assets/manual-monitor-legacy-21OfHFM-.js   34.71 kB │ <span class="nb">gzip</span>:  10.55 kB
+dist/assets/index-legacy-Bx7DxTqD.js            41.71 kB │ <span class="nb">gzip</span>:   9.42 kB
+dist/assets/polyfills-legacy-CloPzPML.js        47.34 kB │ <span class="nb">gzip</span>:  18.66 kB
+dist/assets/vue-legacy-rvlWBwQr.js             105.20 kB │ <span class="nb">gzip</span>:  39.96 kB
+dist/assets/video-monitor-legacy-DdGQ5CQs.js   364.61 kB │ <span class="nb">gzip</span>:  93.13 kB
+dist/assets/element-plus-legacy-BrGRby7B.js    433.86 kB │ <span class="nb">gzip</span>: 137.17 kB
+dist/index.html                            2.86 kB │ <span class="nb">gzip</span>:   1.14 kB
+dist/assets/img-DGGNUpYF.png              11.50 kB
+dist/assets/login_bg-CWzTXAxG.webp       232.57 kB
+dist/assets/index-CrpbdW4S.css             1.33 kB │ <span class="nb">gzip</span>:   0.60 kB
+dist/assets/index-M5Ong37e.css             1.41 kB │ <span class="nb">gzip</span>:   0.57 kB
+dist/assets/index-9V8B37-U.css             6.22 kB │ <span class="nb">gzip</span>:   1.99 kB
+dist/assets/manual-monitor-CBT3uaAD.css   14.27 kB │ <span class="nb">gzip</span>:   3.15 kB
+dist/assets/video-monitor-4QQwoTR2.css   140.80 kB │ <span class="nb">gzip</span>:  20.94 kB
+dist/assets/pinia-DzOI_rpy.js              3.66 kB │ <span class="nb">gzip</span>:   1.88 kB
+dist/assets/@vueuse/core-J9Te5kc0.js       3.79 kB │ <span class="nb">gzip</span>:   1.91 kB
+dist/assets/index-DQlIsuG9.js              4.76 kB │ <span class="nb">gzip</span>:   2.51 kB
+dist/assets/index-B-omhTdP.js              5.49 kB │ <span class="nb">gzip</span>:   2.98 kB
+dist/assets/manual-monitor-DCJul52a.js    20.59 kB │ <span class="nb">gzip</span>:   7.68 kB
+dist/assets/vue-router-0Z6UGjoa.js        23.12 kB │ <span class="nb">gzip</span>:   9.43 kB
+dist/assets/index-Bwt9aLT2.js             40.17 kB │ <span class="nb">gzip</span>:   8.77 kB
+dist/assets/vue-BUczWptF.js              106.70 kB │ <span class="nb">gzip</span>:  41.75 kB
+dist/assets/video-monitor-VuL7gF2g.js    224.50 kB │ <span class="nb">gzip</span>:  74.40 kB
+dist/assets/element-plus-BxSyl5RP.js     443.41 kB │ <span class="nb">gzip</span>: 144.74 kB
+✓ built <span class="k">in </span>30.89s
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<h2 id="6-发布及线上测试">6. 发布及线上测试</h2>
+
+<p>这一步也比较简单了，观察一下之前打包好的文件结构，发现就是和<code class="language-plaintext highlighter-rouge">dist</code>文件夹的内容相同，直接扔到服务器上就可以了。只能说，很幸运，没有遇到别的问题。重启服务器后测试发现逻辑已经生效了。</p>
+
+<p>ok，搞定~</p>
+
+<h2 id="7-写在最后">7. 写在最后</h2>
+
+<p>我是用的是单位提供的<code class="language-plaintext highlighter-rouge">GPT-4o-0806</code>，之前coding的时候也用过<code class="language-plaintext highlighter-rouge">豆包</code>，我觉得在我的使用方法下，主流AI没有本质区别，因为他是Co-pilot，我是Pilot。</p>
+
+<p>另外，和前端同学沟通之后，还有一种方式可以方便的定位代码，使用浏览器插件<code class="language-plaintext highlighter-rouge">Vue.js devtools</code>。但是我还没研究，有机会再分享一下。</p>
+
+<h2 id="更新日志">更新日志</h2>
+<ul>
+  <li>2025年1月14日：初稿</li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2024/07/20/ffmpeg-notes/" data-toggle="tooltip" data-placement="top" title="FFmpeg-使用笔记">
+                        Previous<br>
+                        <span>FFmpeg-使用笔记</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0028" href="/archive/?tag=%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3" title="技术相关" rel="40">技术相关</a>
+        
+                <a data-sort="0057" href="/archive/?tag=xin%E9%A3%9F" title="xin食" rel="11">xin食</a>
+        
+                <a data-sort="0058" href="/archive/?tag=%E6%9D%82%E6%96%87" title="杂文" rel="10">杂文</a>
+        
+                <a data-sort="0061" href="/archive/?tag=Linux" title="Linux" rel="7">Linux</a>
+        
+                <a data-sort="0061" href="/archive/?tag=Python" title="Python" rel="7">Python</a>
+        
+                <a data-sort="0064" href="/archive/?tag=JS" title="JS" rel="4">JS</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E6%8B%8D%E6%8B%8D%E7%85%A7" title="我眼中的世界-拍拍照" rel="3">我眼中的世界-拍拍照</a>
+        
+                <a data-sort="0065" href="/archive/?tag=%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C-%E7%A0%81%E7%A0%81%E5%AD%97" title="我眼中的世界-码码字" rel="3">我眼中的世界-码码字</a>
+        
+                <a data-sort="0065" href="/archive/?tag=MySQL" title="MySQL" rel="3">MySQL</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Nginx" title="Nginx" rel="3">Nginx</a>
+        
+                <a data-sort="0065" href="/archive/?tag=Windows" title="Windows" rel="3">Windows</a>
+        
+                <a data-sort="0066" href="/archive/?tag=%E6%8E%88%E6%9D%83%E8%BD%AC%E8%BD%BD" title="授权转载" rel="2">授权转载</a>
+        
+                <a data-sort="0066" href="/archive/?tag=%E6%91%84%E5%BD%B1%E5%AD%A6%E4%B9%A0" title="摄影学习" rel="2">摄影学习</a>
+        
+                <a data-sort="0066" href="/archive/?tag=Docker" title="Docker" rel="2">Docker</a>
+        
+                <a data-sort="0066" href="/archive/?tag=Java" title="Java" rel="2">Java</a>
+        
+                <a data-sort="0066" href="/archive/?tag=macOS" title="macOS" rel="2">macOS
+    </a>
+</div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  <li>
+    <a href="/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/FuryBrand">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright © For Love To Love 2025
+                    <br>
+                    Powered by <a href="https://jekyllrb.com/">Jekyll</a> | Theme from <a href="http://huangxuan.me">Hux Blog</a> 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
