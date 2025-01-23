@@ -5,12 +5,12 @@
     <description>Write down &amp; share my person notes. 记录和分享我的个人笔记</description>
     <link>http://furybrand.github.io//</link>
     <atom:link href="http://furybrand.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 22 Jan 2025 15:52:18 +0000</pubDate>
-    <lastBuildDate>Wed, 22 Jan 2025 15:52:18 +0000</lastBuildDate>
+    <pubDate>Thu, 23 Jan 2025 12:41:04 +0000</pubDate>
+    <lastBuildDate>Thu, 23 Jan 2025 12:41:04 +0000</lastBuildDate>
     <generator>Jekyll v4.3.4</generator>
     
       <item>
-        <title>xin法-实战前端工程维护</title>
+        <title>xin行-实战前端工程维护</title>
         <description>&lt;blockquote&gt;
   &lt;p&gt;组内现在没有前端同学，之前的工程是从其他组协调前端同学支持开发的。招聘一直不顺利，导致现在项目二期的时候又去借人，然后由于框架不同，又起了一个新工程……如果再这么搞，后面就是屎山代码无疑了。而且协调资源这个事情不牢靠，得遵循人家的排期和优先级。所以基于底线思维，我准备熟悉一下前端，尝试在AI的帮助下自己修改逻辑。本次的需求非常简单，修改一个后台跳转按钮的展示逻辑，如果是管理员就展示该按钮。这里做一个笔记，好帮助组内和其他遭遇类似处境的同学。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -500,7 +500,7 @@ dist/assets/element-plus-BxSyl5RP.js     443.41 kB │ &lt;span class=&quot;nb&q
         
         <category>JS</category>
         
-        <category>xin实践</category>
+        <category>xin行</category>
         
         
       </item>
